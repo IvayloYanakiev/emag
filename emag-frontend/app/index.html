@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="9gagApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+
+</head>
+
+<body ng-controller="homeController">
+
+
+<div class="navigationContainer">
+    <ul>
+        <li>
+            <a class="active" ng-href="#/home">
+                <img src="pictures/emag-bg.png" height="25" width="50"/>
+            </a>
+        </li>
+
+        <li><a ng-href="#/login"><b>Login</b></a></li>
+        <li><a ng-href="#/register"><b>Register</b></a></li>
+        <li><a ng-click="toUserPage()"><b>User</b></a></li>
+        <li><a ng-click="toHome()"><b>Logout</b></a></li>
+
+    </ul>
+</div>
+<div ng-view></div>
+
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
+<script src="app.js"></script>
+<script src="controllers/homeController.js"></script>
+<script src="controllers/loginController.js"></script>
+<script src="controllers/userController.js"></script>
+<script src="controllers/registerController.js"></script>
+
+</body>
+
+</html>

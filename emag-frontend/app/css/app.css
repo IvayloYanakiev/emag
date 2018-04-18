@@ -1,0 +1,67 @@
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li + li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+.loginContainer{
+    padding:20px;
+}
+
+.registerContainer{
+    padding:20px;
+}
+
+.addPostContainer{
+    padding:20px;
+}
+.navigationContainer ul
+
+ {
+    list-style-type: none;
+    margin: 0;
+    padding: 4px;
+    overflow: hidden;
+    background-color: #E6ECF0;
+}
+
+.navigationContainer li
+ {
+    float: left;
+}
+
+.navigationContainer li a {
+    display: block;
+    color: #66757F;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    height: 50px;
+}
+
+.navigationContainer li a:hover {
+    background-color: #F0F8FF;
+}
+
+.input-file { position: relative; margin: 60px 60px 0 } /* Remove margin, it is just for stackoverflow viewing */
+.input-file .input-group-addon { border: 0px; padding: 0px; }
+.input-file .input-group-addon .btn { border-radius: 0 4px 4px 0 }
+.input-file .input-group-addon input { cursor: pointer; position:absolute; width: 72px; z-index:2;top:0;right:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0; background-color:transparent; color:transparent; }
