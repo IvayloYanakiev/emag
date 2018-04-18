@@ -23,6 +23,7 @@ public class LoginController {
     @PostMapping("/loginCheckUser")
     @ResponseBody
     public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {
+
         Gson gson = new Gson();
         String json = null;
 
