@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 ;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
 @RestController
@@ -22,7 +23,7 @@ public class LoginController {
 
     @PostMapping("/loginCheckUser")
     @ResponseBody
-    public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {
+    public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request) {
 
         Gson gson = new Gson();
         String json = null;
@@ -31,6 +32,7 @@ public class LoginController {
             accountService.checkDoesGivenUserExists(email, password);
             Account user = accountService.findByAccountEmail(email);
             json = gson.toJson(user);
+            request.getSession().setAttribute("user",user);
         } catch (AccountException e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);

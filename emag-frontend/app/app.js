@@ -1,4 +1,4 @@
-var app = angular.module('9gagApp', ['ngRoute']);
+var app = angular.module('emag', ['ngRoute']);
 
 app.config(function ($routeProvider) {
 
