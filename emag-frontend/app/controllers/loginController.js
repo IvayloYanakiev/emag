@@ -1,4 +1,4 @@
-var app = angular.module('9gagApp');
+var app = angular.module('emag');
 
 app.controller("loginController", function ($rootScope, $scope, $location, $http, sessionService) {
     $scope.error = false;

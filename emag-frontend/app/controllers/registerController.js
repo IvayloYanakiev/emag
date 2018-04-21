@@ -1,4 +1,4 @@
-var app = angular.module('9gagApp');
+var app = angular.module('emag');
 
 app.controller("registerController", function ($scope, $location, $http) {
     $scope.success =false;

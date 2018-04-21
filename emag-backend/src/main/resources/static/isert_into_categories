@@ -1,0 +1,44 @@
+INSERT INTO main_type (name) VALUES ('Phones, Tablets and Laptops');
+INSERT INTO main_type (name) VALUES ('Computers and Peripheral equipment');
+INSERT INTO main_type (name) VALUES ('TV, Electronics and Gaming');
+INSERT INTO main_type (name) VALUES ('Big electronics');
+INSERT INTO main_type (name) VALUES ('Small electronics');
+INSERT INTO main_type (name) VALUES ('Fashion');
+INSERT INTO main_type (name) VALUES ('Health and Beauty');
+INSERT INTO main_type (name) VALUES ('Home, Garden and Petshop');
+INSERT INTO main_type (name) VALUES ('Books, Office and Presents');
+INSERT INTO main_type (name) VALUES ('Toys and Kids items');
+INSERT INTO main_type (name) VALUES ('Sport and free time');
+INSERT INTO main_type (name) VALUES ('Insurance and auto');
+
+// type e chast ot sintaksisa na sql i trqbwashe da se preimenywa
+RENAME TABLE type TO middle_type;
+
+INSERT INTO middle_type (name, main_type_id) VALUES ('Mobile phones and Accessories', 1);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Tablets and Accessories', 1);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Laptops and Accessories', 1);
+
+INSERT INTO middle_type (name, main_type_id) VALUES ('Computers and Monitors', 2);
+INSERT INTO middle_type (name, main_type_id) VALUES ('PC components', 2);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Software', 2);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Peripheral equipment',2);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Printers and Scanners', 2);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Wireless and Security systems', 2);
+
+INSERT INTO middle_type (name, main_type_id) VALUES ('TV', 3);
+INSERT INTO middle_type (name, main_type_id) VALUES ('TV accessories', 3);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Video projectors and screens', 3);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Home theater systems', 3);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Electronics', 3);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Gaming consoles and Games', 3);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Photo and Video', 3);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Photo and Video accessories', 3);
+
+INSERT INTO middle_type (name, main_type_id) VALUES ('Refrigerators', 4);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Washing machines and Dryers', 4);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Dishwashers', 4);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Cooking stoves and Microwaves', 4);
+INSERT INTO middle_type (name, main_type_id) VALUES ('Boilers, Air conditioners and Heating devices', 4);
+
+
+
