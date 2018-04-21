@@ -11,7 +11,7 @@ app.controller("loginController", function ($rootScope, $scope, $location, $http
         $scope.error = false;
 
         $http({
-            url: "http://localhost:7377/login" + "/loginCheckUser",
+            url: "http://localhost:7377/login" + "/user",
             method: "POST",
             params: {
                 "email": $scope.user.email,
@@ -24,8 +24,9 @@ app.controller("loginController", function ($rootScope, $scope, $location, $http
                 $scope.value = response.data.object;
             }
             else {
-                sessionService.login();
-                $location.url("/userPage/"+JSON.parse(response.data.object).id);
+                var userId = JSON.parse(response.data.object).id;
+                sessionService.login(userId);
+                $location.url("/userPage/"+userId);
             }
         });
 

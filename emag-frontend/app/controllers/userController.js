@@ -1,6 +1,6 @@
 var app = angular.module('emag');
 
-app.controller("userController", function ($scope, $location, $routeParams, $http) {
+app.controller("userController", function ($scope, $location, $routeParams, $http,sessionService,$rootScope) {
 
     var userId = $routeParams.userId;
 
@@ -15,7 +15,7 @@ app.controller("userController", function ($scope, $location, $routeParams, $htt
             $scope.user = response.data.object.user;
         });
     }
-
+    $rootScope.isAuthenticated = sessionService.isLoggedIn();
     a();
 
 

@@ -15,15 +15,19 @@
 <div class="navigationContainer">
     <ul>
         <li>
-            <a class="active" ng-href="#/home">
+            <a class="disabled">
                 <img src="pictures/emag-bg.png" height="25" width="50"/>
             </a>
         </li>
+        <div ng-hide="isAuthenticated">
+            <li><a ng-href="#/login"><b>Login</b></a></li>
+            <li><a ng-href="#/register"><b>Register</b></a></li>
+        </div>
+        <div ng-show="isAuthenticated">
+            <li><a ng-click="toUserPage()"><b>User</b></a></li>
+            <li><a ng-click="toHome()"><b>Logout</b></a></li>
+        </div>
 
-        <li><a ng-href="#/login"><b>Login</b></a></li>
-        <li><a ng-href="#/register"><b>Register</b></a></li>
-        <li><a ng-click="toUserPage()"><b>User</b></a></li>
-        <li><a ng-click="toHome()"><b>Logout</b></a></li>
 
     </ul>
 </div>

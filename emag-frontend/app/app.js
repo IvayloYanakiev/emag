@@ -1,5 +1,5 @@
-var app = angular.module('emag', ['ngRoute']);
 
+var app = angular.module('emag', ['ngRoute']);
 app.config(function ($routeProvider) {
 
     $routeProvider
@@ -25,6 +25,7 @@ app.config(function ($routeProvider) {
 });
 
 app.factory('sessionService', function () {
+
     var session = {};
     session.getSession = function () {
         return localStorage.getItem("session");
@@ -40,5 +41,6 @@ app.factory('sessionService', function () {
     session.isLoggedIn = function () {
         return localStorage.getItem("session") != null;
     };
+
     return session;
 });

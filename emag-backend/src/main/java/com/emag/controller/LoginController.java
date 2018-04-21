@@ -21,7 +21,7 @@ public class LoginController {
     @Autowired
     AccountService accountService;
 
-    @PostMapping("/loginCheckUser")
+    @PostMapping("/user")
     @ResponseBody
     public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request) {
 
@@ -33,6 +33,7 @@ public class LoginController {
             Account user = accountService.findByAccountEmail(email);
             json = gson.toJson(user);
             request.getSession().setAttribute("user",user);
+
         } catch (AccountException e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -63,12 +64,13 @@ public class LoginController {
 
     @GetMapping("/getUserPageById")
     @ResponseBody
-    public ResponseEntity getUserPageById(@RequestParam("id") Long id) {
+    public ResponseEntity getUserPageById(@RequestParam("id") Long id,HttpServletRequest request) {
 
         JSONObject obj = new JSONObject();
         try {
             Account user = accountService.findAccountById(id);
             obj.put("user", user);
+            System.out.println(request.getSession().getAttribute("user"));
         } catch (AccountException e) {
             return new ResponseEntity("KUR", HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
