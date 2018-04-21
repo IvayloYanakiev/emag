@@ -1,5 +1,6 @@
 package com.emag.dao;
 
+import com.emag.config.Constants;
 import com.emag.exceptions.AccountException;
 import com.emag.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +15,24 @@ import java.util.HashMap;
 @Repository
 public class AccountDaoImpl implements AccountDao {
 
+    public static final String FIND_USER_BY_ID = "select * from users where id=:id";
+    public static final String FIND_USER_BY_EMAIL = "select * from users where email=:email";
+    public static final String ADD_USER = "insert into users(name,email,password) values(:name,:email,sha1(:password))";
+
+    public static final String SELECT_USER_BY_EMAIL_AND_PASS = "select * from users where email=:email and password = sha1(:password);";
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
     public Account findAccountById(Long id) throws SQLException, AccountException {
 
-        StringBuilder getUserById = new StringBuilder();
-        getUserById.append("select * from users");
-        getUserById.append(" where id=:id");
+        String getUserById = FIND_USER_BY_ID;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("id", id);
 
-        Account userById = jdbcTemplate.query(getUserById.toString(), userParams, new ResultSetExtractor<Account>() {
+        Account userById = jdbcTemplate.query(getUserById, userParams, new ResultSetExtractor<Account>() {
 
             @Override
             public Account extractData(ResultSet rs) throws SQLException {
@@ -49,14 +54,12 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Account findAccountByEmail(String email) throws SQLException, AccountException {
         checkDoesGivenUserExists(email);
-        StringBuilder getUserByEmail = new StringBuilder();
-        getUserByEmail.append("select * from users");
-        getUserByEmail.append(" where email=:email");
+        String getUserByEmail = FIND_USER_BY_EMAIL;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
 
-        Account user = jdbcTemplate.query(getUserByEmail.toString(), userParams, new ResultSetExtractor<Account>() {
+        Account user = jdbcTemplate.query(getUserByEmail, userParams, new ResultSetExtractor<Account>() {
 
             @Override
             public Account extractData(ResultSet rs) throws SQLException {
@@ -78,9 +81,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public Account createAccount(Account account) throws SQLException, AccountException {
-        StringBuilder registerUser = new StringBuilder();
-        registerUser.append("insert into users(name,email,password)");
-        registerUser.append(" values(:name,:email,sha1(:password))");
+        String registerUser = ADD_USER;
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("name", account.getName());
         userParams.put("email", account.getEmail());
@@ -90,22 +91,20 @@ public class AccountDaoImpl implements AccountDao {
             checkDoesGivenUserExists(account.getEmail());
             checker = true;
         } catch (AccountException e) {
-            jdbcTemplate.update(registerUser.toString(), userParams);
+            jdbcTemplate.update(registerUser, userParams);
         }
-        if (checker) throw new AccountException("User already exists");
+        if (checker) throw new AccountException(Constants.USER_ALREADY_EXISTS);
         return account;
     }
 
 
     public void checkDoesGivenUserExists(String email) throws SQLException, AccountException {
-        StringBuilder checkForUserRequest = new StringBuilder();
-        checkForUserRequest.append("select * from users");
-        checkForUserRequest.append(" where email=:email");
+        String checkForUserRequest = FIND_USER_BY_EMAIL;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
 
-        Boolean checkForUser = jdbcTemplate.query(checkForUserRequest.toString(), userParams, new ResultSetExtractor<Boolean>() {
+        Boolean checkForUser = jdbcTemplate.query(checkForUserRequest, userParams, new ResultSetExtractor<Boolean>() {
 
             @Override
             public Boolean extractData(ResultSet rs) throws SQLException {
@@ -115,20 +114,18 @@ public class AccountDaoImpl implements AccountDao {
                 return false;
             }
         });
-        if (!checkForUser) throw new AccountException("No such user");
+        if (!checkForUser) throw new AccountException(Constants.NO_SUCH_USER);
     }
 
 
     public void checkDoesGivenUserExists(String email, String password) throws SQLException, AccountException {
-        StringBuilder checkForUserRequest = new StringBuilder();
-        checkForUserRequest.append("select * from users");
-        checkForUserRequest.append(" where email=:email and password = sha1(:password);");
+        String checkForUserRequest = SELECT_USER_BY_EMAIL_AND_PASS;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
         userParams.put("password", password);
 
-        Boolean checkForUser = jdbcTemplate.query(checkForUserRequest.toString(), userParams, new ResultSetExtractor<Boolean>() {
+        Boolean checkForUser = jdbcTemplate.query(checkForUserRequest, userParams, new ResultSetExtractor<Boolean>() {
 
             @Override
             public Boolean extractData(ResultSet rs) throws SQLException {
@@ -138,6 +135,6 @@ public class AccountDaoImpl implements AccountDao {
                 return false;
             }
         });
-        if (!checkForUser) throw new AccountException("Wrong username or password");
+        if (!checkForUser) throw new AccountException(Constants.WRONG_USERNAME_OR_PASSWORD);
     }
 }

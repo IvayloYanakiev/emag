@@ -1,5 +1,6 @@
 package com.emag.controller;
 
+import com.emag.config.Constants;
 import com.emag.exceptions.AccountException;
 import com.emag.model.Account;
 import com.emag.model.ResponseEntity;
@@ -7,11 +8,15 @@ import com.emag.service.AccountService;
 import com.google.gson.Gson;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 ;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.xml.bind.JAXBElement;
 import java.sql.SQLException;
 
 @RestController
@@ -23,7 +28,7 @@ public class LoginController {
 
     @PostMapping("/user")
     @ResponseBody
-    public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request) {
+    public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {
 
         Gson gson = new Gson();
         String json = null;
@@ -32,13 +37,11 @@ public class LoginController {
             accountService.checkDoesGivenUserExists(email, password);
             Account user = accountService.findByAccountEmail(email);
             json = gson.toJson(user);
-            request.getSession().setAttribute("user",user);
-
         } catch (AccountException e) {
             System.out.println(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity("Theres a problem with your account", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(Constants.ACC_PROBLEM, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(json, HttpStatus.OK);
@@ -55,7 +58,7 @@ public class LoginController {
         } catch (AccountException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity("Error", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(Constants.ERROR, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(obj, HttpStatus.OK);
@@ -64,17 +67,17 @@ public class LoginController {
 
     @GetMapping("/getUserPageById")
     @ResponseBody
-    public ResponseEntity getUserPageById(@RequestParam("id") Long id,HttpServletRequest request) {
+    public ResponseEntity getUserPageById(@RequestParam("id") Long id) {
 
         JSONObject obj = new JSONObject();
         try {
             Account user = accountService.findAccountById(id);
             obj.put("user", user);
-            System.out.println(request.getSession().getAttribute("user"));
         } catch (AccountException e) {
-            return new ResponseEntity("KUR", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity("Error", HttpStatus.BAD_REQUEST);
+
+            return new ResponseEntity(Constants.ERROR, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(obj, HttpStatus.OK);

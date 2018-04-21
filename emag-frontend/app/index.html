@@ -10,7 +10,7 @@
 
 </head>
 
-<body ng-controller="homeController">
+<body>
 
 <div class="navigationContainer">
     <ul>
@@ -24,8 +24,7 @@
             <li><a ng-href="#/register"><b>Register</b></a></li>
         </div>
         <div ng-show="isAuthenticated">
-            <li><a ng-click="toUserPage()"><b>User</b></a></li>
-            <li><a ng-click="toHome()"><b>Logout</b></a></li>
+            <li><a ng-href="#/logout"><b>Logout</b></a></li>
         </div>
 
 
@@ -39,7 +38,7 @@
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
 <script src="app.js"></script>
-<script src="controllers/homeController.js"></script>
+<script src="controllers/logoutController.js"></script>
 <script src="controllers/loginController.js"></script>
 <script src="controllers/userController.js"></script>
 <script src="controllers/registerController.js"></script>
