@@ -12,24 +12,30 @@
 
 <body>
 
-<div class="navigationContainer">
-    <ul>
-        <li>
-            <a class="disabled">
-                <img src="pictures/emag-bg.png" height="25" width="50"/>
-            </a>
-        </li>
-        <div ng-hide="isAuthenticated">
-            <li><a ng-href="#/login"><b>Login</b></a></li>
-            <li><a ng-href="#/register"><b>Register</b></a></li>
-        </div>
-        <div ng-show="isAuthenticated">
-            <li><a ng-href="#/logout"><b>Logout</b></a></li>
-        </div>
 
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul>
+            <div class="navbar-header">
 
-    </ul>
-</div>
+                <li>
+                    <a class="disabled">
+                        <img src="https://s0emagst.akamaized.net/layout/bg/images/logo//12/17641.png">
+                    </a>
+                </li>
+            </div>
+            <div ng-hide="isAuthenticated" class="nav navbar-nav navbar-right">
+                <li><a ng-href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </div>
+            <div ng-show="isAuthenticated" class="nav navbar-nav navbar-right">
+
+                <li><a ng-href="#/logout"><b>Logout</b></a></li>
+            </div>
+        </ul>
+    </div>
+</nav>
+
 <div ng-view></div>
 
 <script src="bower_components/angular/angular.min.js"></script>

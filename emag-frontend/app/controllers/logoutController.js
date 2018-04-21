@@ -5,7 +5,7 @@ app.controller("logoutController", function ($rootScope,$scope,$location,session
     var logoutUser = function () {
         sessionService.logout();
         $location.url("/login");
-        location.reload();
+        $rootScope.isAuthenticated = sessionService.isLoggedIn();
     };
     logoutUser();
 
