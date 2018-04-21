@@ -15,19 +15,13 @@ import java.util.HashMap;
 @Repository
 public class AccountDaoImpl implements AccountDao {
 
-    public static final String FIND_USER_BY_ID = "select * from users where id=:id";
-    public static final String FIND_USER_BY_EMAIL = "select * from users where email=:email";
-    public static final String ADD_USER = "insert into users(name,email,password) values(:name,:email,sha1(:password))";
-
-    public static final String SELECT_USER_BY_EMAIL_AND_PASS = "select * from users where email=:email and password = sha1(:password);";
-
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
     public Account findAccountById(Long id) throws SQLException, AccountException {
 
-        String getUserById = FIND_USER_BY_ID;
+        String getUserById = Constants.FIND_USER_BY_ID;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("id", id);
@@ -54,7 +48,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Account findAccountByEmail(String email) throws SQLException, AccountException {
         checkDoesGivenUserExists(email);
-        String getUserByEmail = FIND_USER_BY_EMAIL;
+        String getUserByEmail = Constants.FIND_USER_BY_EMAIL;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
@@ -81,7 +75,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public Account createAccount(Account account) throws SQLException, AccountException {
-        String registerUser = ADD_USER;
+        String registerUser = Constants.ADD_USER;
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("name", account.getName());
         userParams.put("email", account.getEmail());
@@ -99,7 +93,7 @@ public class AccountDaoImpl implements AccountDao {
 
 
     public void checkDoesGivenUserExists(String email) throws SQLException, AccountException {
-        String checkForUserRequest = FIND_USER_BY_EMAIL;
+        String checkForUserRequest = Constants.FIND_USER_BY_EMAIL;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
@@ -119,7 +113,7 @@ public class AccountDaoImpl implements AccountDao {
 
 
     public void checkDoesGivenUserExists(String email, String password) throws SQLException, AccountException {
-        String checkForUserRequest = SELECT_USER_BY_EMAIL_AND_PASS;
+        String checkForUserRequest = Constants.SELECT_USER_BY_EMAIL_AND_PASS;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);

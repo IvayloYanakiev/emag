@@ -14,4 +14,8 @@ public class Constants {
     public static final String NO_SUCH_USER = "No such user";
     public static final String WRONG_USERNAME_OR_PASSWORD = "Wrong username or password";
     public static final String SUCCESS = "Success";
+    public static final String FIND_USER_BY_ID = "select * from users where id=:id";
+    public static final String FIND_USER_BY_EMAIL = "select * from users where email=:email";
+    public static final String ADD_USER = "insert into users(name,email,password) values(:name,:email,sha1(:password))";
+    public static final String SELECT_USER_BY_EMAIL_AND_PASS = "select * from users where email=:email and password = sha1(:password);";
 }
