@@ -18,8 +18,6 @@ import java.util.regex.Matcher;
 @RestController
 public class RegisterController {
 
-
-
     @Autowired
     AccountService accountService;
 
