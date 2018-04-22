@@ -6,40 +6,92 @@
     <title>Home</title>
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
 
 
 </head>
 
 <body>
+<div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container">
 
-<nav class="navbar navbar-inverse">
-        <ul>
             <div class="navbar-header">
+                <a class="disabled">
+                    <img src="https://s0emagst.akamaized.net/layout/bg/images/logo//12/17641.png">
+                </a>
 
-                <li>
-                    <a class="disabled">
-                        <img src="https://s0emagst.akamaized.net/layout/bg/images/logo//12/17641.png">
-                    </a>
-                </li>
             </div>
-            <div ng-hide="isAuthenticated" class="nav navbar-nav navbar-right">
-                <li><a ng-href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </div>
-            <div ng-show="isAuthenticated" class="nav navbar-nav navbar-right">
 
-                <li><a ng-href="#/logout"><b>Logout</b></a></li>
-            </div>
-        </ul>
-</nav>
+            <div class="collapse navbar-collapse" id="navbar-collapse-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><input type="text" class="form-control" placeholder="Search"></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Works</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li ng-hide="isAuthenticated">
+                        <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse"
+                           ng-href="#/register"
+                           aria-expanded="false" aria-controls="nav-collapse2"><span
+                                class="glyphicon glyphicon-user"></span> Sign up</a>
+                    </li>
+                    <li ng-hide="isAuthenticated">
+                        <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" ng-href="#/login"
+                           aria-expanded="false" aria-controls="nav-collapse2"><span
+                                class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
 
+                    <li ng-show="isAuthenticated"><a ng-href="#/logout"><b>Logout</b></a></li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Works</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li>
+                            <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse"
+                               href="#nav-collapse1" aria-expanded="false" aria-controls="nav-collapse1">Categories</a>
+                        </li>
+                        
+                    </ul>
+                    <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse1">
+                        <li><a href="#">Web design</a></li>
+                        <li><a href="#">Development</a></li>
+                        <li><a href="#">Mobile apps</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </nav>
+</div>
 <div ng-view></div>
+
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
 <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
 <script src="app.js"></script>
 <script src="controllers/logoutController.js"></script>

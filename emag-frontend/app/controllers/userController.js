@@ -1,22 +1,15 @@
 var app = angular.module('emag');
 
-app.controller("userController", function ($scope, $location, $routeParams, $http,sessionService,$rootScope) {
+app.controller("userController", function ($scope, $location, $routeParams, $http, sessionService, $rootScope) {
 
-    var userId = $routeParams.userId;
+    $http({
+        url: "http://localhost:7377/category" + "/getAllCategories",
+        method: "GET"
+    }).then(function (response) {
+        $scope.categories = JSON.parse(response.data.object);
 
-    function a() {
-        $http({
-            url: "http://localhost:7377/login" + "/getUserPageById",
-            method: "GET",
-            params: {
-                "id": userId
-            }
-        }).then(function (response) {
-            $scope.user = response.data.object.user;
-        });
-    }
+    });
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
-    a();
 
 
 });
