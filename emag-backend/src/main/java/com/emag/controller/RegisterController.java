@@ -18,6 +18,8 @@ import java.util.regex.Matcher;
 @RestController
 public class RegisterController {
 
+
+
     @Autowired
     AccountService accountService;
 
@@ -33,16 +35,16 @@ public class RegisterController {
                 if (confirmPassword != null && confirmPassword.trim().length() > 0) {
                     if (user.getPassword().equals(confirmPassword)) {
                         accountService.createAccount(user);
-                    } else return new ResponseEntity("Passwords are not the same", HttpStatus.BAD_REQUEST);
-                } else return new ResponseEntity("Please check your confirm password", HttpStatus.BAD_REQUEST);
-            } else return new ResponseEntity("Invalid email", HttpStatus.BAD_REQUEST);
+                    } else return new ResponseEntity(Constants.PASSWORDS_NOT_THE_SAME, HttpStatus.BAD_REQUEST);
+                } else return new ResponseEntity(Constants.CHECK_YOUR_PASSWORD, HttpStatus.BAD_REQUEST);
+            } else return new ResponseEntity(Constants.INVALID_EMAIL, HttpStatus.BAD_REQUEST);
         } catch (AccountException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity("Error", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(Constants.ERROR, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity("Success", HttpStatus.OK);
+        return new ResponseEntity(Constants.SUCCESS, HttpStatus.OK);
     }
 
     private boolean validateEmail(String emailStr) {

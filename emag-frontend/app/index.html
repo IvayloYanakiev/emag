@@ -6,27 +6,36 @@
     <title>Home</title>
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 
 
 </head>
 
-<body ng-controller="homeController">
+<body>
 
-<div class="navigationContainer">
-    <ul>
-        <li>
-            <a class="active" ng-href="#/home">
-                <img src="pictures/emag-bg.png" height="25" width="50"/>
-            </a>
-        </li>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul>
+            <div class="navbar-header">
 
-        <li><a ng-href="#/login"><b>Login</b></a></li>
-        <li><a ng-href="#/register"><b>Register</b></a></li>
-        <li><a ng-click="toUserPage()"><b>User</b></a></li>
-        <li><a ng-click="toHome()"><b>Logout</b></a></li>
+                <li>
+                    <a class="disabled">
+                        <img src="https://s0emagst.akamaized.net/layout/bg/images/logo//12/17641.png">
+                    </a>
+                </li>
+            </div>
+            <div ng-hide="isAuthenticated" class="nav navbar-nav navbar-right">
+                <li><a ng-href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a ng-href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </div>
+            <div ng-show="isAuthenticated" class="nav navbar-nav navbar-right">
 
-    </ul>
-</div>
+                <li><a ng-href="#/logout"><b>Logout</b></a></li>
+            </div>
+        </ul>
+    </div>
+</nav>
+
 <div ng-view></div>
 
 <script src="bower_components/angular/angular.min.js"></script>
@@ -35,11 +44,10 @@
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
 <script src="app.js"></script>
-<script src="controllers/homeController.js"></script>
+<script src="controllers/logoutController.js"></script>
 <script src="controllers/loginController.js"></script>
 <script src="controllers/userController.js"></script>
 <script src="controllers/registerController.js"></script>
-
 </body>
 
 </html>

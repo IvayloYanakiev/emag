@@ -3,9 +3,9 @@ var app = angular.module('emag', ['ngRoute']);
 app.config(function ($routeProvider) {
 
     $routeProvider
-        .when('/home', {
-            templateUrl: 'views/home.html',
-            controller: 'homeController'
+        .when('/logout', {
+            templateUrl: 'views/logout.html',
+            controller: 'logoutController'
         })
         .when('/login', {
             templateUrl: 'views/login.html',
@@ -19,12 +19,13 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/userPage.html',
             controller: 'userController'
         })
-        .otherwise('/home');
+        .otherwise('/login');
 
 
 });
 
 app.factory('sessionService', function () {
+
     var session = {};
     session.getSession = function () {
         return localStorage.getItem("session");
@@ -40,5 +41,6 @@ app.factory('sessionService', function () {
     session.isLoggedIn = function () {
         return localStorage.getItem("session") != null;
     };
+
     return session;
 });

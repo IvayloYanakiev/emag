@@ -1,5 +1,6 @@
 package com.emag.controller;
 
+import com.emag.config.Constants;
 import com.emag.exceptions.AccountException;
 import com.emag.model.Account;
 import com.emag.model.ResponseEntity;
@@ -8,9 +9,7 @@ import com.google.gson.Gson;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 
 @RestController
@@ -20,7 +19,7 @@ public class LoginController {
     @Autowired
     AccountService accountService;
 
-    @PostMapping("/loginCheckUser")
+    @PostMapping("/user")
     @ResponseBody
     public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {
 
@@ -32,10 +31,9 @@ public class LoginController {
             Account user = accountService.findByAccountEmail(email);
             json = gson.toJson(user);
         } catch (AccountException e) {
-            System.out.println(e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity("Theres a problem with your account", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(Constants.ACC_PROBLEM, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(json, HttpStatus.OK);
@@ -52,7 +50,7 @@ public class LoginController {
         } catch (AccountException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity("Error", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(Constants.ERROR, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(obj, HttpStatus.OK);
@@ -68,9 +66,10 @@ public class LoginController {
             Account user = accountService.findAccountById(id);
             obj.put("user", user);
         } catch (AccountException e) {
-            return new ResponseEntity("KUR", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity("Error", HttpStatus.BAD_REQUEST);
+
+            return new ResponseEntity(Constants.ERROR, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(obj, HttpStatus.OK);
