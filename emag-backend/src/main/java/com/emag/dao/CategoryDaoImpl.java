@@ -15,31 +15,44 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 @Repository
-public class CategoryDaoImpl implements CategoryDao{
+public class CategoryDaoImpl implements CategoryDao {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public HashMap<Integer,Category> getAllCategories() throws CategoryException {
+    public HashMap<Long, Category> getAllCategories() throws CategoryException {
 
         String getAllCategories = Constants.GET_ALL_CATEGORIES;
 
-        HashMap<Integer, Category> categories = jdbcTemplate.query(getAllCategories , new ResultSetExtractor<Category>() {
+        HashMap<Long, Category> categories = jdbcTemplate.query(getAllCategories, new ResultSetExtractor<HashMap<Long, Category>>() {
+
 
             @Override
-            public HashMap<Integer, Category> extractData(ResultSet rs) throws SQLException {
+            public HashMap<Long, Category> extractData(ResultSet rs) throws SQLException {
+                HashMap<Long, Category> myCategories = new HashMap<>();
 
                 while (rs.next()) {
                     try {
-                      Category category = new Category(rs.getLong("id"), rs.getString("name"));
+                        Long mainID = rs.getLong("id");
+                        String mainName = rs.getString("main_name");
+                        Long middleID = rs.getLong("middle_id");
+                        String middleName = rs.getString("middle_name");
+
+                        if (!myCategories.containsKey(mainID)) {
+                            Category mainCategory = new Category(mainID, mainName);
+                            myCategories.put(mainID, mainCategory);
+                        }
+
+                        myCategories.get(mainID).addCategory(new Category(middleID, middleName));
                     } catch (CategoryException e) {
                         System.out.println(e.getMessage());
                     }
                 }
+                return myCategories;
 
             }
         });
-        return null;
+        return categories;
     }
 }

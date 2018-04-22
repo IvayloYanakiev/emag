@@ -1,11 +1,12 @@
-<div ng-controller="userController">
+<div >
 
-<div style="width: 250px">
-    <div class="alert alert-success" role="alert">
-        Name : {{user.name}}
-    </div>
-    <div class="alert alert-success" role="alert">
-        Email : {{user.email}}
-    </div>
-</div>
+    <ul ng-repeat="category in categories">
+        <li > {{category.id}}.{{category.name}}</li>
+        <ul>
+            <li ng-repeat="inner_category in category.innerCategories">
+                {{inner_category.name}}
+            </li>
+        </ul>
+    </ul>
+
 </div>

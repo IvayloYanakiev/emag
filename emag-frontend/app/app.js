@@ -15,9 +15,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/register.html',
             controller: 'registerController'
         })
-        .when('/userPage/:userId', {
+        .when('/userPage', {
             templateUrl: 'views/userPage.html',
-            controller: 'userController'
+            controller: 'userController',
+            css: 'css/styles.css'
         })
         .otherwise('/login');
 
@@ -31,7 +32,7 @@ app.factory('sessionService', function () {
         return localStorage.getItem("session");
     };
     session.login = function (userId) {
-       localStorage.setItem("session",userId);
+        localStorage.setItem("session", userId);
     };
 
     session.logout = function () {

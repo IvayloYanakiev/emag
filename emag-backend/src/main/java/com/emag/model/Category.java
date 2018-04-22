@@ -34,7 +34,7 @@ public class Category {
         return name;
     }
 
-    private void addCategory(Category category) throws CategoryException {
+    public void addCategory(Category category) throws CategoryException {
         if(category!=null){
             innerCategories.add(category);
         }

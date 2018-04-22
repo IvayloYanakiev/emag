@@ -18,4 +18,5 @@ public class Constants {
     public static final String FIND_USER_BY_EMAIL = "select * from users where email=:email";
     public static final String ADD_USER = "insert into users(name,email,password) values(:name,:email,sha1(:password))";
     public static final String SELECT_USER_BY_EMAIL_AND_PASS = "select * from users where email=:email and password = sha1(:password);";
+    public static final String GET_ALL_CATEGORIES = "select main.id as id,main.name as main_name,middle.id as middle_id,middle.name as middle_name from main_type as main join middle_type as middle on main.id = middle.main_type_id";
 }
