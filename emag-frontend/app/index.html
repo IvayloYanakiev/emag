@@ -10,14 +10,14 @@
 
 </head>
 
-<body>
+<body ng-controller="mainController">
 <nav class="mainNavBar navbar-default">
 
     <div class="mainContainer">
 
         <div class="col-md-2"></div>
         <div class="navbar-header">
-            <a class="disabled">
+            <a ng-href="#/">
                 <img src="https://s0emagst.akamaized.net/layout/bg/images/logo//12/17641.png">
             </a>
         </div>
@@ -56,6 +56,7 @@
 
 <nav class="navbar navbar-default">
     <div class="mainContainer">
+
         <div class="col-md-2"></div>
 
         <div class="navbar-header">
@@ -84,8 +85,22 @@
         </div>
 
 
+
     </div>
 </nav>
+
+<!--<div >-->
+    <!--<ul ng-repeat="category in categories">-->
+        <!--<li > {{category.id}}.{{category.name}}</li>-->
+        <!--<ul>-->
+            <!--<li ng-repeat="inner_category in category.innerCategories">-->
+                <!--{{inner_category.name}}-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</ul>-->
+
+<!--</div>-->
+
 <div ng-view></div>
 
 
@@ -100,7 +115,7 @@
 <script src="app.js"></script>
 <script src="controllers/logoutController.js"></script>
 <script src="controllers/loginController.js"></script>
-<script src="controllers/userController.js"></script>
+<script src="controllers/mainController.js"></script>
 <script src="controllers/registerController.js"></script>
 </body>
 

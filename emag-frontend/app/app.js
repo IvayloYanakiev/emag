@@ -15,11 +15,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/register.html',
             controller: 'registerController'
         })
-        .when('/userPage', {
-            templateUrl: 'views/userPage.html',
-            controller: 'userController'
-        })
-        .otherwise('/login');
+        .otherwise('index.html');
 
 
 });
