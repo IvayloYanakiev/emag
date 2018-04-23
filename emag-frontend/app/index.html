@@ -3,34 +3,33 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>eMAG.bg</title>
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-
-
 </head>
 
 <body>
 <div class="container-fluid">
-    <nav class="navbar navbar-default">
+    <nav id="noBorderPls" class="navbar navbar-default">
         <div class="container">
-
             <div class="navbar-header">
                 <a class="disabled">
-                    <img src="https://s0emagst.akamaized.net/layout/bg/images/logo//12/17641.png">
+                    <img id="logo" src="https://s0emagst.akamaized.net/layout/bg/images/logo//12/17641.png">
                 </a>
-
             </div>
-
             <div class="collapse navbar-collapse" id="navbar-collapse-2">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><input type="text" class="form-control" placeholder="Search"></li>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Works</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li id="searchForm"><input type="text" class="form-control" placeholder="Search" size="45"></li>
+                    <li><a href="#">
+                        <img src="pictures/profile.png" height="20" width="20"/>
+                        My profile</a></li>
+                    <li><a href="#">
+                        <img src="pictures/favourite.png" height="20" width="20"/>
+                        Favourites</a></li>
+                    <li><a href="#">
+                        <img src="pictures/cart.png" height="20" width="20"/>
+                        My shopping cart</a></li>
+
                     <li ng-hide="isAuthenticated">
                         <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse"
                            ng-href="#/register"
@@ -42,43 +41,44 @@
                            aria-expanded="false" aria-controls="nav-collapse2"><span
                                 class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
-
-                    <li ng-show="isAuthenticated"><a ng-href="#/logout"><b>Logout</b></a></li>
-
+                    <li ng-show="isAuthenticated">
+                        <a id="logout" class="btn btn-default btn-outline btn-circle" data-toggle="collapse" ng-href="#/logout">
+                            <b>Logout</b>
+                        </a>
+                    </li>
                 </ul>
-
             </div>
         </div>
     </nav>
-    <nav class="navbar navbar-default">
+    <nav id="noBorderPlss" class="navbar navbar-default">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
-
                     <ul class="nav navbar-nav navbar-right">
-
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Works</a></li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <!--<li>-->
+                            <!--<a class="btn btn-default btn-outline btn-circle" data-toggle="collapse"-->
+                               <!--href="#nav-collapse1" aria-expanded="false" aria-controls="nav-collapse1">Categories</a>-->
+                        <!--</li>-->
                         <li>
-                            <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse"
-                               href="#nav-collapse1" aria-expanded="false" aria-controls="nav-collapse1">Categories</a>
+                         <div class="dropdown">
+                            <button class="dropbtn">Categories</button>
+                            <div class="dropdown-content">
+                                <a href="#">Product</a>
+                                <a href="#">Product</a>
+                                <a href="#">Product</a>
+                            </div>
+                        </div>
                         </li>
-                        
-                    </ul>
-                    <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse1">
-                        <li><a href="#">Web design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Mobile apps</a></li>
+                        <li><a href="#">Subscribe</a></li>
+                        <li><a href="#">Offers of the week</a></li>
+                        <li><a href="#">Best sellers</a></li>
+
+                        <li id="emagInfo"> <a ng-href="#/emagInformation">
+                            <img src="pictures/information.png" height="22" width="22"/>
+                            eMAG info </a></li>
                     </ul>
                 </div>
             </div>
-
-
         </div>
     </nav>
 </div>
@@ -98,6 +98,7 @@
 <script src="controllers/loginController.js"></script>
 <script src="controllers/userController.js"></script>
 <script src="controllers/registerController.js"></script>
+
 </body>
 
 </html>

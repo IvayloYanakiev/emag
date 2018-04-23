@@ -1,3 +1,100 @@
+/* Style The Dropdown Button */
+.dropbtn {
+    background-color: transparent;
+    color: #888888;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {color: #222222}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    color: #222222;
+}
+/***********************************************************/
+
+/* moite pisaniq*/
+html * {
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.container-fluid {
+    background-color: #F8F8F8;
+    width: 1400px;
+    height: 125px;
+    position: relative;
+}
+
+#navbar-collapse-1 {
+    position: absolute;
+    left: 12px;
+}
+
+#logout {
+    right: 15px;
+}
+
+#navbar-collapse-2 {
+    position: absolute;
+    right: 40px;
+}
+
+#logo {
+    position: absolute;
+    left: 25px;
+    top: 5px;
+}
+
+#searchForm {
+    top: 7px;
+}
+
+#emagInfo {
+    position: relative;
+    left: 675px;
+}
+
+#noBorderPls, #noBorderPlss {
+    border: none;
+}
+
+#nav-collapse1 {
+    position: relative;
+}
+
+/*sa do tuk*/
 
 .menu {
     list-style: none;
@@ -22,6 +119,7 @@
     content: "|";
     padding-right: 0.3em;
 }
+
 .loginContainer{
     padding:20px;
 }
@@ -33,12 +131,6 @@
 .addPostContainer{
     padding:20px;
 }
-
-
-/*
-Code snippet by maridlcrmn for Bootsnipp.com
-Follow me on Twitter @maridlcrmn
-*/
 
 .navbar-brand { position: relative; z-index: 2; }
 

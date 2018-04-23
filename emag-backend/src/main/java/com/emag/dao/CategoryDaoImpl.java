@@ -1,9 +1,7 @@
 package com.emag.dao;
 
 import com.emag.config.Constants;
-import com.emag.exceptions.AccountException;
 import com.emag.exceptions.CategoryException;
-import com.emag.model.Account;
 import com.emag.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
