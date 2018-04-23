@@ -11,9 +11,9 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default">
-    <div class="mainContainer">
+<nav class="mainNavBar navbar-default">
 
+    <div class="mainContainer">
 
         <div class="col-md-2"></div>
         <div class="navbar-header">
@@ -37,7 +37,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="isAuthenticated">
                     <a class="btn btn-default btn-outline btn-circle" ng-href="#register">
-                        <span class="glyphicon glyphicon-user"></span> Sign up
+                        <span class="glyphicon glyphicon-user"></span> Sign in
                     </a>
                 </li>
                 <li ng-hide="isAuthenticated">
@@ -51,9 +51,13 @@
             </ul>
         </div>
     </div>
+
 </nav>
+
 <nav class="navbar navbar-default">
-    <div class="container">
+    <div class="mainContainer">
+        <div class="col-md-2"></div>
+
         <div class="navbar-header">
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
 

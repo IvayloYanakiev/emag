@@ -44,6 +44,13 @@ Follow me on Twitter @maridlcrmn
     width: 400px;
 }
 
+.mainNavBar{
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 0.5px solid transparent;
+}
+
 .mainContainer {
     padding-right: 15px;
     padding-left: 15px;
