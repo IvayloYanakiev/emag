@@ -1,9 +1,10 @@
 package com.emag.dao;
 
+import com.emag.exceptions.AddressException;
+
 public interface AddressDao {
-    void changeReceiverName(String newReceiverName);
-    void changeReceiverPhoneNumber(String newPhoneNumber);
-    void changeCity(int newCityId);
-    void changeStreet(String newStreetInfo);
-    void changeFloor(int newFloor);
+    void changeReceiverPhoneNumber(Long id, String newPhoneNumber) throws AddressException;
+    void changeCity(Long id, int newCityId);
+    void changeStreet(Long id,String newStreetInfo);
+    void changeFloor(Long id, int newFloor);
 }
