@@ -1,10 +1,10 @@
 package com.emag.controller;
 
 import com.emag.config.Constants;
-import com.emag.exceptions.AccountException;
-import com.emag.model.Account;
+import com.emag.exceptions.UserException;
+import com.emag.model.User;
 import com.emag.model.ResponseEntity;
-import com.emag.service.AccountService;
+import com.emag.service.UserService;
 import com.google.gson.Gson;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class LoginController {
 
     @Autowired
-    AccountService accountService;
+    UserService userService;
 
     @PostMapping("/user")
     @ResponseBody
@@ -27,10 +27,10 @@ public class LoginController {
         String json = null;
 
         try {
-            accountService.checkDoesGivenUserExists(email, password);
-            Account user = accountService.findByAccountEmail(email);
+            userService.checkDoesGivenUserExists(email, password);
+            User user = userService.findUserByEmail(email);
             json = gson.toJson(user);
-        } catch (AccountException e) {
+        } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
             return new ResponseEntity(Constants.ACC_PROBLEM, HttpStatus.BAD_REQUEST);
@@ -45,9 +45,9 @@ public class LoginController {
 
         JSONObject obj = new JSONObject();
         try {
-            Account user = accountService.findByAccountEmail(email);
+            User user = userService.findUserByEmail(email);
             obj.put("user", user);
-        } catch (AccountException e) {
+        } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
             return new ResponseEntity(Constants.ERROR, HttpStatus.BAD_REQUEST);
@@ -63,9 +63,9 @@ public class LoginController {
 
         JSONObject obj = new JSONObject();
         try {
-            Account user = accountService.findAccountById(id);
+            User user = userService.findUserById(id);
             obj.put("user", user);
-        } catch (AccountException e) {
+        } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
 

@@ -1,8 +1,8 @@
 package com.emag.dao;
 
 import com.emag.config.Constants;
-import com.emag.exceptions.AccountException;
-import com.emag.model.Account;
+import com.emag.exceptions.UserException;
+import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,29 +13,29 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 @Repository
-public class AccountDaoImpl implements AccountDao {
+public class UserDaoImpl implements UserDao {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public Account findAccountById(Long id) throws SQLException, AccountException {
+    public User findUserById(Long id) throws SQLException, UserException {
 
         String getUserById = Constants.FIND_USER_BY_ID;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("id", id);
 
-        Account userById = jdbcTemplate.query(getUserById, userParams, new ResultSetExtractor<Account>() {
+        User userById = jdbcTemplate.query(getUserById, userParams, new ResultSetExtractor<User>() {
 
             @Override
-            public Account extractData(ResultSet rs) throws SQLException {
-                Account userById = new Account();
+            public User extractData(ResultSet rs) throws SQLException {
+                User userById = new User();
                 if (rs.next()) {
                     try {
                         userById.setName(rs.getString("name"));
                         userById.setEmail(rs.getString("email"));
-                    } catch (AccountException e) {
+                    } catch (UserException e) {
                         System.out.println(e.getMessage());
                     }
                 }
@@ -46,24 +46,24 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account findAccountByEmail(String email) throws SQLException, AccountException {
+    public User findUserByEmail(String email) throws SQLException, UserException {
         checkDoesGivenUserExists(email);
         String getUserByEmail = Constants.FIND_USER_BY_EMAIL;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
 
-        Account user = jdbcTemplate.query(getUserByEmail, userParams, new ResultSetExtractor<Account>() {
+        User user = jdbcTemplate.query(getUserByEmail, userParams, new ResultSetExtractor<User>() {
 
             @Override
-            public Account extractData(ResultSet rs) throws SQLException {
-                Account user = new Account();
+            public User extractData(ResultSet rs) throws SQLException {
+                User user = new User();
                 if (rs.next()) {
                     user.setId(rs.getLong("id"));
                     try {
                         user.setName(rs.getString("name"));
                         user.setEmail(rs.getString("email"));
-                    } catch (AccountException e) {
+                    } catch (UserException e) {
                         System.out.println(e.getMessage());
                     }
                 }
@@ -74,25 +74,25 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account createAccount(Account account) throws SQLException, AccountException {
+    public User registerUser(User user) throws SQLException, UserException {
         String registerUser = Constants.ADD_USER;
         HashMap<String, Object> userParams = new HashMap<>();
-        userParams.put("name", account.getName());
-        userParams.put("email", account.getEmail());
-        userParams.put("password", account.getPassword());
+        userParams.put("name", user.getName());
+        userParams.put("email", user.getEmail());
+        userParams.put("password", user.getPassword());
         boolean checker = false;
         try {
-            checkDoesGivenUserExists(account.getEmail());
+            checkDoesGivenUserExists(user.getEmail());
             checker = true;
-        } catch (AccountException e) {
+        } catch (UserException e) {
             jdbcTemplate.update(registerUser, userParams);
         }
-        if (checker) throw new AccountException(Constants.USER_ALREADY_EXISTS);
-        return account;
+        if (checker) throw new UserException(Constants.USER_ALREADY_EXISTS);
+        return user;
     }
 
 
-    public void checkDoesGivenUserExists(String email) throws SQLException, AccountException {
+    public void checkDoesGivenUserExists(String email) throws SQLException, UserException {
         String checkForUserRequest = Constants.FIND_USER_BY_EMAIL;
 
         HashMap<String, Object> userParams = new HashMap<>();
@@ -108,11 +108,11 @@ public class AccountDaoImpl implements AccountDao {
                 return false;
             }
         });
-        if (!checkForUser) throw new AccountException(Constants.NO_SUCH_USER);
+        if (!checkForUser) throw new UserException(Constants.NO_SUCH_USER);
     }
 
 
-    public void checkDoesGivenUserExists(String email, String password) throws SQLException, AccountException {
+    public void checkDoesGivenUserExists(String email, String password) throws SQLException, UserException {
         String checkForUserRequest = Constants.SELECT_USER_BY_EMAIL_AND_PASS;
 
         HashMap<String, Object> userParams = new HashMap<>();
@@ -129,7 +129,7 @@ public class AccountDaoImpl implements AccountDao {
                 return false;
             }
         });
-        if (!checkForUser) throw new AccountException(Constants.WRONG_USERNAME_OR_PASSWORD);
+        if (!checkForUser) throw new UserException(Constants.WRONG_USERNAME_OR_PASSWORD);
     }
 
 }

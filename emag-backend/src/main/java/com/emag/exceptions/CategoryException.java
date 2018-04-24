@@ -1,6 +1,7 @@
 package com.emag.exceptions;
 
 public class CategoryException extends Exception {
+
     public CategoryException() {
     }
 
