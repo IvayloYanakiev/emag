@@ -1,10 +1,10 @@
 package com.emag.model;
 
-import com.emag.exceptions.AccountException;
+import com.emag.exceptions.UserException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Account {
+public class User {
 
     private Long id;
     private String name;
@@ -12,10 +12,10 @@ public class Account {
     private String email;
     private String type;
 
-    public Account() {
+    public User() {
     }
 
-    public Account(String name, String password, String email) throws AccountException {
+    public User(String name, String password, String email) throws UserException {
         setName(name);
         setPassword(password);
         setEmail(email);
@@ -33,10 +33,10 @@ public class Account {
         return name;
     }
 
-    public void setName(String name) throws AccountException {
+    public void setName(String name) throws UserException {
         if (name != null && name.trim().length() > 0) {
             this.name = name;
-        } else throw new AccountException("Invalid name");
+        } else throw new UserException("Invalid name");
     }
 
     public String getPassword() {
@@ -51,10 +51,10 @@ public class Account {
         return email;
     }
 
-    public void setEmail(String email) throws AccountException {
+    public void setEmail(String email) throws UserException {
         if (email != null && email.trim().length() > 0) {
             this.email = email;
-        } else throw new AccountException("Invalid email");
+        } else throw new UserException("Invalid email");
     }
 
     public String getType() {

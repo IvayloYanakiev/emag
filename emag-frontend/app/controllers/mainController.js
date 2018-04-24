@@ -8,4 +8,6 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
     }).then(function (response) {
         $scope.categories = JSON.parse(response.data.object);
     });
+
+
 });

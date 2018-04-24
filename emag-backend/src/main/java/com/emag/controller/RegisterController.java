@@ -2,10 +2,10 @@ package com.emag.controller;
 
 
 import com.emag.config.Constants;
-import com.emag.exceptions.AccountException;
-import com.emag.model.Account;
+import com.emag.exceptions.UserException;
+import com.emag.model.User;
 import com.emag.model.ResponseEntity;
-import com.emag.service.AccountService;
+import com.emag.service.UserService;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,24 +19,24 @@ import java.util.regex.Matcher;
 public class RegisterController {
 
     @Autowired
-    AccountService accountService;
+    UserService userService;
 
-    @PostMapping("/createAccount")
+    @PostMapping("/createUser")
     @ResponseBody
     public ResponseEntity register(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) {
 
         JSONObject obj = new JSONObject();
 
         try {
-            Account user = new Account(name, password, email);
+            User user = new User(name, password, email);
             if (validateEmail(user.getEmail())) {
                 if (confirmPassword != null && confirmPassword.trim().length() > 0) {
                     if (user.getPassword().equals(confirmPassword)) {
-                        accountService.createAccount(user);
+                        userService.registerUser(user);
                     } else return new ResponseEntity(Constants.PASSWORDS_NOT_THE_SAME, HttpStatus.BAD_REQUEST);
                 } else return new ResponseEntity(Constants.CHECK_YOUR_PASSWORD, HttpStatus.BAD_REQUEST);
             } else return new ResponseEntity(Constants.INVALID_EMAIL, HttpStatus.BAD_REQUEST);
-        } catch (AccountException e) {
+        } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
             return new ResponseEntity(Constants.ERROR, HttpStatus.BAD_REQUEST);

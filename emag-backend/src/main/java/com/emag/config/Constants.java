@@ -19,4 +19,15 @@ public class Constants {
     public static final String ADD_USER = "insert into users(name,email,password) values(:name,:email,sha1(:password))";
     public static final String SELECT_USER_BY_EMAIL_AND_PASS = "select * from users where email=:email and password = sha1(:password);";
     public static final String GET_ALL_CATEGORIES = "select main.id as id,main.name as main_name,middle.id as middle_id,middle.name as middle_name from main_type as main join middle_type as middle on main.id = middle.main_type_id";
+    public static final String UPDATE_RECEIVER_PHONE_BY_ADDRESS_ID = "update adresses set reciever_phone=:phone where id=:id";
+    public static final String UPDATE_STREET_INFO_BY_ADDRESS_ID = "update adresses set street=:street where id=:id";
+    public static final String UPDATE_FLOOR_BY_ADDRESS_ID = "update adresses set floor=:floor where id=:id";
+    public static final String UPDATE_CITY_BY_ADDRESS_ID ="update adresses set city_id=:city where id=:id";
+
+
+
+
+
+
+
 }

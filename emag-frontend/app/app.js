@@ -15,6 +15,11 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/register.html',
             controller: 'registerController'
         })
+        .when('/userPersonalData', {
+            templateUrl: 'views/userPersonalData.html',
+            controller: 'userPersonalDataController',
+            css:'css/userPersonalDataCss.css'
+        })
         .otherwise('index.html');
 
 
