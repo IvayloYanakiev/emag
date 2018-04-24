@@ -20,7 +20,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
     @GetMapping("/getUserPersonalData")
     @ResponseBody
     public ResponseEntity getUserInfo(@RequestParam("id") Long id) {
