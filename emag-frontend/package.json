@@ -34,7 +34,7 @@
   "dependencies": {
     "@angular/router": "~3.0.0",
     "angular-ui-router": "^1.0.3",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "3.3.7",
     "jquery": ">=1.9.0"
   }
 }

@@ -27,7 +27,7 @@ app.controller("loginController", function ($rootScope, $scope, $location, $http
                 var userId = JSON.parse(response.data.object).id;
                 sessionService.login(userId);
                 $rootScope.isAuthenticated = sessionService.isLoggedIn();
-                $location.url("/userPage");
+                $location.url("/");
             }
         });
 

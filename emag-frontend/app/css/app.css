@@ -46,6 +46,7 @@
 /***********************************************************/
 
 /* moite pisaniq*/
+
 html * {
     font-family: Verdana, Geneva, sans-serif;
 }
@@ -57,13 +58,17 @@ html * {
     position: relative;
 }
 
+.container {
+    position: relative;
+}
+
 #categoryNavigation {
     position: absolute;
     left: 12px;
 }
 
 #logout {
-    right: 15px;
+    position: relative;
 }
 
 #searchBarContainer {
@@ -72,18 +77,17 @@ html * {
 }
 
 #logo {
-    position: absolute;
-    left: 25px;
-    top: 5px;
+    position: relative;
 }
 
 #searchForm {
-    top: 7px;
+    position: relative;
+    margin-top: 1em;
 }
 
 #emagInfo {
-    position: relative;
-    left: 710px;
+    /*position: relative;*/
+    /*nav-right: auto;*/
 }
 
 #mainNavigationBar, #navigationBar {
@@ -93,6 +97,7 @@ html * {
 #nav-collapse1 {
     position: relative;
 }
+
 
 /*sa do tuk*/
 
