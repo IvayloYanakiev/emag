@@ -22,7 +22,6 @@ public class RegisterController {
     UserService userService;
 
     @PostMapping("/createUser")
-    @ResponseBody
     public ResponseEntity register(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) {
 
         JSONObject obj = new JSONObject();

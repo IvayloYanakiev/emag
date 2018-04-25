@@ -10,22 +10,20 @@ import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
-    UserService userService;
 
     @PostMapping("/user")
-    @ResponseBody
     public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {
+
 
         Gson gson = new Gson();
         String json = null;
-
         try {
             userService.checkDoesGivenUserExists(email, password);
             User user = userService.findUserByEmail(email);
@@ -39,11 +37,15 @@ public class LoginController {
         return new ResponseEntity(json, HttpStatus.OK);
     }
 
+
+    @Autowired
+    UserService userService;
+
     @GetMapping("/getUserPageByEmail")
-    @ResponseBody
     public ResponseEntity getUserPageByEmail(@RequestParam("email") String email) {
 
         JSONObject obj = new JSONObject();
+
         try {
             User user = userService.findUserByEmail(email);
             obj.put("user", user);
@@ -58,10 +60,10 @@ public class LoginController {
 
 
     @GetMapping("/getUserPageById")
-    @ResponseBody
     public ResponseEntity getUserPageById(@RequestParam("id") Long id) {
 
         JSONObject obj = new JSONObject();
+
         try {
             User user = userService.findUserById(id);
             obj.put("user", user);
