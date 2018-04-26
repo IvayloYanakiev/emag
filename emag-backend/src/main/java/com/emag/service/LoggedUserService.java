@@ -1,8 +1,7 @@
-package com.emag.dao;
-
+package com.emag.service;
 
 import com.emag.model.User;
 
-public interface LoggedUserDao {
+public interface LoggedUserService {
     void updateUserPersonalInfo(User user);
 }

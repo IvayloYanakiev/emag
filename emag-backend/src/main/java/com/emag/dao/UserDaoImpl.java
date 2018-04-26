@@ -33,8 +33,12 @@ public class UserDaoImpl implements UserDao {
                 User userById = new User();
                 if (rs.next()) {
                     try {
+                        userById.setId(id);
                         userById.setName(rs.getString("name"));
                         userById.setEmail(rs.getString("email"));
+                        userById.setPhone(rs.getString("phone"));
+                        userById.setGender(rs.getString("gender"));
+                        userById.setPictureUrl(rs.getString("profile_url"));
                     } catch (UserException e) {
                         System.out.println(e.getMessage());
                     }
@@ -59,8 +63,8 @@ public class UserDaoImpl implements UserDao {
             public User extractData(ResultSet rs) throws SQLException {
                 User user = new User();
                 if (rs.next()) {
-                    user.setId(rs.getLong("id"));
                     try {
+                        user.setId(rs.getLong("id"));
                         user.setName(rs.getString("name"));
                         user.setEmail(rs.getString("email"));
                     } catch (UserException e) {

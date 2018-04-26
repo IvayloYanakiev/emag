@@ -19,7 +19,7 @@
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -32,7 +32,9 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {color: #222222}
+.dropdown-content a:hover {
+    color: #222222
+}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -43,6 +45,7 @@
 .dropdown:hover .dropbtn {
     color: #222222;
 }
+
 /***********************************************************/
 
 /* moite pisaniq*/
@@ -98,11 +101,20 @@ html * {
     position: relative;
 }
 
-
 /*sa do tuk*/
 
 #mainNavigationBar, #navigationBar {
     margin-bottom: 0px;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
 }
 
 .menu {
@@ -129,39 +141,99 @@ html * {
     padding-right: 0.3em;
 }
 
-.loginContainer{
-    padding:20px;
+.loginContainer {
+    padding: 20px;
 }
 
-.registerContainer{
-    padding:20px;
+.registerContainer {
+    padding: 20px;
 }
 
-.addPostContainer{
-    padding:20px;
+.addPostContainer {
+    padding: 20px;
 }
 
-.navbar-brand { position: relative; z-index: 2; }
+.navbar-brand {
+    position: relative;
+    z-index: 2;
+}
 
-.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; }
-.navbar-nav.navbar-left .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; }
+.navbar-nav.navbar-right .btn {
+    position: relative;
+    z-index: 2;
+    padding: 4px 20px;
+    margin: 10px auto;
+}
 
-.navbar .navbar-collapse { position: relative; }
-.navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 22px; }
+.navbar-nav.navbar-left .btn {
+    position: relative;
+    z-index: 2;
+    padding: 4px 20px;
+    margin: 10px auto;
+}
 
-.navbar .nav-collapse { position: absolute; z-index: 1; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding-right: 120px; padding-left: 80px; width: 100%; }
-.navbar.navbar-default .nav-collapse { background-color: #f8f8f8; }
-.navbar.navbar-inverse .nav-collapse { background-color: #222; }
-.navbar .nav-collapse .navbar-form { border-width: 0; box-shadow: none; }
-.nav-collapse>li { float: right; }
+.navbar .navbar-collapse {
+    position: relative;
+}
 
-.btn.btn-circle { border-radius: 50px; }
-.btn.btn-outline { background-color: transparent; }
+.navbar .navbar-collapse .navbar-right > li:last-child {
+    padding-left: 22px;
+}
+
+.navbar .nav-collapse {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding-right: 120px;
+    padding-left: 80px;
+    width: 100%;
+}
+
+.navbar.navbar-default .nav-collapse {
+    background-color: #f8f8f8;
+}
+
+.navbar.navbar-inverse .nav-collapse {
+    background-color: #222;
+}
+
+.navbar .nav-collapse .navbar-form {
+    border-width: 0;
+    box-shadow: none;
+}
+
+.nav-collapse > li {
+    float: right;
+}
+
+.btn.btn-circle {
+    border-radius: 50px;
+}
+
+.btn.btn-outline {
+    background-color: transparent;
+}
 
 @media screen and (max-width: 767px) {
-    .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; }
+    .navbar .navbar-collapse .navbar-right > li:last-child {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
-    .navbar .nav-collapse { margin: 7.5px auto; padding: 0; }
-    .navbar .nav-collapse .navbar-form { margin: 0; }
-    .nav-collapse>li { float: none; }
+    .navbar .nav-collapse {
+        margin: 7.5px auto;
+        padding: 0;
+    }
+
+    .navbar .nav-collapse .navbar-form {
+        margin: 0;
+    }
+
+    .nav-collapse > li {
+        float: none;
+    }
 }
