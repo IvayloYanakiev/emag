@@ -5,6 +5,7 @@ import com.emag.exceptions.AddressException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import java.util.HashMap;
 
 @Repository
@@ -14,6 +15,19 @@ public class AddressDaoImpl implements AddressDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
+    public void changeReceiverName(Long id, String name) throws AddressException {
+        String updateReceiverName = Constants.UPDATE_RECEIVER_NAME_BY_ADDRESS_ID;
+        HashMap<String, Object> addressParam = new HashMap<>();
+        addressParam.put("id", id);
+        addressParam.put("name", name);
+
+        int rowsUpdated = jdbcTemplate.update(updateReceiverName, addressParam);
+        if (rowsUpdated == 0) {
+            throw new AddressException(Constants.ADDRESS_NOT_FOUND);
+        }
+    }
+
+    @Override
     public void changeReceiverPhoneNumber(Long id, String phone) throws AddressException {
         String updateReceiverPhone = Constants.UPDATE_RECEIVER_PHONE_BY_ADDRESS_ID;
         HashMap<String, Object> addressParam = new HashMap<>();
@@ -21,21 +35,21 @@ public class AddressDaoImpl implements AddressDao {
         addressParam.put("phone", phone);
 
         int rowsUpdated = jdbcTemplate.update(updateReceiverPhone, addressParam);
-        if(rowsUpdated == 0){
-            throw new AddressException("Address not found");
+        if (rowsUpdated == 0) {
+            throw new AddressException(Constants.ADDRESS_NOT_FOUND);
         }
     }
 
     @Override
-    public void changeCity(Long id, int city) throws AddressException {
-        String updateCity = Constants.UPDATE_CITY_BY_ADDRESS_ID;
+    public void changeCity(Long id, Long cityId) throws AddressException {
+        String updateCityId = Constants.UPDATE_CITY_BY_ADDRESS_ID;
         HashMap<String, Object> addressParam = new HashMap<>();
         addressParam.put("id", id);
-        addressParam.put("city", city);
+        addressParam.put("cityId", cityId);
 
-        int rowsUpdated = jdbcTemplate.update(updateCity, addressParam);
-        if(rowsUpdated == 0){
-            throw new AddressException("Address not found");
+        int rowsUpdated = jdbcTemplate.update(updateCityId, addressParam);
+        if (rowsUpdated == 0) {
+            throw new AddressException(Constants.ADDRESS_NOT_FOUND);
         }
     }
 
@@ -47,8 +61,8 @@ public class AddressDaoImpl implements AddressDao {
         addressParam.put("street", street);
 
         int rowsUpdated = jdbcTemplate.update(updateStreetInfo, addressParam);
-        if(rowsUpdated == 0){
-            throw new AddressException("Address not found");
+        if (rowsUpdated == 0) {
+            throw new AddressException(Constants.ADDRESS_NOT_FOUND);
         }
     }
 
@@ -60,8 +74,8 @@ public class AddressDaoImpl implements AddressDao {
         addressParam.put("floor", floor);
 
         int rowsUpdated = jdbcTemplate.update(updateFloor, addressParam);
-        if(rowsUpdated == 0){
-            throw new AddressException("Address not found");
+        if (rowsUpdated == 0) {
+            throw new AddressException(Constants.ADDRESS_NOT_FOUND);
         }
     }
 }

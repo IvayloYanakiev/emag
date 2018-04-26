@@ -13,5 +13,4 @@ public interface UserDao {
     User registerUser(User data) throws SQLException,UserException;
     void checkDoesGivenUserExists(String email, String password) throws SQLException,UserException;
     void checkDoesGivenUserExists(String email) throws SQLException,UserException;
-
 }

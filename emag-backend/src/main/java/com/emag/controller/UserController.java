@@ -21,7 +21,6 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/getUserPersonalData")
-    @ResponseBody
     public ResponseEntity getUserInfo(@RequestParam("id") Long id) {
 
         Gson gson = new Gson();

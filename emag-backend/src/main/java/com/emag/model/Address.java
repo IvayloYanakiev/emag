@@ -1,19 +1,21 @@
 package com.emag.model;
 
+import com.emag.config.Constants;
 import com.emag.exceptions.AddressException;
+import org.apache.tomcat.util.bcel.classfile.Constant;
 
 public class Address {
-    private int id;
+    private Long id;
     private String receiverName;
     private String receiverPhone;
-    private int cityId;
+    private Long cityId;
     private String street;
     private int floor;
 
-    public Address(){
+    public Address() {
     }
 
-    public Address(String receiverName, String receiverPhone, int cityId, String street, int floor) throws AddressException {
+    public Address(String receiverName, String receiverPhone, Long cityId, String street, int floor) throws AddressException {
         this.setReceiverName(receiverName);
         this.setReceiverPhone(receiverPhone);
         this.setCityId(cityId);
@@ -21,12 +23,16 @@ public class Address {
         this.setFloor(floor);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(Long id) throws AddressException {
+        if (id > -1) {
+            this.id = id;
+        } else {
+            throw new AddressException("Invalid id value");
+        }
     }
 
     public String getReceiverName() {
@@ -34,7 +40,7 @@ public class Address {
     }
 
     public void setReceiverName(String receiverName) throws AddressException {
-        if(receiverName != null && receiverName.trim().length() > 0){
+        if (receiverName != null && receiverName.trim().length() > 0) {
             this.receiverName = receiverName;
         } else {
             throw new AddressException("Invalid receiver name");
@@ -46,19 +52,23 @@ public class Address {
     }
 
     public void setReceiverPhone(String receiverPhone) throws AddressException {
-        if(receiverPhone != null && receiverPhone.trim().length() > 0 ) {
+        if (receiverPhone != null && receiverPhone.trim().length() == Constants.PHONE_NUMBER_LENGTH && receiverPhone.startsWith(Constants.PHONE_NUMBER_PREFIX)) {
             this.receiverPhone = receiverPhone;
         } else {
-            throw new AddressException("Invalid phone number");
+            throw new AddressException("Invalid phone number value");
         }
     }
 
-    public int getCityId() {
+    public Long getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
+    public void setCityId(Long cityId) throws AddressException {
+        if (cityId > -1) {
+            this.cityId = cityId;
+        } else {
+            throw new AddressException("Invalid city ID value");
+        }
     }
 
     public String getStreet() {
@@ -66,10 +76,10 @@ public class Address {
     }
 
     public void setStreet(String street) throws AddressException {
-        if(street != null && street.trim().length() > 0){
+        if (street != null && street.trim().length() > 0) {
             this.street = street;
         } else {
-            throw new AddressException("Invalid street");
+            throw new AddressException("Invalid street value");
         }
     }
 
@@ -78,7 +88,7 @@ public class Address {
     }
 
     public void setFloor(int floor) throws AddressException {
-        if(floor >= 0) {
+        if (floor >= 0) {
             this.floor = floor;
         } else {
             throw new AddressException("Invalid floor value");

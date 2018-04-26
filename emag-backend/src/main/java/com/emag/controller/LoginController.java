@@ -20,7 +20,6 @@ public class LoginController {
     UserService userService;
 
     @PostMapping("/user")
-    @ResponseBody
     public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {
 
         Gson gson = new Gson();
@@ -40,7 +39,6 @@ public class LoginController {
     }
 
     @GetMapping("/getUserPageByEmail")
-    @ResponseBody
     public ResponseEntity getUserPageByEmail(@RequestParam("email") String email) {
 
         JSONObject obj = new JSONObject();
@@ -58,7 +56,6 @@ public class LoginController {
 
 
     @GetMapping("/getUserPageById")
-    @ResponseBody
     public ResponseEntity getUserPageById(@RequestParam("id") Long id) {
 
         JSONObject obj = new JSONObject();
