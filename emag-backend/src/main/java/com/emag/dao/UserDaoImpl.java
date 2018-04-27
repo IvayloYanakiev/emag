@@ -36,9 +36,16 @@ public class UserDaoImpl implements UserDao {
                         userById.setId(id);
                         userById.setName(rs.getString("name"));
                         userById.setEmail(rs.getString("email"));
-                        userById.setPhone(rs.getString("phone"));
-                        userById.setGender(rs.getString("gender"));
-                        userById.setPictureUrl(rs.getString("profile_url"));
+                        if(rs.getString("phone")!=null) {
+                            userById.setPhone(rs.getString("phone"));
+                        }
+                        if(rs.getString("gender")!=null) {
+                            userById.setGender(rs.getString("gender"));
+                        }
+                        if(rs.getString("profile_url")!=null) {
+                            userById.setPictureUrl(rs.getString("profile_url"));
+                        }
+
                     } catch (UserException e) {
                         System.out.println(e.getMessage());
                     }

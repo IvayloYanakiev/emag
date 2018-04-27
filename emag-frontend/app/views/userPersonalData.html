@@ -9,20 +9,50 @@
                 </div>
                 <div class="panel-body">
                     <div class="container">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label> Profile picture </label>
                                 <div class="input-group">
                                   <span class="input-group-btn">
-                                      <span class="btn btn-default btn-file">
-                                       Browse…<input type="file" id="imgInp" class="form-control" file-model="myFile">
-                                     </span>
+
+                                      <img src="{{pictureUrl}}" class="img-rounded" alt="Cinque Terre" width="150"
+                                           height="150">
                                   </span>
+
+
                                 </div>
-                                <img id='img-upload'/>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Update</button>
+
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Update profile picture</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <span class="btn btn-default btn-file">
+                                                Browse…<input type="file" id="imgInp" class="form-control" file-model="myFile">
+                                                </span>
+                                                <img id='img-upload'/>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                        ng-click="updateUserProfilePicture()">Update</button>
+                                                <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <form>
+                        <form class="col-md-3">
                             <div class="form-group">
                                 <label>Names</label>
                                 <input class="form-control" ng-model="user.name">
@@ -32,14 +62,24 @@
                                 <input type="email" class="form-control" ng-model="user.email">
                             </div>
                             <div class="form-group">
-                                <label >Gender</label>
-                                <input class="form-control" ng-model="user.gender">
+                                <!--<input class="form-control" ng-model="user.gender">-->
+                                <div class="dropdown">
+                                    <button class="btn btn-default form-control" type="button" data-toggle="dropdown">{{user.gender}}
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a ng-click="putGender(1)" ng->  <i class="fa fa-male" aria-hidden="true"></i>
+                                            </button>Male</a></li>
+                                        <li><a ng-click="putGender(2)">  <i class="fas fa-female"></i>
+
+                                            </button>Female</a></li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label >Mobile phone</label>
+                                <label>Mobile phone</label>
                                 <input class="form-control" ng-model="user.phone">
                             </div>
-                            <button type="submit" class="btn btn-primary" ng-click="updateUser()">Update</button>
+                            <button type="submit"  class="btn btn-default" ng-click="updateUserPersonalData()">Update</button>
                         </form>
                     </div>
                 </div>

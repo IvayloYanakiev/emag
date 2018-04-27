@@ -19,15 +19,10 @@ app.directive('fileModel', ['$parse', function ($parse) {
 app.service('fileUpload', ['$q', '$http', function ($q, $http) {
     var deffered = $q.defer();
     var responseData;
-    this.uploadFileToUrl = function (file, uploadUrl,user) {
+    this.uploadFileToUrl = function (file, uploadUrl,userId) {
         var fd = new FormData();
+        fd.append('id', userId);
         fd.append('picture', file);
-        fd.append('id', user.id);
-        fd.append('name', user.name);
-        fd.append('email', user.email);
-        fd.append('gender', user.gender);
-        fd.append('mobilePhone', user.phone);
-
         return $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
@@ -55,6 +50,15 @@ app.controller("userPersonalDataController", function ($q,$scope, $location, $ro
     $scope.currentFile = {};
     $scope.dataUpload = true;
     $scope.myFile = {};
+    $scope.pictureUrl = "";
+
+    $scope.putGender = function(gender){
+        if(gender==1){
+            $scope.user.gender = "Male";
+        }
+        else  $scope.user.gender = "Female";
+
+    };
 
     var getData = function () {
         if (sessionService.isLoggedIn()) {
@@ -64,9 +68,9 @@ app.controller("userPersonalDataController", function ($q,$scope, $location, $ro
                 params: {"id": sessionService.getSession()}
             }).then(function (response) {
                 $scope.user = JSON.parse(response.data.object);
-                if($scope.user.profile_url==null){
-                    //ima snimka slagame cheker v html
-                }
+                if($scope.user.pictureUrl!=null){
+                    $scope.pictureUrl=$scope.user.pictureUrl;
+                }else $scope.pictureUrl = "http://127.0.0.1:8887/nopicture.jpg";
             });
         } else $location.url("/login");
 
@@ -74,20 +78,36 @@ app.controller("userPersonalDataController", function ($q,$scope, $location, $ro
     getData();
 
 
-    $scope.updateUser = function(){
+
+    $scope.updateUserProfilePicture = function(){
         var file =  $scope.myFile;
-        var uploadUrl = "http://localhost:7377/user/updateUserPersonalData";
-        fileUpload.uploadFileToUrl(file, uploadUrl,$scope.user).then(function(result){
-            $scope.success = true;
-            $scope.value  = "Success";
-            $scope.errors = fileUpload.getResponse();
-            console.log($scope.errors);
-            $scope.errVisibility = true;
+        var uploadUrl = "http://localhost:7377/user/updateUserProfilePicture";
+        fileUpload.uploadFileToUrl(file, uploadUrl,$scope.user.id).then(function(result){
+            var url = JSON.parse(result.data.object);
+            $scope.pictureUrl = url;
+            $('#myModal').modal('hide');
         }, function() {
             alert('error');
         })
 
     };
+
+  $scope.updateUserPersonalData = function () {
+      $http({
+          url: "http://localhost:7377/user" + "/updateUserPersonalData",
+          method: "POST",
+          params: {
+              "id": $scope.user.id,
+              "name": $scope.user.name,
+              "email": $scope.user.email,
+              "gender": $scope.user.gender,
+              "phone": $scope.user.phone
+          }
+      }).then(function (response) {
+
+      });
+
+  };
 
 
     $(document).ready(function () {

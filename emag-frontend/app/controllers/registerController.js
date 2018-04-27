@@ -11,7 +11,7 @@ app.controller("registerController", function ($scope, $location, $http) {
         $scope.success = false;
 
         $http({
-            url: "http://localhost:7377/register/" + "/createAccount",
+            url: "http://localhost:7377/register/" + "/createUser",
             method: "POST",
             params: {
                 "name": $scope.user.name,

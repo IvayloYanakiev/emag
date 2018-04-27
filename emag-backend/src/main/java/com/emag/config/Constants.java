@@ -27,6 +27,15 @@ public class Constants {
     public static final String ADDRESS_NOT_FOUND = "Address not found";
     public static final int PHONE_NUMBER_LENGTH = 10;
     public static final String PHONE_NUMBER_PREFIX = "08";
-
-
+    public static final String INVALID_PHONE = "Invalid phone";
+    public static final String INVALID_GENDER = "Invalid gender";
+    public static final String INVALID_PICTURE_URL = "Invalid picture url";
+    public static final String INVALID_NAME = "Invalid name";
+    public static final String INVALID_ID = "Invalid id";
+    public static final String INVALID_STREET_VALUE = "Invalid street value";
+    public static final String INVALID_FLOOR_VALUE = "Invalid floor value";
+    public static final String INVALID_CITY_ID_VALUE = "Invalid city ID value";
+    public static final String INVALID_PHONE_NUMBER_VALUE = "Invalid phone number value";
+    public static final String INVALID_RECEIVER_NAME = "Invalid receiver name";
+    public static final String INVALID_ID_VALUE = "Invalid adress id";
 }

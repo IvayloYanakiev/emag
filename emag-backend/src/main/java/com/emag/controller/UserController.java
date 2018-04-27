@@ -35,8 +35,14 @@ public class UserController {
 
         Gson gson = new Gson();
         String json = null;
+
         try {
             User user = userService.findUserById(id);
+            if(user.getPictureUrl()!=null){
+                int newLocationProfilePictureIndex = user.getPictureUrl().lastIndexOf("\\");
+                String newlocation = "http://127.0.0.1:8887/" + user.getPictureUrl().substring(newLocationProfilePictureIndex+1);
+                user.setPictureUrl(newlocation);
+            }
             json = gson.toJson(user);
         } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -47,26 +53,42 @@ public class UserController {
         return new ResponseEntity(json, HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/updateUserPersonalData"}, method = RequestMethod.POST, consumes = "multipart/form-data")
+    @RequestMapping(value = {"/updateUserPersonalData"}, method = RequestMethod.POST)
     public ResponseEntity updateUserPersonalData
             (@RequestParam("id") Long id,@RequestParam("name") String name,@RequestParam("email") String email,
-             @RequestParam("gender") String gender,@RequestParam("mobilePhone") String phone,@RequestParam("picture") MultipartFile picture){
+             @RequestParam("gender") String gender,@RequestParam("phone") String phone){
+
+        User user = null;
+        try {
+            user = new User(id,name,email,gender,phone);
+            loggedUserService.updateUserPersonalInfo(user);
+        } catch (UserException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity("OK", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = {"/updateUserProfilePicture"}, method = RequestMethod.POST, consumes = "multipart/form-data")
+    public ResponseEntity updateUserProfilePicture(@RequestParam("id") Long id,@RequestParam("picture") MultipartFile picture){
+
+        Gson gson = new Gson();
+        String json = null;
 
         try {
             File newFile = convert(picture);
-            User user = new User(id,name,email,newFile.getPath(),gender,phone);
-            loggedUserService.updateUserPersonalInfo(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UserException e) {
-            e.printStackTrace();
+            loggedUserService.updateUserProfilePicture(id,newFile.getPath());
+            int newLocationProfilePictureIndex = newFile.getPath().lastIndexOf("\\");
+            String newlocation = "http://127.0.0.1:8887/" + newFile.getPath().substring(newLocationProfilePictureIndex+1);
+            json = gson.toJson(newlocation);
+        } catch (IOException|UserException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.OK);
         }
 
-
-        return null;
+        return new ResponseEntity(json, HttpStatus.OK);
     }
 
-    public File convert(MultipartFile file) throws IOException {
+    private File convert(MultipartFile file) throws IOException {
         File convFile = new File("D:\\userPictures\\" + file.getOriginalFilename());
         convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
