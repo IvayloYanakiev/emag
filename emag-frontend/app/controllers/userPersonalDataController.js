@@ -178,6 +178,7 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
 
     $scope.resetAddresses = function(){
         $('#myModal3').modal('hide');
+        $('#myModal4').modal('hide');
         getAddresses();
         $scope.address = "";
     };
