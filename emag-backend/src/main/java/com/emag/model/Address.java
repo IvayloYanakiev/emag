@@ -2,7 +2,6 @@ package com.emag.model;
 
 import com.emag.config.Constants;
 import com.emag.exceptions.AddressException;
-
 public class Address {
 
     private Long id;
