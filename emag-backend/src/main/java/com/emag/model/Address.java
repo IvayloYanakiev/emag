@@ -2,8 +2,6 @@ package com.emag.model;
 
 import com.emag.config.Constants;
 import com.emag.exceptions.AddressException;
-import com.emag.exceptions.CityException;
-import org.apache.tomcat.util.bcel.classfile.Constant;
 
 public class Address {
 
