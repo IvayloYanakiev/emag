@@ -79,28 +79,50 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
     };
     getData();
 
-    $scope.getAddress= function(addressId){
+
+    $scope.updateAddress = function(){
         $http({
             url: "http://localhost:7377/address" + "/updateAddress",
             method: "PUT",
             params: {
-                "addressId": addressId,
-                "receiverName": addressId,
-                "receiverPhone": addressId,
-                "cityId": addressId,
-                "street": addressId,
-                "floor": addressId
+                "addressId": $scope.currentAddress.id,
+                "receiverName": $scope.currentAddress.receiverName,
+                "receiverPhone": $scope.currentAddress.receiverPhone,
+                "cityId": $scope.currentAddress.city.id,
+                "street": $scope.currentAddress.street,
+                "floor": $scope.currentAddress.floor
             }
         }).then(function (response) {
-            $scope.addresses = JSON.parse(response.data.object);
+            $('#myModal4').modal('hide');
+            getAddresses();
+            $scope.currentAddress = "";
+        });
+    };
 
+    $scope.getAddress= function(addressId){
+        $http({
+            url: "http://localhost:7377/address" + "/getAddress",
+            method: "GET",
+            params: {
+                "addressId": addressId
+            }
+        }).then(function (response) {
+            $scope.currentAddress = JSON.parse(response.data.object);
         });
     };
 
 
 
     $scope.deleteAddress= function(addressId){
-
+        $http({
+            url: "http://localhost:7377/address" + "/deleteAddress",
+            method: "DELETE",
+            params: {
+                "addressId": addressId
+            }
+        }).then(function (response) {
+            getAddresses();
+        });
     };
 
     var getAddresses = function () {

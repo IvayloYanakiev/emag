@@ -74,7 +74,7 @@ public class AddressDaoImpl implements AddressDao {
                 " where u.id=:userId;";
         HashMap<String, Object> params = new HashMap<>();
         params.put("userId", userId);
-        LinkedHashSet<Address> addresses = jdbcTemplate.query(getAllCategories,params, new ResultSetExtractor<LinkedHashSet<Address>>() {
+        LinkedHashSet<Address> addresses = jdbcTemplate.query(getAllCategories, params, new ResultSetExtractor<LinkedHashSet<Address>>() {
 
             @Override
             public LinkedHashSet<Address> extractData(ResultSet rs) throws SQLException {
@@ -89,10 +89,10 @@ public class AddressDaoImpl implements AddressDao {
                         String cityName = rs.getString("city");
                         String street = rs.getString("street");
                         Integer floor = rs.getInt("floor");
-                        City city = new City(cityId,cityName);
-                        Address address = new Address(addressId,receiverName,receiverPhone,city,street,floor);
+                        City city = new City(cityId, cityName);
+                        Address address = new Address(addressId, receiverName, receiverPhone, city, street, floor);
                         myAddresses.add(address);
-                    } catch (AddressException|CityException e) {
+                    } catch (AddressException | CityException e) {
                         System.out.println(e.getMessage());
                     }
                 }
@@ -106,17 +106,69 @@ public class AddressDaoImpl implements AddressDao {
     @Override
     public void updateAddress(Address address) throws AddressException {
         String updateAddress = "update addresses set receiver_name=:receiver_name,receiver_phone=:receiver_phone,city_id=:city_id,street=:street,floor=:floor where id=:id";
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("id",address.getId());
-        params.put("receiver_name",address.getReceiverName());
-        params.put("receiver_phone",address.getReceiverPhone());
-        params.put("city_id",address.getCity().getId());
-        params.put("street",address.getStreet());
-        params.put("floor",address.getFloor());
-        try{
-            jdbcTemplate.update(updateAddress,params);
-        }catch (Exception e){
-            throw new AddressException("Error updating address",e);
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("id", address.getId());
+        params.put("receiver_name", address.getReceiverName());
+        params.put("receiver_phone", address.getReceiverPhone());
+        params.put("city_id", address.getCity().getId());
+        params.put("street", address.getStreet());
+        params.put("floor", address.getFloor());
+        try {
+            jdbcTemplate.update(updateAddress, params);
+        } catch (Exception e) {
+            throw new AddressException("Error updating address", e);
         }
     }
+
+
+
+
+    @Override
+    public Address getAddress(Long addressId) {
+        String getAddress = "select a.id as address_id,a.receiver_name,a.receiver_phone,c.id as city_id,a.street,a.floor,c.name as city_name " +
+                " from addresses a join cities c on a.city_id=c.id where a.id=:addressId";
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("addressId", addressId);
+
+        Address addressById = jdbcTemplate.query(getAddress, params, new ResultSetExtractor<Address>() {
+
+            @Override
+            public Address extractData(ResultSet rs) throws SQLException {
+               Address address = new Address();
+                if (rs.next()) {
+                    try {
+                        address.setId(rs.getLong("address_id"));
+                        address.setReceiverName(rs.getString("receiver_name"));
+                        address.setReceiverPhone(rs.getString("receiver_phone"));
+                        address.setStreet(rs.getString("street"));
+                        address.setFloor(rs.getInt("floor"));
+                        Long cityId = rs.getLong("city_id");
+                        String cityName = rs.getString("city_name");
+                        City city = new City(cityId,cityName);
+                        address.setCity(city);
+                    } catch (AddressException|CityException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return address;
+            }
+        });
+
+
+        return addressById;
+    }
+
+    @Override
+    public void deleteAddress(Long addressId) throws AddressException {
+        String updateAddress = "delete from addresses where id=:addressId";
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("addressId", addressId);
+        try {
+            jdbcTemplate.update(updateAddress, params);
+        } catch (Exception e) {
+            throw new AddressException("Error deleting address", e);
+        }
+    }
+
+
 }

@@ -29,4 +29,14 @@ public class AddressServiceImpl implements AddressService {
     public void updateAddress(Address address) throws AddressException {
         addressDao.updateAddress(address);
     }
+
+    @Override
+    public Address getAddress(Long addressId) {
+        return addressDao.getAddress(addressId);
+    }
+
+    @Override
+    public void deleteAddress(Long addressId) throws AddressException {
+        addressDao.deleteAddress(addressId);
+    }
 }

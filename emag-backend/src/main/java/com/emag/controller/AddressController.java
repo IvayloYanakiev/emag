@@ -57,7 +57,6 @@ public class AddressController {
                                          @RequestParam("cityId") Long cityId,
                                          @RequestParam("street") String street,
                                          @RequestParam("floor") int floor) {
-
         try {
             City city = new City();
             city.setId(cityId);
@@ -70,10 +69,23 @@ public class AddressController {
         return null;
     }
 
-    @PutMapping("/deleteAddress")
-    public ResponseEntity updateAddress( @RequestParam("addressId") Long addressId) {
+    @GetMapping("/getAddress")
+    public ResponseEntity getAddress( @RequestParam("addressId") Long addressId) {
+        Address address = addressService.getAddress(addressId);
+        Gson gson = new Gson();
+        String json = gson.toJson(address);
+        return new ResponseEntity(json, HttpStatus.OK);
+    }
 
-        return null;
+    @DeleteMapping("/deleteAddress")
+    public ResponseEntity deleteAddress( @RequestParam("addressId") Long addressId) {
+
+        try {
+            addressService.deleteAddress(addressId);
+        } catch (AddressException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity("OK", HttpStatus.OK);
     }
 
 
