@@ -20,6 +20,10 @@ app.config(function ($routeProvider) {
             controller: 'userPersonalDataController',
             css:'css/userPersonalDataCss.css'
         })
+        .when('/shoppingCart', {
+            templateUrl: 'views/shoppingCart.html',
+            controller: 'shoppingCartController'
+        })
         .otherwise('index.html');
 
 

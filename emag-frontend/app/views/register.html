@@ -1,7 +1,7 @@
 <div class="container registerContainer" ng-controller="registerController">
     <div class="row vertical-offset-100">
         <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
+            <div class="panel panel-default"  >
                 <div class="panel-heading">
                     <h3 class="panel-title">Register</h3>
                 </div>
@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <input class="form-control" placeholder="Confirm password" name="confirmPassword" type="password" ng-model="user.confirmPassword" required>
                             </div>
-                            <button class="btn btn-lg btn-success btn-block" ng-click="register()">Register</button> <br>
+                            <button style="background-color: #0e8ce4" class="btn btn-lg btn-success btn-block" ng-click="register()">Register</button> <br>
                             <div class="alert alert-success" role="alert" ng-if="success">
                                 {{value}}
                             </div>
