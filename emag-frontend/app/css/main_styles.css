@@ -825,6 +825,10 @@ select option
 /*********************************
 3.3 Main Navigation
 *********************************/
+#show_menu_btn {
+
+}
+
 .main_nav
 {
 	width: 100%;
@@ -3479,6 +3483,22 @@ select option
 	border-bottom-right-radius: 5px;
 	cursor: pointer;
 }
+
+#show_menu_btn {
+	position: relative;
+	width: 153px;
+	height: 50px;
+	background: #0e8ce4;
+	color: #FFFFFF;
+	line-height: 50px;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	cursor: pointer;
+}
+
 .newsletter_button:hover
 {
 	opacity: 0.8;

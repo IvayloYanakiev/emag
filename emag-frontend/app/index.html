@@ -118,11 +118,13 @@
                             <!-- Categories Menu -->
 
                             <div class="cat_menu_container" >
-                                <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+                                <div id="dropdown_container" class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
                                     <div class="cat_burger"><span></span><span></span><span></span></div>
-                                    <div class="cat_menu_text">categories</div>
+                                    <div class="cat_menu_text">
+                                        <button id="show_menu_btn" onclick="showMenu()">Categories</button>
+                                        </div>
                                 </div>
-                                <ul class="cat_menu">
+                                <ul class="cat_menu" id="dropdown_content">
                                     <li class="hassubs" ng-repeat="category in categories">{{category.name}}
                                         <img src="https://www.materialui.co/materialIcons/hardware/keyboard_arrow_right_grey_192x192.png" alt="" width="20"/>
                                         <ul>
@@ -254,11 +256,11 @@
 
     </header>
 
-    <!-- Banner -->
+    <!--&lt;!&ndash; Banner &ndash;&gt;-->
 
-    <div class="banner">
-        <div class="banner_background" style="background-image:url(http://v3wall.com/wallpaper/1920_1200/1010/1920_1200_20101027082705569467.jpg)"></div>
-    </div>
+    <!--<div class="banner">-->
+        <!--<div class="banner_background" style="background-image:url(http://v3wall.com/wallpaper/1920_1200/1010/1920_1200_20101027082705569467.jpg)"></div>-->
+    <!--</div>-->
 
     <div ng-view></div>
 
@@ -349,6 +351,7 @@
 <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <script src="app.js"></script>
+<script  src="controllers/showDropDownMenu.js"></script>
 <script src="controllers/logoutController.js"></script>
 <script src="controllers/loginController.js"></script>
 <script src="controllers/mainController.js"></script>
