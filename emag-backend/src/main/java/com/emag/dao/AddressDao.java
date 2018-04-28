@@ -10,5 +10,5 @@ public interface AddressDao {
 
     LinkedHashSet<Address> getAllAddresses(Long userId);
 
-    void updateAddress(Address address);
+    void updateAddress(Address address) throws AddressException;
 }

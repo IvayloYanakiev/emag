@@ -104,7 +104,19 @@ public class AddressDaoImpl implements AddressDao {
     }
 
     @Override
-    public void updateAddress(Address address) {
-        String updateAddress = "update addresses set receiver_name:rn,"
+    public void updateAddress(Address address) throws AddressException {
+        String updateAddress = "update addresses set receiver_name=:receiver_name,receiver_phone=:receiver_phone,city_id=:city_id,street=:street,floor=:floor where id=:id";
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("id",address.getId());
+        params.put("receiver_name",address.getReceiverName());
+        params.put("receiver_phone",address.getReceiverPhone());
+        params.put("city_id",address.getCity().getId());
+        params.put("street",address.getStreet());
+        params.put("floor",address.getFloor());
+        try{
+            jdbcTemplate.update(updateAddress,params);
+        }catch (Exception e){
+            throw new AddressException("Error updating address",e);
+        }
     }
 }

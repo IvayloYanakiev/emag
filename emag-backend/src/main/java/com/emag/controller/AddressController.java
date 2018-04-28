@@ -19,7 +19,7 @@ import java.util.LinkedHashSet;
 public class AddressController {
 
     @Autowired
-    AddressService addressService;
+    private AddressService addressService;
 
     @PostMapping("/addAddress")
     public ResponseEntity addAddress(
