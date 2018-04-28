@@ -35,13 +35,6 @@
     "@angular/router": "~3.0.0",
     "angular-ui-router": "^1.0.3",
     "bootstrap": "3.3.7",
-    "jquery": ">=1.9.0",
-    "easing": "0.0.4",
-    "fontawesome": "4.7.0",
-    "greensock": "1.20.2",
-    "owl.carousel": "2.3.4",
-    "rellax": "1.6.2",
-    "scrollmagic": "2.0.5",
-    "slick": "1.12.2"
+    "jquery": ">=1.9.0"
   }
 }
