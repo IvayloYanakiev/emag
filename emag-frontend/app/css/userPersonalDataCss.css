@@ -21,5 +21,6 @@
 #img-upload{
     width: 100%;
 }
-
-.
+.addressButtons{
+    display:inline-block;
+}

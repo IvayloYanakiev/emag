@@ -79,7 +79,7 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
     };
     getData();
 
-    $scope.editAddress= function(addressId){
+    $scope.getAddress= function(addressId){
         $http({
             url: "http://localhost:7377/address" + "/updateAddress",
             method: "PUT",
@@ -89,13 +89,15 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
                 "receiverPhone": addressId,
                 "cityId": addressId,
                 "street": addressId,
-                "floor": addressId,
+                "floor": addressId
             }
         }).then(function (response) {
             $scope.addresses = JSON.parse(response.data.object);
 
         });
     };
+
+
 
     $scope.deleteAddress= function(addressId){
 
