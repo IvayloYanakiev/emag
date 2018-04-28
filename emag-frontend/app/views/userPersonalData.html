@@ -21,7 +21,9 @@
 
 
                                 </div>
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Update</button>
+                                <button type="button" class="btn btn-default" data-toggle="modal"
+                                        data-target="#myModal">Update
+                                </button>
 
                                 <div id="myModal" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
@@ -30,20 +32,24 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close"
-                                                        data-dismiss="modal">&times;</button>
+                                                        data-dismiss="modal">&times;
+                                                </button>
                                                 <h4 class="modal-title">Update profile picture</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <span class="btn btn-default btn-file">
-                                                Browse…<input type="file" id="imgInp" class="form-control" file-model="myFile">
+                                                Browse…<input type="file" id="imgInp" class="form-control"
+                                                              file-model="myFile">
                                                 </span>
                                                 <img id='img-upload'/>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default"
-                                                        ng-click="updateUserProfilePicture()">Update</button>
+                                                        ng-click="updateUserProfilePicture()">Update
+                                                </button>
                                                 <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">Close</button>
+                                                        data-dismiss="modal">Close
+                                                </button>
                                             </div>
                                         </div>
 
@@ -55,35 +61,163 @@
                         <form class="col-md-3">
                             <div class="form-group">
                                 <label>Names</label>
-                                <input class="form-control" ng-model="user.name">
+                                <input class="form-control" ng-model="user.name" disabled>
                             </div>
                             <div class="form-group">
                                 <label>Email address</label>
-                                <input type="email" class="form-control" ng-model="user.email">
+                                <input type="email" class="form-control" ng-model="user.email" disabled>
                             </div>
                             <div class="form-group">
-                                <!--<input class="form-control" ng-model="user.gender">-->
-                                <div class="dropdown">
-                                    <button class="btn btn-default form-control" type="button" data-toggle="dropdown">{{user.gender}}
-                                        <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li><a ng-click="putGender(1)" ng->  <i class="fa fa-male" aria-hidden="true"></i>
-                                            </button>Male</a></li>
-                                        <li><a ng-click="putGender(2)">  <i class="fas fa-female"></i>
-
-                                            </button>Female</a></li>
-                                    </ul>
-                                </div>
+                                <label>Gender</label>
+                                <input class="form-control" ng-model="user.gender" disabled>
                             </div>
                             <div class="form-group">
                                 <label>Mobile phone</label>
-                                <input class="form-control" ng-model="user.phone">
+                                <input class="form-control" ng-model="user.phone" disabled>
                             </div>
-                            <button type="submit"  class="btn btn-default" ng-click="updateUserPersonalData()">Update</button>
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">
+                                Update Personal Info
+                            </button>
                         </form>
+
+
+                        <div id="myModal2" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" ng-click="resetPersonalData()" class="close">&times;
+                                        </button>
+                                        <h4 class="modal-title">Update Personal Info</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="col-md-5">
+                                            <div class="form-group">
+                                                <label>Names</label>
+                                                <input class="form-control" ng-model="user.name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email address</label>
+                                                <input type="email" class="form-control" ng-model="user.email">
+                                            </div>
+                                            <div class="form-group">
+                                                <!--<input class="form-control" ng-model="user.gender">-->
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default form-control" type="button"
+                                                            data-toggle="dropdown">{{user.gender}}
+                                                        <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a ng-click="putGender(1)" ng-> <i class="fa fa-male"
+                                                                                               aria-hidden="true"></i>
+                                                            </button>Male</a></li>
+                                                        <li><a ng-click="putGender(2)"> <i class="fas fa-female"></i>
+
+                                                            </button>Female</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Mobile phone</label>
+                                                <input class="form-control" ng-model="user.phone">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-default"
+                                                ng-click="updateUserPersonalData()">Update
+                                        </button>
+                                        <button type="button" class="btn btn-default"
+                                                ng-click="resetPersonalData()">Close
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Addresses</h3>
+                </div>
+                <div class="panel-body">
+
+
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="address in addresses">
+                            {{address.receiverName}} {{address.receiverPhone}}
+                            {{address.city.name}} {{address.street}} {{address.floor}}
+                            <div class="addressButtons">
+                                <button class="btn btn-default" ng-click="editAddress(address.id)">Edit</button>
+                                <button class="btn btn-default" ng-click="deleteAddress(address.id)">Delete</button>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <form class="col-md-3">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3">
+                            Add address
+                        </button>
+                    </form>
+
+
+                    <div id="myModal3" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" ng-click="resetAddresses()" class="close">&times;
+                                    </button>
+                                    <h4 class="modal-title">Add new address for delivery</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="col-md-5">
+                                        <div class="form-group">
+                                            <label>Receiver name</label>
+                                            <input class="form-control" ng-model="address.receiverName">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Receiver mobile phone</label>
+                                            <input class="form-control" ng-model="address.receiverPhone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input class="form-control" ng-model="address.cityId">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Street</label>
+                                            <input class="form-control" ng-model="address.street">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Floor</label>
+                                            <input class="form-control" ng-model="address.floor">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-default"
+                                            ng-click="addAddress()">Save
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="resetAddresses()">Close
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
+</div>
+
+
 </div>

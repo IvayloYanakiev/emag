@@ -2,6 +2,7 @@ package com.emag.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
@@ -24,5 +25,11 @@ public class SpringJdbcConfig {
         dataSource.setPassword(JDBC_PASS);
 
         return dataSource;
+    }
+
+    @Bean
+    public DataSourceTransactionManager txManager() {
+
+        return new DataSourceTransactionManager(dataSource());
     }
 }

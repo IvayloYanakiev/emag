@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
+
 @RestController
 @RequestMapping("/login")
 public class LoginController {
 
+    @Autowired
+    UserService userService;
 
     @PostMapping("/user")
     public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {
-
-
         Gson gson = new Gson();
         String json = null;
         try {
@@ -36,10 +37,6 @@ public class LoginController {
 
         return new ResponseEntity(json, HttpStatus.OK);
     }
-
-
-    @Autowired
-    UserService userService;
 
     @GetMapping("/getUserPageByEmail")
     public ResponseEntity getUserPageByEmail(@RequestParam("email") String email) {

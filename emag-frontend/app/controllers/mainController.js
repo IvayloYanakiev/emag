@@ -8,12 +8,5 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
     }).then(function (response) {
         $scope.categories = JSON.parse(response.data.object);
     });
-
-    $(document).ready(function(){
-        $('.dropdown-submenu a.test').on("click", function(e){
-            $(this).next('ul').toggle();
-            e.stopPropagation();
-            e.preventDefault();
-        });
-    });
+    $rootScope.isAuthenticated = sessionService.isLoggedIn();
 });

@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -53,7 +51,7 @@ public class UserController {
         return new ResponseEntity(json, HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/updateUserPersonalData"}, method = RequestMethod.POST)
+    @PutMapping("/updateUserPersonalData")
     public ResponseEntity updateUserPersonalData
             (@RequestParam("id") Long id,@RequestParam("name") String name,@RequestParam("email") String email,
              @RequestParam("gender") String gender,@RequestParam("phone") String phone){

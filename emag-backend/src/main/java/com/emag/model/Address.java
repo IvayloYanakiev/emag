@@ -2,6 +2,7 @@ package com.emag.model;
 
 import com.emag.config.Constants;
 import com.emag.exceptions.AddressException;
+import com.emag.exceptions.CityException;
 import org.apache.tomcat.util.bcel.classfile.Constant;
 
 public class Address {
@@ -9,19 +10,39 @@ public class Address {
     private Long id;
     private String receiverName;
     private String receiverPhone;
-    private Long cityId;
+    private City city;
     private String street;
     private int floor;
 
     public Address() {
     }
 
-    public Address(String receiverName, String receiverPhone, Long cityId, String street, int floor) throws AddressException {
-        this.setReceiverName(receiverName);
-        this.setReceiverPhone(receiverPhone);
-        this.setCityId(cityId);
-        this.setStreet(street);
-        this.setFloor(floor);
+    public Address(String receiverName, String receiverPhone, City city, String street, int floor) throws AddressException {
+        setReceiverName(receiverName);
+        setReceiverPhone(receiverPhone);
+        setCity(city);
+        setStreet(street);
+        setFloor(floor);
+    }
+
+    public Address(Long id, String receiverName, String receiverPhone, City city, String street, int floor) throws AddressException {
+        setId(id);
+        setReceiverName(receiverName);
+        setReceiverPhone(receiverPhone);
+        setCity(city);
+        setStreet(street);
+        setFloor(floor);
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) throws AddressException {
+       if(city!=null){
+           this.city=city;
+       }
+       else throw new AddressException("Invalid city");
     }
 
     public Long getId() {
@@ -57,18 +78,6 @@ public class Address {
             this.receiverPhone = receiverPhone;
         } else {
             throw new AddressException(Constants.INVALID_PHONE_NUMBER_VALUE);
-        }
-    }
-
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) throws AddressException {
-        if (cityId > -1) {
-            this.cityId = cityId;
-        } else {
-            throw new AddressException(Constants.INVALID_CITY_ID_VALUE);
         }
     }
 
