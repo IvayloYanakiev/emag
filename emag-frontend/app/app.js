@@ -24,7 +24,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/shoppingCart.html',
             controller: 'shoppingCartController'
         })
-        .otherwise('index.html');
+        .otherwise('home.html');
 
 
 });

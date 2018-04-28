@@ -46,14 +46,14 @@ app.service('fileUpload', ['$q', '$http', function ($q, $http) {
 
 }]);
 
-app.controller("userPersonalDataController", function ($q,$scope, $location, $routeParams, $http, sessionService,fileUpload) {
+app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $location, $routeParams, $http, sessionService,fileUpload) {
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
     $scope.currentFile = {};
     $scope.dataUpload = true;
     $scope.myFile = {};
     $scope.pictureUrl = "";
     $scope.address = "";
-    $rootScope.au
+    $rootScope.isAuthenticated = sessionService.isLoggedIn();
     $scope.putGender = function(gender){
         if(gender==1){
             $scope.user.gender = "Male";
@@ -80,7 +80,21 @@ app.controller("userPersonalDataController", function ($q,$scope, $location, $ro
     getData();
 
     $scope.editAddress= function(addressId){
+        $http({
+            url: "http://localhost:7377/address" + "/updateAddress",
+            method: "PUT",
+            params: {
+                "addressId": addressId,
+                "receiverName": addressId,
+                "receiverPhone": addressId,
+                "cityId": addressId,
+                "street": addressId,
+                "floor": addressId,
+            }
+        }).then(function (response) {
+            $scope.addresses = JSON.parse(response.data.object);
 
+        });
     };
 
     $scope.deleteAddress= function(addressId){

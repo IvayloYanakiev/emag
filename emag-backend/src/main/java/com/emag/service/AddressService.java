@@ -11,5 +11,5 @@ public interface AddressService  {
 
     LinkedHashSet<Address> getAllAddresses(Long id);
 
-    void updateAddress(Address address);
+    void updateAddress(Address address) throws AddressException;
 }
