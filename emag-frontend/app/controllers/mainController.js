@@ -9,4 +9,13 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
         $scope.categories = JSON.parse(response.data.object);
     });
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
+
+    $scope.showMenu = function() {
+        var x = document.getElementById("dropdown_content");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
 });

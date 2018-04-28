@@ -19,7 +19,7 @@ public class CityController {
         Gson gson = new Gson();
         String json = null;
 
-       
+
         return new ResponseEntity(json,HttpStatus.OK);
     }
 }
