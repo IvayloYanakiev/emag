@@ -24,4 +24,9 @@ public class AddressServiceImpl implements AddressService {
     public LinkedHashSet<Address> getAllAddresses(Long userId) {
        return addressDao.getAllAddresses(userId);
     }
+
+    @Override
+    public void updateAddress(Address address) {
+        addressDao.updateAddress(address);
+    }
 }

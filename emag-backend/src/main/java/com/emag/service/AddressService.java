@@ -10,4 +10,6 @@ public interface AddressService  {
     void addAddress(Long userId, Address address) throws AddressException;
 
     LinkedHashSet<Address> getAllAddresses(Long id);
+
+    void updateAddress(Address address);
 }

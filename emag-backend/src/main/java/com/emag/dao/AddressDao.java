@@ -9,4 +9,6 @@ public interface AddressDao {
     void addAddress(Long userId, Address address) throws AddressException;
 
     LinkedHashSet<Address> getAllAddresses(Long userId);
+
+    void updateAddress(Address address);
 }

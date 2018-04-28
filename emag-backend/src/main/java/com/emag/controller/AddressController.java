@@ -58,6 +58,15 @@ public class AddressController {
                                          @RequestParam("street") String street,
                                          @RequestParam("floor") int floor) {
 
+        try {
+            City city = new City();
+            city.setId(cityId);
+            Address address = new Address(addressId,receiverName,receiverPhone,city,street,floor);
+            addressService.updateAddress(address);
+        } catch (CityException|AddressException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

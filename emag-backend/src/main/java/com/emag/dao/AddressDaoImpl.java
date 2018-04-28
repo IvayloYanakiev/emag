@@ -102,4 +102,9 @@ public class AddressDaoImpl implements AddressDao {
         });
         return addresses;
     }
+
+    @Override
+    public void updateAddress(Address address) {
+        String updateAddress = "update addresses set receiver_name:rn,"
+    }
 }
