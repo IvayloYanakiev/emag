@@ -15,6 +15,8 @@
     <link rel="stylesheet" type="text/css" href="./css/slick.css">
     <link rel="stylesheet" type="text/css" href="./css/main_styles.css">
     <link rel="stylesheet" type="text/css" href="./css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="./css/cart_responsive.css">
+    <link rel="stylesheet" type="text/css" href="./css/cart_styles.css">
 
 </head>
 
@@ -115,12 +117,12 @@
 
                             <!-- Categories Menu -->
 
-                            <div class="cat_menu_container">
+                            <div class="cat_menu_container" >
                                 <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
                                     <div class="cat_burger"><span></span><span></span><span></span></div>
                                     <div class="cat_menu_text">categories</div>
                                 </div>
-                                <ul class="cat_menu" >
+                                <ul class="cat_menu">
                                     <li class="hassubs" ng-repeat="category in categories">{{category.name}}
                                         <img src="https://www.materialui.co/materialIcons/hardware/keyboard_arrow_right_grey_192x192.png" alt="" width="20"/>
                                         <ul>
@@ -135,7 +137,7 @@
 
                             <div class="main_nav_menu ml-auto">
                                 <ul class="standard_dropdown main_nav_dropdown">
-                                    <li><a href="#">Offers of the week<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="#">Offers of the week</a></li>
                                     <li class="hassubs">
                                         <a href="#">Best sellers</a>
                                         <ul>
@@ -183,18 +185,6 @@
                                     <li><a href="contact.html">eMAG info<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </div>
-
-                            <!-- Menu Trigger -->
-
-                            <div class="menu_trigger_container ml-auto">
-                                <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
-                                    <div class="menu_burger">
-                                        <div class="menu_trigger_text">menu</div>
-                                        <div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -272,7 +262,63 @@
 
     <div ng-view></div>
 
-    <div class="newsletter">
+    <div class="characteristics">
+        <div class="container">
+            <div class="row">
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_content">
+                            <div class="char_title">
+                                <img src="https://static1.squarespace.com/static/533361cce4b0f4b356806ce8/53f88ffde4b05c22548eb241/54bada5fe4b06ac2744ddd3f/1421531743605/Online+Icon.png?format=500w" alt="" width="50">
+                                Online is always easier</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_content">
+                            <div class="char_title">
+                                <img src="https://cdn1.iconfinder.com/data/icons/delivery-logistics-1/512/Logistics-06-256.png" width="70" alt="">
+                                Fast delivery</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_content">
+                            <div class="char_title">
+                                <img src="https://cdn1.iconfinder.com/data/icons/money-currency-extras/512/Dollar_Return_Arrow-512.png" alt="" width="50">
+                                Return policy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_content">
+                            <div class="char_title">
+                                <img src="https://cdn2.iconfinder.com/data/icons/app-types-in-grey/512/app_type_catalog_512px_GREY.png" alt="" width="50">
+                                Wide choice of products</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            <div class="newsletter">
         <div class="container">
             <div class="row">
                 <div class="col">
