@@ -31,7 +31,7 @@ public class City {
     }
 
     public void setName(String name) throws CityException {
-        if(name.trim().length()>0 && name!=null){
+        if(name!=null && name.trim().length()>0){
             this.name = name;
         }
         else throw new CityException("Invalid city name");
