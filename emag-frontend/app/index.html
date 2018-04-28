@@ -21,7 +21,7 @@
 
 <div class="super_container">
 	<!-- Header -->
-
+	
 	<header class="header">
 
 		<!-- Top Bar -->
@@ -39,7 +39,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>		
 		</div>
 
 		<!-- Header Main -->
@@ -102,14 +102,14 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<!-- Main Navigation -->
 
 		<nav class="main_nav">
 			<div class="container">
 				<div class="row">
 					<div class="col">
-
+						
 						<div class="main_nav_content d-flex flex-row">
 
 							<!-- Categories Menu -->
@@ -119,7 +119,7 @@
 									<div class="cat_burger"><span></span><span></span><span></span></div>
 									<div class="cat_menu_text">categories</div>
 								</div>
-								<ul class="cat_menu" >
+								<ul class="cat_menu">
 									<li class="hassubs" ng-repeat="category in categories">{{category.name}}
 										<img src="https://www.materialui.co/materialIcons/hardware/keyboard_arrow_right_grey_192x192.png" alt="" width="20"/>
 										<ul>
@@ -199,16 +199,16 @@
 				</div>
 			</div>
 		</nav>
-
+		
 		<!-- Menu -->
 
 		<div class="page_menu">
 			<div class="container">
 				<div class="row">
 					<div class="col">
-
+						
 						<div class="page_menu_content">
-
+							
 							<div class="page_menu_search">
 								<!--<form action="#">-->
 									<input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
@@ -254,7 +254,11 @@
 								<li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
 							</ul>
-
+							
+							<div class="menu_contact">
+								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/phone_white.png" alt=""></div>+38 068 005 3570</div>
+								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/mail_white.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -262,14 +266,99 @@
 		</div>
 
 	</header>
-
+	
 	<!-- Banner -->
 
 	<div class="banner">
 		<div class="banner_background" style="background-image:url(http://v3wall.com/wallpaper/1920_1200/1010/1920_1200_20101027082705569467.jpg)"></div>
 	</div>
 
+	<!-- Characteristics -->
+
+	<div class="characteristics">
+		<div class="container">
+			<div class="row">
+
+				<!-- Char. Item -->
+				<div class="col-lg-3 col-md-6 char_col">
+
+					<div class="char_item d-flex flex-row align-items-center justify-content-start">
+						<div class="char_content">
+							<div class="char_title">
+								<img src="https://static1.squarespace.com/static/533361cce4b0f4b356806ce8/53f88ffde4b05c22548eb241/54bada5fe4b06ac2744ddd3f/1421531743605/Online+Icon.png?format=500w" alt="" width="50">
+								Online is always easier</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Char. Item -->
+				<div class="col-lg-3 col-md-6 char_col">
+
+					<div class="char_item d-flex flex-row align-items-center justify-content-start">
+						<div class="char_content">
+							<div class="char_title">
+								<img src="https://cdn1.iconfinder.com/data/icons/delivery-logistics-1/512/Logistics-06-256.png" width="70" alt="">
+								Fast delivery</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Char. Item -->
+				<div class="col-lg-3 col-md-6 char_col">
+
+					<div class="char_item d-flex flex-row align-items-center justify-content-start">
+						<div class="char_content">
+							<div class="char_title">
+								<img src="https://cdn1.iconfinder.com/data/icons/money-currency-extras/512/Dollar_Return_Arrow-512.png" alt="" width="50">
+								Return policy</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Char. Item -->
+				<div class="col-lg-3 col-md-6 char_col">
+
+					<div class="char_item d-flex flex-row align-items-center justify-content-start">
+						<div class="char_content">
+							<div class="char_title">
+								<img src="https://cdn2.iconfinder.com/data/icons/app-types-in-grey/512/app_type_catalog_512px_GREY.png" alt="" width="50">
+								Wide choice of products</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="styles/bootstrap4/popper.js"></script>
+	<script src="styles/bootstrap4/bootstrap.min.js"></script>
+	<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+	<script src="plugins/slick-1.8.0/slick.js"></script>
+	<script src="plugins/easing/easing.js"></script>
+	<script src="js/custom.js"></script>
+
 	<div ng-view></div>
+
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-route/angular-route.min.js"></script>
+	<script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<script src="app.js"></script>
+	<script src="controllers/logoutController.js"></script>
+	<script src="controllers/loginController.js"></script>
+	<script src="controllers/mainController.js"></script>
+	<script src="controllers/registerController.js"></script>
+	<script src="controllers/userPersonalDataController.js"></script>
+	<script src="controllers/shoppingCartController.js"></script>
+
+
+	<!-- Newsletter -->
 
 	<div class="newsletter">
 		<div class="container">
@@ -294,20 +383,6 @@
 	</div>
 
 </div>
-
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<script src="app.js"></script>
-<script src="controllers/logoutController.js"></script>
-<script src="controllers/loginController.js"></script>
-<script src="controllers/mainController.js"></script>
-<script src="controllers/registerController.js"></script>
-<script src="controllers/userPersonalDataController.js"></script>
-<script src="controllers/shoppingCartController.js"></script>
 
 </body>
 
