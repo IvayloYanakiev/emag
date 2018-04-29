@@ -49,9 +49,23 @@ app.service('fileUpload', ['$q', '$http', function ($q, $http) {
 app.controller("addProductController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, fileUpload) {
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
     $scope.currentFile = {};
-    $scope.dataUpload = true;
     $scope.myFile = {};
-    $scope.pictureUrl = "";
+
+
+    $scope.addProduct = function () {
+        var file = $scope.myFile;
+        var uploadUrl = "http://localhost:7377/user/updateUserProfilePicture";
+        fileUpload.uploadFileToUrl(file, uploadUrl, $scope.user.id).then(function (result) {
+            var url = result.data;
+            $scope.pictureUrl = url;
+            $('#myModal').modal('hide');
+        }, function (err) {
+            console.log(err);
+        })
+
+    };
+
+
 
     $(document).ready(function () {
         $(document).on('change', '.btn-file :file', function () {
