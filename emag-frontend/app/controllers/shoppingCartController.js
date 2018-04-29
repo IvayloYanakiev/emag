@@ -6,7 +6,7 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
         url: "http://localhost:7377/category" + "/getProductsInCart",
         method: "GET"
     }).then(function (response) {
-        $scope.productsInCart = JSON.parse(response.data.object);
+        $scope.productsInCart = response.data;
     });
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
 });

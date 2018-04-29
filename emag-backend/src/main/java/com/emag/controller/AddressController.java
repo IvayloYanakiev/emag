@@ -3,13 +3,12 @@ package com.emag.controller;
 import com.emag.config.Constants;
 import com.emag.exceptions.AddressException;
 import com.emag.model.Address;
-import com.emag.model.ResponseEntity;
 import com.emag.service.AddressService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.LinkedHashSet;
 
 @RequestMapping("/address")
@@ -31,9 +30,10 @@ public class AddressController {
             Address address = new Address(receiverName, receiverPhone, city, street, floor);
             addressService.addAddress(id, address);
         } catch (AddressException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            Gson gson = new Gson();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return new ResponseEntity(Constants.SUCCESS, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/getAllAddresses")
@@ -42,8 +42,7 @@ public class AddressController {
         LinkedHashSet<Address> addresses = addressService.getAllAddresses(id);
         Gson gson = new Gson();
         String json = gson.toJson(addresses);
-
-        return new ResponseEntity(json, HttpStatus.OK);
+        return ResponseEntity.ok(json);
     }
 
     @PutMapping("/updateAddress")
@@ -57,10 +56,10 @@ public class AddressController {
             Address address = new Address(addressId,receiverName,receiverPhone,city,street,floor);
             addressService.updateAddress(address);
         } catch (AddressException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            Gson gson = new Gson();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-
-        return null;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/getAddress")
@@ -68,7 +67,7 @@ public class AddressController {
         Address address = addressService.getAddress(addressId);
         Gson gson = new Gson();
         String json = gson.toJson(address);
-        return new ResponseEntity(json, HttpStatus.OK);
+        return new ResponseEntity<>(json,HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteAddress")
@@ -77,9 +76,10 @@ public class AddressController {
         try {
             addressService.deleteAddress(addressId);
         } catch (AddressException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            Gson gson = new Gson();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return new ResponseEntity("OK", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

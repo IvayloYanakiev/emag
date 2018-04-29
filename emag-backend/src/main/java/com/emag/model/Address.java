@@ -1,7 +1,7 @@
 package com.emag.model;
 
 import com.emag.config.Constants;
-import com.emag.config.ErrorMessages;
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.exceptions.AddressException;
 public class Address {
 
@@ -41,7 +41,7 @@ public class Address {
        if(city!=null && city.trim().length() >= Constants.MIN_CITY_NAME_LENGTH){
            this.city=city;
        }
-       else throw new AddressException(ErrorMessages.INVALID_CITY_NAME);
+       else throw new AddressException(ConstantsErrorMessages.INVALID_CITY_NAME);
     }
 
     public Long getId() {
@@ -52,7 +52,7 @@ public class Address {
         if (id > -1) {
             this.id = id;
         } else {
-            throw new AddressException(ErrorMessages.INVALID_ID_VALUE);
+            throw new AddressException(ConstantsErrorMessages.INVALID_ID_VALUE);
         }
     }
 
@@ -64,7 +64,7 @@ public class Address {
         if (receiverName != null && receiverName.trim().length() > 0) {
             this.receiverName = receiverName;
         } else {
-            throw new AddressException(ErrorMessages.INVALID_RECEIVER_NAME);
+            throw new AddressException(ConstantsErrorMessages.INVALID_RECEIVER_NAME);
         }
     }
 
@@ -76,7 +76,7 @@ public class Address {
         if (receiverPhone != null && receiverPhone.trim().length() == Constants.PHONE_NUMBER_LENGTH && receiverPhone.startsWith(Constants.PHONE_NUMBER_PREFIX)) {
             this.receiverPhone = receiverPhone;
         } else {
-            throw new AddressException(ErrorMessages.INVALID_PHONE_NUMBER_VALUE);
+            throw new AddressException(ConstantsErrorMessages.INVALID_PHONE_NUMBER_VALUE);
         }
     }
 
@@ -88,7 +88,7 @@ public class Address {
         if (street != null && street.trim().length() > 0) {
             this.street = street;
         } else {
-            throw new AddressException(ErrorMessages.INVALID_STREET_VALUE);
+            throw new AddressException(ConstantsErrorMessages.INVALID_STREET_VALUE);
         }
     }
 
@@ -100,7 +100,7 @@ public class Address {
         if (floor != null && floor >= 0) {
             this.floor = floor;
         } else {
-            throw new AddressException(ErrorMessages.INVALID_FLOOR_VALUE);
+            throw new AddressException(ConstantsErrorMessages.INVALID_FLOOR_VALUE);
         }
     }
 }

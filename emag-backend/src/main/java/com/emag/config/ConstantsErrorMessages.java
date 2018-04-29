@@ -1,10 +1,9 @@
 package com.emag.config;
 
-public class ErrorMessages {
-    public static final String ERROR = "Error";
+public class ConstantsErrorMessages {
     public static final String ACCOUNT_PROBLEM = "There's a problem with your account";
     public static final String INVALID_EMAIL = "Invalid email";
-    public static final String INVALID_PASSWORD = "Invalid password";
+    public static final String INVALID_PASSWORD = "Invalid password length";
     public static final String INVALID_TYPE = "Invalid type";
     public static final String CHECK_YOUR_PASSWORD = "Please check your confirm password";
     public static final String PASSWORDS_NOT_THE_SAME = "Passwords are not the same";

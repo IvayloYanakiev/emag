@@ -590,10 +590,7 @@
 	{ 
 		font-size: 13px;
 	}
-	.newsletter_input::input-placeholder
-	{
-		font-size: 13px;
-	}
+
 	.copyright_container
 	{
 		height: auto;

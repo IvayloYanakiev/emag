@@ -1,16 +1,15 @@
 package com.emag.controller;
 
-import com.emag.config.ErrorMessages;
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.exceptions.UserException;
 import com.emag.model.User;
-import com.emag.model.ResponseEntity;
 import com.emag.service.UserService;
 import com.google.gson.Gson;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 
 
@@ -30,29 +29,30 @@ public class LoginController {
             User user = userService.findUserByEmail(email);
             json = gson.toJson(user);
         } catch (UserException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         } catch (SQLException e) {
-            return new ResponseEntity(ErrorMessages.ACCOUNT_PROBLEM, HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
 
-        return new ResponseEntity(json, HttpStatus.OK);
+        return new ResponseEntity<>(json,HttpStatus.OK);
     }
 
     @GetMapping("/getUserPageByEmail")
     public ResponseEntity getUserPageByEmail(@RequestParam("email") String email) {
 
-        JSONObject obj = new JSONObject();
+        Gson gson = new Gson();
+        String json = null;
 
         try {
             User user = userService.findUserByEmail(email);
-            obj.put("user", user);
+            json = gson.toJson(user);
         } catch (UserException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         } catch (SQLException e) {
-            return new ResponseEntity(ErrorMessages.ERROR, HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
 
-        return new ResponseEntity(obj, HttpStatus.OK);
+        return new ResponseEntity<>(json,HttpStatus.OK);
     }
 
 
@@ -60,16 +60,15 @@ public class LoginController {
     public ResponseEntity getUserPageById(@RequestParam("id") Long id) {
 
         JSONObject obj = new JSONObject();
-
+        Gson gson = new Gson();
         try {
             User user = userService.findUserById(id);
             obj.put("user", user);
         } catch (UserException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         } catch (SQLException e) {
-            return new ResponseEntity(ErrorMessages.ERROR, HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
-
-        return new ResponseEntity(obj, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

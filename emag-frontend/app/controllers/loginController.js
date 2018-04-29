@@ -18,17 +18,14 @@ app.controller("loginController", function ($rootScope, $scope, $location, $http
                 "password": $scope.user.password
             }
         }).then(function (response) {
-
-            if(response.data.status=="BAD_REQUEST") {
-                $scope.error = true;
-                $scope.value = response.data.object;
-            }
-            else {
-                var userId = JSON.parse(response.data.object).id;
-                sessionService.login(userId);
-                $rootScope.isAuthenticated = sessionService.isLoggedIn();
-                $location.url("/");
-            }
+            var userId = response.data.id;
+            sessionService.login(userId);
+            $rootScope.isAuthenticated = sessionService.isLoggedIn();
+            $location.url("/");
+        }, function (error) {
+            $scope.error = true;
+            $scope.user = {email: "", password: ""};
+            $scope.value = error.data;
         });
 
     }

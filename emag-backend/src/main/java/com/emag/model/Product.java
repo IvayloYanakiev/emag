@@ -1,6 +1,6 @@
 package com.emag.model;
 
-import com.emag.config.ErrorMessages;
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.exceptions.ProductException;
 
 public class Product {
@@ -31,7 +31,7 @@ public class Product {
         if (id != null && id > -1) {
             this.id = id;
         } else {
-            throw new ProductException(ErrorMessages.INVALID_PRODUCT_ID);
+            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_ID);
         }
     }
 
@@ -43,7 +43,7 @@ public class Product {
         if (name != null && name.trim().length() > 0) {
             this.name = name;
         } else {
-            throw new ProductException(ErrorMessages.INVALID_PRODUCT_NAME);
+            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_NAME);
         }
     }
 
@@ -55,7 +55,7 @@ public class Product {
         if (pictureURL != null && pictureURL.trim().length() > 0) {
             this.pictureURL = pictureURL;
         } else {
-            throw new ProductException(ErrorMessages.INVALID_PRODUCT_PICTURE_URL);
+            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_PICTURE_URL);
         }
     }
 
@@ -67,7 +67,7 @@ public class Product {
         if (price > 0) {
             this.price = price;
         } else {
-            throw new ProductException(ErrorMessages.INVALID_PRODUCT_PRICE);
+            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_PRICE);
         }
     }
 
@@ -79,7 +79,7 @@ public class Product {
         if (typeID != null && typeID > -1) {
             this.typeID = typeID;
         } else {
-            throw new ProductException(ErrorMessages.INVALID_PRODUCT_TYPE_ID);
+            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_TYPE_ID);
         }
     }
 
@@ -91,7 +91,7 @@ public class Product {
         if (quantity >= 0) {
             this.quantity = quantity;
         } else {
-            throw new ProductException(ErrorMessages.INVALID_PRODUCT_QUANTITY);
+            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_QUANTITY);
         }
     }
 }

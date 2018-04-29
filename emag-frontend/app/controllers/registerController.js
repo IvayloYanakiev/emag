@@ -1,13 +1,13 @@
 var app = angular.module('emag');
 
 app.controller("registerController", function ($scope, $location, $http) {
-    $scope.success =false;
-    $scope.error =false;
-    $scope.value = "";
+    $scope.success = false;
+    $scope.error = false;
+    $scope.value = " ";
     $scope.user = {name: "", email: "", password: "", confirmPassword: ""};
     $scope.register = function () {
 
-        $scope.error =false;
+        $scope.error = false;
         $scope.success = false;
 
         $http({
@@ -20,17 +20,13 @@ app.controller("registerController", function ($scope, $location, $http) {
                 "confirmPassword": $scope.user.confirmPassword
             }
         }).then(function (response) {
-
-            if(response.data.status=="BAD_REQUEST"){
-                $scope.error=true;
-                $scope.value = response.data.object;
-            }
-            else {
-                $scope.success=true;
-                $rootScope.isRegAuthenticated = true;
-                $scope.value = response.data.object;
-                $scope.user = {name: "", email: "", password: "", confirmPassword: ""};
-            }
+            $scope.success = true;
+            $rootScope.isRegAuthenticated = true;
+            $scope.value = response.data;
+            $scope.user = {name: "", email: "", password: "", confirmPassword: ""};
+        }, function (error) {
+            $scope.error = true;
+            $scope.value = error.data;
         });
 
     }

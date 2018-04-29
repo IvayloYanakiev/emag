@@ -1,7 +1,7 @@
 package com.emag.model;
 
 
-import com.emag.config.ErrorMessages;
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.exceptions.CategoryException;
 
 import java.util.LinkedHashSet;
@@ -20,7 +20,7 @@ public class Category {
     public void setName(String name) throws CategoryException {
         if (name != null && name.trim().length() > 0) {
             this.name = name;
-        } else throw new CategoryException(ErrorMessages.INVALID_CATEGORY_NAME);
+        } else throw new CategoryException(ConstantsErrorMessages.INVALID_CATEGORY_NAME);
     }
 
     public Long getId() {
@@ -39,7 +39,7 @@ public class Category {
         if(category!=null){
             innerCategories.add(category);
         }
-        else throw new CategoryException(ErrorMessages.INVALID_INNER_CATEGORY);
+        else throw new CategoryException(ConstantsErrorMessages.INVALID_INNER_CATEGORY);
     }
 
 
