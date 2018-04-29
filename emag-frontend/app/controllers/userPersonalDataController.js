@@ -192,7 +192,7 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
                 "userId": sessionService.getSession(),
                 "receiverName": $scope.address.receiverName,
                 "receiverPhone": $scope.address.receiverPhone,
-                "cityId": $scope.address.cityId,
+                "city": $scope.address.city,
                 "street": $scope.address.street,
                 "floor": $scope.address.floor
             }
@@ -202,6 +202,20 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
             $scope.address = "";
         });
     };
+
+    // $scope.getCities = function(){
+    //     $http({
+    //         url: "http://localhost:7377/city" + "/getAllCities",
+    //         method: "GET",
+    //         params:{}
+    //     }).then(function (response) {
+    //         alert(response);
+    //         // $scope.cities = JSON.parse(response.data.object);
+    //     },
+    //         function(err){
+    //         alert(err);
+    //         });
+    // };
 
 
     $(document).ready(function () {

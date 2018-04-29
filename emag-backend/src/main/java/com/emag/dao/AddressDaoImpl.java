@@ -1,21 +1,13 @@
 package com.emag.dao;
 
-import com.emag.config.Constants;
 import com.emag.exceptions.AddressException;
-import com.emag.exceptions.CategoryException;
-import com.emag.exceptions.CityException;
 import com.emag.model.Address;
-import com.emag.model.Category;
-import com.emag.model.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.UnexpectedRollbackException;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -38,14 +30,14 @@ public class AddressDaoImpl implements AddressDao {
 
         TransactionTemplate tx = new TransactionTemplate(transactionManager);
         String insertIntoAddresses =
-                " insert into addresses(receiver_name,receiver_phone,city_id,street,floor) values (:receiverName,:receiverPhone,:cityId,:street,:floor); ";
+                " insert into addresses(receiver_name,receiver_phone,city,street,floor) values (:receiverName,:receiverPhone,:city,:street,:floor); ";
         String insertIntoUserAddresses = " insert into users_addresses(address_id,user_id) values ((SELECT LAST_INSERT_ID() from addresses group by last_insert_id()),:userId); ";
 
         HashMap<String, Object> addressParam = new HashMap<>();
         addressParam.put("userId", userId);
         addressParam.put("receiverName", address.getReceiverName());
         addressParam.put("receiverPhone", address.getReceiverPhone());
-        addressParam.put("cityId", address.getCity().getId());
+        addressParam.put("city", address.getCity());
         addressParam.put("street", address.getStreet());
         addressParam.put("floor", address.getFloor());
 

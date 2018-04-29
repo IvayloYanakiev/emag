@@ -3484,6 +3484,11 @@ select option
 	cursor: pointer;
 }
 
+
+#dropdown_content{
+	display:none;
+}
+
 #show_menu_btn {
 	position: relative;
 	width: 153px;

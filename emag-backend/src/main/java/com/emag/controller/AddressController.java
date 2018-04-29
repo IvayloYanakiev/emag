@@ -2,9 +2,7 @@ package com.emag.controller;
 
 import com.emag.config.Constants;
 import com.emag.exceptions.AddressException;
-import com.emag.exceptions.CityException;
 import com.emag.model.Address;
-import com.emag.model.City;
 import com.emag.model.ResponseEntity;
 import com.emag.service.AddressService;
 import com.google.gson.Gson;
@@ -26,15 +24,13 @@ public class AddressController {
             @RequestParam("userId") Long id,
             @RequestParam("receiverName") String receiverName,
             @RequestParam("receiverPhone") String receiverPhone,
-            @RequestParam("cityId") Long cityId,
+            @RequestParam("city") String city,
             @RequestParam("street") String street,
             @RequestParam("floor") int floor) {
         try {
-            City city = new City();
-            city.setId(cityId);
             Address address = new Address(receiverName, receiverPhone, city, street, floor);
             addressService.addAddress(id, address);
-        } catch (AddressException | CityException e) {
+        } catch (AddressException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity(Constants.SUCCESS, HttpStatus.OK);
