@@ -26,7 +26,7 @@ public class AddressController {
             @RequestParam("receiverPhone") String receiverPhone,
             @RequestParam("city") String city,
             @RequestParam("street") String street,
-            @RequestParam("floor") int floor) {
+            @RequestParam("floor") Integer floor) {
         try {
             Address address = new Address(receiverName, receiverPhone, city, street, floor);
             addressService.addAddress(id, address);
@@ -52,7 +52,7 @@ public class AddressController {
                                          @RequestParam("receiverPhone") String receiverPhone,
                                          @RequestParam("city") String city,
                                          @RequestParam("street") String street,
-                                         @RequestParam("floor") int floor) {
+                                         @RequestParam("floor") Integer floor) {
         try {
             Address address = new Address(addressId,receiverName,receiverPhone,city,street,floor);
             addressService.updateAddress(address);

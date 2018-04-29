@@ -81,6 +81,7 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
 
 
     $scope.updateAddress = function(){
+        $scope.error = false;
         $http({
             url: "http://localhost:7377/address" + "/updateAddress",
             method: "PUT",
@@ -93,13 +94,20 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
                 "floor": $scope.currentAddress.floor
             }
         }).then(function (response) {
-            $('#myModal4').modal('hide');
-            getAddresses();
-            $scope.currentAddress = "";
+            if(response.data.status=="BAD_REQUEST") {
+                $scope.error = true;
+                $scope.value = response.data.object;
+            }
+            else {
+                $('#myModal4').modal('hide');
+                getAddresses();
+                $scope.currentAddress = "";
+            }
         });
     };
 
     $scope.getAddress= function(addressId){
+        $scope.error = false;
         $http({
             url: "http://localhost:7377/address" + "/getAddress",
             method: "GET",
@@ -166,7 +174,14 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
 
           }
       }).then(function (response) {
-          $('#myModal2').modal('hide');
+          if(response.data.status=="BAD_REQUEST") {
+              $scope.error = true;
+              $scope.value = response.data.object;
+          }
+          else {
+              $('#myModal2').modal('hide');
+          }
+
       });
 
   };
@@ -183,8 +198,9 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
         $scope.address = "";
     };
 
-
+    $scope.address = {receiverName:"", receiverPhone:"", city:"", street:"", floor:""};
     $scope.addAddress = function(){
+        $scope.error = false;
         $http({
             url: "http://localhost:7377/address" + "/addAddress",
             method: "POST",
@@ -197,9 +213,16 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
                 "floor": $scope.address.floor
             }
         }).then(function (response) {
-            $('#myModal3').modal('hide');
-            getAddresses();
-            $scope.address = "";
+            if(response.data.status=="BAD_REQUEST") {
+                $scope.error = true;
+                $scope.value = response.data.object;
+            }
+            else {
+                $('#myModal3').modal('hide');
+                getAddresses();
+                $scope.address = "";
+            }
+
         });
     };
 
