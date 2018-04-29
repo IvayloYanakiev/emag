@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class User {
-
     private Long id;
     private String name;
     private String password;
@@ -48,7 +47,7 @@ public class User {
     }
 
     public void setId(Long id) throws UserException {
-        if (id!=null && id>-1)
+        if (id != null && id > -1)
             this.id = id;
         else throw new UserException(ErrorMessages.INVALID_ID);
     }
@@ -67,8 +66,12 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws UserException {
+        if (password != null && password.trim().length() > Constants.MIN_PASSWORD_LENGTH) {
+            this.password = password;
+        } else {
+            throw new UserException(ErrorMessages.INVALID_PASSWORD);
+        }
     }
 
     public String getEmail() {
@@ -76,17 +79,23 @@ public class User {
     }
 
     public void setEmail(String email) throws UserException {
-        if (email != null && email.trim().length() > 0) {
+        if (email != null && email.trim().length() > Constants.MIN_EMAIL_LENGTH) {
             this.email = email;
-        } else throw new UserException(ErrorMessages.INVALID_EMAIL);
+        } else {
+            throw new UserException(ErrorMessages.INVALID_EMAIL);
+        }
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(String type) throws UserException {
+        if (type != null && type.trim().length() > 0) {
+            this.type = type;
+        } else {
+            throw new UserException(ErrorMessages.INVALID_TYPE);
+        }
     }
 
     public void setPictureUrl(String pictureUrl) throws UserException {
