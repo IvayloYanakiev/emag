@@ -1,20 +1,21 @@
 package com.emag.model;
 
 import com.emag.config.Constants;
+import com.emag.config.ErrorMessages;
 import com.emag.exceptions.AddressException;
 public class Address {
 
     private Long id;
     private String receiverName;
     private String receiverPhone;
-    private City city;
+    private String city;
     private String street;
     private int floor;
 
     public Address() {
     }
 
-    public Address(String receiverName, String receiverPhone, City city, String street, int floor) throws AddressException {
+    public Address(String receiverName, String receiverPhone, String city, String street, int floor) throws AddressException {
         setReceiverName(receiverName);
         setReceiverPhone(receiverPhone);
         setCity(city);
@@ -22,7 +23,7 @@ public class Address {
         setFloor(floor);
     }
 
-    public Address(Long id, String receiverName, String receiverPhone, City city, String street, int floor) throws AddressException {
+    public Address(Long id, String receiverName, String receiverPhone, String city, String street, int floor) throws AddressException {
         setId(id);
         setReceiverName(receiverName);
         setReceiverPhone(receiverPhone);
@@ -31,15 +32,15 @@ public class Address {
         setFloor(floor);
     }
 
-    public City getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(City city) throws AddressException {
-       if(city!=null){
+    public void setCity(String city) throws AddressException {
+       if(city!=null && city.trim().length() >= Constants.MIN_CITY_NAME_LENGTH){
            this.city=city;
        }
-       else throw new AddressException("Invalid city");
+       else throw new AddressException(ErrorMessages.INVALID_CITY_NAME);
     }
 
     public Long getId() {
@@ -50,7 +51,7 @@ public class Address {
         if (id > -1) {
             this.id = id;
         } else {
-            throw new AddressException(Constants.INVALID_ID_VALUE);
+            throw new AddressException(ErrorMessages.INVALID_ID_VALUE);
         }
     }
 
@@ -62,7 +63,7 @@ public class Address {
         if (receiverName != null && receiverName.trim().length() > 0) {
             this.receiverName = receiverName;
         } else {
-            throw new AddressException(Constants.INVALID_RECEIVER_NAME);
+            throw new AddressException(ErrorMessages.INVALID_RECEIVER_NAME);
         }
     }
 
@@ -74,7 +75,7 @@ public class Address {
         if (receiverPhone != null && receiverPhone.trim().length() == Constants.PHONE_NUMBER_LENGTH && receiverPhone.startsWith(Constants.PHONE_NUMBER_PREFIX)) {
             this.receiverPhone = receiverPhone;
         } else {
-            throw new AddressException(Constants.INVALID_PHONE_NUMBER_VALUE);
+            throw new AddressException(ErrorMessages.INVALID_PHONE_NUMBER_VALUE);
         }
     }
 
@@ -86,7 +87,7 @@ public class Address {
         if (street != null && street.trim().length() > 0) {
             this.street = street;
         } else {
-            throw new AddressException(Constants.INVALID_STREET_VALUE);
+            throw new AddressException(ErrorMessages.INVALID_STREET_VALUE);
         }
     }
 
@@ -98,7 +99,7 @@ public class Address {
         if (floor >= 0) {
             this.floor = floor;
         } else {
-            throw new AddressException(Constants.INVALID_FLOOR_VALUE);
+            throw new AddressException(ErrorMessages.INVALID_FLOOR_VALUE);
         }
     }
 }

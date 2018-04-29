@@ -1,6 +1,6 @@
 package com.emag.dao;
 
-import com.emag.config.Constants;
+import com.emag.config.SqlConstants;
 import com.emag.exceptions.CategoryException;
 import com.emag.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public HashMap<Long, Category> getAllCategories() throws CategoryException {
 
-        String getAllCategories = Constants.GET_ALL_CATEGORIES;
+        String getAllCategories = SqlConstants.GET_ALL_CATEGORIES;
 
         HashMap<Long, Category> categories = jdbcTemplate.query(getAllCategories, new ResultSetExtractor<HashMap<Long, Category>>() {
 

@@ -63,7 +63,7 @@ public class AddressController {
             Address address = new Address(addressId,receiverName,receiverPhone,city,street,floor);
             addressService.updateAddress(address);
         } catch (CityException|AddressException e) {
-            e.printStackTrace();
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
         return null;
