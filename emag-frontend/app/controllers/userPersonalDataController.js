@@ -88,7 +88,7 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
                 "addressId": $scope.currentAddress.id,
                 "receiverName": $scope.currentAddress.receiverName,
                 "receiverPhone": $scope.currentAddress.receiverPhone,
-                "cityId": $scope.currentAddress.city.id,
+                "city": $scope.currentAddress.city,
                 "street": $scope.currentAddress.street,
                 "floor": $scope.currentAddress.floor
             }

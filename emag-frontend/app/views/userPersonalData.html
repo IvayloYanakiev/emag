@@ -150,8 +150,8 @@
 
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="address in addresses">
-                            {{address.receiverName}} {{address.receiverPhone}}
-                            {{address.city.name}} {{address.street}} {{address.floor}}
+                            {{address.receiverName}} {{address.receiverPhone}} {{address.city}}
+                            {{address.name}} {{address.street}} {{address.floor}}
                             <div class="addressButtons">
                                 <button class="btn btn-default" ng-click="getAddress(address.id)" data-toggle="modal" data-target="#myModal4">Edit</button>
                                 <button class="btn btn-default" ng-click="deleteAddress(address.id)">Delete</button>
@@ -182,7 +182,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>City</label>
-                                            <input class="form-control" ng-model="currentAddress.city.name">
+                                            <input class="form-control" ng-model="currentAddress.city">
                                         </div>
                                         <div class="form-group">
                                             <label>Street</label>

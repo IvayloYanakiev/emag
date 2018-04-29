@@ -37,18 +37,11 @@ public class Address {
     }
 
     public void setCity(String city) throws AddressException {
-<<<<<<< HEAD
-        if (city != null && city.trim().length() > 0) {
-            this.city = city;
-        } else {
-            throw new AddressException("Address invalid city");
-        }
-=======
+
        if(city!=null && city.trim().length() >= Constants.MIN_CITY_NAME_LENGTH){
            this.city=city;
        }
        else throw new AddressException(ErrorMessages.INVALID_CITY_NAME);
->>>>>>> 9b4f12be27a379934557043ebe5bc20918f62ddd
     }
 
     public Long getId() {

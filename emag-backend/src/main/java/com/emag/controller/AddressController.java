@@ -50,15 +50,13 @@ public class AddressController {
     public ResponseEntity updateAddress( @RequestParam("addressId") Long addressId,
                                          @RequestParam("receiverName") String receiverName,
                                          @RequestParam("receiverPhone") String receiverPhone,
-                                         @RequestParam("cityId") Long cityId,
+                                         @RequestParam("city") String city,
                                          @RequestParam("street") String street,
                                          @RequestParam("floor") int floor) {
         try {
-            City city = new City();
-            city.setId(cityId);
             Address address = new Address(addressId,receiverName,receiverPhone,city,street,floor);
             addressService.updateAddress(address);
-        } catch (CityException|AddressException e) {
+        } catch (AddressException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
