@@ -8,6 +8,7 @@
                     <h3 class="panel-title">Update personal info</h3>
                 </div>
                 <div class="panel-body">
+                    <fieldset>
                     <div class="container">
                         <div class="col-md-5">
                             <div class="form-group">
@@ -63,7 +64,7 @@
                         </div>
                         <form class="col-md-3">
                             <div class="form-group">
-                                <label>Names</label>
+                                <label>Full name</label>
                                 <input class="form-control" ng-model="user.name" disabled>
                             </div>
                             <div class="form-group">
@@ -78,7 +79,7 @@
                                 <label>Mobile phone</label>
                                 <input class="form-control" ng-model="user.phone" disabled>
                             </div>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">
+                            <button type="button" ng-click="resetError()" class="btn btn-default" data-toggle="modal" data-target="#myModal2">
                                 Update Personal Info
                             </button>
                         </form>
@@ -134,11 +135,16 @@
                                                 ng-click="resetPersonalData()">Close
                                         </button>
                                     </div>
+                                    <br>
+                                    <div class="alert alert-danger" role="alert" ng-if="error">
+                                        {{value}}
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
+                    </fieldset>
                 </div>
             </div>
 
@@ -161,7 +167,6 @@
                         </li>
                     </ul>
 
-
                     <div id="myModal4" class="modal fade" role="dialog">
                         <div class="modal-dialog">
 
@@ -174,6 +179,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form class="col-md-5">
+                                        <fieldset>
                                         <div class="form-group">
                                             <label>Receiver name</label>
                                             <input class="form-control" ng-model="currentAddress.receiverName">
@@ -192,9 +198,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Floor</label>
-                                            <input class="form-control" ng-model="currentAddress.floor">
+                                            <input type="number" class="form-control" ng-model="currentAddress.floor">
                                         </div>
-                                    </form>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-default"
@@ -204,22 +210,23 @@
                                             ng-click="resetAddresses()">Close
                                     </button>
                                 </div>
+                                <br>
+                                <div class="alert alert-danger" role="alert" ng-if="error">
+                                    {{value}}
+                                </div>
+                                </fieldset>
+                                </form>
                             </div>
-
                         </div>
                     </div>
 
 
-
-
-
-                    <form class="col-md-3">
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3">
-                            Add address
-                        </button>
-                    </form>
-
-
+                    <fieldset>
+                        <form class="col-md-3">
+                            <button type="button" ng-click="resetError()" class="btn btn-default" data-toggle="modal" data-target="#myModal3">
+                                Add address
+                            </button>
+                        </form>
                     <div id="myModal3" class="modal fade" role="dialog">
                         <div class="modal-dialog">
 
@@ -250,7 +257,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Floor</label>
-                                            <input class="form-control" ng-model="address.floor">
+                                            <input type="number" class="form-control" ng-model="address.floor">
                                         </div>
                                     </form>
                                 </div>
@@ -262,10 +269,14 @@
                                             ng-click="resetAddresses()">Close
                                     </button>
                                 </div>
+                                <br>
+                                <div class="alert alert-danger" role="alert" ng-if="error">
+                                    {{value}}
+                                </div>
                             </div>
-
                         </div>
                     </div>
+                    </fieldset>
                 </div>
             </div>
         </div>

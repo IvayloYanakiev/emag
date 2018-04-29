@@ -1,9 +1,10 @@
 package com.emag.config;
 
 public class ConstantsErrorMessages {
-    public static final String ERROR = "Error";
     public static final String ACCOUNT_PROBLEM = "There's a problem with your account";
     public static final String INVALID_EMAIL = "Invalid email";
+    public static final String INVALID_PASSWORD = "Invalid password length";
+    public static final String INVALID_TYPE = "Invalid type";
     public static final String CHECK_YOUR_PASSWORD = "Please check your confirm password";
     public static final String PASSWORDS_NOT_THE_SAME = "Passwords are not the same";
     public static final String USER_ALREADY_EXISTS = "User already exists";
@@ -25,4 +26,10 @@ public class ConstantsErrorMessages {
     public static final String ERROR_UPDATING_USER = "Error updating user";
     public static final String INVALID_CATEGORY_NAME = "Invalid category name";
     public static final String INVALID_INNER_CATEGORY = "Inner category doesn't exists";
+    public static final String INVALID_PRODUCT_ID = "Invalid product id";
+    public static final String INVALID_PRODUCT_NAME = "Invalid product name";
+    public static final String INVALID_PRODUCT_PICTURE_URL = "Invalid product picture URL";
+    public static final String INVALID_PRODUCT_PRICE = "Invalid product price";
+    public static final String INVALID_PRODUCT_TYPE_ID = "Invalid product type ID";
+    public static final String INVALID_PRODUCT_QUANTITY = "Invalid product quantity";
 }

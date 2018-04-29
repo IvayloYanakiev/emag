@@ -9,5 +9,6 @@ public class Constants {
     public static final int PHONE_NUMBER_LENGTH = 10;
     public static final String PHONE_NUMBER_PREFIX = "08";
     public static final int MIN_CITY_NAME_LENGTH = 3;
-
+    public static final int MIN_PASSWORD_LENGTH = 5;
+    public static final int MIN_EMAIL_LENGTH = 5;
 }

@@ -10,12 +10,12 @@ public class Address {
     private String receiverPhone;
     private String city;
     private String street;
-    private int floor;
+    private Integer floor;
 
     public Address() {
     }
 
-    public Address(String receiverName, String receiverPhone, String city, String street, int floor) throws AddressException {
+    public Address(String receiverName, String receiverPhone, String city, String street, Integer floor) throws AddressException {
         setReceiverName(receiverName);
         setReceiverPhone(receiverPhone);
         setCity(city);
@@ -23,7 +23,7 @@ public class Address {
         setFloor(floor);
     }
 
-    public Address(Long id, String receiverName, String receiverPhone, String city, String street, int floor) throws AddressException {
+    public Address(Long id, String receiverName, String receiverPhone, String city, String street, Integer floor) throws AddressException {
         setId(id);
         setReceiverName(receiverName);
         setReceiverPhone(receiverPhone);
@@ -92,12 +92,12 @@ public class Address {
         }
     }
 
-    public int getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 
-    public void setFloor(int floor) throws AddressException {
-        if (floor >= 0) {
+    public void setFloor(Integer floor) throws AddressException {
+        if (floor != null && floor >= 0) {
             this.floor = floor;
         } else {
             throw new AddressException(ConstantsErrorMessages.INVALID_FLOOR_VALUE);

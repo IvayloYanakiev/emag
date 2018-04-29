@@ -19,7 +19,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
 app.service('fileUpload', ['$q', '$http', function ($q, $http) {
     var deffered = $q.defer();
     var responseData;
-    this.uploadFileToUrl = function (file, uploadUrl,userId) {
+    this.uploadFileToUrl = function (file, uploadUrl, userId) {
         var fd = new FormData();
         fd.append('id', userId);
         fd.append('picture', file);
@@ -46,7 +46,7 @@ app.service('fileUpload', ['$q', '$http', function ($q, $http) {
 
 }]);
 
-app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $location, $routeParams, $http, sessionService,fileUpload) {
+app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, fileUpload) {
 
     $scope.currentFile = {};
     $scope.dataUpload = true;
@@ -55,11 +55,11 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
     $scope.address = "";
 
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
-    $scope.putGender = function(gender){
-        if(gender==1){
+    $scope.putGender = function (gender) {
+        if (gender == 1) {
             $scope.user.gender = "Male";
         }
-        else  $scope.user.gender = "Female";
+        else $scope.user.gender = "Female";
 
     };
 
@@ -70,10 +70,10 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
                 method: "GET",
                 params: {"id": sessionService.getSession()}
             }).then(function (response) {
-                $scope.user = JSON.parse(response.data.object);
-                if($scope.user.pictureUrl!=null){
-                    $scope.pictureUrl=$scope.user.pictureUrl;
-                }else $scope.pictureUrl = "http://127.0.0.1:8887/nopicture.jpg";
+                $scope.user =response.data
+                if ($scope.user.pictureUrl != null) {
+                    $scope.pictureUrl = $scope.user.pictureUrl;
+                } else $scope.pictureUrl = "http://127.0.0.1:8887/nopicture.jpg";
             });
         } else $location.url("/login");
 
@@ -81,7 +81,8 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
     getData();
 
 
-    $scope.updateAddress = function(){
+    $scope.updateAddress = function () {
+        $scope.error = false;
         $http({
             url: "http://localhost:7377/address" + "/updateAddress",
             method: "PUT",
@@ -97,10 +98,14 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
             $('#myModal4').modal('hide');
             getAddresses();
             $scope.currentAddress = "";
+        }, function (error) {
+            $scope.error = true;
+            $scope.value = error.data;
         });
     };
 
-    $scope.getAddress= function(addressId){
+    $scope.getAddress = function (addressId) {
+        $scope.error = false;
         $http({
             url: "http://localhost:7377/address" + "/getAddress",
             method: "GET",
@@ -108,13 +113,12 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
                 "addressId": addressId
             }
         }).then(function (response) {
-            $scope.currentAddress = JSON.parse(response.data.object);
+            $scope.currentAddress = response.data
         });
     };
 
 
-
-    $scope.deleteAddress= function(addressId){
+    $scope.deleteAddress = function (addressId) {
         $http({
             url: "http://localhost:7377/address" + "/deleteAddress",
             method: "DELETE",
@@ -133,7 +137,7 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
                 method: "GET",
                 params: {"userId": sessionService.getSession()}
             }).then(function (response) {
-                $scope.addresses = JSON.parse(response.data.object);
+                $scope.addresses = response.data;
 
             });
         } else $location.url("/login");
@@ -141,51 +145,58 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
     };
     getAddresses();
 
-    $scope.updateUserProfilePicture = function(){
-        var file =  $scope.myFile;
+    $scope.updateUserProfilePicture = function () {
+        var file = $scope.myFile;
         var uploadUrl = "http://localhost:7377/user/updateUserProfilePicture";
-        fileUpload.uploadFileToUrl(file, uploadUrl,$scope.user.id).then(function(result){
-            var url = JSON.parse(result.data.object);
+        fileUpload.uploadFileToUrl(file, uploadUrl, $scope.user.id).then(function (result) {
+            var url = result.data;
             $scope.pictureUrl = url;
             $('#myModal').modal('hide');
-        }, function() {
-            alert('error');
+        }, function (err) {
+            console.log(err);
         })
 
     };
 
-  $scope.updateUserPersonalData = function () {
-      $http({
-          url: "http://localhost:7377/user" + "/updateUserPersonalData",
-          method: "PUT",
-          params: {
-              "id": $scope.user.id,
-              "name": $scope.user.name,
-              "email": $scope.user.email,
-              "gender": $scope.user.gender,
-              "phone": $scope.user.phone
+    $scope.updateUserPersonalData = function () {
+        $http({
+            url: "http://localhost:7377/user" + "/updateUserPersonalData",
+            method: "PUT",
+            params: {
+                "id": $scope.user.id,
+                "name": $scope.user.name,
+                "email": $scope.user.email,
+                "gender": $scope.user.gender,
+                "phone": $scope.user.phone
 
-          }
-      }).then(function (response) {
-          $('#myModal2').modal('hide');
-      });
+            }
+        }).then(function (response) {
+            $('#myModal2').modal('hide');
+        }, function (error) {
+            $scope.error = true;
+            $scope.value = error.data;
+        });
 
-  };
+    };
 
-  $scope.resetPersonalData = function(){
-      $('#myModal2').modal('hide');
-      getData();
-  };
+    $scope.resetPersonalData = function () {
+        $('#myModal2').modal('hide');
+        getData();
+    };
 
-    $scope.resetAddresses = function(){
+    $scope.resetAddresses = function () {
         $('#myModal3').modal('hide');
         $('#myModal4').modal('hide');
         getAddresses();
         $scope.address = "";
     };
+    $scope.resetError = function(){
+        $scope.error=false;
+    };
 
-    $scope.address = {receiverName:"", receiverPhone:"", city:"", street:"", floor:""};
-    $scope.addAddress = function(){
+    $scope.address = {receiverName: "", receiverPhone: "", city: "", street: "", floor: ""};
+    $scope.addAddress = function () {
+        $scope.error = false;
         $http({
             url: "http://localhost:7377/address" + "/addAddress",
             method: "POST",
@@ -201,8 +212,9 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
             $('#myModal3').modal('hide');
             getAddresses();
             $scope.address = "";
-        },function(error){
-            alert(error);
+        }, function (error) {
+            $scope.error = true;
+            $scope.value = error.data;
         });
     };
 
@@ -213,7 +225,7 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
     //         params:{}
     //     }).then(function (response) {
     //         alert(response);
-    //         // $scope.cities = JSON.parse(response.data.object);
+    //         // $scope.cities = response.data
     //     },
     //         function(err){
     //         alert(err);

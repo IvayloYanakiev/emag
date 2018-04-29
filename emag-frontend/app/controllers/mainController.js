@@ -6,7 +6,9 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
         url: "http://localhost:7377/category" + "/getAllCategories",
         method: "GET"
     }).then(function (response) {
-        $scope.categories = JSON.parse(response.data.object);
+        $scope.categories = response.data;
+    },function(error){
+
     });
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
 
