@@ -1,6 +1,6 @@
 package com.emag.controller;
 
-import com.emag.config.Constants;
+import com.emag.config.ErrorMessages;
 import com.emag.exceptions.UserException;
 import com.emag.model.ResponseEntity;
 import com.emag.model.User;
@@ -36,7 +36,7 @@ public class UserController {
 
         try {
             User user = userService.findUserById(id);
-            if(user.getPictureUrl()!=null){
+            if(user.getPictureUrl()!= null){
                 int newLocationProfilePictureIndex = user.getPictureUrl().lastIndexOf("\\");
                 String newlocation = "http://127.0.0.1:8887/" + user.getPictureUrl().substring(newLocationProfilePictureIndex+1);
                 user.setPictureUrl(newlocation);
@@ -45,7 +45,7 @@ public class UserController {
         } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity(Constants.ACC_PROBLEM, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(ErrorMessages.ACCOUNT_PROBLEM, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(json, HttpStatus.OK);

@@ -18,4 +18,5 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
             x.style.display = "none";
         }
     }
+
 });

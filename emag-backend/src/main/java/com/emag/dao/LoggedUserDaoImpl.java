@@ -1,5 +1,7 @@
 package com.emag.dao;
 
+import com.emag.config.ErrorMessages;
+import com.emag.config.SqlConstants;
 import com.emag.exceptions.UserException;
 import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ public class LoggedUserDaoImpl implements LoggedUserDao{
 
     @Override
     public void updateUserPersonalInfo(User user) throws UserException {
-        String updateUserPersonalInfo = "update users set name=:name,email=:email,phone=:phone,gender=:gender where id=:id";
+        String updateUserPersonalInfo = SqlConstants.UPDATE_USER_PERSONAL_INFO;
         HashMap<String,Object> params = new HashMap<>();
         params.put("id",user.getId());
         params.put("name",user.getName());
@@ -24,19 +26,19 @@ public class LoggedUserDaoImpl implements LoggedUserDao{
         params.put("gender",user.getGender());
         int rowUpdated  = jdbcTemplate.update(updateUserPersonalInfo,params);
         if(rowUpdated==0){
-            throw new UserException("Error updating user");
+            throw new UserException(ErrorMessages.ERROR_UPDATING_USER);
         }
     }
 
     @Override
     public void updateUserProfilePicture(Long userId, String pictureUrl) throws UserException {
-        String updateUserProfilePicture = "update users set profile_url=:profile_url where id=:userId";
+        String updateUserProfilePicture = SqlConstants.UPDATE_USER_PERSONAL_PICTURE;
         HashMap<String,Object> params = new HashMap<>();
         params.put("userId",userId);
         params.put("profile_url",pictureUrl);
         int rowUpdated  = jdbcTemplate.update(updateUserProfilePicture,params);
         if(rowUpdated==0){
-            throw new UserException("Error updating user");
+            throw new UserException(ErrorMessages.ERROR_UPDATING_USER);
         }
     }
 }
