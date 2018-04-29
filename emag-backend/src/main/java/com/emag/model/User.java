@@ -1,7 +1,7 @@
 package com.emag.model;
 
 import com.emag.config.Constants;
-import com.emag.config.ErrorMessages;
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.exceptions.UserException;
 import org.springframework.stereotype.Component;
 
@@ -50,7 +50,7 @@ public class User {
     public void setId(Long id) throws UserException {
         if (id!=null && id>-1)
             this.id = id;
-        else throw new UserException(ErrorMessages.INVALID_ID);
+        else throw new UserException(ConstantsErrorMessages.INVALID_ID);
     }
 
     public String getName() {
@@ -60,7 +60,7 @@ public class User {
     public void setName(String name) throws UserException {
         if (name != null && name.trim().length() > 0) {
             this.name = name;
-        } else throw new UserException(ErrorMessages.INVALID_NAME);
+        } else throw new UserException(ConstantsErrorMessages.INVALID_NAME);
     }
 
     public String getPassword() {
@@ -78,7 +78,7 @@ public class User {
     public void setEmail(String email) throws UserException {
         if (email != null && email.trim().length() > 0) {
             this.email = email;
-        } else throw new UserException(ErrorMessages.INVALID_EMAIL);
+        } else throw new UserException(ConstantsErrorMessages.INVALID_EMAIL);
     }
 
     public String getType() {
@@ -92,7 +92,7 @@ public class User {
     public void setPictureUrl(String pictureUrl) throws UserException {
         if (pictureUrl != null && pictureUrl.trim().length() > 0)
             this.pictureUrl = pictureUrl;
-        else throw new UserException(ErrorMessages.INVALID_PICTURE_URL);
+        else throw new UserException(ConstantsErrorMessages.INVALID_PICTURE_URL);
     }
 
     public String getGender() {
@@ -102,7 +102,7 @@ public class User {
     public void setGender(String gender) throws UserException {
         if (gender != null && gender.trim().length() > 0)
             this.gender = gender;
-        else throw new UserException(ErrorMessages.INVALID_GENDER);
+        else throw new UserException(ConstantsErrorMessages.INVALID_GENDER);
     }
 
     public String getPhone() {
@@ -112,7 +112,7 @@ public class User {
     public void setPhone(String phone) throws UserException {
         if (phone != null && phone.trim().length() == Constants.PHONE_NUMBER_LENGTH && phone.startsWith(Constants.PHONE_NUMBER_PREFIX))
             this.phone = phone;
-        else throw new UserException(ErrorMessages.INVALID_PHONE);
+        else throw new UserException(ConstantsErrorMessages.INVALID_PHONE);
     }
 
     public String getPictureUrl() {

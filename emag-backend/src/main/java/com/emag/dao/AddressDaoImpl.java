@@ -2,8 +2,8 @@ package com.emag.dao;
 
 import com.emag.exceptions.AddressException;
 
-import com.emag.config.ErrorMessages;
-import com.emag.config.SqlConstants;
+import com.emag.config.ConstantsErrorMessages;
+import com.emag.config.ConstantsSQL;
 import com.emag.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -32,8 +32,8 @@ public class AddressDaoImpl implements AddressDao {
     public void addAddress(Long userId, Address address) throws AddressException {
 
         TransactionTemplate tx = new TransactionTemplate(transactionManager);
-        String insertIntoAddresses = SqlConstants.INSERT_INTO_ADDRESSES;
-        String insertIntoUserAddresses = SqlConstants.INSERT_INTO_USER_ADDRESSES;
+        String insertIntoAddresses = ConstantsSQL.INSERT_INTO_ADDRESSES;
+        String insertIntoUserAddresses = ConstantsSQL.INSERT_INTO_USER_ADDRESSES;
 
         HashMap<String, Object> addressParam = new HashMap<>();
         addressParam.put("userId", userId);
@@ -60,7 +60,7 @@ public class AddressDaoImpl implements AddressDao {
     @Override
     public LinkedHashSet<Address> getAllAddresses(Long userId) {
 
-        String getAllAddresses = SqlConstants.GET_ALL_ADDRESSES;
+        String getAllAddresses = ConstantsSQL.GET_ALL_ADDRESSES;
         HashMap<String, Object> params = new HashMap<>();
         params.put("userId", userId);
         LinkedHashSet<Address> addresses = jdbcTemplate.query(getAllAddresses, params, new ResultSetExtractor<LinkedHashSet<Address>>() {
@@ -93,7 +93,7 @@ public class AddressDaoImpl implements AddressDao {
 
     @Override
     public void updateAddress(Address address) throws AddressException {
-        String updateAddress = SqlConstants.UPDATE_ADDRESS;
+        String updateAddress = ConstantsSQL.UPDATE_ADDRESS;
         HashMap<String, Object> params = new HashMap<>();
         params.put("id", address.getId());
         params.put("receiver_name", address.getReceiverName());
@@ -104,14 +104,14 @@ public class AddressDaoImpl implements AddressDao {
         try {
             jdbcTemplate.update(updateAddress, params);
         } catch (Exception e) {
-            throw new AddressException(ErrorMessages.ERROR_UPDATING_ADDRESS, e);
+            throw new AddressException(ConstantsErrorMessages.ERROR_UPDATING_ADDRESS, e);
         }
     }
 
 
     @Override
     public Address getAddress(Long addressId) {
-        String getAddress = SqlConstants.GET_ADDRESS_BY_ID;
+        String getAddress = ConstantsSQL.GET_ADDRESS_BY_ID;
         HashMap<String, Object> params = new HashMap<>();
         params.put("addressId", addressId);
 
@@ -142,13 +142,13 @@ public class AddressDaoImpl implements AddressDao {
 
     @Override
     public void deleteAddress(Long addressId) throws AddressException {
-        String deleteAddress = SqlConstants.DELETE_ADDRESS;
+        String deleteAddress = ConstantsSQL.DELETE_ADDRESS;
         HashMap<String, Object> params = new HashMap<>();
         params.put("addressId", addressId);
         try {
             jdbcTemplate.update(deleteAddress, params);
         } catch (Exception e) {
-            throw new AddressException(ErrorMessages.ERROR_DELETING_ADDRESS, e);
+            throw new AddressException(ConstantsErrorMessages.ERROR_DELETING_ADDRESS, e);
         }
     }
 

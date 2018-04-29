@@ -18,11 +18,16 @@ app.config(function ($routeProvider) {
         .when('/userPersonalData', {
             templateUrl: 'views/userPersonalData.html',
             controller: 'userPersonalDataController',
-            css:'css/userPersonalDataCss.css'
+            css:'css/userPersonalData.css'
         })
         .when('/shoppingCart', {
             templateUrl: 'views/shoppingCart.html',
             controller: 'shoppingCartController'
+        })
+        .when('/addProduct', {
+            templateUrl: 'views/addProduct.html',
+            controller: 'addProductController',
+            css:'css/addProduct.css'
         })
         .otherwise('home.html');
 

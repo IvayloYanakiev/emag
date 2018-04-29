@@ -1,7 +1,7 @@
 package com.emag.dao;
 
-import com.emag.config.ErrorMessages;
-import com.emag.config.SqlConstants;
+import com.emag.config.ConstantsErrorMessages;
+import com.emag.config.ConstantsSQL;
 import com.emag.exceptions.UserException;
 import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findUserById(Long id) throws SQLException, UserException {
 
-        String getUserById = SqlConstants.FIND_USER_BY_ID;
+        String getUserById = ConstantsSQL.FIND_USER_BY_ID;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("id", id);
@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findUserByEmail(String email) throws SQLException, UserException {
         checkDoesGivenUserExists(email);
-        String getUserByEmail = SqlConstants.FIND_USER_BY_EMAIL;
+        String getUserByEmail = ConstantsSQL.FIND_USER_BY_EMAIL;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
@@ -87,7 +87,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User registerUser(User user) throws SQLException, UserException {
-        String registerUser = SqlConstants.ADD_USER;
+        String registerUser = ConstantsSQL.ADD_USER;
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("name", user.getName());
         userParams.put("email", user.getEmail());
@@ -99,13 +99,13 @@ public class UserDaoImpl implements UserDao {
         } catch (UserException e) {
             jdbcTemplate.update(registerUser, userParams);
         }
-        if (checker) throw new UserException(ErrorMessages.USER_ALREADY_EXISTS);
+        if (checker) throw new UserException(ConstantsErrorMessages.USER_ALREADY_EXISTS);
         return user;
     }
 
 
     public void checkDoesGivenUserExists(String email) throws SQLException, UserException {
-        String checkForUserRequest = SqlConstants.FIND_USER_BY_EMAIL;
+        String checkForUserRequest = ConstantsSQL.FIND_USER_BY_EMAIL;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
@@ -120,12 +120,12 @@ public class UserDaoImpl implements UserDao {
                 return false;
             }
         });
-        if (!checkForUser) throw new UserException(ErrorMessages.NO_SUCH_USER);
+        if (!checkForUser) throw new UserException(ConstantsErrorMessages.NO_SUCH_USER);
     }
 
 
     public void checkDoesGivenUserExists(String email, String password) throws SQLException, UserException {
-        String checkForUserRequest = SqlConstants.SELECT_USER_BY_EMAIL_AND_PASS;
+        String checkForUserRequest = ConstantsSQL.SELECT_USER_BY_EMAIL_AND_PASS;
 
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("email", email);
@@ -141,7 +141,7 @@ public class UserDaoImpl implements UserDao {
                 return false;
             }
         });
-        if (!checkForUser) throw new UserException(ErrorMessages.WRONG_USERNAME_OR_PASSWORD);
+        if (!checkForUser) throw new UserException(ConstantsErrorMessages.WRONG_USERNAME_OR_PASSWORD);
     }
 
 }

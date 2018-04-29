@@ -1,6 +1,6 @@
 package com.emag.config;
 
-public class SqlConstants {
+public class ConstantsSQL {
     public static final String FIND_USER_BY_ID = "select * from users where id=:id";
     public static final String FIND_USER_BY_EMAIL = "select * from users where email=:email";
     public static final String ADD_USER = "insert into users(name,email,password) values(:name,:email,sha1(:password))";

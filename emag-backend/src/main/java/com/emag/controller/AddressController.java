@@ -26,7 +26,7 @@ public class AddressController {
             @RequestParam("receiverPhone") String receiverPhone,
             @RequestParam("city") String city,
             @RequestParam("street") String street,
-            @RequestParam("floor") int floor) {
+            @RequestParam("floor") Integer floor) {
         try {
             Address address = new Address(receiverName, receiverPhone, city, street, floor);
             addressService.addAddress(id, address);
@@ -60,7 +60,7 @@ public class AddressController {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return null;
+        return new ResponseEntity(Constants.SUCCESS, HttpStatus.OK);
     }
 
     @GetMapping("/getAddress")

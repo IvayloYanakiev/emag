@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../css/userPersonalDataCss.css">
 <div ng-controller="userPersonalDataController">
 
 
@@ -38,11 +37,14 @@
                                                 <h4 class="modal-title">Update profile picture</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <span class="btn btn-default btn-file">
+                                                <form>
+                                                     <span class="btn btn-default btn-file form-control">
                                                 Browse…<input type="file" id="imgInp" class="form-control"
                                                               file-model="myFile">
                                                 </span>
-                                                <img id='img-upload'/>
+                                                    <img id='img-upload'/>
+                                                </form>
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default"

@@ -7,16 +7,20 @@
     <meta name="description" content="EMAG project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="./css/owl.theme.default.css">
-    <link rel="stylesheet" type="text/css" href="./css/animate.css">
-    <link rel="stylesheet" type="text/css" href="./css/slick.css">
-    <link rel="stylesheet" type="text/css" href="./css/main_styles.css">
-    <link rel="stylesheet" type="text/css" href="./css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="./css/cart_responsive.css">
-    <link rel="stylesheet" type="text/css" href="./css/cart_styles.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/cart_responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/cart_styles.css">
+    <link rel="stylesheet" type="text/css" href="css/userPersonalData.css">
+    <link rel="stylesheet" href="css/addProduct.css">
+
 
 </head>
 
@@ -156,34 +160,7 @@
                                             <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
                                         </ul>
                                     </li>
-                                    <li class="hassubs">
-                                        <a href="#">Featured Brands</a>
-                                        <ul>
-                                            <li>
-                                                <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                                <ul>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="hassubs">
-                                        <a href="#">Pages</a>
-                                        <ul>
-                                            <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a ng-href="#addProduct">Add Product<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="contact.html">eMAG info<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </div>
@@ -258,9 +235,9 @@
 
     <!--&lt;!&ndash; Banner &ndash;&gt;-->
 
-    <div class="banner">
-        <div class="banner_background"><img src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/cm/15/11/54ffe5266025c-dog1.jpg?crop=1xw:1.0xh;center,top&resize=480:*" alt="" width="100%"></div>
-    </div>
+    <!--<div class="banner">-->
+        <!--<div class="banner_background"><img src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/cm/15/11/54ffe5266025c-dog1.jpg?crop=1xw:1.0xh;center,top&resize=480:*" alt="" width="100%"></div>-->
+    <!--</div>-->
 
     <div ng-view></div>
 
@@ -357,6 +334,8 @@
 <script src="controllers/registerController.js"></script>
 <script src="controllers/userPersonalDataController.js"></script>
 <script src="controllers/shoppingCartController.js"></script>
+<script src="controllers/addProductController.js"></script>
+
 
 </body>
 

@@ -47,12 +47,13 @@ app.service('fileUpload', ['$q', '$http', function ($q, $http) {
 }]);
 
 app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $location, $routeParams, $http, sessionService,fileUpload) {
-    $rootScope.isAuthenticated = sessionService.isLoggedIn();
+
     $scope.currentFile = {};
     $scope.dataUpload = true;
     $scope.myFile = {};
     $scope.pictureUrl = "";
     $scope.address = "";
+
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
     $scope.putGender = function(gender){
         if(gender==1){
@@ -183,7 +184,7 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
         $scope.address = "";
     };
 
-
+    $scope.address = {receiverName:"", receiverPhone:"", city:"", street:"", floor:""};
     $scope.addAddress = function(){
         $http({
             url: "http://localhost:7377/address" + "/addAddress",
@@ -200,6 +201,8 @@ app.controller("userPersonalDataController", function ($rootScope,$q,$scope, $lo
             $('#myModal3').modal('hide');
             getAddresses();
             $scope.address = "";
+        },function(error){
+            alert(error);
         });
     };
 

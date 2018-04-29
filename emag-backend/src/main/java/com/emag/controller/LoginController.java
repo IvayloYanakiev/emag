@@ -1,6 +1,6 @@
 package com.emag.controller;
 
-import com.emag.config.ErrorMessages;
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.exceptions.UserException;
 import com.emag.model.User;
 import com.emag.model.ResponseEntity;
@@ -32,7 +32,7 @@ public class LoginController {
         } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity(ErrorMessages.ACCOUNT_PROBLEM, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(ConstantsErrorMessages.ACCOUNT_PROBLEM, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(json, HttpStatus.OK);
@@ -49,7 +49,7 @@ public class LoginController {
         } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity(ErrorMessages.ERROR, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(ConstantsErrorMessages.ERROR, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(obj, HttpStatus.OK);
@@ -67,7 +67,7 @@ public class LoginController {
         } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity(ErrorMessages.ERROR, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(ConstantsErrorMessages.ERROR, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(obj, HttpStatus.OK);

@@ -2,7 +2,7 @@ package com.emag.controller;
 
 
 import com.emag.config.Constants;
-import com.emag.config.ErrorMessages;
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.exceptions.UserException;
 import com.emag.model.User;
 import com.emag.model.ResponseEntity;
@@ -33,13 +33,13 @@ public class RegisterController {
                 if (confirmPassword != null && confirmPassword.trim().length() > 0) {
                     if (user.getPassword().equals(confirmPassword)) {
                         userService.registerUser(user);
-                    } else return new ResponseEntity(ErrorMessages.PASSWORDS_NOT_THE_SAME, HttpStatus.BAD_REQUEST);
-                } else return new ResponseEntity(ErrorMessages.CHECK_YOUR_PASSWORD, HttpStatus.BAD_REQUEST);
-            } else return new ResponseEntity(ErrorMessages.INVALID_EMAIL, HttpStatus.BAD_REQUEST);
+                    } else return new ResponseEntity(ConstantsErrorMessages.PASSWORDS_NOT_THE_SAME, HttpStatus.BAD_REQUEST);
+                } else return new ResponseEntity(ConstantsErrorMessages.CHECK_YOUR_PASSWORD, HttpStatus.BAD_REQUEST);
+            } else return new ResponseEntity(ConstantsErrorMessages.INVALID_EMAIL, HttpStatus.BAD_REQUEST);
         } catch (UserException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (SQLException e) {
-            return new ResponseEntity(ErrorMessages.ERROR, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(ConstantsErrorMessages.ERROR, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(Constants.SUCCESS, HttpStatus.OK);

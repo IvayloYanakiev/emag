@@ -1,6 +1,6 @@
 package com.emag.config;
 
-public class ErrorMessages {
+public class ConstantsErrorMessages {
     public static final String ERROR = "Error";
     public static final String ACCOUNT_PROBLEM = "There's a problem with your account";
     public static final String INVALID_EMAIL = "Invalid email";
@@ -20,7 +20,6 @@ public class ErrorMessages {
     public static final String INVALID_PHONE_NUMBER_VALUE = "Invalid phone number value";
     public static final String INVALID_RECEIVER_NAME = "Invalid receiver name";
     public static final String INVALID_ID_VALUE = "Invalid address id";
-    public static final String INVALID_CITY_VALUE =  "Invalid city";
     public static final String ERROR_UPDATING_ADDRESS = "Error updating address";
     public static final String ERROR_DELETING_ADDRESS = "Error deleting address";
     public static final String ERROR_UPDATING_USER = "Error updating user";
