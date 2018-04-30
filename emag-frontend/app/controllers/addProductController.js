@@ -6,6 +6,7 @@ app.service('productUploadService', ['$q', '$http', function ($q, $http) {
     this.uploadFileToUrl = function (file, uploadUrl, product) {
         var fd = new FormData();
         fd.append('name', product.name);
+        fd.append('categoryId', product.category);
         fd.append('price', product.price);
         fd.append('quantity', product.quantity);
         fd.append('description', product.description);
@@ -35,8 +36,7 @@ app.service('productUploadService', ['$q', '$http', function ($q, $http) {
 
 app.controller("addProductController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, productUploadService) {
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
-    $scope.myFile = {};
-    $scope.product = {name: "", price: "", quantity: "", description: ""};
+    $scope.myFile = "";
 
     $scope.addProduct = function () {
         var file = $scope.myFile;
@@ -47,11 +47,20 @@ app.controller("addProductController", function ($rootScope, $q, $scope, $locati
             $location.url("/");
         }, function (err) {
             $scope.error = true;
-            $scope.value = err.data;
+            $scope.value = "Error adding product"
         })
 
 
     };
+    $scope.product = {name:"",category:"",price:"",quantity:"",description:""};
+    $http({
+        url: "http://localhost:7377/category" + "/getAllCategories",
+        method: "GET"
+    }).then(function (response) {
+        $scope.categories = response.data;
+    },function(error){
+
+    });
 
 
     $(document).ready(function () {

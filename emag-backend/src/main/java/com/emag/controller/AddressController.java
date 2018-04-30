@@ -1,5 +1,6 @@
 package com.emag.controller;
 
+import com.emag.config.Constants;
 import com.emag.exception.AddressException;
 import com.emag.model.Address;
 import com.emag.service.AddressService;
@@ -25,14 +26,14 @@ public class AddressController {
             @RequestParam("city") String city,
             @RequestParam("street") String street,
             @RequestParam("floor") Integer floor) {
+        Gson gson = new Gson();
         try {
             Address address = new Address(receiverName, receiverPhone, city, street, floor);
             addressService.addAddress(id, address);
         } catch (AddressException e) {
-            Gson gson = new Gson();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
 
     @GetMapping("/getAllAddresses")
@@ -51,14 +52,14 @@ public class AddressController {
                                          @RequestParam("city") String city,
                                          @RequestParam("street") String street,
                                          @RequestParam("floor") Integer floor) {
+        Gson gson = new Gson();
         try {
             Address address = new Address(addressId,receiverName,receiverPhone,city,street,floor);
             addressService.updateAddress(address);
         } catch (AddressException e) {
-            Gson gson = new Gson();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
 
     @GetMapping("/getAddress")
@@ -72,13 +73,13 @@ public class AddressController {
     @DeleteMapping("/deleteAddress")
     public ResponseEntity deleteAddress( @RequestParam("addressId") Long addressId) {
 
+        Gson gson = new Gson();
         try {
             addressService.deleteAddress(addressId);
         } catch (AddressException e) {
-            Gson gson = new Gson();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
 
 

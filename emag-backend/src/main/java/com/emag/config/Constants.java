@@ -7,6 +7,7 @@ public class Constants {
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     public static final String SUCCESS = "Success";
     public static final int PHONE_NUMBER_LENGTH = 10;
+    public static final String ERROR = "Error";
     public static final String PHONE_NUMBER_PREFIX = "08";
     public static final int MIN_CITY_NAME_LENGTH = 3;
     public static final int MIN_PASSWORD_LENGTH = 5;

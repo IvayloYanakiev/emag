@@ -4,23 +4,34 @@ import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.ProductException;
 
 public class Product {
+
     private Long id;
     private String name;
     private String pictureURL;
-    private double price;
-    private Long typeID;
-    private int quantity;
+    private Double price;
+    private Long innerCategoryId;
+    private Integer quantity;
+    private String description;
 
-    public Product() {
-
+    public Product(String name, Long innerCategoryId, Double price, Integer quantity,String description, String pictureURL) throws ProductException {
+        setName(name);
+        setInnerCategoryId(innerCategoryId);
+        setPrice(price);
+        setQuantity(quantity);
+        setDescription(description);
+        setPictureURL(pictureURL);
     }
 
-    public Product(String name, String pictureURL, double price, Long typeID, int quantity) throws ProductException {
-        setName(name);
-        setPictureURL(pictureURL);
-        setPrice(price);
-        setTypeID(typeID);
-        setQuantity(quantity);
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) throws ProductException {
+        if (description != null && description.trim().length() > 0) {
+            this.description = description;
+        } else {
+            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_DESCRIPTION);
+        }
     }
 
     public Long getId() {
@@ -63,21 +74,22 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) throws ProductException {
-        if (price > 0) {
+    public void setPrice(Double price) throws ProductException {
+        if (price!=null && price > 0) {
             this.price = price;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_PRICE);
         }
     }
 
-    public Long getTypeID() {
-        return typeID;
+
+    public Long getInnerCategoryId() {
+        return innerCategoryId;
     }
 
-    public void setTypeID(Long typeID) throws ProductException {
-        if (typeID != null && typeID > -1) {
-            this.typeID = typeID;
+    public void setInnerCategoryId(Long innerCategoryId) throws ProductException {
+        if (innerCategoryId != null && innerCategoryId > -1) {
+            this.innerCategoryId = innerCategoryId;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_TYPE_ID);
         }
@@ -87,8 +99,8 @@ public class Product {
         return quantity;
     }
 
-    public void setQuantity(int quantity) throws ProductException {
-        if (quantity >= 0) {
+    public void setQuantity(Integer quantity) throws ProductException {
+        if (quantity!=null && quantity >= 0) {
             this.quantity = quantity;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_QUANTITY);

@@ -26,7 +26,6 @@ public class CategoryController {
 
        Gson gson = new Gson();
        String json = null;
-
        try {
            HashMap<Long, Category> categories =  categoryService.getAllCategories();
            json = gson.toJson(categories);
@@ -35,5 +34,4 @@ public class CategoryController {
        }
        return new ResponseEntity<>(json, HttpStatus.OK);
    }
-
 }

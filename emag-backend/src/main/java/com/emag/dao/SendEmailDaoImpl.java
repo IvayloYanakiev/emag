@@ -2,7 +2,7 @@ package com.emag.dao;
 
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
-import com.emag.exceptions.EmailException;
+import com.emag.exception.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.mail.MailException;

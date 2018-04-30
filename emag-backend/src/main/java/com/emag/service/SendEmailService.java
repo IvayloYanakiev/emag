@@ -1,6 +1,6 @@
 package com.emag.service;
 
-import com.emag.exceptions.EmailException;
+import com.emag.exception.EmailException;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 

@@ -1,5 +1,6 @@
 package com.emag.controller;
 
+import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.UserException;
 import com.emag.model.User;
@@ -69,6 +70,6 @@ public class LoginController {
         } catch (SQLException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
 }

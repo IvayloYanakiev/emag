@@ -45,7 +45,7 @@ public class RegisterController {
         } catch (SQLException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
 
     private boolean validateEmail(String emailStr) {

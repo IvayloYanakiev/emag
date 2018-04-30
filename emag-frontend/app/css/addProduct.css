@@ -18,3 +18,8 @@
 #productButton{
     margin-left: 91%;
 }
+
+#selectContainer{
+    height: 100%;
+    margin-left: auto;
+}

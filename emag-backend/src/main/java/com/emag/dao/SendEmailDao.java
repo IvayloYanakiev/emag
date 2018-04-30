@@ -1,6 +1,6 @@
 package com.emag.dao;
 
-import com.emag.exceptions.EmailException;
+import com.emag.exception.EmailException;
 import org.springframework.mail.MailException;
 
 public interface SendEmailDao {

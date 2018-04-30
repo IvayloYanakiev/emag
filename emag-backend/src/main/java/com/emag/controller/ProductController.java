@@ -1,6 +1,11 @@
 package com.emag.controller;
 
+import com.emag.config.Constants;
+import com.emag.exception.ProductException;
+import com.emag.model.Product;
+import com.emag.service.ProductService;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +22,14 @@ import java.io.IOException;
 public class ProductController {
 
 
+    @Autowired
+    ProductService productService;
 
     @RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity addProduct(
             @RequestParam("name") String name,
-            @RequestParam("price") Long price,
+            @RequestParam("categoryId") Long category,
+            @RequestParam("price") Double price,
             @RequestParam("quantity") Integer quantity,
             @RequestParam("description") String description,
             @RequestParam("picture") MultipartFile picture) {
@@ -32,17 +40,15 @@ public class ProductController {
         if (!type.equals("jpg") && !type.equals("png"))  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid file type"));
         try {
             File newFile = convertProductPicture(picture);
-//            Product product = new Product(name,price,quantity,description,newFile.getPath());
-//            productService.addProduct(product);
+            Product product = new Product(name,category,price,quantity,description,newFile.getPath());
+            productService.addProduct(product);
         } catch (IOException e) {
-            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(Constants.ERROR));
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
-
-
-
-
 
     private File convertProductPicture(MultipartFile file) throws IOException {
         File convFile = new File("D:\\emagPictures\\productPictures\\" + file.getOriginalFilename());
