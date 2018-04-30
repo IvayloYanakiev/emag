@@ -21,7 +21,6 @@ app.controller("registerController", function ($scope, $location, $http) {
             }
         }).then(function (response) {
             $scope.success = true;
-            $rootScope.isRegAuthenticated = true;
             $scope.value = response.data;
             $scope.user = {name: "", email: "", password: "", confirmPassword: ""};
         }, function (error) {
