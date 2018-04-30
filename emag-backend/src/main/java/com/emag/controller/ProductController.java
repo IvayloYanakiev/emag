@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/product")
 public class ProductController {
+
+
 
     @RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity addProduct(
@@ -28,11 +29,27 @@ public class ProductController {
 
         String mimetype = picture.getOriginalFilename().split("\\.")[1];
         String type = mimetype.split("/")[0];
-        if (!type.equals("image"))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid file type"));
-        System.out.println("OK");
+        if (!type.equals("jpg") && !type.equals("png"))  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid file type"));
+        try {
+            File newFile = convertProductPicture(picture);
+//            Product product = new Product(name,price,quantity,description,newFile.getPath());
+//            productService.addProduct(product);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
+
+
+
+
+    private File convertProductPicture(MultipartFile file) throws IOException {
+        File convFile = new File("D:\\emagPictures\\productPictures\\" + file.getOriginalFilename());
+        convFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+        return convFile;
+    }
 }

@@ -39,7 +39,7 @@ public class UserController {
             User user = userService.findUserById(id);
             if (user.getPictureUrl() != null) {
                 int newLocationProfilePictureIndex = user.getPictureUrl().lastIndexOf("\\");
-                String newlocation = "http://127.0.0.1:8887/" + user.getPictureUrl().substring(newLocationProfilePictureIndex + 1);
+                String newlocation = "http://127.0.0.1:8887/userPictures/" + user.getPictureUrl().substring(newLocationProfilePictureIndex + 1);
                 user.setPictureUrl(newlocation);
             }
             json = gson.toJson(user);
@@ -82,7 +82,7 @@ public class UserController {
             File newFile = covertProfilePicture(picture);
             loggedUserService.updateUserProfilePicture(id, newFile.getPath());
             int newLocationProfilePictureIndex = newFile.getPath().lastIndexOf("\\");
-            String newlocation = "http://127.0.0.1:8887/" + newFile.getPath().substring(newLocationProfilePictureIndex + 1);
+            String newlocation = "http://127.0.0.1:8887/userPictures/" + newFile.getPath().substring(newLocationProfilePictureIndex + 1);
             json = gson.toJson(newlocation);
         } catch (IOException | UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
@@ -92,7 +92,7 @@ public class UserController {
     }
 
     private File covertProfilePicture(MultipartFile file) throws IOException {
-        File convFile = new File("D:\\userPictures\\" + file.getOriginalFilename());
+        File convFile = new File("D:\\emagPictures\\userPictures\\" + file.getOriginalFilename());
         convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(file.getBytes());
