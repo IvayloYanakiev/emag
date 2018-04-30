@@ -1,6 +1,6 @@
 package com.emag.dao;
 
-import com.emag.exceptions.CategoryException;
+import com.emag.exception.CategoryException;
 import com.emag.model.Category;
 
 import java.util.HashMap;

@@ -1,27 +1,14 @@
 var app = angular.module('emag');
 
-app.directive('fileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
-
-            element.bind('change', function () {
-                scope.$apply(function () {
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}]);
-
-app.service('fileUpload', ['$q', '$http', function ($q, $http) {
+app.service('productUploadService', ['$q', '$http', function ($q, $http) {
     var deffered = $q.defer();
     var responseData;
-    this.uploadFileToUrl = function (file, uploadUrl, userId) {
+    this.uploadFileToUrl = function (file, uploadUrl, product) {
         var fd = new FormData();
-        fd.append('id', userId);
+        fd.append('name', product.name);
+        fd.append('price', product.price);
+        fd.append('quantity', product.quantity);
+        fd.append('description', product.description);
         fd.append('picture', file);
         return $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
@@ -30,7 +17,7 @@ app.service('fileUpload', ['$q', '$http', function ($q, $http) {
             .success(function (response) {
 
                 responseData = response;
-                   deffered.resolve(response);
+                deffered.resolve(response);
                 return deffered.promise;
             })
             .error(function (error) {
@@ -46,25 +33,25 @@ app.service('fileUpload', ['$q', '$http', function ($q, $http) {
 
 }]);
 
-app.controller("addProductController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, fileUpload) {
+app.controller("addProductController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, productUploadService) {
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
-    $scope.currentFile = {};
     $scope.myFile = {};
-
+    $scope.product = {name: "", price: "", quantity: "", description: ""};
 
     $scope.addProduct = function () {
         var file = $scope.myFile;
-        var uploadUrl = "http://localhost:7377/user/updateUserProfilePicture";
-        fileUpload.uploadFileToUrl(file, uploadUrl, $scope.user.id).then(function (result) {
-            var url = result.data;
-            $scope.pictureUrl = url;
-            $('#myModal').modal('hide');
+        $scope.success = false;
+        $scope.error = false;
+        var uploadUrl = "http://localhost:7377/product/addProduct";
+        productUploadService.uploadFileToUrl(file, uploadUrl, $scope.product).then(function (result) {
+            $location.url("/");
         }, function (err) {
-            console.log(err);
+            $scope.error = true;
+            $scope.value = err.data;
         })
 
-    };
 
+    };
 
 
     $(document).ready(function () {
@@ -92,14 +79,23 @@ app.controller("addProductController", function ($rootScope, $q, $scope, $locati
 
                 reader.onload = function (e) {
                     $('#img-upload').attr('src', e.target.result);
-                }
+                };
 
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
         $("#imgInp").change(function () {
-            readURL(this);
+            if (this.files && this.files[0]) {
+                $scope.error = false;
+                var file = this.files[0];
+                var fileType = file.type;
+                var ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
+                if ($.inArray(fileType, ValidImageTypes) < 0) {
+                    $scope.error = true;
+                    $scope.value = "Invalid file"
+                } else readURL(this);
+            }
         });
     });
 });

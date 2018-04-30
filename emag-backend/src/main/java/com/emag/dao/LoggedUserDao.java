@@ -1,7 +1,7 @@
 package com.emag.dao;
 
 
-import com.emag.exceptions.UserException;
+import com.emag.exception.UserException;
 import com.emag.model.User;
 
 public interface LoggedUserDao {

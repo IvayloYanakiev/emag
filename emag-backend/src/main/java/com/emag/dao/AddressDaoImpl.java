@@ -1,6 +1,6 @@
 package com.emag.dao;
 
-import com.emag.exceptions.AddressException;
+import com.emag.exception.AddressException;
 
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;

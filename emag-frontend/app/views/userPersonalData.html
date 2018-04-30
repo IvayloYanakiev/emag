@@ -22,8 +22,8 @@
 
 
                                 </div>
-                                <button type="button" class="btn btn-default" data-toggle="modal"
-                                        data-target="#myModal">Update
+                                <button type="button" class="btn btn-default" ng-click="resetPictureError()" data-toggle="modal"
+                                        data-target="#myModal">Update profile picture
                                 </button>
 
                                 <div id="myModal" class="modal fade" role="dialog">
@@ -40,11 +40,14 @@
                                             <div class="modal-body">
                                                 <form>
                                                      <span class="btn btn-default btn-file form-control">
-                                                Browse…<input type="file" id="imgInp" class="form-control"
+                                                Browse…<input type="file" id="profileImg" accept="image/*" class="form-control"
                                                               file-model="myFile">
                                                 </span>
-                                                    <img id='img-upload'/>
+                                                    <img ng-hide="pictureError" id='img-upload'/>
                                                 </form>
+                                                <div class="alert alert-danger" role="alert" ng-if="pictureError">
+                                                    {{value}}
+                                                </div>
 
                                             </div>
                                             <div class="modal-footer">

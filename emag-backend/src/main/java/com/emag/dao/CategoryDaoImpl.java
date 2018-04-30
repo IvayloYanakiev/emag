@@ -1,7 +1,7 @@
 package com.emag.dao;
 
 import com.emag.config.ConstantsSQL;
-import com.emag.exceptions.CategoryException;
+import com.emag.exception.CategoryException;
 import com.emag.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;

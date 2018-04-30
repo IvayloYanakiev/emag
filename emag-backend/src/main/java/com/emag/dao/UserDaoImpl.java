@@ -2,7 +2,7 @@ package com.emag.dao;
 
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
-import com.emag.exceptions.UserException;
+import com.emag.exception.UserException;
 import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;

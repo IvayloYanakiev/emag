@@ -1,6 +1,6 @@
 package com.emag.dao;
 
-import com.emag.exceptions.AddressException;
+import com.emag.exception.AddressException;
 import com.emag.model.Address;
 
 import java.util.LinkedHashSet;

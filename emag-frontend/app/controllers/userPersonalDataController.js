@@ -1,27 +1,11 @@
 var app = angular.module('emag');
 
-app.directive('fileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
-
-            element.bind('change', function () {
-                scope.$apply(function () {
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}]);
-
-app.service('fileUpload', ['$q', '$http', function ($q, $http) {
+app.service('addProfilePictureService', ['$q', '$http', function ($q, $http) {
     var deffered = $q.defer();
     var responseData;
-    this.uploadFileToUrl = function (file, uploadUrl, userId) {
+    this.uploadFileToUrl = function (file, uploadUrl, id) {
         var fd = new FormData();
-        fd.append('id', userId);
+        fd.append('id', id);
         fd.append('picture', file);
         return $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
@@ -46,7 +30,7 @@ app.service('fileUpload', ['$q', '$http', function ($q, $http) {
 
 }]);
 
-app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, fileUpload) {
+app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, addProfilePictureService) {
 
     $scope.currentFile = {};
     $scope.dataUpload = true;
@@ -147,13 +131,15 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
 
     $scope.updateUserProfilePicture = function () {
         var file = $scope.myFile;
+        var id = $scope.user.id;
         var uploadUrl = "http://localhost:7377/user/updateUserProfilePicture";
-        fileUpload.uploadFileToUrl(file, uploadUrl, $scope.user.id).then(function (result) {
+        addProfilePictureService.uploadFileToUrl(file, uploadUrl,id ).then(function (result) {
             var url = result.data;
             $scope.pictureUrl = url;
             $('#myModal').modal('hide');
         }, function (err) {
-            console.log(err);
+            $scope.pictureError = true;
+            $scope.value = err.data;
         })
 
     };
@@ -218,20 +204,6 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
         });
     };
 
-    // $scope.getCities = function(){
-    //     $http({
-    //         url: "http://localhost:7377/city" + "/getAllCities",
-    //         method: "GET",
-    //         params:{}
-    //     }).then(function (response) {
-    //         alert(response);
-    //         // $scope.cities = response.data
-    //     },
-    //         function(err){
-    //         alert(err);
-    //         });
-    // };
-
 
     $(document).ready(function () {
         $(document).on('change', '.btn-file :file', function () {
@@ -251,7 +223,9 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
             }
 
         });
-
+    $scope.resetPictureError =function(){
+        $scope.pictureError = false;
+    }
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -264,8 +238,17 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
             }
         }
 
-        $("#imgInp").change(function () {
-            readURL(this);
+        $("#profileImg").change(function () {
+            if (this.files && this.files[0]) {
+                $scope.pictureError = false;
+                var file = this.files[0];
+                var fileType = file.type;
+                var ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
+                if ($.inArray(fileType, ValidImageTypes) < 0) {
+                    $scope.pictureError = true;
+                    $scope.value = "Invalid file"
+                } else readURL(this);
+            }
         });
     });
 });

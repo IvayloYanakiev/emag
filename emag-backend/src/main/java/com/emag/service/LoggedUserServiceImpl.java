@@ -1,7 +1,7 @@
 package com.emag.service;
 
 import com.emag.dao.LoggedUserDao;
-import com.emag.exceptions.UserException;
+import com.emag.exception.UserException;
 import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

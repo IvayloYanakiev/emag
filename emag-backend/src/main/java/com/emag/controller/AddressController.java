@@ -1,7 +1,6 @@
 package com.emag.controller;
 
-import com.emag.config.Constants;
-import com.emag.exceptions.AddressException;
+import com.emag.exception.AddressException;
 import com.emag.model.Address;
 import com.emag.service.AddressService;
 import com.google.gson.Gson;

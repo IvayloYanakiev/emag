@@ -1,7 +1,7 @@
 package com.emag.controller;
 
 import com.emag.config.ConstantsErrorMessages;
-import com.emag.exceptions.UserException;
+import com.emag.exception.UserException;
 import com.emag.model.User;
 import com.emag.service.UserService;
 import com.google.gson.Gson;
