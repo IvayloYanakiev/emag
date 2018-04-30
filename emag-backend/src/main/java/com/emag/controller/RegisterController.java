@@ -3,7 +3,7 @@ package com.emag.controller;
 
 import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
-import com.emag.exceptions.UserException;
+import com.emag.exception.UserException;
 import com.emag.model.User;
 import com.emag.service.UserService;
 import com.google.gson.Gson;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 

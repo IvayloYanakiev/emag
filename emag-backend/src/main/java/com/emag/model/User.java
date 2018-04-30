@@ -2,7 +2,7 @@ package com.emag.model;
 
 import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
-import com.emag.exceptions.UserException;
+import com.emag.exception.UserException;
 import org.springframework.stereotype.Component;
 
 @Component

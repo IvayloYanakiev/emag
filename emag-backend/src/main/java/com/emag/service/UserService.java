@@ -1,6 +1,6 @@
 package com.emag.service;
 
-import com.emag.exceptions.UserException;
+import com.emag.exception.UserException;
 import com.emag.model.User;
 
 import java.sql.SQLException;

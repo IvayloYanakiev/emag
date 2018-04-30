@@ -1,7 +1,7 @@
 package com.emag.service;
 
 import com.emag.dao.AddressDao;
-import com.emag.exceptions.AddressException;
+import com.emag.exception.AddressException;
 import com.emag.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

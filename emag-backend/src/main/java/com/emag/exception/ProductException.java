@@ -1,4 +1,4 @@
-package com.emag.exceptions;
+package com.emag.exception;
 
 public class ProductException extends Exception {
     public ProductException() {

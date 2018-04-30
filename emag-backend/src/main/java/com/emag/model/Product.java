@@ -1,7 +1,7 @@
 package com.emag.model;
 
 import com.emag.config.ConstantsErrorMessages;
-import com.emag.exceptions.ProductException;
+import com.emag.exception.ProductException;
 
 public class Product {
     private Long id;

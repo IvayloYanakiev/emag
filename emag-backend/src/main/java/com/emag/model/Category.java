@@ -2,7 +2,7 @@ package com.emag.model;
 
 
 import com.emag.config.ConstantsErrorMessages;
-import com.emag.exceptions.CategoryException;
+import com.emag.exception.CategoryException;
 
 import java.util.LinkedHashSet;
 

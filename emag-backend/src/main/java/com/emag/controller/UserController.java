@@ -1,8 +1,7 @@
 package com.emag.controller;
 
-import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
-import com.emag.exceptions.UserException;
+import com.emag.exception.UserException;
 import com.emag.model.User;
 import com.emag.service.LoggedUserService;
 import com.emag.service.UserService;
@@ -13,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -77,7 +76,10 @@ public class UserController {
         String json = null;
 
         try {
-            File newFile = convert(picture);
+            String mimetype = picture.getOriginalFilename().split("\\.")[1];
+            String type = mimetype.split("/")[0];
+            if (!type.equals("jpg") && !type.equals("png")) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid image type"));
+            File newFile = covertProfilePicture(picture);
             loggedUserService.updateUserProfilePicture(id, newFile.getPath());
             int newLocationProfilePictureIndex = newFile.getPath().lastIndexOf("\\");
             String newlocation = "http://127.0.0.1:8887/" + newFile.getPath().substring(newLocationProfilePictureIndex + 1);
@@ -89,7 +91,7 @@ public class UserController {
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
-    private File convert(MultipartFile file) throws IOException {
+    private File covertProfilePicture(MultipartFile file) throws IOException {
         File convFile = new File("D:\\userPictures\\" + file.getOriginalFilename());
         convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
@@ -97,6 +99,5 @@ public class UserController {
         fos.close();
         return convFile;
     }
-
 
 }
