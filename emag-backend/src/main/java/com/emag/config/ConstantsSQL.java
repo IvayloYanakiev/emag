@@ -14,5 +14,5 @@ public class ConstantsSQL {
     public static final String DELETE_ADDRESS = "delete from addresses where id=:addressId";
     public static final String UPDATE_USER_PERSONAL_INFO = "update users set name=:name,email=:email,phone=:phone,gender=:gender where id=:id";
     public static final String UPDATE_USER_PERSONAL_PICTURE = "update users set profile_url=:profile_url where id=:userId";
-
+    public static final String UPDATE_USER_SUBSCRIBE_STATUS = "update users set isSubscribed=1 where email=:email";
 }

@@ -11,4 +11,7 @@ public class Constants {
     public static final int MIN_CITY_NAME_LENGTH = 3;
     public static final int MIN_PASSWORD_LENGTH = 5;
     public static final int MIN_EMAIL_LENGTH = 5;
+    public static final String SENDER_EMAIL = "emag.7377@gmail.com";
+    public static final String EMAIL_SUBJECT = "Subscription for eMAG.bg";
+    public static final String EMAIL_TEXT = "Congratulations!\nYou have successfully subscribed to eMAG.bg";
 }
