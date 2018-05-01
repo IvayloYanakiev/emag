@@ -148,7 +148,8 @@
                                         <img src="https://www.materialui.co/materialIcons/hardware/keyboard_arrow_right_grey_192x192.png"
                                              alt="" width="20"/>
                                         <ul>
-                                            <li ng-repeat="inner in category.innerCategories">{{inner.name}}
+                                            <li ng-click="goTo(inner.id)" ng-repeat="inner in category.innerCategories">
+                                                {{inner.name}}
                                             </li>
                                         </ul>
                                     </li>

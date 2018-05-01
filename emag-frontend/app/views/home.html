@@ -1,10 +1,11 @@
 <div ng-controller="homeController">
 
 <form>
-    <div class="form-group imageContainer">
-        <div ng-repeat="product in products" class="form-control">
+    <div ng-repeat="product in products" class="form-group imageContainer">
+        <div  class="form-control">
             {{product.name}} -> {{product.description}}
         </div>
+        <img src={{product.pictureURL}} class="form-control" style="height: auto; width:auto" />
     </div>
 </form>
 
