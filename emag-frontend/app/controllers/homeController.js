@@ -1,6 +1,6 @@
 var app = angular.module('emag');
 
-app.controller("homeController", function ($scope, $location, $routeParams, $http, sessionService, $rootScope) {
+app.controller("homeController", function ($scope, $location, $routeParams, $http, shoppingCart) {
 
     $http({
         url: "http://localhost:7377/product" + "/getAllProducts",
@@ -10,4 +10,8 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
     }, function (error) {
 
     });
+
+    $scope.addToCart = function(productId){
+        shoppingCart.addEntry(productId);
+    }
 });

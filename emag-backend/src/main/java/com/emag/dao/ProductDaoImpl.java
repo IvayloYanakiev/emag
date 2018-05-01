@@ -1,10 +1,8 @@
 package com.emag.dao;
 
-import com.emag.config.ConstantsSQL;
 import com.emag.exception.ProductException;
 import com.emag.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -40,10 +38,7 @@ public class ProductDaoImpl implements ProductDao {
         String getProducts = "select * from products where middle_type_id=:id;";
         HashMap<String, Object> params = new HashMap<>();
         params.put("id", id);
-
         LinkedHashSet<Product> products = jdbcTemplate.query(getProducts, params, new ResultSetExtractor<LinkedHashSet<Product>>() {
-
-
             @Override
             public LinkedHashSet<Product> extractData(ResultSet rs) throws SQLException {
                 LinkedHashSet<Product> myProducts = new LinkedHashSet<>();
@@ -57,6 +52,19 @@ public class ProductDaoImpl implements ProductDao {
         });
 
         return products;
+    }
+
+    @Override
+    public HashMap<Integer, Product> getProductsFromShoppingCart(HashMap<Integer, Integer> products,String[] ids) {
+        HashMap<Integer,Product> returnedProducts = new HashMap<>();
+        System.out.println(ids.toString());
+        String getProducts = "select from products where in ";
+        for (Map.Entry<Integer, Integer> entry : products.entrySet()) {
+            Integer productId = entry.getKey();
+            Integer howMany = entry.getValue();
+
+        }
+        return null;
     }
 
 

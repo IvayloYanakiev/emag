@@ -14,10 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.HashSet;
+import java.util.*;
 
 
 @RestController
@@ -70,11 +67,18 @@ public class ProductController {
         return convFile;
     }
 
-    @RequestMapping("/getInnerCategoryProducts")
+    @GetMapping("/getInnerCategoryProducts")
     public ResponseEntity getProductsByInnerCategoryId(@RequestParam("id") Long id) {
         LinkedHashSet<Product> products = productService.getProductsByInnerCategoryId(id);
         Gson gson = new Gson();
         String json = gson.toJson(products);
         return ResponseEntity.ok(json);
+    }
+    @GetMapping("/getProductsFromShoppingCart")
+    public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {
+//        LinkedHashSet<Product> products = productService.getProductsByInnerCategoryId(id);
+        Gson gson = new Gson();
+        HashMap<Integer,Product> products = productService.getProductsFromShoppingCart(ids);
+        return null;
     }
 }

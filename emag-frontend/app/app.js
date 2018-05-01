@@ -9,7 +9,8 @@ app.config(function ($routeProvider) {
         })
         .when('/home', {
             templateUrl: 'views/home.html',
-            controller: 'homeController'
+            controller: 'homeController',
+            css:'css/home.css'
         })
         .when('/login', {
             templateUrl: 'views/login.html',
@@ -61,6 +62,34 @@ app.factory('sessionService', function () {
     };
 
     return session;
+});
+
+app.factory('shoppingCart', function () {
+
+    var existingEntries = [];
+    existingEntries.getEntries = function () {
+        return localStorage.getItem("allEntries");
+    };
+    existingEntries.addEntry = function(productId) {
+        // Parse any JSON previously stored in allEntries
+        var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+        if(existingEntries == null) existingEntries = [];
+        localStorage.setItem("entry", JSON.stringify(productId));
+        // Save allEntries back to local storage
+        existingEntries.push(productId);
+        localStorage.setItem("allEntries", JSON.stringify(existingEntries));
+    };
+
+    existingEntries.removeEntry = function(productId){
+        var ids = localStorage.getItem('allEntries');
+        if (ids != 0) {
+            ids.splice(productId, 1);
+            localStorage.setItem('allEntries', JSON.stringify(ids));
+        }
+    };
+
+    return existingEntries;
+
 });
 
 app.directive('fileModel', ['$parse', function ($parse) {

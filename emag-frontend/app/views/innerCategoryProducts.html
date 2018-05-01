@@ -1,5 +1,57 @@
-<div ng-repeat="product in products" class="col-md-2 column productbox">
-    <img src="{{product.pictureURL}}" class="img-responsive">
-    <div class="producttitle">{{product.name}}</div>
-    <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">£8.95</div></div>
+<div class="container" ng-controller="innerCategoryProducts">
+    <div ng-repeat="product in products" class="col-xs-12 col-md-6">
+        <!-- First product box start here-->
+        <div class="prod-info-main prod-wrap clearfix">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    <div class="product-image">
+                        <img src="{{product.pictureURL}}" class="img-responsive rotprod">
+                        <span class="tag2 hot">
+							HOT
+						</span>
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                    <div class="product-deatil">
+                        <h5 class="name">
+                            <a href="#">
+                                {{product.name}}
+                            </a>
+                            <span></span>
+
+                        </h5>
+                        <p class="price-container">
+                            <span>${{product.price}}</span>
+                        </p>
+                        <span class="tag1"></span>
+                    </div>
+                    <div class="description">
+                        <p>{{product.description}} </p>
+                    </div>
+                    <div class="product-info smart-form">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-success btn-cart"><span>Add to cart</span></button>
+                                <button  class="btn btn-info btn-cart"><span>More info</span></button>
+                            </div>
+                            <!--<div class="col-md-12">-->
+                            <!--<div class="rating">Rating:-->
+                            <!--<label for="stars-rating-5"><i class="fa fa-star text-danger"></i></label>-->
+                            <!--<label for="stars-rating-4"><i class="fa fa-star text-danger"></i></label>-->
+                            <!--<label for="stars-rating-3"><i class="fa fa-star text-danger"></i></label>-->
+                            <!--<label for="stars-rating-2"><i class="fa fa-star text-warning"></i></label>-->
+                            <!--<label for="stars-rating-1"><i class="fa fa-star text-warning"></i></label>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end product -->
+    </div>
+
+
 </div>
+
+
