@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.HashSet;
 
@@ -56,7 +57,7 @@ public class ProductController {
     @GetMapping("/getAllProducts")
     public ResponseEntity getAllProducts(){
         Gson gson = new Gson();
-        HashSet<Product> products = productService.getAllProducts();
+        LinkedHashSet<Product> products = productService.getAllProducts();
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
@@ -69,9 +70,9 @@ public class ProductController {
         return convFile;
     }
 
-    @RequestMapping("/showProductsByCategoryId")
+    @RequestMapping("/getInnerCategoryProducts")
     public ResponseEntity getProductsByInnerCategoryId(@RequestParam("id") Long id) {
-        HashMap<Long, List<Product>> products = productService.getProductsByInnerCategoryId(id);
+        LinkedHashSet<Product> products = productService.getProductsByInnerCategoryId(id);
         Gson gson = new Gson();
         String json = gson.toJson(products);
         return ResponseEntity.ok(json);

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.HashSet;
 
@@ -22,12 +23,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public HashMap<Long, List<Product>> getProductsByInnerCategoryId(Long id) {
+    public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) {
         return productDao.getProductsByInnerCategoryId(id);
     }
 
     @Override
-    public HashSet<Product> getAllProducts() {
+    public LinkedHashSet<Product> getAllProducts() {
         return productDao.getAllProducts();
     }
 }

@@ -5,10 +5,11 @@ import com.emag.model.Product;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public interface ProductDao {
     void addProduct(Product product) throws ProductException;
-    HashSet<Product> getAllProducts();
-    HashMap<Long, List<Product>> getProductsByInnerCategoryId(Long id);
+    LinkedHashSet<Product> getAllProducts();
+    LinkedHashSet<Product> getProductsByInnerCategoryId(Long id);
 }

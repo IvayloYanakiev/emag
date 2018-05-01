@@ -33,6 +33,10 @@ app.config(function ($routeProvider) {
             controller: 'addProductController',
             css:'css/addProduct.css'
         })
+        .when('/products/:id', {
+            templateUrl: 'views/innerCategoryProducts.html',
+            controller: 'innerCategoryProducts'
+        })
         .otherwise('/home');
 
 

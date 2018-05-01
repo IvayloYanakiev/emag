@@ -21,7 +21,7 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
         }
     };
     $scope.goTo= function(innerCategoryId){
-
+            $location.url("/products/"+innerCategoryId);
     }
 
 });
