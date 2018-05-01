@@ -3,7 +3,7 @@ var app = angular.module('emag');
 app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, addProfilePictureService) {
 
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
-    if (isAuthenticated) {
+    if ($rootScope.isAuthenticated) {
         $scope.currentFile = {};
         $scope.dataUpload = true;
         $scope.myFile = {};
@@ -24,7 +24,7 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
                 method: "GET",
                 params: {"id": sessionService.getSession()}
             }).then(function (response) {
-                $scope.user = response.data
+                $scope.user = response.data;
                 if ($scope.user.pictureUrl != null) {
                     $scope.pictureUrl = $scope.user.pictureUrl;
                 } else $scope.pictureUrl = "http://127.0.0.1:8887/nopicture.jpg";

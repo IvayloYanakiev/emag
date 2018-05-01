@@ -3,7 +3,7 @@ var app = angular.module('emag');
 app.controller("addProductController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, productUploadService) {
 
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
-    if(isAuthenticated){
+    if($rootScope.isAuthenticated){
         $scope.myFile = "";
 
         $scope.addProduct = function () {
