@@ -105,7 +105,6 @@ public class ProductDaoImpl implements ProductDao{
 
                 }
                 return myProducts;
-
             }
         });
         return products;
