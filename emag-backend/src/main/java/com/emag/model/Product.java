@@ -22,6 +22,17 @@ public class Product {
         setPictureURL(pictureURL);
     }
 
+
+    public Product(Long id, String name, String pictureURL, Double price, Long innerCategoryId, Integer quantity, String description) throws ProductException {
+        setId(id);
+        setName(name);
+        setInnerCategoryId(innerCategoryId);
+        setPrice(price);
+        setQuantity(quantity);
+        setDescription(description);
+        setPictureURL(pictureURL);
+    }
+
     public String getDescription() {
         return description;
     }
