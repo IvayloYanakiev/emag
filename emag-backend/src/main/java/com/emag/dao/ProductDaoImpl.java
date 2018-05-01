@@ -52,8 +52,10 @@ public class ProductDaoImpl implements ProductDao{
                     Long middleTypeId = rs.getLong("middle_type_id");
                     Integer quantity = rs.getInt("quantity");
                     String description = rs.getString("description");
+                    int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
+                    String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
                     try {
-                        Product product = new Product(id,name,pictureUrl,price,middleTypeId,quantity,description);
+                        Product product = new Product(id,name,newlocation,price,middleTypeId,quantity,description);
                         myProducts.add(product);
                     } catch (ProductException e) {
                         System.out.println(e.getMessage());
