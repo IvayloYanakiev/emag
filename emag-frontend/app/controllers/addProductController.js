@@ -1,110 +1,80 @@
 var app = angular.module('emag');
 
-app.service('productUploadService', ['$q', '$http', function ($q, $http) {
-    var deffered = $q.defer();
-    var responseData;
-    this.uploadFileToUrl = function (file, uploadUrl, product) {
-        var fd = new FormData();
-        fd.append('name', product.name);
-        fd.append('categoryId', product.category);
-        fd.append('price', product.price);
-        fd.append('quantity', product.quantity);
-        fd.append('description', product.description);
-        fd.append('picture', file);
-        return $http.post(uploadUrl, fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
-        })
-            .success(function (response) {
+app.controller("addProductController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, productUploadService) {
 
-                responseData = response;
-                deffered.resolve(response);
-                return deffered.promise;
+    $rootScope.isAuthenticated = sessionService.isLoggedIn();
+    if(isAuthenticated){
+        $scope.myFile = "";
+
+        $scope.addProduct = function () {
+            var file = $scope.myFile;
+            $scope.success = false;
+            $scope.error = false;
+            var uploadUrl = "http://localhost:7377/product/addProduct";
+            productUploadService.uploadFileToUrl(file, uploadUrl, $scope.product).then(function (result) {
+                $location.url("/");
+            }, function (err) {
+                $scope.error = true;
+                $scope.value = "Error adding product"
             })
-            .error(function (error) {
-                deffered.reject(error);
-                return deffered.promise;
+
+
+        };
+        $scope.product = {name:"",category:"",price:"",quantity:"",description:""};
+        $http({
+            url: "http://localhost:7377/category" + "/getAllCategories",
+            method: "GET"
+        }).then(function (response) {
+            $scope.categories = response.data;
+        },function(error){
+
+        });
+
+
+        $(document).ready(function () {
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
             });
 
-    };
+            $('.btn-file :file').on('fileselect', function (event, label) {
 
-    this.getResponse = function () {
-        return responseData;
-    }
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
 
-}]);
+                if (input.length) {
+                    input.val(log);
+                } else {
+                }
 
-app.controller("addProductController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, productUploadService) {
-    $rootScope.isAuthenticated = sessionService.isLoggedIn();
-    $scope.myFile = "";
+            });
 
-    $scope.addProduct = function () {
-        var file = $scope.myFile;
-        $scope.success = false;
-        $scope.error = false;
-        var uploadUrl = "http://localhost:7377/product/addProduct";
-        productUploadService.uploadFileToUrl(file, uploadUrl, $scope.product).then(function (result) {
-            $location.url("/");
-        }, function (err) {
-            $scope.error = true;
-            $scope.value = "Error adding product"
-        })
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
+                    reader.onload = function (e) {
+                        $('#img-upload').attr('src', e.target.result);
+                    };
 
-    };
-    $scope.product = {name:"",category:"",price:"",quantity:"",description:""};
-    $http({
-        url: "http://localhost:7377/category" + "/getAllCategories",
-        method: "GET"
-    }).then(function (response) {
-        $scope.categories = response.data;
-    },function(error){
-
-    });
-
-
-    $(document).ready(function () {
-        $(document).on('change', '.btn-file :file', function () {
-            var input = $(this),
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [label]);
-        });
-
-        $('.btn-file :file').on('fileselect', function (event, label) {
-
-            var input = $(this).parents('.input-group').find(':text'),
-                log = label;
-
-            if (input.length) {
-                input.val(log);
-            } else {
+                    reader.readAsDataURL(input.files[0]);
+                }
             }
 
+            $("#imgInp").change(function () {
+                if (this.files && this.files[0]) {
+                    $scope.error = false;
+                    var file = this.files[0];
+                    var fileType = file.type;
+                    var ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
+                    if ($.inArray(fileType, ValidImageTypes) < 0) {
+                        $scope.error = true;
+                        $scope.value = "Invalid file"
+                    } else readURL(this);
+                }
+            });
         });
+    } else $location.url("/login");
 
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#img-upload').attr('src', e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#imgInp").change(function () {
-            if (this.files && this.files[0]) {
-                $scope.error = false;
-                var file = this.files[0];
-                var fileType = file.type;
-                var ValidImageTypes = ["image/gif", "image/jpeg", "image/png"];
-                if ($.inArray(fileType, ValidImageTypes) < 0) {
-                    $scope.error = true;
-                    $scope.value = "Invalid file"
-                } else readURL(this);
-            }
-        });
-    });
 });

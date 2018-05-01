@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.HashSet;
 
 @Repository
 public class ProductDaoImpl implements ProductDao{
@@ -70,6 +71,41 @@ public class ProductDaoImpl implements ProductDao{
                     }
                 }
                 return allProducts;
+            }
+        });
+        return products;
+    }
+
+
+    public HashSet<Product> getAllProducts() {
+        String getProducts = "select * from products;";
+        HashSet<Product> products = jdbcTemplate.query(getProducts, new ResultSetExtractor<HashSet<Product>>() {
+
+
+            @Override
+            public  HashSet<Product> extractData(ResultSet rs) throws SQLException {
+                HashSet<Product> myProducts =  new HashSet<>();
+
+                while (rs.next()) {
+                    Long id = rs.getLong("id");
+                    String name = rs.getString("name");
+                    String pictureUrl = rs.getString("picture_url");
+                    Double price = rs.getDouble("price");
+                    Long middleTypeId = rs.getLong("middle_type_id");
+                    Integer quantity = rs.getInt("quantity");
+                    String description = rs.getString("description");
+                    int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
+                    String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
+                    try {
+                        Product product = new Product(id,name,newlocation,price,middleTypeId,quantity,description);
+                        myProducts.add(product);
+                    } catch (ProductException e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                }
+                return myProducts;
+
             }
         });
         return products;

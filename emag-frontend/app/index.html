@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/addProduct.css">
 
 
+
 </head>
 
 <body ng-controller="mainController">
@@ -147,7 +148,7 @@
                                         <img src="https://www.materialui.co/materialIcons/hardware/keyboard_arrow_right_grey_192x192.png"
                                              alt="" width="20"/>
                                         <ul>
-                                          <li ng-repeat="inner in category.innerCategories"><a ng-value="inner.id" ng-href="#/test" ng-click="showProducts()">{{inner.name}}</a></li>
+                                          <li ng-repeat="inner in category.innerCategories"><a ng-value="inner.id" ng-click="">{{inner.name}}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -259,7 +260,7 @@
     <!--<div class="banner_background"><img src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/cm/15/11/54ffe5266025c-dog1.jpg?crop=1xw:1.0xh;center,top&resize=480:*" alt="" width="100%"></div>-->
     <!--</div>-->
 
-    <div ng-view></div>
+    <div ng-view> </div>
 
     <div class="characteristics">
         <div class="container">
@@ -365,6 +366,7 @@
 <script src="controllers/shoppingCartController.js"></script>
 <script src="controllers/addProductController.js"></script>
 <script src="controllers/subscribeController.js"></script>
+<script src="controllers/homeController.js"></script>
 
 </body>
 

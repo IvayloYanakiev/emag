@@ -8,10 +8,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -19,6 +16,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.HashSet;
+
 
 @RestController
 @RequestMapping("/product")
@@ -52,6 +51,13 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+    }
+
+    @GetMapping("/getAllProducts")
+    public ResponseEntity getAllProducts(){
+        Gson gson = new Gson();
+        HashSet<Product> products = productService.getAllProducts();
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
     private File convertProductPicture(MultipartFile file) throws IOException {
