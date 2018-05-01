@@ -135,7 +135,7 @@
 
                             <!-- Categories Menu -->
 
-                            <div class="cat_menu_container">
+                            <div class="cat_menu_container" >
                                 <div id="dropdown_container"
                                      class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
                                     <div class="cat_burger"><span></span><span></span><span></span></div>
@@ -143,7 +143,7 @@
                                         <button id="show_menu_btn" ng-click="showMenu()">Categories</button>
                                     </div>
                                 </div>
-                                <ul class="cat_menu" id="dropdown_content">
+                                <ul class="cat_menu" id="dropdown_content" >
                                     <li class="hassubs" ng-repeat="category in categories">{{category.name}}
                                         <img src="https://www.materialui.co/materialIcons/hardware/keyboard_arrow_right_grey_192x192.png"
                                              alt="" width="20"/>
@@ -334,11 +334,11 @@
                 <div class="col">
                     <div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
                         <div class="newsletter_title_container">
-                            <div class="newsletter_icon"><a ng-href="#/"><img src="./pictures/emag-bg.png" width="150"></a>
+                            <div  class="newsletter_icon"><a ng-href="#/"><img src="./pictures/emag-bg.png" width="150"></a>
                             </div>
-                            <div class="newsletter_title">Sign up for the latest updates</div>
+                            <div  class="newsletter_title">Sign up for the latest updates</div>
                         </div>
-                        <div class="newsletter_content clearfix" ng-controller="subscribeController">
+                        <div  class="newsletter_content clearfix" ng-controller="subscribeController">
                             <form class="newsletter_form">
                                     <input ng-model="user.email" type="email" class="newsletter_input"
                                            required="required" placeholder="Enter your email address">

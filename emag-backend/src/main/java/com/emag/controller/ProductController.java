@@ -10,10 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.HashSet;
+
 
 @RestController
 @RequestMapping("/product")
@@ -35,10 +39,11 @@ public class ProductController {
 
         String mimetype = picture.getOriginalFilename().split("\\.")[1];
         String type = mimetype.split("/")[0];
-        if (!type.equals("jpg") && !type.equals("png"))  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid file type"));
+        if (!type.equals("jpg") && !type.equals("png"))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid file type"));
         try {
             File newFile = convertProductPicture(picture);
-            Product product = new Product(name,category,price,quantity,description,newFile.getPath());
+            Product product = new Product(name, category, price, quantity, description, newFile.getPath());
             productService.addProduct(product);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(Constants.ERROR));
@@ -62,5 +67,13 @@ public class ProductController {
         fos.write(file.getBytes());
         fos.close();
         return convFile;
+    }
+
+    @RequestMapping("/showProductsByCategoryId")
+    public ResponseEntity getProductsByInnerCategoryId(@RequestParam("id") Long id) {
+        HashMap<Long, List<Product>> products = productService.getProductsByInnerCategoryId(id);
+        Gson gson = new Gson();
+        String json = gson.toJson(products);
+        return ResponseEntity.ok(json);
     }
 }

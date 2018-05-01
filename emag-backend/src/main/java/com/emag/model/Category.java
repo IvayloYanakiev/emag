@@ -42,5 +42,4 @@ public class Category {
         else throw new CategoryException(ConstantsErrorMessages.INVALID_INNER_CATEGORY);
     }
 
-
 }
