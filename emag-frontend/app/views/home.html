@@ -1,5 +1,11 @@
 <div ng-controller="homeController">
 
-
+<form>
+    <div class="form-group imageContainer">
+        <div ng-repeat="product in products" class="form-control">
+            {{product.name}} -> {{product.description}}
+        </div>
+    </div>
+</form>
 
 </div>
