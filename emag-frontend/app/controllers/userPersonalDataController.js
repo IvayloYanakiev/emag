@@ -122,7 +122,6 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
                 params: {"userId": sessionService.getSession()}
             }).then(function (response) {
                 $scope.addresses = response.data;
-
             });
         } else $location.url("/login");
 

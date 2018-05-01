@@ -34,4 +34,8 @@ public class ConstantsErrorMessages {
     public static final String INVALID_PRODUCT_QUANTITY = "Invalid product quantity";
     public static final String INVALID_PRODUCT_DESCRIPTION = "Invalid product description";
     public static final String NO_SUCH_EMAIL = "The email doesn't exists";
+    public static final String INVALID_INNER_CATEGORY_ID = "Invalid inner category id";
+    public static final String INVALID_INNER_CATEGORY_NAME = "Invalid inner category name";
+    public static final String INVALID_INNER_CATEGORY_MAIN_TYPE_ID = "Invalid inner category main type id";
+    public static final String NO_SUCH_PRODUCT = "The product doesn't exists";
 }
