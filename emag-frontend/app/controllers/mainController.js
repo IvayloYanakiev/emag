@@ -21,17 +21,4 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
         }
     };
 
-
-    $scope.showProducts = function () {
-        $http({
-            url: "http://localhost:7377/product" + "/showProductsByCategoryId",
-            method: "GET",
-            params: {"id": $scope.inner.id }
-        }).then(function (response) {
-            $scope.products = response.data;
-        }, function (error) {
-
-        });
-    }
-
 });

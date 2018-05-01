@@ -1,11 +1,34 @@
 <div ng-controller="homeController">
+<!--<form>-->
+    <!--<div class="form-group imageContainer">-->
+        <!--<div ng-repeat="product in products" class="form-control">-->
+            <!--{{product.name}} -> {{product.description}}-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
 
-<form>
-    <div class="form-group imageContainer">
-        <div ng-repeat="product in products" class="form-control">
-            {{product.name}} -> {{product.description}}
+
+    <div class="arrivals_slider_item" style="width: 100%; display: inline-block;">
+        <div class="border_active active"></div>
+        <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/new_1.jpg" alt=""></div>
+            <div class="product_content">
+                <div class="product_price">$225</div>
+                <div class="product_name"><div><a href="product.html" tabindex="0">Astro M2 Black</a></div></div>
+                <div class="product_extras">
+                    <div class="product_color">
+                        <input type="radio" checked="" name="product_color" style="background:#b19c83" tabindex="0">
+                        <input type="radio" name="product_color" style="background:#000000" tabindex="0">
+                        <input type="radio" name="product_color" style="background:#999999" tabindex="0">
+                    </div>
+                    <button class="product_cart_button" tabindex="0">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
         </div>
     </div>
-</form>
-
 </div>
