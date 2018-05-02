@@ -45,4 +45,9 @@ public class ProductServiceImpl implements ProductService {
         }
         return productDao.getProductsFromShoppingCart(products,idsProducts);
     }
+
+    @Override
+    public Product getProductById(Long id) {
+        return productDao.getProductById(id);
+    }
 }

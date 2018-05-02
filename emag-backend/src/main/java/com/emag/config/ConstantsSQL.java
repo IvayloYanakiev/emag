@@ -15,5 +15,7 @@ public class ConstantsSQL {
     public static final String UPDATE_USER_PERSONAL_INFO = "update users set name=:name,email=:email,phone=:phone,gender=:gender where id=:id";
     public static final String UPDATE_USER_PERSONAL_PICTURE = "update users set profile_url=:profile_url where id=:userId";
     public static final String UPDATE_USER_SUBSCRIBE_STATUS = "update users set isSubscribed=1 where email=:email";
+    public static final String GET_PRODUCT_BY_ID = "select * from products where id=:id";
+    public static final String GET_ALL_PRODUCTS = "select * from products";
     public static final String GET_ALL_PRODUCTS_BY_INNER_CATEGORY_ID = "select * from products where middle_type_id=:id";
 }

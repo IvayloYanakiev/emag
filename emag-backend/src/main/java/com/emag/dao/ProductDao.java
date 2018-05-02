@@ -11,4 +11,5 @@ public interface ProductDao {
     LinkedHashSet<Product> getAllProducts();
     LinkedHashSet<Product> getProductsByInnerCategoryId(Long id);
     HashMap<Integer,Product> getProductsFromShoppingCart(HashMap<Integer, Integer> products,String[] ids);
+    Product getProductById(Long id);
 }

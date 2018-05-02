@@ -51,10 +51,10 @@ public class ProductController {
     }
 
     @GetMapping("/getAllProducts")
-    public ResponseEntity getAllProducts(){
+    public ResponseEntity getAllProducts() {
         Gson gson = new Gson();
         LinkedHashSet<Product> products = productService.getAllProducts();
-bu        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
     private File convertProductPicture(MultipartFile file) throws IOException {
@@ -73,11 +73,20 @@ bu        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products)
         String json = gson.toJson(products);
         return ResponseEntity.ok(json);
     }
+
     @GetMapping("/getProductsFromShoppingCart")
     public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {
 //        LinkedHashSet<Product> products = productService.getProductsByInnerCategoryId(id);
         Gson gson = new Gson();
-        HashMap<Integer,Product> products = productService.getProductsFromShoppingCart(ids);
+        HashMap<Integer, Product> products = productService.getProductsFromShoppingCart(ids);
         return null;
+    }
+
+    @GetMapping("/getProductById")
+    public ResponseEntity getProductById(@RequestParam("id") Long id) {
+        Gson gson = new Gson();
+        Product selectedProduct = productService.getProductById(id);
+        String json = gson.toJson(selectedProduct);
+        return ResponseEntity.ok(json);
     }
 }

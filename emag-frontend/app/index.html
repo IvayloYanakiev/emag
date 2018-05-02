@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="css/addProduct.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/productDetails.css">
+
+
 
 
 </head>
@@ -77,31 +80,24 @@
                     <div class="col-lg-4 col-12 order-lg-2 order-3 text-lg-left text-right">
                         <div class="header_search">
                             <div class="header_search_content">
-                                <form id="live-search" action="" class="styled" method="post">
-                                    <fieldset>
-                                        <h1>Live Search</h1>
-                                        <input type="text" class="text-input" id="filter" placeholder="search" />
-                                        <span id="filter-count"></span>
-                                    </fieldset>
-                                </form>
+                                <!--<div class="header_search_form_container" >-->
+                                    <!--<form action="#" class="header_search_form clearfix" >-->
+                                        <!--<input ng-model="product.name" type="search" required="required" class="header_search_input"-->
+                                               <!--placeholder="Search for products...">-->
+                                        <!--<button ng-click="searchProductByName()" type="submit" class="header_search_button trans_300" value="Submit"><img-->
+                                                <!--src="https://image.flaticon.com/icons/svg/54/54481.svg" alt=""-->
+                                                <!--width="20"></button>-->
+                                    <!--</form>-->
+                                <!--</div>-->
 
-                                <nav>
-                                    <ul class="liveSearchBar">
-                                        <li><a href="#">Jim James</a></li>
-                                        <li><a href="#">Hello Bye</a></li>
-                                        <li><a href="#">Wassup Food</a></li>
-                                        <li><a href="#">Contact Us</a></li>
-                                        <li><a href="#">Bleep bloop</a></li>
-                                        <li><a href="#">jQuery HTML</a></li>
-                                        <li><a href="#">CSS HTML AJAX</a></li>
-                                        <li><a href="#">HTML5 Net Set</a></li>
-                                        <li><a href="#">Node Easy</a></li>
-                                        <li><a href="#">Listing Bloop</a></li>
-                                        <li><a href="#">Contact HTML5</a></li>
-                                        <li><a href="#">CSS3 Ajax</a></li>
-                                        <li><a href="#">ET</a></li>
+                                <div ng-keyup="MyController()">
+                                    <input type="search" ng-model="search" placeholder="Search product">
+                                    <ul>
+                                        <li ng-click="goToPage(product.id)" ng-repeat="product in products | filter:search">
+                                            {{ product.name }}
+                                        </li>
                                     </ul>
-                                </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -384,8 +380,9 @@
 <script src="controllers/subscribeController.js"></script>
 <script src="controllers/homeController.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="controllers/searchController.js"></script>
 <script src="controllers/innerCategoryProducts.js"></script>
+<script src="controllers/productDetailsController.js"></script>
+
 
 </body>
 

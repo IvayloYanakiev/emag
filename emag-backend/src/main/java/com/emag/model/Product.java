@@ -13,6 +13,9 @@ public class Product {
     private Integer quantity;
     private String description;
 
+    public Product(){
+    }
+
     public Product(String name, Long innerCategoryId, Double price, Integer quantity,String description, String pictureURL) throws ProductException {
         setName(name);
         setInnerCategoryId(innerCategoryId);

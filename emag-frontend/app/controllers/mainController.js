@@ -24,5 +24,19 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
             $location.url("/products/"+innerCategoryId);
     }
 
+    $scope.MyController = function() {
 
+        $http({
+            url: "http://localhost:7377/product" + "/getAllProducts",
+            method: "GET"
+        }).then(function (response) {
+            $scope.products = response.data;
+        },function(error){
+
+        });
+    }
+
+    $scope.goToPage = function(productId){
+        $location.url("/product/"+productId);
+    }
 });

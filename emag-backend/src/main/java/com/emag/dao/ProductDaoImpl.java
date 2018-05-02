@@ -1,5 +1,6 @@
 package com.emag.dao;
 
+import com.emag.config.ConstantsSQL;
 import com.emag.exception.ProductException;
 import com.emag.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) {
-        String getProducts = "select * from products where middle_type_id=:id;";
+        String getProducts = ConstantsSQL.GET_ALL_PRODUCTS_BY_INNER_CATEGORY_ID;
         HashMap<String, Object> params = new HashMap<>();
         params.put("id", id);
         LinkedHashSet<Product> products = jdbcTemplate.query(getProducts, params, new ResultSetExtractor<LinkedHashSet<Product>>() {
@@ -67,9 +68,41 @@ public class ProductDaoImpl implements ProductDao {
         return null;
     }
 
+    @Override
+    public Product getProductById(Long id) {
+        String getProductById = ConstantsSQL.GET_PRODUCT_BY_ID;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("id", id);
+
+        Product productById = jdbcTemplate.query(getProductById, params, new ResultSetExtractor<Product>() {
+            @Override
+            public Product extractData(ResultSet rs) throws SQLException {
+                Product selectedProduct = new Product();
+
+                while (rs.next()) {
+                    try {
+                        selectedProduct.setId(rs.getLong("id"));
+                        selectedProduct.setName(rs.getString("name"));
+                        String pictureUrl = rs.getString("picture_url");
+                        selectedProduct.setPrice(rs.getDouble("price"));
+                        selectedProduct.setQuantity(rs.getInt("quantity"));
+                        selectedProduct.setDescription(rs.getString("description"));
+                        int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
+                        String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
+                        selectedProduct.setPictureURL(newlocation);
+                    } catch (ProductException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return selectedProduct;
+            }
+        });
+        return productById;
+    }
+
 
     public LinkedHashSet<Product> getAllProducts() {
-        String getProducts = "select * from products;";
+        String getProducts = ConstantsSQL.GET_ALL_PRODUCTS;
         LinkedHashSet<Product> products = jdbcTemplate.query(getProducts, new ResultSetExtractor<LinkedHashSet<Product>>() {
 
 

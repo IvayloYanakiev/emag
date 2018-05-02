@@ -12,4 +12,5 @@ public interface ProductService {
     LinkedHashSet<Product> getProductsByInnerCategoryId(Long id);
     LinkedHashSet<Product> getAllProducts();
     HashMap<Integer,Product> getProductsFromShoppingCart(String ids);
+    Product getProductById(Long id);
 }

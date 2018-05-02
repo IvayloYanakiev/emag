@@ -38,6 +38,11 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/innerCategoryProducts.html',
             controller: 'innerCategoryProducts'
         })
+        .when('/product/:id', {
+            templateUrl: 'views/productDetails.html',
+            controller: 'productDetailsController',
+            css: 'css/productDetails.css'
+        })
         .otherwise('/home');
 
 
