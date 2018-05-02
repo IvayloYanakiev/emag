@@ -60,4 +60,9 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Long id) {
         return productDao.getProductById(id);
     }
+
+    @Override
+    public void deleteProductById(Long id) throws ProductException {
+         productDao.deleteProductById(id);
+    }
 }
