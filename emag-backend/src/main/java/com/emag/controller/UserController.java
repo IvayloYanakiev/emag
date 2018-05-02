@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,10 +31,8 @@ public class UserController {
 
     @GetMapping("/getUserPersonalData")
     public ResponseEntity getUserInfo(@RequestParam("id") Long id) {
-
         Gson gson = new Gson();
         String json = null;
-
         try {
             User user = userService.findUserById(id);
             if (user.getPictureUrl() != null) {
