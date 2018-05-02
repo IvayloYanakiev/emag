@@ -84,7 +84,7 @@
                                 <div style="position: absolute" ng-keyup="MyController()">
                                     <input class="form-control" size="70" type="search" ng-model="search" placeholder="Search for product..">
                                     <ul>
-                                        <li ng-show="productsNameList()" ng-click="goToPage(product.id)" ng-repeat="product in products | filter:search">
+                                        <li ng-click="goToPage(product.id)" ng-repeat="product in products | filter:search">
                                             {{ product.name }}
                                         </li>
                                     </ul>
