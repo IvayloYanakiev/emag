@@ -19,7 +19,7 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
         }
         else $scope.products=[];
     };
-    
+
     getShoppingCart();
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
     $scope.addToCart = function(productId){

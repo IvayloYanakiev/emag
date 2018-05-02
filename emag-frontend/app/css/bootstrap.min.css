@@ -813,9 +813,9 @@ pre code {
     margin-left: 8.333333%
 }
 
-.offset-2 {
-    margin-left: 16.666667%
-}
+/*.offset-2 {*/
+    /*margin-left: 16.666667%*/
+/*}*/
 
 .offset-3 {
     margin-left: 25%
@@ -3092,7 +3092,7 @@ tbody.collapse.show {
     padding-left: .375rem
 }
 
-.btn-group-lg > .btn + .dropdown-toggle-split, .btn-lg + .dropdown-toggle-split {
+.btn-grmargin-leftoup-lg > .btn + .dropdown-toggle-split, .btn-lg + .dropdown-toggle-split {
     padding-right: .75rem;
     padding-left: .75rem
 }

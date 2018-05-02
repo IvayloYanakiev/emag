@@ -24,3 +24,11 @@
 .addressButtons{
     display:inline-block;
 }
+.col-md-off {
+    width: 50%;
+    margin-left: 25%;
+}
+.col-md-offset-2 {
+    width: 50%;
+    margin-left: 25%;
+}
