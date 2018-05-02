@@ -14,15 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.HashSet;
+import java.util.*;
 
 
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-
 
     @Autowired
     ProductService productService;
@@ -56,8 +53,8 @@ public class ProductController {
     @GetMapping("/getAllProducts")
     public ResponseEntity getAllProducts(){
         Gson gson = new Gson();
-        HashSet<Product> products = productService.getAllProducts();
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
+        LinkedHashSet<Product> products = productService.getAllProducts();
+bu        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
     private File convertProductPicture(MultipartFile file) throws IOException {
@@ -69,11 +66,18 @@ public class ProductController {
         return convFile;
     }
 
-    @RequestMapping("/showProductsByCategoryId")
+    @GetMapping("/getInnerCategoryProducts")
     public ResponseEntity getProductsByInnerCategoryId(@RequestParam("id") Long id) {
-        HashMap<Long, List<Product>> products = productService.getProductsByInnerCategoryId(id);
+        LinkedHashSet<Product> products = productService.getProductsByInnerCategoryId(id);
         Gson gson = new Gson();
         String json = gson.toJson(products);
         return ResponseEntity.ok(json);
+    }
+    @GetMapping("/getProductsFromShoppingCart")
+    public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {
+//        LinkedHashSet<Product> products = productService.getProductsByInnerCategoryId(id);
+        Gson gson = new Gson();
+        HashMap<Integer,Product> products = productService.getProductsFromShoppingCart(ids);
+        return null;
     }
 }

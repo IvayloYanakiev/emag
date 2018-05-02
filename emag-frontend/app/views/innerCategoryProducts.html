@@ -1,4 +1,4 @@
-<div class="container" ng-controller="homeController">
+<div class="container" ng-controller="innerCategoryProducts">
     <div ng-repeat="product in products" class="col-xs-12 col-md-6">
         <!-- First product box start here-->
         <div class="prod-info-main prod-wrap clearfix">
@@ -15,9 +15,9 @@
                     <div class="product-deatil">
                         <h5 class="name">
                             <a href="#">
-                            {{product.name}}
+                                {{product.name}}
                             </a>
-                                <span></span>
+                            <span></span>
 
                         </h5>
                         <p class="price-container">
@@ -31,17 +31,17 @@
                     <div class="product-info smart-form">
                         <div class="row">
                             <div class="col-md-12">
-                                <button ng-click="addToCart(product.id)" class="btn btn-success btn-cart"><span>Add to cart</span></button>
+                                <button class="btn btn-success btn-cart"><span>Add to cart</span></button>
                                 <button  class="btn btn-info btn-cart"><span>More info</span></button>
                             </div>
                             <!--<div class="col-md-12">-->
-                                <!--<div class="rating">Rating:-->
-                                    <!--<label for="stars-rating-5"><i class="fa fa-star text-danger"></i></label>-->
-                                    <!--<label for="stars-rating-4"><i class="fa fa-star text-danger"></i></label>-->
-                                    <!--<label for="stars-rating-3"><i class="fa fa-star text-danger"></i></label>-->
-                                    <!--<label for="stars-rating-2"><i class="fa fa-star text-warning"></i></label>-->
-                                    <!--<label for="stars-rating-1"><i class="fa fa-star text-warning"></i></label>-->
-                                <!--</div>-->
+                            <!--<div class="rating">Rating:-->
+                            <!--<label for="stars-rating-5"><i class="fa fa-star text-danger"></i></label>-->
+                            <!--<label for="stars-rating-4"><i class="fa fa-star text-danger"></i></label>-->
+                            <!--<label for="stars-rating-3"><i class="fa fa-star text-danger"></i></label>-->
+                            <!--<label for="stars-rating-2"><i class="fa fa-star text-warning"></i></label>-->
+                            <!--<label for="stars-rating-1"><i class="fa fa-star text-warning"></i></label>-->
+                            <!--</div>-->
                             <!--</div>-->
                         </div>
                     </div>
