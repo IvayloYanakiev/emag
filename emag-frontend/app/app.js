@@ -10,7 +10,7 @@ app.config(function ($routeProvider) {
         .when('/home', {
             templateUrl: 'views/home.html',
             controller: 'homeController',
-            css:'css/home.css'
+            css: 'css/home.css'
         })
         .when('/login', {
             templateUrl: 'views/login.html',
@@ -23,16 +23,17 @@ app.config(function ($routeProvider) {
         .when('/userPersonalData', {
             templateUrl: 'views/userPersonalData.html',
             controller: 'userPersonalDataController',
-            css:'css/userPersonalData.css'
+            css: 'css/userPersonalData.css'
         })
         .when('/shoppingCart', {
             templateUrl: 'views/shoppingCart.html',
-            controller: 'shoppingCartController'
+            controller: 'shoppingCartController',
+            css: 'css/shoppingCart.css'
         })
         .when('/addProduct', {
             templateUrl: 'views/addProduct.html',
             controller: 'addProductController',
-            css:'css/addProduct.css'
+            css: 'css/addProduct.css'
         })
         .when('/products/:id', {
             templateUrl: 'views/innerCategoryProducts.html',
@@ -75,27 +76,44 @@ app.factory('shoppingCart', function () {
     existingEntries.getEntries = function () {
         return localStorage.getItem("allEntries");
     };
-    existingEntries.addEntry = function(productId) {
+    existingEntries.isNotEmpty = function () {
+        return localStorage.getItem("allEntries").length>2;
+    };
+    existingEntries.addEntry = function (productId) {
         // Parse any JSON previously stored in allEntries
         var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
-        if(existingEntries == null) existingEntries = [];
+        if (existingEntries == null) existingEntries = [];
         localStorage.setItem("entry", JSON.stringify(productId));
         // Save allEntries back to local storage
         existingEntries.push(productId);
         localStorage.setItem("allEntries", JSON.stringify(existingEntries));
     };
 
-    existingEntries.removeEntry = function(productId){
-        var ids = localStorage.getItem('allEntries');
-        if (ids != 0) {
-            ids.splice(productId, 1);
-            localStorage.setItem('allEntries', JSON.stringify(ids));
+    existingEntries.removeEntry = function (productId) {
+        // var ids = localStorage.getItem('allEntries');
+        // alert(ids);
+        // var index = ids.indexOf(productId);
+        // if (index > -1) {
+        //     ids.splice(index, 1);
+        // }
+        // localStorage.setItem('allEntries', JSON.stringify(ids));
+        var arr = JSON.parse(localStorage.getItem("allEntries"));
+        if(arr!=null){
+            var index = arr.indexOf(productId);
+            if (index > -1) {
+                arr.splice(index, 1);//remove first
+            }
+            localStorage.setItem("allEntries", JSON.stringify(arr));
         }
+
+
+
     };
 
     return existingEntries;
 
-});
+})
+;
 
 app.directive('fileModel', ['$parse', function ($parse) {
     return {

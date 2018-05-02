@@ -76,10 +76,17 @@ public class ProductController {
 
     @GetMapping("/getProductsFromShoppingCart")
     public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {
-//        LinkedHashSet<Product> products = productService.getProductsByInnerCategoryId(id);
         Gson gson = new Gson();
-        HashMap<Integer, Product> products = productService.getProductsFromShoppingCart(ids);
-        return null;
+        LinkedHashSet<Product> products = new LinkedHashSet<>();
+        if(ids==null || ids.trim().length()==0){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(products));
+        }
+        try {
+            products = productService.getProductsFromShoppingCart(ids);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(products));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
     @GetMapping("/getProductById")

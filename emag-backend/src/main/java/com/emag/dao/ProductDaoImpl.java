@@ -36,7 +36,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) {
-        String getProducts = ConstantsSQL.GET_ALL_PRODUCTS_BY_INNER_CATEGORY_ID;
+        String getProducts = "select * from products where middle_type_id=:id;";
         HashMap<String, Object> params = new HashMap<>();
         params.put("id", id);
         LinkedHashSet<Product> products = jdbcTemplate.query(getProducts, params, new ResultSetExtractor<LinkedHashSet<Product>>() {
@@ -45,7 +45,7 @@ public class ProductDaoImpl implements ProductDao {
                 LinkedHashSet<Product> myProducts = new LinkedHashSet<>();
 
                 while (rs.next()) {
-                    addProduct(rs, myProducts);
+                    addProductFromResultToHashSet(rs, myProducts);
                 }
                 return myProducts;
 
@@ -56,16 +56,61 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public HashMap<Integer, Product> getProductsFromShoppingCart(HashMap<Integer, Integer> products,String[] ids) {
-        HashMap<Integer,Product> returnedProducts = new HashMap<>();
-        System.out.println(ids.toString());
-        String getProducts = "select from products where in ";
-        for (Map.Entry<Integer, Integer> entry : products.entrySet()) {
-            Integer productId = entry.getKey();
-            Integer howMany = entry.getValue();
+    public LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids) {
+        String productsInCart = "select * from products where id in (:ids)";
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("ids",ids);
 
+        LinkedHashSet<Product> retrievedProducts  = jdbcTemplate.query(productsInCart,params, new ResultSetExtractor<LinkedHashSet<Product>>() {
+
+            @Override
+            public LinkedHashSet<Product> extractData(ResultSet rs) throws SQLException {
+                LinkedHashSet<Product> myProducts = new LinkedHashSet<>();
+
+                while (rs.next()) {
+                    addProductFromResultToHashSet(rs, myProducts);
+                }
+
+                return myProducts;
+            }
+        });
+        return retrievedProducts;
+    }
+
+    private void addProductFromResultToHashSet(ResultSet rs, HashSet<Product> myProducts) throws SQLException {
+        Long id = rs.getLong("id");
+        String name = rs.getString("name");
+        String pictureUrl = rs.getString("picture_url");
+        Double price = rs.getDouble("price");
+        Long middleTypeId = rs.getLong("middle_type_id");
+        Integer quantity = rs.getInt("quantity");
+        String description = rs.getString("description");
+        int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
+        String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
+        try {
+            Product product = new Product(id, name, newlocation, price, middleTypeId, quantity, description);
+            myProducts.add(product);
+        } catch (ProductException e) {
+            System.out.println(e.getMessage());
         }
-        return null;
+    }
+
+
+    public LinkedHashSet<Product> getAllProducts() {
+        String getProducts = "select * from products;";
+        LinkedHashSet<Product> products = jdbcTemplate.query(getProducts, new ResultSetExtractor<LinkedHashSet<Product>>() {
+
+            @Override
+            public LinkedHashSet<Product> extractData(ResultSet rs) throws SQLException {
+                LinkedHashSet<Product> myProducts = new LinkedHashSet<>();
+
+                while (rs.next()) {
+                    addProductFromResultToHashSet(rs, myProducts);
+                }
+                return myProducts;
+            }
+        });
+        return products;
     }
 
     @Override
@@ -100,41 +145,5 @@ public class ProductDaoImpl implements ProductDao {
         return productById;
     }
 
-
-    public LinkedHashSet<Product> getAllProducts() {
-        String getProducts = ConstantsSQL.GET_ALL_PRODUCTS;
-        LinkedHashSet<Product> products = jdbcTemplate.query(getProducts, new ResultSetExtractor<LinkedHashSet<Product>>() {
-
-
-            @Override
-            public LinkedHashSet<Product> extractData(ResultSet rs) throws SQLException {
-                LinkedHashSet<Product> myProducts = new LinkedHashSet<>();
-
-                while (rs.next()) {
-                    addProduct(rs, myProducts);
-                }
-                return myProducts;
-            }
-        });
-        return products;
-    }
-
-    private void addProduct(ResultSet rs, LinkedHashSet<Product> myProducts) throws SQLException {
-        Long id = rs.getLong("id");
-        String name = rs.getString("name");
-        String pictureUrl = rs.getString("picture_url");
-        Double price = rs.getDouble("price");
-        Long middleTypeId = rs.getLong("middle_type_id");
-        Integer quantity = rs.getInt("quantity");
-        String description = rs.getString("description");
-        int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
-        String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
-        try {
-            Product product = new Product(id, name, newlocation, price, middleTypeId, quantity, description);
-            myProducts.add(product);
-        } catch (ProductException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 }
+

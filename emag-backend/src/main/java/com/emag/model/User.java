@@ -3,9 +3,15 @@ package com.emag.model;
 import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.UserException;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+@ComponentScan("com.emag")
 public class User {
     private Long id;
     private String name;
@@ -139,5 +145,11 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public void copyValuesForSession(User user) throws UserException {
+        this.setId(user.getId());
+        this.setName(user.getName());
+        this.setEmail(user.getEmail());
     }
 }

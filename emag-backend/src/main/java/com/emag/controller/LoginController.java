@@ -19,6 +19,9 @@ import java.sql.SQLException;
 public class LoginController {
 
     @Autowired
+    User session;
+
+    @Autowired
     UserService userService;
 
     @PostMapping("/user")
@@ -28,6 +31,7 @@ public class LoginController {
         try {
             userService.checkDoesGivenUserExists(email, password);
             User user = userService.findUserByEmail(email);
+            this.session.copyValuesForSession(user);
             json = gson.toJson(user);
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));

@@ -191,7 +191,7 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
             });
             $scope.resetPictureError = function () {
                 $scope.pictureError = false;
-            }
+            };
 
             function readURL(input) {
                 if (input.files && input.files[0]) {

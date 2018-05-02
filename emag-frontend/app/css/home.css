@@ -299,19 +299,19 @@
     transition: all 0.40s ease 0s;
 }
 
-.btn-cart:hover:after {
-    top: 40%;
-    opacity: 5;
-}
+/*.btn-cart:hover:after {*/
+    /*top: 40%;*/
+    /*opacity: 5;*/
+/*}*/
 
 .btn-cart span {
     display: block;
     transition: all 0.70s linear 0s;
 }
 
-.btn-cart:hover span {
-    transform: translate(-9px);
-}
+/*.btn-cart:hover span {*/
+    /*transform: translate(-9px);*/
+/*}*/
 
 /*--Button effect classes for More info*/
 .btn-info {
@@ -323,16 +323,16 @@
     transition: all 0.40s ease 0s;
 }
 
-.btn-info:after {
-    content: "\f129";
-    font-family: fontawesome;
-    position: absolute;
-    right: 6px;
-    top: -4px;
-    opacity: 0;
-    color: #fff;
-    transition: all 0.40s ease 0s;
-}
+/*.btn-info:after {*/
+    /*content: "\f129";*/
+    /*font-family: fontawesome;*/
+    /*position: absolute;*/
+    /*right: 6px;*/
+    /*top: -4px;*/
+    /*opacity: 0;*/
+    /*color: #fff;*/
+    /*transition: all 0.40s ease 0s;*/
+/*}*/
 
 .button {
     background-color: #4CAF50;
@@ -347,19 +347,19 @@
 }
 
 
-.btn-info:hover:after {
-    top: 40%;
-    opacity: 5;
-}
+/*.btn-info:hover:after {*/
+    /*top: 40%;*/
+    /*opacity: 5;*/
+/*}*/
 
 .btn-info span {
     display: block;
     transition: all 0.70s linear 0s;
 }
 
-.btn-info:hover span {
-    transform: translate(-9px);
-}
+/*.btn-info:hover span {*/
+    /*transform: translate(-9px);*/
+/*}*/
 
 @media only screen and (min-width: 1024px) {
     .prod-info-main div[class*=col-md-4] {
