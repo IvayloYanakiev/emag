@@ -2,6 +2,7 @@
     position: relative;
     overflow: hidden;
 }
+
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -18,17 +19,17 @@
     display: block;
 }
 
-#img-upload{
+#img-upload {
     width: 100%;
 }
-.addressButtons{
-    display:inline-block;
+
+.addressButtons {
+    display: inline-block;
 }
-.col-md-off {
-    width: 50%;
-    margin-left: 25%;
-}
-.col-md-offset-2 {
+
+
+
+.updatePanelContainer {
     width: 50%;
     margin-left: 25%;
 }

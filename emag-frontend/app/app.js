@@ -90,7 +90,7 @@ app.factory('shoppingCart', function () {
     };
 
     existingEntries.removeEntry = function (productId) {
-    
+
         var arr = JSON.parse(localStorage.getItem("allEntries"));
         if(arr!=null){
             var index = arr.indexOf(productId);
