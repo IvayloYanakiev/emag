@@ -94,6 +94,17 @@ public class ProductController {
         Gson gson = new Gson();
         Product selectedProduct = productService.getProductById(id);
         String json = gson.toJson(selectedProduct);
-        return ResponseEntity.ok(json);
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+    }
+
+    @DeleteMapping("/removeProductById")
+    public ResponseEntity removeProductById(@RequestParam("id") Long id) {
+        Gson gson = new Gson();
+        try {
+            productService.deleteProductById(id);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
 }

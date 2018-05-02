@@ -12,4 +12,5 @@ public interface ProductDao {
     LinkedHashSet<Product> getProductsByInnerCategoryId(Long id);
     LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids);
     Product getProductById(Long id);
+    void deleteProductById(Long id) throws ProductException;
 }

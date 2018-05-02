@@ -145,5 +145,14 @@ public class ProductDaoImpl implements ProductDao {
         return productById;
     }
 
+    public void deleteProductById(Long productId) throws ProductException {
+        String getProductById = "delete from products where id=:productId";
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("productId", productId);
+        int rowsDeleted = jdbcTemplate.update(getProductById,params);
+        if(rowsDeleted==0){
+        throw new ProductException("Deleting product unsuccessful");
+        }
+    }
 }
 

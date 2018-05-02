@@ -90,13 +90,7 @@ app.factory('shoppingCart', function () {
     };
 
     existingEntries.removeEntry = function (productId) {
-        // var ids = localStorage.getItem('allEntries');
-        // alert(ids);
-        // var index = ids.indexOf(productId);
-        // if (index > -1) {
-        //     ids.splice(index, 1);
-        // }
-        // localStorage.setItem('allEntries', JSON.stringify(ids));
+    
         var arr = JSON.parse(localStorage.getItem("allEntries"));
         if(arr!=null){
             var index = arr.indexOf(productId);
