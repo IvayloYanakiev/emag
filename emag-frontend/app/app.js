@@ -74,7 +74,7 @@ app.factory('shoppingCart', function () {
 
     var existingEntries = [];
     existingEntries.getEntries = function () {
-        return JSON.parse(localStorage.getItem("allEntries"));
+        return localStorage.getItem("allEntries");
     };
     existingEntries.isNotEmpty = function () {
         return localStorage.getItem("allEntries").length>2;

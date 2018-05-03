@@ -31,13 +31,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public LinkedHashSet<Product> getProductsFromShoppingCart(String ids) throws ProductException {
-        ids = ids.replace("[", "");
-        ids = ids.replace("]", "");
-
         String[] idsProducts = ids.split(",");
         HashMap<Long, Integer> products = new HashMap<>(); //how many for given product id
         ArrayList<Long> idsInList = new ArrayList<>();
         for (int i = 0; i < idsProducts.length; i++) {
+            if(idsProducts[i].length()==0) continue;
             Long productId = Long.parseLong(idsProducts[i]);
             idsInList.add(productId);
             if (products.containsKey(productId)) {
