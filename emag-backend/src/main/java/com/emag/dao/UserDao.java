@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 
 public interface UserDao {
-    User findUserById(Long id) throws SQLException,UserException;
-    User findUserByEmail(String email) throws SQLException,UserException;
-    User registerUser(User data) throws SQLException,UserException;
-    void checkDoesGivenUserExists(String email, String password) throws SQLException,UserException;
-    void checkDoesGivenUserExists(String email) throws SQLException,UserException;
+    User findUserById(Long id) throws UserException;
+    User findUserByEmail(String email) throws UserException;
+    User registerUser(User data) throws UserException;
+    void checkDoesGivenUserExists(String email, String password) throws UserException;
+    void checkDoesGivenUserExists(String email) throws UserException;
 }

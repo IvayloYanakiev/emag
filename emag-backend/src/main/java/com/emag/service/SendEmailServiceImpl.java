@@ -19,7 +19,8 @@ public class SendEmailServiceImpl implements SendEmailService {
     private JavaMailSender javaMailSender;
 
     @Override
-    public void sendEmail(String email) throws MailException, EmailException {
+    public void sendEmail(String email) throws EmailException {
+
         sendEmailDao.sendEmail(email);
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -27,7 +28,10 @@ public class SendEmailServiceImpl implements SendEmailService {
         mailMessage.setFrom(Constants.SENDER_EMAIL);
         mailMessage.setSubject(Constants.EMAIL_SUBJECT);
         mailMessage.setText(Constants.EMAIL_TEXT);
-
-        javaMailSender.send(mailMessage);
+        try {
+            javaMailSender.send(mailMessage);
+        } catch (MailException e) {
+            throw new EmailException(e.getMessage(), e);
+        }
     }
 }

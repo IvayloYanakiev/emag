@@ -20,12 +20,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) {
+    public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) throws ProductException {
         return productDao.getProductsByInnerCategoryId(id);
     }
 
     @Override
-    public LinkedHashSet<Product> getAllProducts() {
+    public LinkedHashSet<Product> getAllProducts() throws ProductException {
         return productDao.getAllProducts();
     }
 
@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long id) {
+    public Product getProductById(Long id) throws ProductException {
         return productDao.getProductById(id);
     }
 
@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) {
+    public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) throws ProductException {
         return  productDao.getAllProductsOrderedByPrice(orderBy);
     }
 }

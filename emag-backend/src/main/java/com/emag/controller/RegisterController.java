@@ -39,11 +39,10 @@ public class RegisterController {
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.PASSWORDS_NOT_THE_SAME));
                 } else
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.CHECK_YOUR_PASSWORD));
-            } else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.INVALID_EMAIL));
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.INVALID_EMAIL));
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
-        } catch (SQLException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }

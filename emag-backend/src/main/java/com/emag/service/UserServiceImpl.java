@@ -15,27 +15,27 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public User findUserById(Long id) throws UserException, SQLException {
+    public User findUserById(Long id) throws UserException {
         return userDao.findUserById(id);
     }
 
     @Override
-    public User registerUser(User data) throws UserException, SQLException {
+    public User registerUser(User data) throws UserException {
         return userDao.registerUser(data);
     }
 
     @Override
-    public User findUserByEmail(String email) throws UserException, SQLException {
+    public User findUserByEmail(String email) throws UserException {
         return userDao.findUserByEmail(email);
     }
 
     @Override
-    public void checkDoesGivenUserExists(String email, String password) throws SQLException, UserException {
+    public void checkDoesGivenUserExists(String email, String password) throws UserException {
         userDao.checkDoesGivenUserExists(email, password);
     }
 
     @Override
-    public void checkDoesGivenUserExists(String email) throws SQLException, UserException {
+    public void checkDoesGivenUserExists(String email) throws  UserException {
         userDao.checkDoesGivenUserExists(email);
     }
 

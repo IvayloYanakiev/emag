@@ -8,13 +8,13 @@ import java.util.LinkedHashSet;
 
 public interface ProductDao {
     void addProduct(Product product) throws ProductException;
-    LinkedHashSet<Product> getAllProducts();
-    LinkedHashSet<Product> getProductsByInnerCategoryId(Long id);
-    LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids);
-    Product getProductById(Long id);
+    LinkedHashSet<Product> getAllProducts() throws ProductException;
+    LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) throws ProductException;
+    LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException;
+    Product getProductById(Long id) throws ProductException;
     void deleteProductById(Long id) throws ProductException;
 
     void updateProduct(Product product) throws ProductException;
 
-    LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy);
+    LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) throws ProductException;
 }

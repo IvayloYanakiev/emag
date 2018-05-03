@@ -1,5 +1,4 @@
 var app = angular.module('emag');
-
 app.controller("productDetailsController", function ($scope, $location, $routeParams, $http) {
 
     var idProduct = $routeParams.id;
@@ -11,7 +10,8 @@ app.controller("productDetailsController", function ($scope, $location, $routePa
     }).then(function (response) {
         $scope.asd = response.data;
     }, function (error) {
-
+        alert(error);
     });
 
 });
+

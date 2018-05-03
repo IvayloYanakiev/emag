@@ -6,9 +6,9 @@ import com.emag.model.User;
 import java.sql.SQLException;
 
 public interface UserService {
-     User findUserById(Long id) throws UserException, SQLException;
-     User registerUser(User data) throws UserException, SQLException;
-     User findUserByEmail(String email) throws UserException, SQLException ;
-     void checkDoesGivenUserExists(String email,String password) throws SQLException, UserException;
-     void checkDoesGivenUserExists(String email) throws SQLException, UserException;
+     User findUserById(Long id) throws UserException;
+     User registerUser(User data) throws UserException;
+     User findUserByEmail(String email) throws UserException ;
+     void checkDoesGivenUserExists(String email,String password) throws  UserException;
+     void checkDoesGivenUserExists(String email) throws  UserException;
 }

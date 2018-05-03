@@ -54,7 +54,12 @@ public class ProductController {
     @GetMapping("/getAllProducts")
     public ResponseEntity getAllProducts() {
         Gson gson = new Gson();
-        LinkedHashSet<Product> products = productService.getAllProducts();
+        LinkedHashSet<Product> products = null;
+        try {
+            products = productService.getAllProducts();
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
@@ -69,8 +74,13 @@ public class ProductController {
 
     @GetMapping("/getInnerCategoryProducts")
     public ResponseEntity getProductsByInnerCategoryId(@RequestParam("id") Long id) {
-        LinkedHashSet<Product> products = productService.getProductsByInnerCategoryId(id);
+        LinkedHashSet<Product> products = null;
         Gson gson = new Gson();
+        try {
+            products = productService.getProductsByInnerCategoryId(id);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
         String json = gson.toJson(products);
         return ResponseEntity.ok(json);
     }
@@ -93,14 +103,24 @@ public class ProductController {
     @GetMapping("/orderProductsBy")
     public ResponseEntity orderProductsBy(@RequestParam("by") String orderBy){
         Gson gson = new Gson();
-        LinkedHashSet<Product> products = productService.getAllProductsOrderedByPrice(orderBy);
+        LinkedHashSet<Product> products = null;
+        try {
+            products = productService.getAllProductsOrderedByPrice(orderBy);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
     @GetMapping("/getProductById")
     public ResponseEntity getProductById(@RequestParam("id") Long id) {
         Gson gson = new Gson();
-        Product selectedProduct = productService.getProductById(id);
+        Product selectedProduct = null;
+        try {
+            selectedProduct = productService.getProductById(id);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
         String json = gson.toJson(selectedProduct);
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(json));
     }
