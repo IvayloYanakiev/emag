@@ -79,6 +79,7 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
                 "description": $scope.updateProduct.description
             }
         }).then(function (response) {
+            $('#myModal').modal('hide');
             $location.url("/");
         }, function (error) {
             $scope.error = true;
