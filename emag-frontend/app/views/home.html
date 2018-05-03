@@ -1,6 +1,5 @@
 <div class="container" ng-controller="homeController">
     <div ng-repeat="product in products" class="col-xs-12 col-md-6">
-        <!-- First product box start here-->
         <div class="prod-info-main prod-wrap clearfix">
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
@@ -39,16 +38,75 @@
                                         class="btn btn-default btn-sm btn btn-danger">
                                     <i class="fa fa-close"></i> Remove
                                 </button>
+                                <button ng-click="editProduct(product)" type="button"
+                                        class="btn btn-default btn-sm btn btn-light"  data-toggle="modal"
+                                        data-target="#myModal"></i> Edit
+                                </button>
                             </div>
-                            <!--<div class="col-md-12">-->
-                            <!--<div class="rating">Rating:-->
-                            <!--<label for="stars-rating-5"><i class="fa fa-star text-danger"></i></label>-->
-                            <!--<label for="stars-rating-4"><i class="fa fa-star text-danger"></i></label>-->
-                            <!--<label for="stars-rating-3"><i class="fa fa-star text-danger"></i></label>-->
-                            <!--<label for="stars-rating-2"><i class="fa fa-star text-warning"></i></label>-->
-                            <!--<label for="stars-rating-1"><i class="fa fa-star text-warning"></i></label>-->
-                            <!--</div>-->
-                            <!--</div>-->
+
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close"
+                                                    data-dismiss="modal">&times;
+                                            </button>
+                                            <h4 class="modal-title">Update product  </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="productPictureContainer product-image">
+                                                        <img src="{{updateProduct.pictureURL}}" class="img-responsive" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input ng-model="updateProduct.name" type="text" class="form-control" placeholder="Enter name">
+                                                </div>
+                                                <div class="form-check">
+                                                    <label>Category</label>
+                                                    <select class="selectpicker form-control" id="selectContainer" ng-model="updateProduct.innerCategoryId" >
+                                                        <optgroup ng-repeat="category in categories" label={{category.name}}>
+                                                            <option  ng-value="inner.id" ng-repeat="inner in category.innerCategories">{{inner.name}}</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Price</label>
+                                                    <input ng-model="updateProduct.price" type="number" class="form-control" placeholder="Enter price">
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <label>Quantity</label>
+                                                    <input ng-model="updateProduct.quantity" type="number" class="form-control" placeholder="Enter quantity">
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <label>Description</label>
+                                                    <input ng-model="updateProduct.description" type="text" class="form-control" placeholder="Enter description">
+                                                </div>
+
+                                                <div class="alert alert-danger" role="alert" ng-if="error">
+                                                    {{value}}
+                                                </div>
+
+                                            </form>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success"
+                                                    ng-click="updProduct()">Update
+                                            </button>
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

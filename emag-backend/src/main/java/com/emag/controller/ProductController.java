@@ -78,7 +78,7 @@ public class ProductController {
     public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {
         Gson gson = new Gson();
         LinkedHashSet<Product> products = new LinkedHashSet<>();
-        if(ids==null || ids.trim().length()==0){
+        if (ids == null || ids.trim().length() == 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(products));
         }
         try {
@@ -102,6 +102,23 @@ public class ProductController {
         Gson gson = new Gson();
         try {
             productService.deleteProductById(id);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+    }
+
+    @PutMapping("/updateProduct")
+    public ResponseEntity updateProduct(@RequestParam("id") Long id,
+                                        @RequestParam("name") String name,
+                                        @RequestParam("categoryId") Long category,
+                                        @RequestParam("price") Double price,
+                                        @RequestParam("quantity") Integer quantity,
+                                        @RequestParam("description") String description) {
+        Gson gson = new Gson();
+        try {
+            Product product = new Product(id,name, category, price, quantity, description);
+            productService.updateProductById(product);
         } catch (ProductException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }

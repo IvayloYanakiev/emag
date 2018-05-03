@@ -65,4 +65,9 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProductById(Long id) throws ProductException {
          productDao.deleteProductById(id);
     }
+
+    @Override
+    public void updateProductById(Product product) throws ProductException {
+        productDao.updateProduct(product);
+    }
 }

@@ -12,4 +12,6 @@ public interface ProductService {
     LinkedHashSet<Product> getProductsFromShoppingCart(String ids) throws ProductException;
     Product getProductById(Long id);
     void deleteProductById(Long id) throws ProductException;
+
+    void updateProductById(Product product) throws ProductException;
 }

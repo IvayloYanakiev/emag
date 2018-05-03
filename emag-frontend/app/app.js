@@ -74,7 +74,7 @@ app.factory('shoppingCart', function () {
 
     var existingEntries = [];
     existingEntries.getEntries = function () {
-        return localStorage.getItem("allEntries");
+        return JSON.parse(localStorage.getItem("allEntries"));
     };
     existingEntries.isNotEmpty = function () {
         return localStorage.getItem("allEntries").length>2;
@@ -95,6 +95,7 @@ app.factory('shoppingCart', function () {
         if(arr!=null){
             var index = arr.indexOf(productId);
             if (index > -1) {
+
                 arr.splice(index, 1);//remove first
             }
             localStorage.setItem("allEntries", JSON.stringify(arr));
