@@ -15,4 +15,6 @@ public interface ProductDao {
     void deleteProductById(Long id) throws ProductException;
 
     void updateProduct(Product product) throws ProductException;
+
+    LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy);
 }

@@ -14,4 +14,6 @@ public interface ProductService {
     void deleteProductById(Long id) throws ProductException;
 
     void updateProductById(Product product) throws ProductException;
+
+    LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy);
 }
