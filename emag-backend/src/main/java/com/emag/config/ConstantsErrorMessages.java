@@ -30,7 +30,7 @@ public class ConstantsErrorMessages {
     public static final String INVALID_PRODUCT_NAME = "Invalid product name";
     public static final String INVALID_PRODUCT_PICTURE_URL = "Invalid product picture URL";
     public static final String INVALID_PRODUCT_PRICE = "Invalid product price";
-    public static final String INVALID_PRODUCT_TYPE_ID = "Invalid product type ID";
+    public static final String INVALID_PRODUCT_TYPE_ID = "Invalid product inner category ID";
     public static final String INVALID_PRODUCT_QUANTITY = "Invalid product quantity";
     public static final String INVALID_PRODUCT_DESCRIPTION = "Invalid product description";
     public static final String NO_SUCH_EMAIL = "The email doesn't exists";

@@ -36,6 +36,23 @@ public class Product {
         setPictureURL(pictureURL);
     }
 
+    public Product(String name, Long category, Double price, Integer quantity, String description) throws ProductException {
+        setName(name);
+        setInnerCategoryId(category);
+        setPrice(price);
+        setQuantity(quantity);
+        setDescription(description);
+    }
+
+    public Product(Long id, String name, Long category, Double price, Integer quantity, String description) throws ProductException {
+        setId(id);
+        setName(name);
+        setInnerCategoryId(category);
+        setPrice(price);
+        setQuantity(quantity);
+        setDescription(description);
+    }
+
     public String getDescription() {
         return description;
     }
@@ -105,7 +122,7 @@ public class Product {
         if (innerCategoryId != null && innerCategoryId > -1) {
             this.innerCategoryId = innerCategoryId;
         } else {
-            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_TYPE_ID);
+            throw new ProductException(ConstantsErrorMessages.INVALID_INNER_CATEGORY_ID);
         }
     }
 

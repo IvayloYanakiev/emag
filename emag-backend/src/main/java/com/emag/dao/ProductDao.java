@@ -13,4 +13,6 @@ public interface ProductDao {
     LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids);
     Product getProductById(Long id);
     void deleteProductById(Long id) throws ProductException;
+
+    void updateProduct(Product product) throws ProductException;
 }

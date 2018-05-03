@@ -154,5 +154,22 @@ public class ProductDaoImpl implements ProductDao {
         throw new ProductException("Deleting product unsuccessful");
         }
     }
+
+    @Override
+    public void updateProduct(Product product) throws ProductException {
+        String updateProduct = "update products set name=:name,middle_type_id=:categoryId,price=:price,quantity=:quantity,description=:description where id =:id ";
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("id",product.getId());
+        params.put("name",product.getName());
+        params.put("categoryId",product.getInnerCategoryId());
+        params.put("price",product.getPrice());
+        params.put("quantity",product.getQuantity());
+        params.put("description",product.getDescription());
+        int updatedRows = jdbcTemplate.update(updateProduct,params);
+        if(updatedRows==0){
+            throw new ProductException("Update failed");
+        }
+
+    }
 }
 

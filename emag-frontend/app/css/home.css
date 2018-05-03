@@ -382,3 +382,7 @@
         position: relative
     }
 }
+.productPictureContainer{
+    width: 50%;
+    left:25%;
+}

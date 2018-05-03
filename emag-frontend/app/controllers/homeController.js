@@ -31,5 +31,31 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
     };
     $scope.goTo= function(productId){
         $location.url("/product/"+productId);
+    };
+
+    $scope.editProduct= function(updateProduct){
+        $scope.updateProduct = jQuery.extend({}, updateProduct);
+    };
+
+    $scope.updProduct = function(){
+        $scope.error = false;
+
+        $http({
+            url: "http://localhost:7377/product" + "/updateProduct",
+            method: "PUT",
+            params: {
+                "id":  $scope.updateProduct.id,
+                "name":  $scope.updateProduct.name,
+                "categoryId":  $scope.updateProduct.innerCategoryId,
+                "price":  $scope.updateProduct.price,
+                "quantity":  $scope.updateProduct.quantity,
+                "description":  $scope.updateProduct.description
+            }
+        }).then(function (response) {
+            $location.url("/");
+        }, function (error) {
+            $scope.error = true;
+            $scope.value = error.data;
+        });
     }
 });
