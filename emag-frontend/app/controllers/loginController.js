@@ -21,6 +21,8 @@ app.controller("loginController", function ($rootScope, $scope, $location, $http
             var userId = response.data.id;
             sessionService.login(userId);
             $rootScope.isAuthenticated = sessionService.isLoggedIn();
+                // sessionService.setAdmin(response.data);
+            // $rootScope.isAdmin = sessionService.isHeAdmin();
             $location.url("/");
         }, function (error) {
             $scope.error = true;

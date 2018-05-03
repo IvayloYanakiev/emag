@@ -58,8 +58,19 @@ app.factory('sessionService', function () {
         localStorage.setItem("session", userId);
     };
 
+    session.setAdmin = function (user) {
+        if(user.type==1){
+            localStorage.setItem("isAdmin", "1");
+        }
+
+    };
+    session.isHeAdmin = function () {
+        return localStorage.getItem("isAdmin") != null;
+    };
+
     session.logout = function () {
         localStorage.removeItem("session");
+        localStorage.removeItem("isAdmin");
     };
 
     session.isLoggedIn = function () {
@@ -68,6 +79,8 @@ app.factory('sessionService', function () {
 
     return session;
 });
+
+
 
 app.factory('shoppingCart', function () {
 

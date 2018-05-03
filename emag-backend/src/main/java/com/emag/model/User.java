@@ -20,7 +20,7 @@ public class User {
     private String pictureUrl;
     private String gender;
     private String phone;
-    private String type;
+    private Integer type;
 
     public User() {
     }
@@ -91,12 +91,12 @@ public class User {
 
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) throws UserException {
-        if (type != null && type.trim().length() > 0) {
+    public void setType(Integer type) throws UserException {
+        if (type != null && (type == 0 || type==1)) {
             this.type = type;
         } else {
             throw new UserException(ConstantsErrorMessages.INVALID_TYPE);

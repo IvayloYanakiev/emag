@@ -5,6 +5,7 @@ app.controller("registerController", function ($scope, $location, $http) {
     $scope.error = false;
     $scope.value = " ";
     $scope.user = {name: "", email: "", password: "", confirmPassword: ""};
+
     $scope.register = function () {
 
         $scope.error = false;

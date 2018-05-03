@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
                             if (rs.getString("profile_url") != null) {
                                 userById.setPictureUrl(rs.getString("profile_url"));
                             }
-
+                            userById.setType(rs.getInt("isAdmin"));
                         } catch (UserException e) {
                             throw new SQLException(e.getMessage());
                         }
@@ -81,6 +81,7 @@ public class UserDaoImpl implements UserDao {
                             user.setId(rs.getLong("id"));
                             user.setName(rs.getString("name"));
                             user.setEmail(rs.getString("email"));
+                            user.setType(rs.getInt("isAdmin"));
                         } catch (UserException e) {
                             throw new SQLException(e.getMessage());
                         }
