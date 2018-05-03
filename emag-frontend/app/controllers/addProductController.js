@@ -20,7 +20,7 @@ app.controller("addProductController", function ($rootScope, $q, $scope, $locati
 
 
         };
-        $scope.product = {name:"",category:"",price:"",quantity:"",description:""};
+        $scope.product = {name:"",category:"",price:"",quantity:"",description:"", discount:""};
         $http({
             url: "http://localhost:7377/category" + "/getAllCategories",
             method: "GET"

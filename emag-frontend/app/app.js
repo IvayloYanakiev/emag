@@ -137,6 +137,7 @@ app.service('productUploadService', ['$q', '$http', function ($q, $http) {
         fd.append('quantity', product.quantity);
         fd.append('description', product.description);
         fd.append('picture', file);
+        fd.append('discount', product.discount);
         return $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}

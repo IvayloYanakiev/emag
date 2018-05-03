@@ -49,7 +49,8 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
                 "categoryId":  $scope.updateProduct.innerCategoryId,
                 "price":  $scope.updateProduct.price,
                 "quantity":  $scope.updateProduct.quantity,
-                "description":  $scope.updateProduct.description
+                "description":  $scope.updateProduct.description,
+                "discount": $scope.updateProduct.discount
             }
         }).then(function (response) {
             $location.url("/");
@@ -57,5 +58,14 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
             $scope.error = true;
             $scope.value = error.data;
         });
+    }
+
+    $scope.hasDiscount = function (discountValue) {
+        var discountSpanContainer = document.getElementById("hasDiscountContainer");
+        if(discountValue === 0){
+            discountSpanContainer.style.display = "block";
+        } else {
+            discountSpanContainer.style.display = "none";
+        }
     }
 });

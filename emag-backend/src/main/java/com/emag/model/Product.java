@@ -12,21 +12,12 @@ public class Product {
     private Long innerCategoryId;
     private Integer quantity;
     private String description;
+    private Integer discount;
 
     public Product(){
     }
 
-    public Product(String name, Long innerCategoryId, Double price, Integer quantity,String description, String pictureURL) throws ProductException {
-        setName(name);
-        setInnerCategoryId(innerCategoryId);
-        setPrice(price);
-        setQuantity(quantity);
-        setDescription(description);
-        setPictureURL(pictureURL);
-    }
-
-
-    public Product(Long id, String name, String pictureURL, Double price, Long innerCategoryId, Integer quantity, String description) throws ProductException {
+    public Product(Long id, String name, String pictureURL, Double price, Long innerCategoryId, Integer quantity, String description, Integer discount) throws ProductException {
         setId(id);
         setName(name);
         setInnerCategoryId(innerCategoryId);
@@ -34,23 +25,39 @@ public class Product {
         setQuantity(quantity);
         setDescription(description);
         setPictureURL(pictureURL);
+        setDiscount(discount);
     }
 
-    public Product(String name, Long category, Double price, Integer quantity, String description) throws ProductException {
+    public Product(String name, Long innerCategoryId, Double price, Integer quantity,String description, String pictureURL, Integer discount) throws ProductException {
         setName(name);
-        setInnerCategoryId(category);
+        setInnerCategoryId(innerCategoryId);
         setPrice(price);
         setQuantity(quantity);
         setDescription(description);
+        setPictureURL(pictureURL);
+        setDiscount(discount);
     }
 
-    public Product(Long id, String name, Long category, Double price, Integer quantity, String description) throws ProductException {
+    public Product(Long id, String name, Long category, Double price, Integer quantity, String description, Integer discount) throws ProductException {
         setId(id);
         setName(name);
         setInnerCategoryId(category);
         setPrice(price);
         setQuantity(quantity);
         setDescription(description);
+        setDiscount(discount);
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) throws ProductException {
+        if(discount != null && discount >= 0) {
+            this.discount = discount;
+        } else {
+            throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_DISCOUNT);
+        }
     }
 
     public String getDescription() {

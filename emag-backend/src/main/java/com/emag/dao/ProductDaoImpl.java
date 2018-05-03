@@ -20,7 +20,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void addProduct(Product product) throws ProductException {
-        String addProduct = "insert into products(name,picture_url,price,middle_type_id,quantity,description) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description)";
+        String addProduct = "insert into products(name,picture_url,price,middle_type_id,quantity,description,discount) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description,:discount)";
         HashMap<String, Object> params = new HashMap<>();
         params.put("name", product.getName());
         params.put("picture_url", product.getPictureURL());
@@ -28,6 +28,7 @@ public class ProductDaoImpl implements ProductDao {
         params.put("middle_type_id", product.getInnerCategoryId());
         params.put("quantity", product.getQuantity());
         params.put("description", product.getDescription());
+        params.put("discount", product.getDiscount());
         int insertedRows = jdbcTemplate.update(addProduct, params);
         if (insertedRows == 0) {
             throw new ProductException("Error adding product");
@@ -85,10 +86,11 @@ public class ProductDaoImpl implements ProductDao {
         Long middleTypeId = rs.getLong("middle_type_id");
         Integer quantity = rs.getInt("quantity");
         String description = rs.getString("description");
+        Integer discount = rs.getInt("discount");
         int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
         String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
         try {
-            Product product = new Product(id, name, newlocation, price, middleTypeId, quantity, description);
+            Product product = new Product(id, name, newlocation, price, middleTypeId, quantity, description, discount);
             myProducts.add(product);
         } catch (ProductException e) {
             System.out.println(e.getMessage());
@@ -132,6 +134,7 @@ public class ProductDaoImpl implements ProductDao {
                         selectedProduct.setPrice(rs.getDouble("price"));
                         selectedProduct.setQuantity(rs.getInt("quantity"));
                         selectedProduct.setDescription(rs.getString("description"));
+                        selectedProduct.setDiscount(rs.getInt("discount"));
                         int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
                         String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
                         selectedProduct.setPictureURL(newlocation);
@@ -157,7 +160,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void updateProduct(Product product) throws ProductException {
-        String updateProduct = "update products set name=:name,middle_type_id=:categoryId,price=:price,quantity=:quantity,description=:description where id =:id ";
+        String updateProduct = "update products set name=:name,middle_type_id=:categoryId,price=:price,quantity=:quantity,description=:description, discount=:discount where id =:id ";
         HashMap<String,Object> params = new HashMap<>();
         params.put("id",product.getId());
         params.put("name",product.getName());
@@ -165,6 +168,7 @@ public class ProductDaoImpl implements ProductDao {
         params.put("price",product.getPrice());
         params.put("quantity",product.getQuantity());
         params.put("description",product.getDescription());
+        params.put("discount",product.getDiscount());
         int updatedRows = jdbcTemplate.update(updateProduct,params);
         if(updatedRows==0){
             throw new ProductException("Update failed");

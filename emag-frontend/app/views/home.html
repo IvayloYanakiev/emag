@@ -5,8 +5,8 @@
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
                         <img src="{{product.pictureURL}}" class="img-responsive rotprod productPictures">
-                        <span class="tag2 hot">
-							HOT
+                        <span id="hasDiscountContainer" ng-show="hasDiscount(product.discount)" class="tag2 hot">
+							-{{product.discount}}%
 						</span>
                     </div>
                 </div>
@@ -84,6 +84,11 @@
                                                 <div class="form-check">
                                                     <label>Description</label>
                                                     <input ng-model="updateProduct.description" type="text" class="form-control" placeholder="Enter description">
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <label>Discount</label>
+                                                    <input ng-model="updateProduct.discount" type="text" class="form-control" placeholder="Enter discount">
                                                 </div>
 
                                                 <div class="alert alert-danger" role="alert" ng-if="error">

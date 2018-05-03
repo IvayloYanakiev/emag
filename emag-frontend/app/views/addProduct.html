@@ -20,9 +20,10 @@
             </div>
             <div class="form-check">
                 <label>Category</label>
-                <select class="selectpicker form-control" id="selectContainer" ng-model="product.category" >
+                <select class="selectpicker form-control" id="selectContainer" ng-model="product.category">
                     <optgroup ng-repeat="category in categories" label={{category.name}}>
-                        <option  ng-value="inner.id" ng-repeat="inner in category.innerCategories">{{inner.name}}</option>
+                        <option ng-value="inner.id" ng-repeat="inner in category.innerCategories">{{inner.name}}
+                        </option>
                     </optgroup>
                 </select>
             </div>
@@ -39,6 +40,11 @@
             <div class="form-check">
                 <label>Description</label>
                 <input ng-model="product.description" type="text" class="form-control" placeholder="Enter description">
+            </div>
+
+            <div class="form-check">
+                <label>Discount</label>
+                <input ng-model="product.discount" type="number" class="form-control" placeholder="Enter discount">
             </div>
 
             <button type="submit" ng-click="addProduct()" class="btn btn-primary" id="productButton">Submit</button>

@@ -31,7 +31,8 @@ public class ProductController {
             @RequestParam("price") Double price,
             @RequestParam("quantity") Integer quantity,
             @RequestParam("description") String description,
-            @RequestParam("picture") MultipartFile picture) {
+            @RequestParam("picture") MultipartFile picture,
+            @RequestParam("discount") Integer discount) {
         Gson gson = new Gson();
 
         String mimetype = picture.getOriginalFilename().split("\\.")[1];
@@ -40,7 +41,7 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid file type"));
         try {
             File newFile = convertProductPicture(picture);
-            Product product = new Product(name, category, price, quantity, description, newFile.getPath());
+            Product product = new Product(name, category, price, quantity, description, newFile.getPath(), discount);
             productService.addProduct(product);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(Constants.ERROR));
@@ -114,10 +115,11 @@ public class ProductController {
                                         @RequestParam("categoryId") Long category,
                                         @RequestParam("price") Double price,
                                         @RequestParam("quantity") Integer quantity,
-                                        @RequestParam("description") String description) {
+                                        @RequestParam("description") String description,
+                                        @RequestParam("discount") Integer discount) {
         Gson gson = new Gson();
         try {
-            Product product = new Product(id,name, category, price, quantity, description);
+            Product product = new Product(id, name, category, price, quantity, description, discount);
             productService.updateProductById(product);
         } catch (ProductException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
