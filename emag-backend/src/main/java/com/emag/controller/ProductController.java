@@ -122,7 +122,7 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
         String json = gson.toJson(selectedProduct);
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(json));
+        return ResponseEntity.status(HttpStatus.OK).body(json);
     }
 
     @DeleteMapping("/removeProductById")

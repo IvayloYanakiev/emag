@@ -30,7 +30,18 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
         shoppingCart.removeEntry(productId);
 
         getShoppingCart();
+    };
+
+    $scope.getTotal = function() {
+        var total = 0;
+        for(var i = 0; i < $scope.products.length; i++){
+            var product = $scope.products[i];
+            total += (product.price * product.quantity);
+        }
+        return total;
+    };
+
+    $scope.getSubTotal = function (price, quantity) {
+        return price*quantity;
     }
-
-
 });

@@ -32,7 +32,16 @@ span.itemPrice {
     color: #FA5B58;
 }
 
+#productPic{
+    /*height: 300px;*/
+    /*width: 300px;*/
+    margin-left: 22%;
+    margin-top: 5%;
+ }
 
+.text-warning {
+    color: #21c2f8 !important;
+}
 /*----------------------
 ##star Rating Styles
 ----------------------*/

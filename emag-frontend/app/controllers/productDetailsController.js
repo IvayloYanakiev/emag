@@ -8,7 +8,7 @@ app.controller("productDetailsController", function ($scope, $location, $routePa
         method: "GET",
         params:{"id":idProduct}
     }).then(function (response) {
-        $scope.asd = response.data;
+        $scope.product = response.data;
     }, function (error) {
         alert(error);
     });
