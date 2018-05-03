@@ -386,3 +386,29 @@
     width: 50%;
     left:25%;
 }
+
+#editBtn {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+.modal-header {
+    text-align: left;
+}
+
+.close {
+    position: relative;
+    margin-left: auto;
+    color: #d43f3a;
+}
+
+.close:hover {
+    color: #d9534f;
+}
+
+#btnCloseUpdateProduct {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: white;
+}

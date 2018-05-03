@@ -23,6 +23,11 @@
                             <span>${{product.price}}</span>
                         </p>
                         <span class="tag1"></span>
+
+                        <button id="editBtn" ng-click="editProduct(product)" type="button"
+                                class="btn btn-default btn-sm btn btn-light"  data-toggle="modal"
+                                data-target="#myModal"></i> Edit
+                        </button>
                     </div>
                     <div class="description">
                         <p>{{product.description}} </p>
@@ -38,21 +43,16 @@
                                         class="btn btn-default btn-sm btn btn-danger">
                                     <i class="fa fa-close"></i> Remove
                                 </button>
-                                <button ng-click="editProduct(product)" type="button"
-                                        class="btn btn-default btn-sm btn btn-light"  data-toggle="modal"
-                                        data-target="#myModal"></i> Edit
-                                </button>
                             </div>
-
                             <div id="myModal" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
 
                                     <div class="modal-content">
                                         <div class="modal-header">
+                                            <h4 class="modal-title">Update product</h4>
                                             <button type="button" class="close"
-                                                    data-dismiss="modal">&times;
+                                                    data-dismiss="modal">x
                                             </button>
-                                            <h4 class="modal-title">Update product  </h4>
                                         </div>
                                         <div class="modal-body">
                                             <form>
@@ -98,7 +98,7 @@
                                             <button type="button" class="btn btn-success"
                                                     ng-click="updProduct()">Update
                                             </button>
-                                            <button type="button" class="btn btn-default"
+                                            <button id="btnCloseUpdateProduct" type="button" class="btn btn-default"
                                                     data-dismiss="modal">Close
                                             </button>
                                         </div>
