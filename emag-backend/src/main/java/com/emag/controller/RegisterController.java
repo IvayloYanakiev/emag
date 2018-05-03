@@ -31,26 +31,20 @@ public class RegisterController {
 
         try {
             User user = new User(name, password, email);
-            if (validateEmail(user.getEmail())) {
-                if (confirmPassword != null && confirmPassword.trim().length() > 0) {
-                    if (user.getPassword().equals(confirmPassword)) {
-                        userService.registerUser(user);
-                    } else
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.PASSWORDS_NOT_THE_SAME));
+            if (confirmPassword != null && confirmPassword.trim().length() > 0) {
+                if (user.getPassword().equals(confirmPassword)) {
+                    userService.registerUser(user);
                 } else
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.CHECK_YOUR_PASSWORD));
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.PASSWORDS_NOT_THE_SAME));
             } else
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.INVALID_EMAIL));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.CHECK_YOUR_PASSWORD));
+
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
 
-    private boolean validateEmail(String emailStr) {
-        Matcher matcher = Constants.VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.find();
-    }
 
 }
 

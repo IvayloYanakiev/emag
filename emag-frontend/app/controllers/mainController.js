@@ -11,7 +11,7 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
 
     });
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
-
+    $rootScope.isAdmin = sessionService.isHeAdmin();
     $scope.showMenu = function () {
         var dropdownContent = document.getElementById("dropdown_content");
         if (dropdownContent.style.display === "none") {

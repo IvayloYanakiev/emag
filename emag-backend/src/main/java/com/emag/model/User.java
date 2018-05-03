@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import java.util.regex.Matcher;
+
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 @ComponentScan("com.emag")
@@ -85,7 +87,7 @@ public class User {
     }
 
     public void setEmail(String email) throws UserException {
-        if (email != null && email.trim().length() > Constants.MIN_EMAIL_LENGTH) {
+        if (email != null && email.trim().length() > Constants.MIN_EMAIL_LENGTH && validateEmail(email)) {
             this.email = email;
         } else throw new UserException(ConstantsErrorMessages.INVALID_EMAIL);
 
@@ -151,5 +153,9 @@ public class User {
         this.setId(user.getId());
         this.setName(user.getName());
         this.setEmail(user.getEmail());
+    }
+    private boolean validateEmail(String emailStr) {
+        Matcher matcher = Constants.VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
     }
 }

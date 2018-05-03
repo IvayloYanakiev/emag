@@ -1,6 +1,6 @@
 var app = angular.module('emag');
 
-app.controller("homeController", function ($scope, $location, $routeParams, $http, shoppingCart) {
+app.controller("homeController", function ($rootScope,$scope, $location, $routeParams, $http, shoppingCart,sessionService) {
 
     var getProducts = function () {
         $http({
@@ -18,7 +18,7 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
         shoppingCart.addEntry(productId);
     };
 
-
+    $rootScope.isAdmin = sessionService.isHeAdmin();
     $scope.orderByPriceAscending = function () {
         $http({
             url: "http://localhost:7377/product" + "/orderProductsBy",

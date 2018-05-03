@@ -29,7 +29,7 @@
                         </p>
                         <span class="tag1"></span>
 
-                        <button  id="editBtn" ng-click="editProduct(product)" type="button"
+                        <button ng-show="isAdmin && isAuthenticated" id="editBtn" ng-click="editProduct(product)" type="button"
                                 class="btn btn-default btn-sm btn btn-light"  data-toggle="modal"
                                 data-target="#myModal"></i> Edit
                         </button>
@@ -44,7 +44,7 @@
                                         class="btn btn-default btn-sm btn btn-success">
                                     <span class="glyphicon glyphicon-shopping-cart"></span> Add to cart
                                 </button>
-                                <button ng-click="removeProduct(product.id)" type="button"
+                                <button ng-show="isAdmin && isAuthenticated" ng-click="removeProduct(product.id)" type="button"
                                         class="btn btn-default btn-sm btn btn-danger">
                                     <i class="fa fa-close"></i> Remove
                                 </button>

@@ -41,7 +41,7 @@ app.config(function ($routeProvider) {
         })
         .when('/product/:id', {
             templateUrl: 'views/productDetails.html',
-            controller: 'productDetailsController',
+            controller: 'productDetailsController'
         })
         .otherwise('/home');
 
