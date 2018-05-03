@@ -42,7 +42,6 @@ app.config(function ($routeProvider) {
         .when('/product/:id', {
             templateUrl: 'views/productDetails.html',
             controller: 'productDetailsController',
-            css: 'css/productDetails.css'
         })
         .otherwise('/home');
 

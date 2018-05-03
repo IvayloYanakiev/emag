@@ -53,7 +53,7 @@ public class Product {
     }
 
     public void setDiscount(Integer discount) throws ProductException {
-        if(discount != null && discount >= 0) {
+        if(discount != null && discount >= 0 && discount <=100) {
             this.discount = discount;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_DISCOUNT);

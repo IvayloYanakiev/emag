@@ -90,12 +90,4 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
     };
 
 
-    $scope.hasDiscount = function (discountValue) {
-        var discountSpanContainer = document.getElementById("hasDiscountContainer");
-        if(discountValue === 0){
-            discountSpanContainer.style.display = "block";
-        } else {
-            discountSpanContainer.style.display = "none";
-        }
-    }
 });

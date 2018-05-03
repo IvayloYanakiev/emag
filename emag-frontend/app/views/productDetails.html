@@ -3,23 +3,23 @@
         <div class="row">
             <aside class="col-sm-7">
                 <article class="gallery-wrap">
-                    <div><img id="productPic" src="{{currentProduct.pictureURL}}"></div>
+                        <div><img id="productPic" src="{{product.pictureURL}}"></div>
                 </article>
             </aside>
             <aside class="col-sm-5">
                 <article class="card-body p-5">
-                    <h3 class="title mb-3">{{currentProduct.name}}</h3>
+                    <h3 class="title mb-3">{{product.name}}</h3>
                     <p class="price-detail-wrap"><span class="price h3 text-warning">
-                        <span class="currency">$</span><span class="num">{{currentProduct.price}}</span></span>
+                        <span class="currency">$</span><span class="num">{{product.price}}</span></span>
                     </p>
                     <dl class="item-property">
                         <dt>Description</dt>
-                        <dd><p>{{currentProduct.description}}</p></dd>
+                        <dd><p>{{product.description}}</p></dd>
                     </dl>
                     <hr>
                     <div class="row">
                         <div class="col-sm-5">
-                            <dt>Quantity: {{currentProduct.quantity}}</dt>
+                            <dt>Quantity: {{product.quantity}}</dt>
                         </div>
                     </div>
                     <hr>
@@ -29,5 +29,5 @@
             </aside>
         </div>
     </div>
-
+    {{product.price}}
 </div>
