@@ -31,6 +31,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public LinkedHashSet<Product> getProductsFromShoppingCart(String ids) throws ProductException {
+        ids = ids.replace("[", "");
+        ids = ids.replace("]", "");
         String[] idsProducts = ids.split(",");
         HashMap<Long, Integer> products = new HashMap<>(); //how many for given product id
         ArrayList<Long> idsInList = new ArrayList<>();
