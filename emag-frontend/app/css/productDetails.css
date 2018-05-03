@@ -42,13 +42,6 @@
     font-size: 18px;
 }
 
-#btnFav {
-    position: absolute;
-    bottom: 8px;
-    right: 50%;
-    font-size: 18px;
-}
-
 .gallery-wrap {
     height: auto;
 }
@@ -59,4 +52,17 @@ dt {
 
 dd {
     font-size: large;
+}
+
+#filteredProducts li {
+    display: block;
+    position: relative;
+    width: auto;
+    height: 35px;
+    padding-left: 20px;
+    padding-right: 30px;
+    white-space: nowrap;
+    border: 1px solid #0e8ce4;
+    background-color: #f6f6f6;
+    line-height: 30%;
 }

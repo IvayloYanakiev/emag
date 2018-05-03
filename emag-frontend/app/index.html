@@ -83,7 +83,7 @@
 
                                 <div style="position: absolute" ng-keyup="MyController()">
                                     <input class="form-control" size="70" type="search" ng-model="search" placeholder="Search for product..">
-                                    <ul>
+                                    <ul id="filteredProducts">
                                         <li ng-click="goToPage(product.id)" ng-repeat="product in products | filter:search">
                                             {{ product.name }}
                                         </li>
@@ -148,9 +148,9 @@
                                         <img src="https://www.materialui.co/materialIcons/hardware/keyboard_arrow_right_grey_192x192.png"
                                              alt="" width="20"/>
                                         <ul>
-                                            <option ng-click="goTo(inner.id)" ng-repeat="inner in category.innerCategories">
+                                            <li ng-click="goTo(inner.id)" ng-repeat="inner in category.innerCategories">
                                                 {{inner.name}}
-                                            </option>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>

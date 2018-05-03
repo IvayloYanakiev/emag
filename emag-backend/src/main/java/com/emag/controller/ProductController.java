@@ -94,7 +94,7 @@ public class ProductController {
         Gson gson = new Gson();
         Product selectedProduct = productService.getProductById(id);
         String json = gson.toJson(selectedProduct);
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(json));
     }
 
     @DeleteMapping("/removeProductById")
