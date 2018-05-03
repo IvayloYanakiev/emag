@@ -80,6 +80,7 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
                 "discount": $scope.updateProduct.discount
             }
         }).then(function (response) {
+            $('#myModal').modal('hide');
             $location.url("/");
         }, function (error) {
             $scope.error = true;
