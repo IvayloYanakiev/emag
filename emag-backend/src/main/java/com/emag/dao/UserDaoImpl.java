@@ -127,7 +127,7 @@ public class UserDaoImpl implements UserDao {
     }
 
 
-    public void checkDoesGivenUserExists(String email, String password) throws SQLException, UserException {
+    public void checkDoesGivenUserExists(String email, String password) throws UserException {
         String checkForUserRequest = ConstantsSQL.SELECT_USER_BY_EMAIL_AND_PASS;
 
         HashMap<String, Object> userParams = new HashMap<>();

@@ -20,11 +20,13 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
             dropdownContent.style.display = "none";
         }
     };
-    $scope.goTo= function(innerCategoryId){
-            $location.url("/products/"+innerCategoryId);
+    $scope.goTo = function (innerCategoryId) {
+        $location.url("/products/" + innerCategoryId);
+        var dropdownContent = document.getElementById("dropdown_content");
+        dropdownContent.style.display = "none";
     }
 
-    $scope.MyController = function() {
+    $scope.MyController = function () {
         var listOfProducts = document.getElementById("filteredProducts");
         listOfProducts.style.display = "block";
 
@@ -33,16 +35,16 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
             method: "GET"
         }).then(function (response) {
             $scope.products = response.data;
-        },function(error){
+        }, function (error) {
 
         });
     }
 
-    $scope.goToPage = function(productId){
+    $scope.goToPage = function (productId) {
         var listOfFilteredProducts = document.getElementById("filteredProducts");
         listOfFilteredProducts.style.display = "none";
-        $scope.search ="";
+        $scope.search = "";
 
-        $location.url("/product/"+productId);
+        $location.url("/product/" + productId);
     }
 });

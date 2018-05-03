@@ -57,6 +57,7 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
         });
     };
     $scope.goTo = function (productId) {
+
         $location.url("/product/" + productId);
     };
 
@@ -86,7 +87,8 @@ app.controller("homeController", function ($scope, $location, $routeParams, $htt
             $scope.error = true;
             $scope.value = error.data;
         });
-    }
+    };
+
 
     $scope.hasDiscount = function (discountValue) {
         var discountSpanContainer = document.getElementById("hasDiscountContainer");

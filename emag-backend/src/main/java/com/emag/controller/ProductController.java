@@ -37,7 +37,7 @@ public class ProductController {
 
         String mimetype = picture.getOriginalFilename().split("\\.")[1];
         String type = mimetype.split("/")[0];
-        if (!type.equals("jpg") && !type.equals("png"))
+        if (!type.equals("jpg") && !type.equals("png") && !type.equals("jpeg"))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid file type"));
         try {
             File newFile = convertProductPicture(picture);
