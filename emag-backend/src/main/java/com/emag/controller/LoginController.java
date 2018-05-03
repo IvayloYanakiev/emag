@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.sql.SQLException;
 
 
@@ -35,11 +36,9 @@ public class LoginController {
             json = gson.toJson(user);
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
-        } catch (SQLException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
 
-        return new ResponseEntity<>(json,HttpStatus.OK);
+        return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
     @GetMapping("/getUserPageByEmail")
@@ -53,11 +52,9 @@ public class LoginController {
             json = gson.toJson(user);
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
-        } catch (SQLException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
 
-        return new ResponseEntity<>(json,HttpStatus.OK);
+        return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
 
@@ -71,8 +68,6 @@ public class LoginController {
             obj.put("user", user);
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
-        } catch (SQLException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }

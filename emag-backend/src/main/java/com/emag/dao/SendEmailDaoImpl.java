@@ -4,10 +4,12 @@ import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
 import com.emag.exception.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.util.HashMap;
 
 @Repository
@@ -18,14 +20,15 @@ public class SendEmailDaoImpl implements SendEmailDao {
 
 
     @Override
-    public void sendEmail(String email) throws MailException, EmailException {
+    public void sendEmail(String email) throws EmailException {
         String updateSubscribeStatus = ConstantsSQL.UPDATE_USER_SUBSCRIBE_STATUS;
         HashMap<String, Object> params = new HashMap<>();
         params.put("email", email);
-        int rowUpdated = jdbcTemplate.update(updateSubscribeStatus, params);
-
-        if (rowUpdated == 0) {
+        try {
+            jdbcTemplate.update(updateSubscribeStatus, params);
+        } catch (DataAccessException e) {
             throw new EmailException(ConstantsErrorMessages.NO_SUCH_EMAIL);
         }
+
     }
 }

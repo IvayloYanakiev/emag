@@ -35,7 +35,7 @@ app.controller("innerCategoryProducts", function ($scope, $location, $routeParam
                 "description": $scope.updateProduct.description
             }
         }).then(function (response) {
-            $('#myModal').modal('hide');
+
             $location.url("/");
         }, function (error) {
             $scope.error = true;

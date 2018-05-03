@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface SendEmailService {
-    void sendEmail(String email) throws MailException, EmailException;
+    void sendEmail(String email) throws EmailException;
 }

@@ -21,8 +21,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public LinkedHashSet<Address> getAllAddresses(Long userId) {
-       return addressDao.getAllAddresses(userId);
+    public LinkedHashSet<Address> getAllAddresses(Long userId) throws AddressException {
+        return addressDao.getAllAddresses(userId);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address getAddress(Long addressId) {
+    public Address getAddress(Long addressId) throws AddressException {
         return addressDao.getAddress(addressId);
     }
 

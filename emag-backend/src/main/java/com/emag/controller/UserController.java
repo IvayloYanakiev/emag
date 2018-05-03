@@ -43,8 +43,6 @@ public class UserController {
             json = gson.toJson(user);
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
-        } catch (SQLException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.ACCOUNT_PROBLEM));
         }
 
         return new ResponseEntity<>(json, HttpStatus.OK);

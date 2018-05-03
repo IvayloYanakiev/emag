@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.LinkedHashSet;
 
 @RequestMapping("/address")
@@ -38,23 +39,28 @@ public class AddressController {
 
     @GetMapping("/getAllAddresses")
     public ResponseEntity getAllAddresses(@RequestParam("userId") Long id) {
-
-        LinkedHashSet<Address> addresses = addressService.getAllAddresses(id);
         Gson gson = new Gson();
+        LinkedHashSet<Address> addresses = null;
+        try {
+            addresses = addressService.getAllAddresses(id);
+        } catch (AddressException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+
         String json = gson.toJson(addresses);
         return ResponseEntity.ok(json);
     }
 
     @PutMapping("/updateAddress")
-    public ResponseEntity updateAddress( @RequestParam("addressId") Long addressId,
-                                         @RequestParam("receiverName") String receiverName,
-                                         @RequestParam("receiverPhone") String receiverPhone,
-                                         @RequestParam("city") String city,
-                                         @RequestParam("street") String street,
-                                         @RequestParam("floor") Integer floor) {
+    public ResponseEntity updateAddress(@RequestParam("addressId") Long addressId,
+                                        @RequestParam("receiverName") String receiverName,
+                                        @RequestParam("receiverPhone") String receiverPhone,
+                                        @RequestParam("city") String city,
+                                        @RequestParam("street") String street,
+                                        @RequestParam("floor") Integer floor) {
         Gson gson = new Gson();
         try {
-            Address address = new Address(addressId,receiverName,receiverPhone,city,street,floor);
+            Address address = new Address(addressId, receiverName, receiverPhone, city, street, floor);
             addressService.updateAddress(address);
         } catch (AddressException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
@@ -63,15 +69,21 @@ public class AddressController {
     }
 
     @GetMapping("/getAddress")
-    public ResponseEntity getAddress( @RequestParam("addressId") Long addressId) {
-        Address address = addressService.getAddress(addressId);
+    public ResponseEntity getAddress(@RequestParam("addressId") Long addressId) {
         Gson gson = new Gson();
+        Address address = null;
+        try {
+            address = addressService.getAddress(addressId);
+        } catch (AddressException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
         String json = gson.toJson(address);
-        return new ResponseEntity<>(json,HttpStatus.OK);
+
+        return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteAddress")
-    public ResponseEntity deleteAddress( @RequestParam("addressId") Long addressId) {
+    public ResponseEntity deleteAddress(@RequestParam("addressId") Long addressId) {
 
         Gson gson = new Gson();
         try {
