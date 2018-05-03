@@ -1,35 +1,78 @@
-<div class="container" ng-controller="productDetailsController">
-    <div class="card">
-        <div class="row">
-            <aside class="col-sm-7">
-                <article class="gallery-wrap">
-                        <div><img id="productPic" src="{{product.pictureURL}}"></div>
-                </article>
-            </aside>
-            <aside class="col-sm-5">
-                <article class="card-body p-5">
-                    <h3 class="title mb-3">{{product.name}}</h3>
-                    <p class="price-detail-wrap"><span class="price h3 text-warning">
-                        <span class="currency">$</span><span class="num">{{product.price}}</span></span>
-                    </p>
-                    <dl class="item-property">
-                        <dt>Description</dt>
-                        <dd><p>{{product.description}}</p></dd>
-                    </dl>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <dt>Quantity: {{product.quantity}}</dt>
+<!--<div class="container" ng-controller="productDetailsController">-->
+    <!--<div class="card">-->
+        <!--<div class="row">-->
+            <!--<aside class="col-sm-7">-->
+                <!--<article class="gallery-wrap">-->
+                        <!--<div><img id="productPic" src="{{product.pictureURL}}"></div>-->
+                <!--</article>-->
+            <!--</aside>-->
+            <!--<aside class="col-sm-5">-->
+                <!--<article class="card-body p-5">-->
+                    <!--<h3 class="title mb-3">{{product.name}}</h3>-->
+                    <!--<p class="price-detail-wrap"><span class="price h3 text-warning">-->
+                        <!--<span class="currency">$</span><span class="num">{{product.price}}</span></span>-->
+                    <!--</p>-->
+                    <!--<dl class="item-property">-->
+                        <!--<dt>Description</dt>-->
+                        <!--<dd><p>{{product.description}}</p></dd>-->
+                    <!--</dl>-->
+                    <!--<hr>-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-sm-5">-->
+                            <!--<dt>Quantity: {{product.quantity}}</dt>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<hr>-->
+                    <!--<a id="btnAdd" class="btn btn-lg btn-outline-primary text-uppercase">-->
+                        <!--<img id="cart_icon" src="" alt="" width="22">Add to cart </a>-->
+                <!--</article>-->
+            <!--</aside>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--{{product.price}}-->
+<!--</div>-->
+
+
+
+============================
+
+<!------ Include the above in your HEAD tag ---------->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default  panel--styled">
+                <div class="panel-body">
+                    <div class="col-md-12 panelTop">
+                        <div class="col-md-4">
+                            <img class="img-responsive" src="http://placehold.it/350x350" alt=""/>
+                        </div>
+                        <div class="col-md-8">
+                            <h2>{{asd.name}}</h2>
+                            <p>Lorem ipsum dolor sit amet, altera propriae iudicabit eos ne. Vel ut accusam tacimates, prima oratio ius ea. Et duo alii verterem principes, te quo putent melius fabulas, ei scripta eligendi appareat duo.</p>
                         </div>
                     </div>
-                    <hr>
-                    <a id="btnAdd" class="btn btn-lg btn-outline-primary text-uppercase">
-                        <img id="cart_icon" src="" alt="" width="22">Add to cart </a>
-                </article>
-            </aside>
+
+                    <div class="col-md-12 panelBottom">
+                        <div class="col-md-4 text-center">
+                            <button class="btn btn-lg btn-add-to-cart"><span class="glyphicon glyphicon-shopping-cart"></span>   Add to Cart</button>
+                        </div>
+                        <div class="col-md-4 text-left">
+                            <h5>Price <span class="itemPrice">$24.99</span></h5>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stars">
+                                <div id="stars" class="starrr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    {{product.price}}
 </div>
+
+<script src="../controllers/productDetailsController.js"></script>
 
 

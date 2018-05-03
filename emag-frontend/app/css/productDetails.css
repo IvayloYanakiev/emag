@@ -1,68 +1,62 @@
-.gallery-wrap img {
-    height: 80%;
-    width: 80%;
+/*----------------------
+Product Card Styles
+----------------------*/
+.panel.panel--styled {
+    background: #F4F2F3;
+}
+.panelTop {
+    padding: 30px;
+}
+
+.panelBottom {
+    border-top: 1px solid #e7e7e7;
+    padding-top: 20px;
+}
+.btn-add-to-cart {
+    background: #FD5A5B;
+    color: #fff;
+}
+.btn.btn-add-to-cart.focus, .btn.btn-add-to-cart:focus, .btn.btn-add-to-cart:hover  {
+    color: #fff;
+    background: #FD7172;
+    outline: none;
+}
+.btn-add-to-cart:active {
+    background: #F9494B;
+    outline: none;
+}
+
+
+span.itemPrice {
+    font-size: 24px;
+    color: #FA5B58;
+}
+
+
+/*----------------------
+##star Rating Styles
+----------------------*/
+.stars {
+    padding-top: 10px;
+    width: 100%;
     display: inline-block;
 }
-
-.gallery-wrap .item-gallery {
-    width: 60px;
-    height: 20px;
-    border: 1px solid #ddd;
-    margin: 7px 2px;
-    display: inline-block;
+span.glyphicon {
+    padding: 5px;
 }
-
-.gallery-wrap {
-    text-align: center;
+.glyphicon-star-empty {
+    color: #9d9d9d;
 }
-
-.card {
-    height: 500px;
-    border: 1px solid grey;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    background: #fff;
-    padding: 6px;
-    -webkit-box-shadow: 0 1px 4px 0 grey;
-    box-shadow: 0 1px 1px 0 grey;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-#productPic {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border: 1px solid grey;
-    padding-top: 0px;
-    height: 480px;
-}
-
-#btnAdd {
-    position: absolute;
-    bottom: 8px;
-    right: 10%;
+.glyphicon-star-empty, .glyphicon-star {
     font-size: 18px;
 }
-
-.gallery-wrap {
-    height: auto;
+.glyphicon-star {
+    color: #FD4;
+    transition: all .25s;
+}
+.glyphicon-star:hover {
+    transform: rotate(-15deg) scale(1.3);
 }
 
-dt {
-    font-size: larger;
-}
 
-dd {
-    font-size: large;
-}
 
-#filteredProducts li {
-    display: block;
-    position: relative;
-    width: auto;
-    height: 35px;
-    padding-left: 20px;
-    padding-right: 30px;
-    white-space: nowrap;
-    border: 1px solid #0e8ce4;
-    background-color: #f6f6f6;
-    line-height: 30%;
-}
