@@ -70,4 +70,9 @@ public class ProductServiceImpl implements ProductService {
     public void updateProductById(Product product) throws ProductException {
         productDao.updateProduct(product);
     }
+
+    @Override
+    public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) {
+        return  productDao.getAllProductsOrderedByPrice(orderBy);
+    }
 }

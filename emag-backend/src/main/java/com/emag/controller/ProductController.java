@@ -90,6 +90,13 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
+    @GetMapping("/orderProductsBy")
+    public ResponseEntity orderProductsBy(@RequestParam("by") String orderBy){
+        Gson gson = new Gson();
+        LinkedHashSet<Product> products = productService.getAllProductsOrderedByPrice(orderBy);
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
+    }
+
     @GetMapping("/getProductById")
     public ResponseEntity getProductById(@RequestParam("id") Long id) {
         Gson gson = new Gson();

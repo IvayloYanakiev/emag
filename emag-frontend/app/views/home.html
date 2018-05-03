@@ -1,4 +1,9 @@
 <div class="container" ng-controller="homeController">
+<div>
+    <button class="btn btn-default" ng-click="orderByPriceAscending()"> ascending order</button>
+    <button class="btn btn-default" ng-click="orderByPriceDescending()"> descending order</button>
+</div>
+
     <div ng-repeat="product in products" class="col-xs-12 col-md-6">
         <div class="prod-info-main prod-wrap clearfix">
             <div class="row">
@@ -30,7 +35,7 @@
                         </button>
                     </div>
                     <div class="description">
-                        <p>{{product.description}} </p>
+                        <p id="descriptionProduct">{{product.description}} </p>
                     </div>
                     <div class="product-info smart-form">
                         <div class="row">
