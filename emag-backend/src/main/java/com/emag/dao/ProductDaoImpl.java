@@ -2,7 +2,9 @@ package com.emag.dao;
 
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
+import com.emag.exception.CommentException;
 import com.emag.exception.ProductException;
+import com.emag.model.Comment;
 import com.emag.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -116,20 +118,18 @@ public class ProductDaoImpl implements ProductDao {
                 @Override
                 public Product extractData(ResultSet rs) throws SQLException {
                     Product selectedProduct = new Product();
-
                     while (rs.next()) {
                         try {
-                            selectedProduct.setId(rs.getLong("id"));
-                            selectedProduct.setName(rs.getString("name"));
-                            String pictureUrl = rs.getString("picture_url");
-                            selectedProduct.setPrice(rs.getDouble("price"));
-                            selectedProduct.setQuantity(rs.getInt("quantity"));
-                            selectedProduct.setDescription(rs.getString("description"));
-                            selectedProduct.setDiscount(rs.getInt("discount"));
-                            int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
-                            String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
-                            selectedProduct.setPictureURL(newlocation);
-                        } catch (ProductException e) {
+                            Long commentId = rs.getLong("comment_id");
+                            if (commentId != 0) {
+                                if (selectedProduct.getCommentsSize() == 0) {
+                                    setProductProperties(rs, selectedProduct);
+                                }
+                                selectedProduct.addComment(new Comment(commentId,rs.getLong("user_id"),rs.getLong("product_id"), rs.getString("uname"),rs.getString("value"),rs.getInt("stars")));
+                            } else {
+                                setProductProperties(rs, selectedProduct);
+                            }
+                        } catch (ProductException | CommentException e) {
                             throw new SQLException(e.getMessage());
                         }
                     }
@@ -140,6 +140,20 @@ public class ProductDaoImpl implements ProductDao {
             throw new ProductException(e.getMessage(), e);
         }
         return productById;
+    }
+
+    private void setProductProperties(ResultSet rs, Product selectedProduct) throws ProductException, SQLException {
+        selectedProduct.setId(rs.getLong("product_id"));
+        selectedProduct.setName(rs.getString("name"));
+        String pictureUrl = rs.getString("picture_url");
+        selectedProduct.setPrice(rs.getDouble("price"));
+        selectedProduct.setQuantity(rs.getInt("quantity"));
+        selectedProduct.setDescription(rs.getString("description"));
+        selectedProduct.setDiscount(rs.getInt("discount"));
+
+        int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
+        String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
+        selectedProduct.setPictureURL(newlocation);
     }
 
     public void deleteProductById(Long productId) throws ProductException {

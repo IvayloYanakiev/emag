@@ -4,6 +4,10 @@ import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.ProductException;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+
 public class Product {
 
     private Long id;
@@ -14,8 +18,26 @@ public class Product {
     private Integer quantity;
     private String description;
     private Integer discount;
+    private Collection<Comment> comments;
 
     public Product(){
+        comments= new LinkedHashSet<>();
+    }
+
+    public void addComment(Comment comment){
+        if(comment!=null){
+            comments.add(comment);
+        }
+    }
+
+    public Collection<Comment> getComments() {
+        return Collections.unmodifiableCollection(comments);
+    }
+    public int getCommentsSize(){
+        if(comments!=null){
+            return this.comments.size();
+        }
+       return 0;
     }
 
     public Product(Long id, String name, String pictureURL, Double price, Long innerCategoryId, Integer quantity, String description, Integer discount) throws ProductException {
@@ -27,6 +49,7 @@ public class Product {
         setDescription(description);
         setPictureURL(pictureURL);
         setDiscount(discount);
+        comments= new LinkedHashSet<>();
     }
 
     public Product(String name, Long innerCategoryId, Double price, Integer quantity,String description, String pictureURL, Integer discount) throws ProductException {
@@ -37,6 +60,7 @@ public class Product {
         setDescription(description);
         setPictureURL(pictureURL);
         setDiscount(discount);
+        comments= new LinkedHashSet<>();
     }
 
     public Product(Long id, String name, Long category, Double price, Integer quantity, String description, Integer discount) throws ProductException {
@@ -47,6 +71,7 @@ public class Product {
         setQuantity(quantity);
         setDescription(description);
         setDiscount(discount);
+        comments= new LinkedHashSet<>();
     }
 
     public Integer getDiscount() {

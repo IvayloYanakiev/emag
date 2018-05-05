@@ -23,6 +23,10 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
         }
         else $scope.products=[];
     };
+    $scope.goTo = function (productId) {
+
+        $location.url("/product/" + productId);
+    };
 
     getShoppingCart();
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
