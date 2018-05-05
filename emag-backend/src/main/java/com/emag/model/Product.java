@@ -1,5 +1,6 @@
 package com.emag.model;
 
+import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.ProductException;
 
@@ -53,7 +54,7 @@ public class Product {
     }
 
     public void setDiscount(Integer discount) throws ProductException {
-        if(discount != null && discount >= 0 && discount <=100) {
+        if(discount != null && discount >= 0 && discount <= Constants.MAX_DISCOUNT_VALUE) {
             this.discount = discount;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_DISCOUNT);
@@ -65,7 +66,7 @@ public class Product {
     }
 
     public void setDescription(String description) throws ProductException {
-        if (description != null && description.trim().length() > 0) {
+        if (description != null && description.trim().length() > 0 && description.trim().length() <= Constants.MAX_PRODUCT_DESCRIPTION_LENGTH) {
             this.description = description;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_DESCRIPTION);
@@ -89,7 +90,7 @@ public class Product {
     }
 
     public void setName(String name) throws ProductException {
-        if (name != null && name.trim().length() > 0) {
+        if (name != null && name.trim().length() > 0 && name.trim().length() <= Constants.MAX_PRODUCT_NAME_LENGTH) {
             this.name = name;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_NAME);
@@ -101,7 +102,7 @@ public class Product {
     }
 
     public void setPictureURL(String pictureURL) throws ProductException {
-        if (pictureURL != null && pictureURL.trim().length() > 0) {
+        if (pictureURL != null && pictureURL.trim().length() > 0 && pictureURL.trim().length() <= Constants.MAX_PRODUCT_PICTURE_URL_LENGTH) {
             this.pictureURL = pictureURL;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_PICTURE_URL);

@@ -1,6 +1,7 @@
 package com.emag.model;
 
 
+import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.CategoryException;
 
@@ -18,7 +19,7 @@ public class Category {
     }
 
     public void setName(String name) throws CategoryException {
-        if (name != null && name.trim().length() > 0) {
+        if (name != null && name.trim().length() > 0 && name.trim().length() <= Constants.MAX_CATEGORY_NAME_LENGTH) {
             this.name = name;
         } else throw new CategoryException(ConstantsErrorMessages.INVALID_CATEGORY_NAME);
     }
@@ -27,8 +28,13 @@ public class Category {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long id) throws CategoryException {
+        if(id != null && id > -1){
+            this.id = id;
+        } else {
+            throw new CategoryException(ConstantsErrorMessages.INVALID_CATEGORY_ID);
+        }
+
     }
 
     public String getName() {

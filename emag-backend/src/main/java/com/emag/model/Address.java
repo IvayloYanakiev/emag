@@ -38,7 +38,7 @@ public class Address {
 
     public void setCity(String city) throws AddressException {
 
-       if(city!=null && city.trim().length() >= Constants.MIN_CITY_NAME_LENGTH){
+       if(city!=null && city.trim().length() >= Constants.MIN_CITY_NAME_LENGTH && city.trim().length() <= Constants.MAX_CITY_NAME_LENGTH){
            this.city=city;
        }
        else throw new AddressException(ConstantsErrorMessages.INVALID_CITY_NAME);
@@ -61,7 +61,7 @@ public class Address {
     }
 
     public void setReceiverName(String receiverName) throws AddressException {
-        if (receiverName != null && receiverName.trim().length() > 0) {
+        if (receiverName != null && receiverName.trim().length() > 0 && receiverName.trim().length() <= Constants.MAX_RECEIVER_NAME_LENGTH) {
             this.receiverName = receiverName;
         } else {
             throw new AddressException(ConstantsErrorMessages.INVALID_RECEIVER_NAME);
@@ -85,7 +85,7 @@ public class Address {
     }
 
     public void setStreet(String street) throws AddressException {
-        if (street != null && street.trim().length() > 0) {
+        if (street != null && street.trim().length() > 0 && street.trim().length() <= Constants.MAX_STREET_INFO_LENGTH) {
             this.street = street;
         } else {
             throw new AddressException(ConstantsErrorMessages.INVALID_STREET_VALUE);
@@ -97,7 +97,7 @@ public class Address {
     }
 
     public void setFloor(Integer floor) throws AddressException {
-        if (floor != null && floor >= 0) {
+        if (floor != null && floor >= 0 ) {
             this.floor = floor;
         } else {
             throw new AddressException(ConstantsErrorMessages.INVALID_FLOOR_VALUE);

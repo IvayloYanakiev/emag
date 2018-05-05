@@ -6,7 +6,7 @@ app.controller("subscribeController", function ($rootScope, $scope, $location, $
         $scope.subscribe = function () {
 
             $http({
-                url: "http://localhost:7377/subscribe" + "/subscribeUser",
+                url: "http://localhost:7377/sendEmail" + "/subscribeUser",
                 method: "PUT",
                 params: {
                     "email": $scope.user.email
