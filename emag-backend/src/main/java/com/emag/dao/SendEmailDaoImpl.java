@@ -3,13 +3,18 @@ package com.emag.dao;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
 import com.emag.exception.EmailException;
+import com.emag.exception.UserException;
+import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Repository;
 
 import javax.xml.crypto.Data;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 @Repository
@@ -29,6 +34,6 @@ public class SendEmailDaoImpl implements SendEmailDao {
         } catch (DataAccessException e) {
             throw new EmailException(ConstantsErrorMessages.NO_SUCH_EMAIL);
         }
-
     }
+
 }

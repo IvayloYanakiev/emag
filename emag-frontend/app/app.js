@@ -43,6 +43,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/productDetails.html',
             controller: 'productDetailsController'
         })
+        .when('/checkoutShoppingCart', {
+            templateUrl: 'views/checkoutShoppingCart.html',
+            controller: 'checkoutShoppingCartController',
+        })
         .otherwise('/home');
 
 

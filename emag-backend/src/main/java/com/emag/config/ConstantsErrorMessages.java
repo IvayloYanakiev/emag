@@ -1,7 +1,6 @@
 package com.emag.config;
 
 public class ConstantsErrorMessages {
-    public static final String ACCOUNT_PROBLEM = "There's a problem with your account";
     public static final String INVALID_EMAIL = "Invalid email";
     public static final String INVALID_PASSWORD = "Invalid password length";
     public static final String INVALID_TYPE = "Invalid type";
@@ -25,6 +24,7 @@ public class ConstantsErrorMessages {
     public static final String ERROR_DELETING_ADDRESS = "Error deleting address";
     public static final String ERROR_UPDATING_USER = "Error updating user";
     public static final String INVALID_CATEGORY_NAME = "Invalid category name";
+    public static final String INVALID_CATEGORY_ID = "Invalid category id";
     public static final String INVALID_INNER_CATEGORY = "Inner category doesn't exists";
     public static final String INVALID_PRODUCT_ID = "Invalid product id";
     public static final String INVALID_PRODUCT_NAME = "Invalid product name";
@@ -35,4 +35,6 @@ public class ConstantsErrorMessages {
     public static final String NO_SUCH_EMAIL = "The email doesn't exists";
     public static final String INVALID_INNER_CATEGORY_ID = "Invalid inner category id";
     public static final String INVALID_PRODUCT_DISCOUNT = "Invalid product discount";
+    public static final String UNSUCCESSFUL_PRODUCT_DELETING = "Deleting product unsuccessful";
+    public static final String UNSUCCESSFUL_PRODUCT_UPDATING = "Updating product unsuccessful";
 }

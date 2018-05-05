@@ -13,6 +13,10 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
                 params:{"products":entries}
             }).then(function (response) {
                 $scope.products = response.data;
+                if(products.length ===0){
+                    var element = document.getElementById("checkoutBtn");
+                    element.style.display = "none";
+                }
             }, function (error) {
 
             });
@@ -34,6 +38,9 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
 
     $scope.getTotal = function() {
         var total = 0;
+        if($scope.products.length === 0){
+            return 0;
+        }
         for(var i = 0; i < $scope.products.length; i++){
             var product = $scope.products[i];
             if(product.discount===0) total += (product.price * product.quantity);
@@ -47,4 +54,5 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
         if(discount===0) return price*quantity;
         else return (price - discount/100*price)*quantity;
     }
+
 });

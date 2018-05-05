@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/subscribe")
+        @RequestMapping("/sendEmail")
 public class SendEmailController {
 
     @Autowired
@@ -25,4 +25,5 @@ public class SendEmailController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
+
 }

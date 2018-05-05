@@ -65,7 +65,7 @@ public class User {
     }
 
     public void setName(String name) throws UserException {
-        if (name != null && name.trim().length() > 0) {
+        if (name != null && name.trim().length() > 0 && name.trim().length() <= Constants.MAX_USER_NAME_LENGTH) {
             this.name = name;
         } else throw new UserException(ConstantsErrorMessages.INVALID_NAME);
     }
@@ -75,7 +75,7 @@ public class User {
     }
 
     public void setPassword(String password) throws UserException {
-        if (password != null && password.trim().length() > Constants.MIN_PASSWORD_LENGTH) {
+        if (password != null && password.trim().length() > Constants.MIN_PASSWORD_LENGTH && password.trim().length() <= Constants.MAX_USER_PASSWORD_LENGTH) {
             this.password = password;
         } else {
             throw new UserException(ConstantsErrorMessages.INVALID_PASSWORD);
@@ -87,7 +87,8 @@ public class User {
     }
 
     public void setEmail(String email) throws UserException {
-        if (email != null && email.trim().length() > Constants.MIN_EMAIL_LENGTH && validateEmail(email)) {
+        if (email != null && email.trim().length() > Constants.MIN_EMAIL_LENGTH &&
+                email.trim().length() <= Constants.MAX_EMAIL_LENGTH && validateEmail(email)) {
             this.email = email;
         } else throw new UserException(ConstantsErrorMessages.INVALID_EMAIL);
 
@@ -106,7 +107,7 @@ public class User {
     }
 
     public void setPictureUrl(String pictureUrl) throws UserException {
-        if (pictureUrl != null && pictureUrl.trim().length() > 0)
+        if (pictureUrl != null && pictureUrl.trim().length() > 0 && pictureUrl.trim().length() <= Constants.MAX_USER_PROFILE_PICTURE_URL_LENGTH)
             this.pictureUrl = pictureUrl;
         else throw new UserException(ConstantsErrorMessages.INVALID_PICTURE_URL);
     }
@@ -116,7 +117,7 @@ public class User {
     }
 
     public void setGender(String gender) throws UserException {
-        if (gender != null && gender.trim().length() > 0)
+        if (gender != null && gender.trim().length() > 0 && gender.trim().length() <= Constants.MAX_USER_GENDER_VALUE_LENGTH)
             this.gender = gender;
         else throw new UserException(ConstantsErrorMessages.INVALID_GENDER);
     }

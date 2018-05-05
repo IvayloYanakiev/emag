@@ -1,5 +1,6 @@
 package com.emag.dao;
 
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
 import com.emag.exception.ProductException;
 import com.emag.model.Product;
@@ -40,7 +41,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) throws ProductException {
-        String getProducts = "select * from products where middle_type_id=:id;";
+        String getProducts = ConstantsSQL.GET_ALL_PRODUCTS_BY_INNER_CATEGORY_ID;
         HashMap<String, Object> params = new HashMap<>();
         params.put("id", id);
         LinkedHashSet<Product> products = getProducts(getProducts, params);
@@ -69,7 +70,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException {
-        String productsInCart = "select * from products where id in (:ids)";
+        String productsInCart = ConstantsSQL.GET_PRODUCTS_BY_ID_INTERVAL;
         HashMap<String, Object> params = new HashMap<>();
         params.put("ids", ids);
 
@@ -98,7 +99,7 @@ public class ProductDaoImpl implements ProductDao {
 
 
     public LinkedHashSet<Product> getAllProducts() throws ProductException {
-        String getProducts = "select * from products;";
+        String getProducts = ConstantsSQL.GET_ALL_PRODUCTS;
         LinkedHashSet<Product> products = getProducts(getProducts);
 
         return products;
@@ -142,20 +143,19 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     public void deleteProductById(Long productId) throws ProductException {
-        String getProductById = "delete from products where id=:productId";
+        String deleteProductById = ConstantsSQL.DELETE_PRODUCT_BY_ID;
         HashMap<String, Object> params = new HashMap<>();
         params.put("productId", productId);
         try {
-            jdbcTemplate.update(getProductById, params);
+            jdbcTemplate.update(deleteProductById, params);
         } catch (DataAccessException e) {
-            throw new ProductException("Deleting product unsuccessful", e);
+            throw new ProductException(ConstantsErrorMessages.UNSUCCESSFUL_PRODUCT_DELETING, e);
         }
-
     }
 
     @Override
     public void updateProduct(Product product) throws ProductException {
-        String updateProduct = "update products set name=:name,middle_type_id=:categoryId,price=:price,quantity=:quantity,description=:description, discount=:discount where id =:id ";
+        String updateProduct = ConstantsSQL.UPDATE_PRODUCT_BY_ID;
         HashMap<String, Object> params = new HashMap<>();
         params.put("id", product.getId());
         params.put("name", product.getName());
@@ -167,13 +167,13 @@ public class ProductDaoImpl implements ProductDao {
         try {
             jdbcTemplate.update(updateProduct, params);
         } catch (DataAccessException e) {
-            throw new ProductException("Update failed", e);
+            throw new ProductException(ConstantsErrorMessages.UNSUCCESSFUL_PRODUCT_UPDATING, e);
         }
     }
 
     @Override
     public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) throws ProductException {
-        String getProducts = "select * from products order by price";
+        String getProducts = ConstantsSQL.ORDER_PRODUCTS_BY_PRICE;
         if (orderBy.equals("asc")) {
             getProducts += " asc";
         } else {
