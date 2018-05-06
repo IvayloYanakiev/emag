@@ -64,7 +64,7 @@ public class ProductController {
     }
 
     private File convertProductPicture(MultipartFile file) throws IOException {
-        File convFile = new File("D:\\emagPictures\\productPictures\\" + file.getOriginalFilename());
+        File convFile = new File("D:\\emagPictures\\w\\" + file.getOriginalFilename());
         convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(file.getBytes());
@@ -99,6 +99,9 @@ public class ProductController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
+
+
+
 
     @GetMapping("/orderProductsBy")
     public ResponseEntity orderProductsBy(@RequestParam("by") String orderBy) {

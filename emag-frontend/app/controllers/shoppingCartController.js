@@ -23,6 +23,10 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
         }
         else $scope.products=[];
     };
+    $scope.goTo = function (productId) {
+
+        $location.url("/product/" + productId);
+    };
 
     getShoppingCart();
     $rootScope.isAuthenticated = sessionService.isLoggedIn();
@@ -43,13 +47,16 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
         }
         for(var i = 0; i < $scope.products.length; i++){
             var product = $scope.products[i];
-            total += (product.price * product.quantity);
+            if(product.discount===0) total += (product.price * product.quantity);
+            else  total= (product.price - product.discount/100*product.price)*product.quantity;
         }
         return total;
     };
 
-    $scope.getSubTotal = function (price, quantity) {
-        return price*quantity;
+    $scope.getSubTotal = function (price, quantity,discount) {
+
+        if(discount===0) return price*quantity;
+        else return (price - discount/100*price)*quantity;
     }
 
 });

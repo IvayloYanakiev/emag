@@ -15,7 +15,7 @@ public class ConstantsSQL {
     public static final String UPDATE_USER_PERSONAL_INFO = "update users set name=:name,email=:email,phone=:phone,gender=:gender where id=:id";
     public static final String UPDATE_USER_PERSONAL_PICTURE = "update users set profile_url=:profile_url where id=:userId";
     public static final String UPDATE_USER_SUBSCRIBE_STATUS = "update users set isSubscribed=1 where email=:email";
-    public static final String GET_PRODUCT_BY_ID = "select * from products where id=:id";
+    public static final String GET_PRODUCT_BY_ID = "select p.id as product_id,p.name,p.picture_url,p.price,p.quantity,p.discount,p.description,c.id as  comment_id,c.user_id,c.value,u.name as uname,c.stars from products p left join comments c on p.id = c.product_id  left join users u on c.user_id=u.id where p.id=:id order by c.id ;";
     public static final String GET_ALL_PRODUCTS = "select * from products";
     public static final String GET_ALL_PRODUCTS_BY_INNER_CATEGORY_ID = "select * from products where middle_type_id=:id";
     public static final String DELETE_PRODUCT_BY_ID = "delete from products where id=:productId";
