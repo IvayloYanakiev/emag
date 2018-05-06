@@ -1,4 +1,4 @@
-var app = angular.module('emag', ['ngRoute']);
+var app = angular.module('emag', ['angularUtils.directives.dirPagination','ngRoute']);
 
 app.config(function ($routeProvider) {
 

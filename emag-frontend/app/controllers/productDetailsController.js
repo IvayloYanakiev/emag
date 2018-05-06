@@ -15,19 +15,24 @@ app.controller("productDetailsController", function ($scope, $location, $routePa
                 "stars": $scope.comment.stars
             }
         }).then(function (response) {
+
             $scope.product.comments = response.data;
             $scope.comment.value = "";
+
         }, function (error) {
 
         });
     };
-    $scope.iterateStars= function (stars) {
+
+
+    $scope.iterateStars = function (stars) {
         var html = '';
-        for (i = 0; i < stars; i++){
+        for (i = 0; i < stars; i++) {
             html += '<i class="text-warning fa fa-star"></i>';
         }
         $('#float-right').html(html);
     };
+
 
     var getProductById = function () {
         $http({
@@ -131,5 +136,6 @@ app.controller("productDetailsController", function ($scope, $location, $routePa
         });
 
     });
-});
 
+
+});

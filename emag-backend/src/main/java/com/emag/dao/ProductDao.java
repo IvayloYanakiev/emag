@@ -16,5 +16,11 @@ public interface ProductDao {
 
     void updateProduct(Product product) throws ProductException;
 
-    LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) throws ProductException;
+    LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderIn) throws ProductException;
+
+    LinkedHashSet<Product> getAllProductsOrderedByDiscount(String orderIn) throws ProductException;
+
+    LinkedHashSet<Product> getAllProductsOrderedByName(String orderIn) throws ProductException;
+
+    LinkedHashSet<Product> getProductsBetweenTwoPrices(Integer from, Integer to) throws ProductException;
 }

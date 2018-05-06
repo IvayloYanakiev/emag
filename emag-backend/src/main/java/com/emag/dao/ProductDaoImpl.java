@@ -186,15 +186,44 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) throws ProductException {
+    public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderIn) throws ProductException {
         String getProducts = ConstantsSQL.ORDER_PRODUCTS_BY_PRICE;
-        if (orderBy.equals("asc")) {
+        if (orderIn.equals("asc")) {
             getProducts += " asc";
         } else {
             getProducts += " desc";
         }
         LinkedHashSet<Product> products = getProducts(getProducts);
         return products;
+    }
+
+    @Override
+    public LinkedHashSet<Product> getAllProductsOrderedByDiscount(String orderIn) throws ProductException {
+        String getProducts = ConstantsSQL.ORDER_PRODUCTS_BY_DISCOUNT;
+        if (orderIn.equals("asc")) {
+            getProducts += " asc";
+        } else {
+            getProducts += " desc";
+        }
+        LinkedHashSet<Product> products = getProducts(getProducts);
+        return products;
+    }
+
+    @Override
+    public LinkedHashSet<Product> getAllProductsOrderedByName(String orderIn) throws ProductException {
+        String getProducts = ConstantsSQL.ORDER_PRODUCTS_BY_NAME;
+        if (orderIn.equals("asc")) {
+            getProducts += " asc";
+        } else {
+            getProducts += " desc";
+        }
+        LinkedHashSet<Product> products = getProducts(getProducts);
+        return products;
+    }
+
+    @Override
+    public LinkedHashSet<Product> getProductsBetweenTwoPrices(Integer from, Integer to) throws ProductException {
+        return null;
     }
 
     private LinkedHashSet<Product> getProducts(String getProducts) throws ProductException {

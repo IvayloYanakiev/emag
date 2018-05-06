@@ -44,7 +44,52 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
 
         });
     };
+    $scope.orderByDiscountAscending = function () {
+        $http({
+            url: "http://localhost:7377/product" + "/orderProductsByDiscount",
+            method: "GET",
+            params: {"orderIn": "asc"}
+        }).then(function (response) {
+            $scope.products = response.data;
+        }, function (error) {
 
+        });
+    };
+
+    $scope.orderByDiscountDescending = function () {
+        $http({
+            url: "http://localhost:7377/product" + "/orderProductsByDiscount",
+            method: "GET",
+            params: {"orderIn": "desc"}
+        }).then(function (response) {
+            $scope.products = response.data;
+        }, function (error) {
+
+        });
+    };
+    $scope.orderByNameAscending = function () {
+        $http({
+            url: "http://localhost:7377/product" + "/orderProductsByName",
+            method: "GET",
+            params: {"orderIn": "asc"}
+        }).then(function (response) {
+            $scope.products = response.data;
+        }, function (error) {
+
+        });
+    };
+
+    $scope.orderByNameDescending = function () {
+        $http({
+            url: "http://localhost:7377/product" + "/orderProductsByName",
+            method: "GET",
+            params: {"orderIn": "desc"}
+        }).then(function (response) {
+            $scope.products = response.data;
+        }, function (error) {
+
+        });
+    };
     $scope.removeProduct = function (productId) {
         $http({
             url: "http://localhost:7377/product" + "/removeProductById",
