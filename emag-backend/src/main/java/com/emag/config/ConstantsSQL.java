@@ -23,5 +23,5 @@ public class ConstantsSQL {
     public static final String ORDER_PRODUCTS_BY_PRICE = "select * from products order by price";
     public static final String GET_PRODUCTS_BY_ID_INTERVAL =  "select * from products where id in (:ids)";
     public static final String INSERT_INTO_PRODUCTS = "insert into products(name,picture_url,price,middle_type_id,quantity,description,discount) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description,:discount)";
-    public static final String GET_PRODUCTS_FILTERED_BY_NAME = "select * from products where name LIKE '%:searchInput%'";
+    public static final String GET_PRODUCTS_FILTERED_BY_NAME = "select * from products where name LIKE :searchInput order by price ";
 }

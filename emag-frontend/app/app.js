@@ -49,7 +49,7 @@ app.config(function ($routeProvider) {
         })
         .when('/searchedProduct', {
             templateUrl: 'views/searchedProduct.html',
-            controller: 'searchProductController',
+            controller: 'searchedProductController'
         })
         .otherwise('/home');
 

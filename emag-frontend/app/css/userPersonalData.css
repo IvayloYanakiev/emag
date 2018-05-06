@@ -27,8 +27,19 @@
     display: inline-block;
 }
 
-
 .updatePanelContainer {
     width: 50%;
     margin-left: 25%;
+}
+
+.labelContainer input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.radioBtn {
+    transform: scale(1.5);
+}
+
+.radioBtn:checked + label {
+    color: #2196F3;
 }

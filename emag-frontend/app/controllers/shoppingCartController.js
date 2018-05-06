@@ -13,15 +13,13 @@ app.controller("shoppingCartController", function ($scope, $location, $routePara
                 params:{"products":entries}
             }).then(function (response) {
                 $scope.products = response.data;
-                if(products.length ===0){
-                    var element = document.getElementById("checkoutBtn");
-                    element.style.display = "none";
-                }
             }, function (error) {
 
             });
+        } else {
+            $scope.products=[];
+
         }
-        else $scope.products=[];
     };
     $scope.goTo = function (productId) {
 
