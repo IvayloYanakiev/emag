@@ -16,4 +16,5 @@ public interface ProductService {
     void updateProductById(Product product) throws ProductException;
 
     LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) throws ProductException;
+    LinkedHashSet<Product> getProductsFilteredByName(String searchInput) throws ProductException;
 }

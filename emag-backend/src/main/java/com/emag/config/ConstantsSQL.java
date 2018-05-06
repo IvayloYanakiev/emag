@@ -3,7 +3,6 @@ package com.emag.config;
 public class ConstantsSQL {
     public static final String FIND_USER_BY_ID = "select * from users where id=:id";
     public static final String FIND_USER_BY_EMAIL = "select * from users where email=:email";
-    public static final String GET_USER_PASSWORD = "select password from users where email=:email";
     public static final String ADD_USER = "insert into users(name,email,password) values(:name,:email,sha1(:password))";
     public static final String SELECT_USER_BY_EMAIL_AND_PASS = "select * from users where email=:email and password = sha1(:password);";
     public static final String GET_ALL_CATEGORIES = "select main.id as id,main.name as main_name,middle.id as middle_id,middle.name as middle_name from main_type as main join middle_type as middle on main.id = middle.main_type_id";
@@ -23,4 +22,6 @@ public class ConstantsSQL {
     public static final String UPDATE_PRODUCT_BY_ID = "update products set name=:name,middle_type_id=:categoryId,price=:price,quantity=:quantity,description=:description, discount=:discount where id =:id ";
     public static final String ORDER_PRODUCTS_BY_PRICE = "select * from products order by price";
     public static final String GET_PRODUCTS_BY_ID_INTERVAL =  "select * from products where id in (:ids)";
+    public static final String INSERT_INTO_PRODUCTS = "insert into products(name,picture_url,price,middle_type_id,quantity,description,discount) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description,:discount)";
+    public static final String GET_PRODUCTS_FILTERED_BY_NAME = "select * from products where name LIKE '%:searchInput%'";
 }

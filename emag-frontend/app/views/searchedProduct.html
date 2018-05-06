@@ -1,0 +1,134 @@
+<div ng-controller="searchProductController">
+    <!--<div>-->
+        <!--<button class="btn btn-default" ng-click="orderByPriceAscending()"> ascending order</button>-->
+        <!--<button class="btn btn-default" ng-click="orderByPriceDescending()"> descending order</button>-->
+    <!--</div>-->
+====================================
+    <div ng-repeat="product in addresses">
+    <h6>{{product.name}}</h6>
+    </div>
+
+    <!--<div ng-repeat="product in filter" class="col-xs-12 col-md-6">-->
+        <!--<div class="prod-info-main prod-wrap clearfix">-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-5 col-sm-12 col-xs-12">-->
+                    <!--<div class="product-image">-->
+                        <!--<img src="{{product.pictureURL}}" class="img-responsive rotprod productPictures">-->
+                        <!--<span class="tag2 hot">-->
+							<!-- -{{product.discount}}%-->
+						<!--</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-7 col-sm-12 col-xs-12">-->
+                    <!--<div class="product-deatil">-->
+                        <!--<h4 class="name">-->
+                            <!--<a ng-click="goTo(product.id)">-->
+                                <!--{{product.name}}-->
+                            <!--</a>-->
+                            <!--<span></span>-->
+
+                        <!--</h4>-->
+                        <!--<p class="price-container">-->
+                            <!--<span>${{product.price}}</span>-->
+                        <!--</p>-->
+                        <!--<span class="tag1"></span>-->
+
+                        <!--<button ng-show="isAdmin && isAuthenticated" id="editBtn" ng-click="editProduct(product)" type="button"-->
+                                <!--class="btn btn-default btn-sm btn btn-light"  data-toggle="modal"-->
+                                <!--data-target="#myModal"></i> Edit-->
+                        <!--</button>-->
+                    <!--</div>-->
+                    <!--<div class="description">-->
+                        <!--<p id="descriptionProduct">{{product.description}} </p>-->
+                    <!--</div>-->
+                    <!--<div class="product-info smart-form">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-12">-->
+                                <!--<button ng-click="addToCart(product.id)" type="button"-->
+                                        <!--class="btn btn-default btn-sm btn btn-success">-->
+                                    <!--<span class="glyphicon glyphicon-shopping-cart"></span> Add to cart-->
+                                <!--</button>-->
+                                <!--<button ng-show="isAdmin && isAuthenticated" ng-click="removeProduct(product.id)" type="button"-->
+                                        <!--class="btn btn-default btn-sm btn btn-danger">-->
+                                    <!--<i class="fa fa-close"></i> Remove-->
+                                <!--</button>-->
+                            <!--</div>-->
+                            <!--<div id="myModal" class="modal fade" role="dialog">-->
+                                <!--<div class="modal-dialog">-->
+
+                                    <!--<div class="modal-content">-->
+                                        <!--<div class="modal-header">-->
+                                            <!--<h4 class="modal-title">Update product</h4>-->
+                                            <!--<button type="button" class="close"-->
+                                                    <!--data-dismiss="modal">x-->
+                                            <!--</button>-->
+                                        <!--</div>-->
+                                        <!--<div class="modal-body">-->
+                                            <!--<form>-->
+                                                <!--<div class="productPictureContainer product-image">-->
+                                                    <!--<img src="{{updateProduct.pictureURL}}" class="img-responsive" />-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label>Name</label>-->
+                                                    <!--<input ng-model="updateProduct.name" type="text" class="form-control" placeholder="Enter name">-->
+                                                <!--</div>-->
+                                                <!--<div class="form-check">-->
+                                                    <!--<label>Category</label>-->
+                                                    <!--<select class="selectpicker form-control" id="selectContainer" ng-model="updateProduct.innerCategoryId" >-->
+                                                        <!--<optgroup ng-repeat="category in categories" label={{category.name}}>-->
+                                                            <!--<option  ng-value="inner.id" ng-repeat="inner in category.innerCategories">{{inner.name}}</option>-->
+                                                        <!--</optgroup>-->
+                                                    <!--</select>-->
+                                                <!--</div>-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<label>Price</label>-->
+                                                    <!--<input ng-model="updateProduct.price" type="number" class="form-control" placeholder="Enter price">-->
+                                                <!--</div>-->
+
+                                                <!--<div class="form-check">-->
+                                                    <!--<label>Quantity</label>-->
+                                                    <!--<input ng-model="updateProduct.quantity" type="number" class="form-control" placeholder="Enter quantity">-->
+                                                <!--</div>-->
+
+                                                <!--<div class="form-check">-->
+                                                    <!--<label>Description</label>-->
+                                                    <!--<input ng-model="updateProduct.description" type="text" class="form-control" placeholder="Enter description">-->
+                                                <!--</div>-->
+
+                                                <!--<div class="form-check">-->
+                                                    <!--<label>Discount</label>-->
+                                                    <!--<input ng-model="updateProduct.discount" type="text" class="form-control" placeholder="Enter discount">-->
+                                                <!--</div>-->
+
+                                                <!--<div class="alert alert-danger" role="alert" ng-if="error">-->
+                                                    <!--{{value}}-->
+                                                <!--</div>-->
+
+                                            <!--</form>-->
+
+
+                                        <!--</div>-->
+                                        <!--<div class="modal-footer">-->
+                                            <!--<button type="button" class="btn btn-success"-->
+                                                    <!--ng-click="updProduct()">Update-->
+                                            <!--</button>-->
+                                            <!--<button id="btnCloseUpdateProduct" type="button" class="btn btn-default"-->
+                                                    <!--data-dismiss="modal">Close-->
+                                            <!--</button>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; end product &ndash;&gt;-->
+    <!--</div>-->
+
+
+</div>
+

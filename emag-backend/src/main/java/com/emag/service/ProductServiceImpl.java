@@ -75,4 +75,9 @@ public class ProductServiceImpl implements ProductService {
     public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) throws ProductException {
         return  productDao.getAllProductsOrderedByPrice(orderBy);
     }
+
+    @Override
+    public LinkedHashSet<Product> getProductsFilteredByName(String searchInput) throws ProductException {
+        return productDao.getProductsFilteredByName(searchInput);
+    }
 }

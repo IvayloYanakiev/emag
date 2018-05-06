@@ -23,7 +23,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void addProduct(Product product) throws ProductException {
-        String addProduct = "insert into products(name,picture_url,price,middle_type_id,quantity,description,discount) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description,:discount)";
+        String addProduct = ConstantsSQL.INSERT_INTO_PRODUCTS;
         HashMap<String, Object> params = new HashMap<>();
         params.put("name", product.getName());
         params.put("picture_url", product.getPictureURL());
@@ -33,11 +33,11 @@ public class ProductDaoImpl implements ProductDao {
         params.put("description", product.getDescription());
         params.put("discount", product.getDiscount());
         try {
-            jdbcTemplate.update(addProduct, params);
-        } catch (DataAccessException e) {
-            throw new ProductException("Error adding product", e);
-        }
+        jdbcTemplate.update(addProduct, params);
+    } catch (DataAccessException e) {
+        throw new ProductException("Error adding product", e);
     }
+}
 
     @Override
     public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) throws ProductException {
@@ -180,6 +180,45 @@ public class ProductDaoImpl implements ProductDao {
             getProducts += " desc";
         }
         LinkedHashSet<Product> products = getProducts(getProducts);
+        return products;
+    }
+
+    @Override
+    public LinkedHashSet<Product> getProductsFilteredByName(String searchInput) throws ProductException {
+        String getAllAddresses = ConstantsSQL.GET_PRODUCTS_FILTERED_BY_NAME;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("search", searchInput);
+        LinkedHashSet<Product> products = null;
+        try {
+            products = jdbcTemplate.query(getAllAddresses, params, new ResultSetExtractor<LinkedHashSet<Product>>() {
+
+                @Override
+                public LinkedHashSet<Product> extractData(ResultSet rs) throws SQLException {
+                    LinkedHashSet<Product> products = new LinkedHashSet<>();
+
+                    while (rs.next()) {
+                        Long id = rs.getLong("id");
+                        String name = rs.getString("name");
+                        String url = rs.getString("picture_url");
+                        Double price = rs.getDouble("price");
+                        Long categoryId = rs.getLong("middle_type_id");
+                        Integer quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        Integer discount = rs.getInt("discount");
+
+                        try {
+                            Product product = new Product(id, name, url, price, categoryId, quantity, description, discount);
+                            products.add(product);
+                        } catch (ProductException e) {
+                            throw new SQLException(e.getMessage());
+                        }
+                    }
+                    return products;
+                }
+            });
+        } catch (Exception e) {
+            throw new ProductException(e.getMessage(), e);
+        }
         return products;
     }
 

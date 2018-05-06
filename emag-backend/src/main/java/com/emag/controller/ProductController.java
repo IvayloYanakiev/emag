@@ -101,7 +101,7 @@ public class ProductController {
     }
 
     @GetMapping("/orderProductsBy")
-    public ResponseEntity orderProductsBy(@RequestParam("by") String orderBy){
+    public ResponseEntity orderProductsBy(@RequestParam("by") String orderBy) {
         Gson gson = new Gson();
         LinkedHashSet<Product> products = null;
         try {
@@ -152,5 +152,21 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+    }
+
+
+    @RequestMapping("/getProductsFilteredByName")
+    public ResponseEntity getProductsFilteredByName(@RequestParam("searchInput") String searchInput) {
+        Gson gson = new Gson();
+        String json = null;
+
+        try {
+            LinkedHashSet<Product> products = productService.getProductsFilteredByName(searchInput);
+            json = gson.toJson(products);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(json);
+
     }
 }

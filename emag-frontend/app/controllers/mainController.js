@@ -26,25 +26,4 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
         dropdownContent.style.display = "none";
     }
 
-    $scope.MyController = function () {
-        var listOfProducts = document.getElementById("filteredProducts");
-        listOfProducts.style.display = "block";
-
-        $http({
-            url: "http://localhost:7377/product" + "/getAllProducts",
-            method: "GET"
-        }).then(function (response) {
-            $scope.products = response.data;
-        }, function (error) {
-
-        });
-    }
-
-    $scope.goToPage = function (productId) {
-        var listOfFilteredProducts = document.getElementById("filteredProducts");
-        listOfFilteredProducts.style.display = "none";
-        $scope.search = "";
-
-        $location.url("/product/" + productId);
-    }
 });

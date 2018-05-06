@@ -116,36 +116,7 @@ public class UserDaoImpl implements UserDao {
         if (checker) throw new UserException(ConstantsErrorMessages.USER_ALREADY_EXISTS);
         return user;
     }
-
-    @Override
-    public String getUserPassword(String email) throws UserException {
-        String getUserPasswordByEmail = ConstantsSQL.GET_USER_PASSWORD;
-
-        HashMap<String, Object> userParams = new HashMap<>();
-        userParams.put("email", email);
-        String userPassword = null;
-        try {
-            userPassword = jdbcTemplate.query(getUserPasswordByEmail, userParams, new ResultSetExtractor<String>() {
-
-                @Override
-                public String extractData(ResultSet rs) throws SQLException {
-                    String password = "";
-                    if (rs.next()) {
-                        try {
-                           password = rs.getString("password");
-                        } catch (Exception e) {
-                            throw new SQLException(e.getMessage());
-                        }
-                    }
-                    return password;
-                }
-            });
-        } catch (Exception e) {
-            throw new UserException(e.getMessage(), e);
-        }
-        return userPassword;
-    }
-
+    
 
     public void checkDoesGivenUserExists(String email) throws UserException {
         String checkForUserRequest = ConstantsSQL.FIND_USER_BY_EMAIL;
