@@ -102,6 +102,7 @@ public class UserDaoImpl implements UserDao {
         userParams.put("name", user.getName());
         userParams.put("email", user.getEmail());
         userParams.put("password", user.getPassword());
+        userParams.put("profileUrl",user.getPictureUrl());
         boolean checker = false;
         try {
             checkDoesGivenUserExists(user.getEmail());

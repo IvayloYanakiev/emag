@@ -25,12 +25,12 @@ app.controller("productDetailsController", function ($scope, $location, $routePa
     };
 
 
-    $scope.iterateStars = function (stars) {
+    $scope.iterateStars = function (stars,commentId) {
         var html = '';
         for (i = 0; i < stars; i++) {
-            html += '<i class="text-warning fa fa-star"></i>';
+            html += '<i class=" text-warning fa fa-star"></i>';
         }
-        $('#float-right').html(html);
+        $('#'+commentId).html(html);
     };
 
 
@@ -137,5 +137,13 @@ app.controller("productDetailsController", function ($scope, $location, $routePa
 
     });
 
-
+    $scope.getNewProductPrice = function (price, discount) {
+        if(discount === 0){
+            return price;
+        } else {
+            var result = price - discount / 100 * price;
+            result = result.toFixed(2);
+            return result;
+        }
+    }
 });

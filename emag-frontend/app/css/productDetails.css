@@ -33,8 +33,8 @@ span.itemPrice {
 }
 
 #productPic{
-    /*height: 300px;*/
-    /*width: 300px;*/
+    height: 300px;
+    width: 300px;
     margin-left: 22%;
     margin-top: 5%;
  }
@@ -84,6 +84,13 @@ span.glyphicon {
     margin-top:10px;
     border-radius: 1rem;
 }
+
+.big-icon {
+    font-size: 26px;
+    padding-top: 4px;
+    padding-left: 79%;
+}
+
 div.stars {
     width: 270px;
     display: inline-block;

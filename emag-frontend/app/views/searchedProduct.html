@@ -6,7 +6,7 @@
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
                         <img src="{{product.pictureURL}}" class="img-responsive rotprod productPictures">
-                        <span class="tag2 hot">
+                        <span ng-show="product.discount != 0" class="tag2 hot">
 							  -{{product.discount}}%
 						</span>
                     </div>
@@ -18,12 +18,13 @@
                                 {{product.name}}
                             </a>
                             <span></span>
-
                         </h4>
-                        <p class="price-container">
-                            <span>${{product.price}}</span>
+                        <p ng-show="product.discount != 0" class="price-container">
+                            <span style="color: darkred"><strike>${{product.price}}</strike></span>
                         </p>
-                        <span class="tag1"></span>
+                        <p class="price-container">
+                            <span>${{getNewProductPrice(product.price, product.discount)}}</span>
+                        </p>
 
                         <button ng-show="isAdmin && isAuthenticated" id="editBtn" ng-click="editProduct(product)" type="button"
                                 class="btn btn-default btn-sm btn btn-light"  data-toggle="modal"

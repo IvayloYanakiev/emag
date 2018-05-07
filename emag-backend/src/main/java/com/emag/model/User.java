@@ -27,6 +27,7 @@ public class User {
     public User() {
     }
 
+
     public User(String name, String password, String email) throws UserException {
         setName(name);
         setPassword(password);
@@ -48,6 +49,13 @@ public class User {
         setPictureUrl(pictureUrl);
         setGender(gender);
         setPhone(phone);
+    }
+
+    public User(String name, String password, String email, String profileUrl) throws UserException {
+        setName(name);
+        setPassword(password);
+        setEmail(email);
+        setPictureUrl(profileUrl);
     }
 
     public Long getId() {

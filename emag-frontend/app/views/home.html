@@ -1,6 +1,5 @@
 <div class="container" ng-controller="homeController">
 
-
     <div class="panel panel-default" ng-show="hasProducts" style="margin-bottom: 5%; margin-top: 2%">
         <div class="panel-heading">
             <h3 class="panel-title">Filter products</h3>
@@ -10,7 +9,7 @@
                 <div class="col-md-5">
                 <ul class="standard_dropdown main_nav_dropdown">
                     <li class="hassubs" style="margin-left: 20%; margin-top: 3%">
-                        <a href="#">Order products by <i class="fa fa-angle-down"></i></a>
+                        <a style="color: grey;">Order products by <i class="fa fa-angle-down"></i></a>
                         <ul style="width: 100%;">
                             <li><button style="background-color: transparent; border: none" ng-click="orderByPriceAscending()"> Price ascending</button></li>
                             <li><button style="background-color: transparent; border: none" ng-click="orderByPriceDescending()"> Price descending</button></li>
@@ -23,9 +22,8 @@
                 </ul>
                 </div>
                     <div class="col-md-4">
-                        <p style="font-size: larger">Filter products by price</p>
-                        <input style="width: 100%" type="range" min="1" max="10000" value="50" class="slider" id="myRange">
-                        <p>Price: $<span id="demo"></span></p>
+                        <p style="font-size: larger">Filter products by price: &nbsp; $<span id="demo"></span></p>
+                        <input style="width: 100%" type="range" min="1" max="10000" value="1" class="slider" id="myRange">
                     </div>
 
                     <div class="col-md-3"><button style="width: 50%; position: absolute; margin-top: 10%" ng-click="filterProducts()" class="btn btn-success">filter
@@ -35,14 +33,13 @@
         </div>
     </div>
 
-
-    <div  ng-show="hasProducts" ng-repeat="product in products" class="col-xs-12 col-md-6">
+    <div ng-show="hasProducts" dir-paginate="product in products | itemsPerPage: 6" class="col-xs-12 col-md-6">
         <div class="prod-info-main prod-wrap clearfix">
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
                         <img src="{{product.pictureURL}}" class="img-responsive rotprod productPictures">
-                        <span class="tag2 hot">
+                        <span ng-show="product.discount != 0" class="tag2 hot">
 							-{{product.discount}}%
 						</span>
                     </div>
@@ -56,10 +53,12 @@
                             <span></span>
 
                         </h4>
-                        <p class="price-container">
-                            <span>${{product.price}}</span>
+                        <p ng-show="product.discount != 0" class="price-container">
+                            <span style="color: darkred"><strike>${{product.price}}</strike></span>
                         </p>
-                        <span class="tag1"></span>
+                        <p class="price-container">
+                            <span>${{getNewProductPrice(product.price, product.discount)}}</span>
+                        </p>
 
                         <button ng-show="isAdmin && isAuthenticated" id="editBtn" ng-click="editProduct(product)" type="button"
                                 class="btn btn-default btn-sm btn btn-light"  data-toggle="modal"
@@ -155,10 +154,13 @@
             </div>
         </div>
         <!-- end product -->
+        <div class="dirPaginationHome">
+            <dir-pagination-controls></dir-pagination-controls>
+        </div>
+        <h3 ng-show="informUser">No products found</h3>
+        <br>
+        <a ng-show="informUser" href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Return to home
+            page</a>
     </div>
-
-    <h3 ng-show="informUser">No products found</h3>
-    <br>
-    <a ng-show="informUser" href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Return to home page</a>
 </div>
 

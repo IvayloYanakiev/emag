@@ -41,10 +41,8 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
                         Integer quantity = rs.getInt("quantity");
                         String description = rs.getString("description");
                         Integer discount = rs.getInt("discount");
-                        int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
-                        String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
 
-                        Product product = new Product(id, name, newlocation, price, middleTypeId, quantity, description, discount);
+                        Product product = new Product(id, name, pictureUrl, price, middleTypeId, quantity, description, discount);
                         myProducts.add(product);
                     } catch (ProductException e) {
                         throw new SQLException(e.getMessage());

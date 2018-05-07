@@ -25,9 +25,6 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
                 params: {"id": sessionService.getSession()}
             }).then(function (response) {
                 $scope.user = response.data;
-                if ($scope.user.pictureUrl != null) {
-                    $scope.pictureUrl = $scope.user.pictureUrl;
-                } else $scope.pictureUrl = "http://127.0.0.1:8887/nopicture.jpg";
             });
 
         };
@@ -101,7 +98,7 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
             var uploadUrl = "http://localhost:7377/user/updateUserProfilePicture";
             addProfilePictureService.uploadFileToUrl(file, uploadUrl, id).then(function (result) {
                 var url = result.data;
-                $scope.pictureUrl = url;
+                $scope.user.pictureUrl  = url;
                 $('#myModal').modal('hide');
             }, function (err) {
                 $scope.pictureError = true;

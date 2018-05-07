@@ -37,32 +37,6 @@
 
     <header class="header">
 
-        <!-- Top Bar -->
-        <div class="top_bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col d-flex flex-row">
-                        <div class="top_bar_content ml-auto">
-                            <div class="top_bar_user">
-                                <div class="user_icon"></div>
-                                <div ng-hide="isAuthenticated"><a ng-href="#register"><img id="register_icon"
-                                                                                           src="https://cdn0.iconfinder.com/data/icons/cosmetic-store/25/Register-512.png"
-                                                                                           alt=""
-                                                                                           width="20">Register</a></div>
-                                <div ng-hide="isAuthenticated"><a ng-href="#login"><img id="login_icon"
-                                                                                        src="https://image.freepik.com/free-icon/login-symbol_318-9896.jpg"
-                                                                                        alt="" width="21">Log in</a>
-                                </div>
-                                <div ng-show="isAuthenticated"><a ng-href="#logout"><img id="logout_icon"
-                                                                                         src="https://cdn1.iconfinder.com/data/icons/door-3/200/1333_door-512.png"
-                                                                                         alt="" width="21">Log out</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Header Main -->
 
@@ -97,18 +71,38 @@
                     <div class="col-lg-6 col-9 order-lg-3 order-2 text-lg-left text-right">
                         <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 
-
                             <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                                 <div class="wishlist_content" ng-show="isAuthenticated">
-                                    <div class="wishlist_text"><a ng-href="#userPersonalData">
-                                        <img src="./pictures/profile.png" alt="" width="20"/>
-                                        My profile</a></div>
+                                    <ul class="standard_dropdown main_nav_dropdown">
+                                        <li class="hassubs" style="margin-left: 20%; margin-top: 3%">
+                                            <a><img src="./pictures/profile.png" alt="" width="20"/> My profile <i class="fa fa-angle-down"></i></a>
+                                            <ul style="width: 100%;">
+                                                <li><a ng-href="#userPersonalData">Update profile</a></li>
+                                                <li><a ng-href="#logout">Log out</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
 
                             <!-- Cart -->
                             <div class="cart">
                                 <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                    <div class="col d-flex flex-row">
+                                        <div class="top_bar_content ml-auto">
+                                            <div class="top_bar_user">
+                                                <div class="user_icon"></div>
+                                                <div ng-hide="isAuthenticated"><a ng-href="#register"><img id="register_icon"
+                                                                                                           src="https://cdn0.iconfinder.com/data/icons/cosmetic-store/25/Register-512.png"
+                                                                                                           alt=""
+                                                                                                           width="20">Register</a></div>
+                                                <div ng-hide="isAuthenticated"><a ng-href="#login"><img id="login_icon"
+                                                                                                        src="https://image.freepik.com/free-icon/login-symbol_318-9896.jpg"
+                                                                                                        alt="" width="21">Log in</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="cart_content">
                                         <div class="cart_text"><a ng-href="#/shoppingCart">
                                             <img id="cart_icon" src="./pictures/cart.png" alt="" width="22">Shopping
@@ -133,7 +127,7 @@
 
                             <!-- Categories Menu -->
 
-                            <div class="cat_menu_container">
+                            <div class="cat_menu_container"  style="border-radius: 7px; ">
                                 <div id="dropdown_container"
                                      class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
                                     <div class="cat_burger"><span></span><span></span><span></span></div>
@@ -336,7 +330,7 @@
                             <form class="newsletter_form">
                                 <input ng-model="user.email" type="email" class="newsletter_input"
                                        required="required" placeholder="Enter your email address">
-                                <button class="newsletter_button" ng-click="subscribe()">Subscribe</button>
+                                <button style="border-radius: 7px;" class="newsletter_button" ng-click="subscribe()">Subscribe</button>
                             </form>
                         </div>
                     </div>

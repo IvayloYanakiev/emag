@@ -52,4 +52,13 @@ app.controller("searchedProductController", function ($rootScope, $scope, $locat
         });
     };
 
+    $scope.getNewProductPrice = function (priceOfProduct, discountOfProduct) {
+        if(discountOfProduct === 0){
+            return priceOfProduct;
+        } else {
+            var result = priceOfProduct - discountOfProduct / 100 * priceOfProduct;
+            result = result.toFixed(2);
+            return result;
+        }
+    }
 });

@@ -455,3 +455,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.dirPaginationHome{
+    display: inline;
+    width: 100%;
+    float: right;
+    padding-left: 87.3%;
+}

@@ -1,6 +1,7 @@
 package com.emag.controller;
 
 import com.emag.config.Constants;
+import com.emag.config.EmagCloud;
 import com.emag.exception.ProductException;
 import com.emag.model.Product;
 import com.emag.service.ProductService;
@@ -21,8 +22,12 @@ import java.util.*;
 @RequestMapping("/product")
 public class ProductController {
 
+    public static final String INVALID_FILE_TYPE = "Invalid file type";
     @Autowired
-    ProductService productService;
+    private ProductService productService;
+
+    @Autowired
+    private EmagCloud myCloud;
 
     @RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity addProduct(
@@ -38,10 +43,12 @@ public class ProductController {
         String mimetype = picture.getOriginalFilename().split("\\.")[1];
         String type = mimetype.split("/")[0];
         if (!type.equals("jpg") && !type.equals("png") && !type.equals("jpeg"))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson("Invalid file type"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(INVALID_FILE_TYPE));
         try {
-            File newFile = convertProductPicture(picture);
-            Product product = new Product(name, category, price, quantity, description, newFile.getPath(), discount);
+            File newFile = UserController.convertFromMultypartToFile(picture);
+            Map uploadResult = myCloud.emagCloud().uploader().upload(newFile, new HashMap<String, Object>());
+            String url = (String) uploadResult.get("url");
+            Product product = new Product(name, category, price, quantity, description, url, discount);
             productService.addProduct(product);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(Constants.ERROR));
@@ -61,15 +68,6 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
-    }
-
-    private File convertProductPicture(MultipartFile file) throws IOException {
-        File convFile = new File("D:\\emagPictures\\w\\" + file.getOriginalFilename());
-        convFile.createNewFile();
-        FileOutputStream fos = new FileOutputStream(convFile);
-        fos.write(file.getBytes());
-        fos.close();
-        return convFile;
     }
 
     @GetMapping("/getInnerCategoryProducts")

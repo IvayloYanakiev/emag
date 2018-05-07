@@ -3,6 +3,7 @@ package com.emag.controller;
 
 import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
+import com.emag.config.EmagCloud;
 import com.emag.exception.UserException;
 import com.emag.model.User;
 import com.emag.service.UserService;
@@ -19,8 +20,12 @@ import java.util.regex.Matcher;
 @RestController
 public class RegisterController {
 
+    public static final String NO_PICTURE = "http://res.cloudinary.com/dxnmejm7r/image/upload/v1525705078/zx95yaxdahmoocm9fbt4.jpg";
     @Autowired
     UserService userService;
+
+    @Autowired
+    EmagCloud myCloud;
 
     @PostMapping("/createUser")
     public ResponseEntity register(@RequestParam("name") String name,
@@ -30,7 +35,7 @@ public class RegisterController {
         Gson gson = new Gson();
 
         try {
-            User user = new User(name, password, email);
+            User user = new User(name, password, email, NO_PICTURE);
             if (confirmPassword != null && confirmPassword.trim().length() > 0) {
                 if (user.getPassword().equals(confirmPassword)) {
                     userService.registerUser(user);

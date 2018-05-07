@@ -30,12 +30,13 @@ public class CommentDaoImpl implements CommentDao{
 
     @Override
     public void addProductComment(Comment comment) throws CommentException {
-        String insertComment = "insert into comments(user_id,product_id,value,stars) values(:user_id,:product_id,:commentValue,:stars)";
+        String insertComment = "insert into comments(user_id,product_id,value,stars,creation_date) values(:user_id,:product_id,:commentValue,:stars,:creationDate)";
         HashMap<String,Object> params = new HashMap<>();
         params.put("user_id",comment.getUserId());
         params.put("product_id",comment.getProductId());
         params.put("commentValue",comment.getValue());
         params.put("stars",comment.getStars());
+        params.put("creationDate",comment.getCreatingDate());
         try{
             jdbcTemplate.update(insertComment,params);
         }catch (DataAccessException e){
@@ -63,8 +64,10 @@ public class CommentDaoImpl implements CommentDao{
                         String commentValue = rs.getString("value");
                         Integer stars = rs.getInt("stars");
                         String namesOfUser = rs.getString("name");
+                        String profileUrl = rs.getString("profile_url");
+                        String creationDate = rs.getString("creation_date");
                         try {
-                            Comment comment = new Comment(id,productId,userId,namesOfUser,commentValue,stars);
+                            Comment comment = new Comment(id,productId,userId,namesOfUser,commentValue,stars,profileUrl,creationDate);
                             myComments.add(comment);
                         } catch (CommentException e) {
                            throw new SQLException(e.getMessage());

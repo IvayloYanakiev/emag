@@ -19,6 +19,7 @@ import java.util.*;
 @Repository
 public class ProductDaoImpl implements ProductDao {
 
+    public static final String ERROR_ADDING_PRODUCT = "Error adding product";
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -34,11 +35,11 @@ public class ProductDaoImpl implements ProductDao {
         params.put("description", product.getDescription());
         params.put("discount", product.getDiscount());
         try {
-        jdbcTemplate.update(addProduct, params);
-    } catch (DataAccessException e) {
-        throw new ProductException("Error adding product", e);
+            jdbcTemplate.update(addProduct, params);
+        } catch (DataAccessException e) {
+            throw new ProductException(ERROR_ADDING_PRODUCT, e);
+        }
     }
-}
 
     @Override
     public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) throws ProductException {
@@ -78,10 +79,8 @@ public class ProductDaoImpl implements ProductDao {
         Integer quantity = rs.getInt("quantity");
         String description = rs.getString("description");
         Integer discount = rs.getInt("discount");
-        int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
-        String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
         try {
-            Product product = new Product(id, name, newlocation, price, middleTypeId, quantity, description, discount);
+            Product product = new Product(id, name, pictureUrl, price, middleTypeId, quantity, description, discount);
             myProducts.add(product);
         } catch (ProductException e) {
             throw new SQLException(e.getMessage());
@@ -114,7 +113,15 @@ public class ProductDaoImpl implements ProductDao {
                                 if (selectedProduct.getCommentsSize() == 0) {
                                     setProductProperties(rs, selectedProduct);
                                 }
-                                selectedProduct.addComment(new Comment(commentId,rs.getLong("user_id"),rs.getLong("product_id"), rs.getString("uname"),rs.getString("value"),rs.getInt("stars")));
+                                selectedProduct.addComment(
+                                        new Comment(
+                                                commentId,
+                                                rs.getLong("user_id"),
+                                                rs.getLong("product_id"),
+                                                rs.getString("uname"), rs.getString("value"),
+                                                rs.getInt("stars"), rs.getString("profile_url"),
+                                                rs.getString("creation_date")
+                                        ));
                             } else {
                                 setProductProperties(rs, selectedProduct);
                             }
@@ -134,15 +141,11 @@ public class ProductDaoImpl implements ProductDao {
     private void setProductProperties(ResultSet rs, Product selectedProduct) throws ProductException, SQLException {
         selectedProduct.setId(rs.getLong("product_id"));
         selectedProduct.setName(rs.getString("name"));
-        String pictureUrl = rs.getString("picture_url");
+        selectedProduct.setPictureURL(rs.getString("picture_url"));
         selectedProduct.setPrice(rs.getDouble("price"));
         selectedProduct.setQuantity(rs.getInt("quantity"));
         selectedProduct.setDescription(rs.getString("description"));
         selectedProduct.setDiscount(rs.getInt("discount"));
-
-        int newLocationProfilePictureIndex = pictureUrl.lastIndexOf("\\");
-        String newlocation = "http://127.0.0.1:8887/productPictures/" + pictureUrl.substring(newLocationProfilePictureIndex + 1);
-        selectedProduct.setPictureURL(newlocation);
     }
 
     public void deleteProductById(Long productId) throws ProductException {
@@ -189,7 +192,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public LinkedHashSet<Product> getProductsFilteredByName(String searchInput) throws ProductException {
         searchInput = "%" + searchInput.trim() + "%";
-        String getProducts =  ConstantsSQL.GET_PRODUCTS_FILTERED_BY_NAME;
+        String getProducts = ConstantsSQL.GET_PRODUCTS_FILTERED_BY_NAME;
         HashMap<String, Object> params = new HashMap<>();
         params.put("searchInput", searchInput);
         LinkedHashSet<Product> products = getProducts(getProducts, params);
