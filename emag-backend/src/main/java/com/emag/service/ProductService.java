@@ -22,5 +22,5 @@ public interface ProductService {
 
     LinkedHashSet<Product> getAllProductsOrderedByName(String orderIn) throws ProductException;
 
-    LinkedHashSet<Product> getProductsBetweenTwoPrices(Integer from, Integer to) throws ProductException;
+    LinkedHashSet<Product> getProductsFilteredByPrice(Integer maxPrice) throws ProductException;
 }

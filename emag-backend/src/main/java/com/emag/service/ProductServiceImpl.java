@@ -64,8 +64,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public LinkedHashSet<Product> getProductsBetweenTwoPrices(Integer from, Integer to) throws ProductException {
-        return  productDao.getProductsBetweenTwoPrices(from,to);
+    public LinkedHashSet<Product> getProductsFilteredByPrice(Integer maxPrice) throws ProductException {
+        return  productDao.getProductsFilteredByPrice(maxPrice);
     }
 
 }

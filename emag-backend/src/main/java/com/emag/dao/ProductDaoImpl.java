@@ -221,8 +221,13 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public LinkedHashSet<Product> getProductsBetweenTwoPrices(Integer from, Integer to) throws ProductException {
-        return null;
+    public LinkedHashSet<Product> getProductsFilteredByPrice(Integer maxPrice) throws ProductException {
+        String getProducts = ConstantsSQL.GET_PRODUCTS_FILTERED_BY_PRICE;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("maxPrice", maxPrice);
+        LinkedHashSet<Product> products = getProducts(getProducts, params);
+        
+        return products;
     }
 
     private LinkedHashSet<Product> getProducts(String getProducts) throws ProductException {

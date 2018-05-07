@@ -2,6 +2,8 @@ var app = angular.module('emag');
 
 app.controller("homeController", function ($rootScope,$scope, $location, $routeParams, $http, shoppingCart,sessionService) {
 
+    $scope.hasProducts = true;
+    $scope.informUser = false;
     var getProducts = function () {
         $http({
             url: "http://localhost:7377/product" + "/getAllProducts",
@@ -148,5 +150,32 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
         });
     };
 
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
 
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+
+    $scope.filterProducts = function () {
+        $http({
+            url: "http://localhost:7377/product" + "/getProductsFilteredByPrice",
+            method: "GET",
+            params: {"maxPrice": slider.value}
+        }).
+        then(function (response) {
+            $scope.products = response.data;
+            var result = $scope.products;
+
+            if (typeof result != "undefined" && result != null && result.length != null && result.length > 0) {
+                $scope.hasProducts = true;
+                $scope.informUser = false;
+            } else {
+                $scope.hasProducts = false;
+                $scope.informUser = true;
+            }
+        }, function (error) {
+        });
+    }
 });

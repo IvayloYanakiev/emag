@@ -109,19 +109,6 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
-    @GetMapping("/getProductsBetweenTwoPrices")
-    public ResponseEntity getProductsBetweenTwoPrices(@RequestParam("from") Integer from,@RequestParam("to") Integer to) {
-        Gson gson = new Gson();
-        LinkedHashSet<Product> products = null;
-        try {
-            products = productService.getProductsBetweenTwoPrices(from,to);
-        } catch (ProductException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
-    }
-
-
     @GetMapping("/orderProductsByName")
     public ResponseEntity orderProductsByName(@RequestParam("orderIn") String orderIn) {
         Gson gson = new Gson();
@@ -190,6 +177,18 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(json);
+    }
+
+    @GetMapping("/getProductsFilteredByPrice")
+    public ResponseEntity getProductsFilteredByPrice(@RequestParam("maxPrice") Integer maxPrice) {
+        Gson gson = new Gson();
+        LinkedHashSet<Product> products = null;
+        try {
+            products = productService.getProductsFilteredByPrice(maxPrice);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
 
 }
