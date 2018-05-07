@@ -42,7 +42,6 @@
             <artifactId>spring-jdbc</artifactId>
             <version>5.0.4.RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>com.cloudinary</groupId>
             <artifactId>cloudinary</artifactId>

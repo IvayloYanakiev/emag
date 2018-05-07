@@ -26,25 +26,39 @@ app.controller("mainController", function ($scope, $location, $routeParams, $htt
         dropdownContent.style.display = "none";
     }
 
-    $scope.MyController = function () {
-        var listOfProducts = document.getElementById("filteredProducts");
-        listOfProducts.style.display = "block";
+    $scope.searchProduct = function search() {
+        var input = document.getElementById("searchBox").value;
+        $location.url("/searchedProduct");
 
-        $http({
-            url: "http://localhost:7377/product" + "/getAllProducts",
-            method: "GET"
-        }).then(function (response) {
-            $scope.products = response.data;
-        }, function (error) {
+            if (input === "") {
+                $scope.hasProducts = false;
+                $scope.informUser = true;
+            } else {
+                $scope.hasProducts = true;
+                $scope.informUser = false;
 
-        });
+                $http({
+                    url: "http://localhost:7377/product" + "/getProductsFilteredByName",
+                    method: "GET",
+                    params: {"searchInput": input}
+                }).then(function (response) {
+                    document.getElementById("searchBox").value = "";
+                    $scope.products = response.data;
+                    var result = $scope.products;
+
+                    if (typeof result != "undefined" && result != null && result.length != null && result.length > 0) {
+                        $scope.hasProducts = true;
+                        $scope.informUser = false;
+                    } else {
+                        $scope.hasProducts = false;
+                        $scope.informUser = true;
+                    }
+                });
+            }
     }
-
-    $scope.goToPage = function (productId) {
-        var listOfFilteredProducts = document.getElementById("filteredProducts");
-        listOfFilteredProducts.style.display = "none";
-        $scope.search = "";
-
-        $location.url("/product/" + productId);
-    }
+    $('#searchBox').keydown(function(e){
+        if(e.keyCode === 13){
+            $scope.searchProduct();
+        }
+    });
 });

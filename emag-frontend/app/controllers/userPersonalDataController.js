@@ -98,7 +98,7 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
             var uploadUrl = "http://localhost:7377/user/updateUserProfilePicture";
             addProfilePictureService.uploadFileToUrl(file, uploadUrl, id).then(function (result) {
                 var url = result.data;
-                $scope.pictureUrl = url;
+                $scope.user.pictureUrl  = url;
                 $('#myModal').modal('hide');
             }, function (err) {
                 $scope.pictureError = true;

@@ -27,5 +27,8 @@ public class Constants {
     public static final int MAX_USER_GENDER_VALUE_LENGTH = 45;
     public static final String SENDER_EMAIL = "emag.7377@gmail.com";
     public static final String EMAIL_SUBJECT_SUBSCRIPTION = "Subscription for eMAG.bg";
+    public static final String EMAIL_SUBJECT_ORDER_INFORMATION = "Order information";
     public static final String EMAIL_TEXT_SUCCESSFUL_SUBSCRIPTION = "Congratulations!\nYou have successfully subscribed to eMAG.bg";
+    public static final String EMAIL_TEXT_SUCCESSFUL_ORDER = "Your order was successful!\nOrder details:\n";
+    public static final String CHOSEN_PAYING_METHOD ="\nMethod of paying: ";
 }

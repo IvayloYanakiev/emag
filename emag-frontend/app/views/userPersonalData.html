@@ -22,7 +22,7 @@
 
 
                                 </div>
-                                <button style="width: 150px" type="button" class="btn btn-default" ng-click="resetPictureError()" data-toggle="modal"
+                                <button style="width: 150px" type="button" class="btn btn-success" ng-click="resetPictureError()" data-toggle="modal"
                                         data-target="#myModal">Update picture
                                 </button>
 
@@ -83,7 +83,7 @@
                                 <label>Mobile phone</label>
                                 <input class="form-control" ng-model="user.phone" disabled>
                             </div>
-                            <button type="button" ng-click="resetError()" class="btn btn-default" data-toggle="modal" data-target="#myModal2">
+                            <button type="button" ng-click="resetError()" class="btn btn-success" data-toggle="modal" data-target="#myModal2">
                                 Update Personal Info
                             </button>
                         </form>
@@ -166,8 +166,8 @@
                             {{address.receiverName}} {{address.receiverPhone}} {{address.city}}
                             {{address.name}} {{address.street}} {{address.floor}}
                             <div class="addressButtons">
-                                <button class="btn btn-default" ng-click="getAddress(address.id)" data-toggle="modal" data-target="#myModal4">Edit</button>
-                                <button class="btn btn-default" ng-click="deleteAddress(address.id)">Delete</button>
+                                <button class="btn btn-warning" ng-click="getAddress(address.id)" data-toggle="modal" data-target="#myModal4">Edit</button>
+                                <button class="btn btn-danger" ng-click="deleteAddress(address.id)">Delete</button>
                             </div>
                         </li>
                     </ul>
@@ -211,7 +211,7 @@
                                     <button type="submit" class="btn btn-success"
                                             ng-click="updateAddress()">Update
                                     </button>
-                                    <button type="button" class="btn btn-default"
+                                    <button type="button" class="btn btn-danger"
                                             ng-click="resetAddresses()">Close
                                     </button>
                                 </div>
@@ -228,7 +228,7 @@
 
                     <fieldset>
                         <form class="col-md-3">
-                            <button type="button" ng-click="resetError()" class="btn btn-default" data-toggle="modal" data-target="#myModal3">
+                            <button type="button" ng-click="resetError()" class="btn btn-success" data-toggle="modal" data-target="#myModal3">
                                 Add address
                             </button>
                         </form>

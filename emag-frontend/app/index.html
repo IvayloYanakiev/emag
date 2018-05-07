@@ -81,17 +81,14 @@
                     <div style="padding-top: 5%" class="col-lg-4 col-12 order-lg-2 order-3 text-lg-left text-right">
                         <div class="header_search">
                             <div class="header_search_content">
-
-                                <div style="position: absolute" ng-keyup="MyController()">
-                                    <input class="form-control" size="70" type="search" ng-model="search" placeholder="Search for product..">
-                                    <ul id="filteredProducts">
-                                        <li ng-click="goToPage(product.id)" ng-repeat="product in products | filter:search">
-                                            {{ product.name }}
-                                        </li>
-                                    </ul>
+                                <div> <!--searchedProductController-->
+                                    <div style="position: absolute">
+                                        <input class="form-control" size="70" required="required" type="text"
+                                               ng-model="search" id="searchBox" placeholder="Search for product..">
+                                    </div>
+                                    <button style="width: 20%; position: absolute; margin-left: 85%" ng-click="searchProduct()"
+                                       class="btn btn-success btn-block">search</button>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -333,7 +330,7 @@
                         <div class="newsletter_title_container">
                             <div class="newsletter_icon"><a ng-href="#/"><img src="./pictures/emag-bg.png" width="150"></a>
                             </div>
-                            <div class="newsletter_title">Sign up for the <latest></latest> updates</div>
+                            <div class="newsletter_title">Sign up for the latest updates</div>
                         </div>
                         <div class="newsletter_content clearfix" ng-controller="subscribeController">
                             <form class="newsletter_form">
@@ -369,6 +366,7 @@
 <script src="controllers/subscribeController.js"></script>
 <script src="controllers/userPersonalDataController.js"></script>
 <script src="controllers/checkoutShoppingCartController.js"></script>
+<script src="controllers/searchedProductController.js"></script>
 <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
 
 </body>

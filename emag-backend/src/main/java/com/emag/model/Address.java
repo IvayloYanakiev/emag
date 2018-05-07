@@ -103,4 +103,13 @@ public class Address {
             throw new AddressException(ConstantsErrorMessages.INVALID_FLOOR_VALUE);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Receiver name: " + receiverName +
+                "\nPhone number: " + receiverPhone +
+                "\nStreet: " + street +
+                "\nFloor: " + floor +
+                "\nCity: " + city;
+    }
 }

@@ -1,10 +1,11 @@
 package com.emag.service;
 
 import com.emag.config.Constants;
+import com.emag.dao.AddressDao;
 import com.emag.dao.SendEmailDao;
-import com.emag.dao.UserDao;
+import com.emag.exception.AddressException;
 import com.emag.exception.EmailException;
-import com.emag.exception.UserException;
+import com.emag.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SendEmailServiceImpl implements SendEmailService {
+
+    @Autowired
+    AddressDao addressDao;
 
     @Autowired
     SendEmailDao sendEmailDao;
@@ -32,6 +36,25 @@ public class SendEmailServiceImpl implements SendEmailService {
         try {
             javaMailSender.send(mailMessage);
         } catch (MailException e) {
+            throw new EmailException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void informUserForOrder(String email, Long addressId, String payingMethod) throws EmailException {
+        try {
+            Address address = addressDao.getAddress(addressId);
+
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setTo(email);
+            mailMessage.setFrom(Constants.SENDER_EMAIL);
+            mailMessage.setSubject(Constants.EMAIL_SUBJECT_ORDER_INFORMATION);
+            mailMessage.setText(Constants.EMAIL_TEXT_SUCCESSFUL_ORDER + address.toString() + Constants.CHOSEN_PAYING_METHOD + payingMethod);
+
+            javaMailSender.send(mailMessage);
+        } catch (MailException e) {
+            throw new EmailException(e.getMessage(), e);
+        } catch (AddressException e) {
             throw new EmailException(e.getMessage(), e);
         }
     }

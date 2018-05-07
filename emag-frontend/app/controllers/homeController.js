@@ -101,6 +101,7 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
 
         });
     };
+
     $scope.goTo = function (productId) {
 
         $location.url("/product/" + productId);
@@ -131,6 +132,19 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
         }, function (error) {
             $scope.error = true;
             $scope.value = error.data;
+        });
+    };
+
+    $scope.orderByPriceDescending = function () {
+        $http({
+            url: "http://localhost:7377/product" + "/orderProductsBy",
+            method: "GET",
+            params: {"by":"desc"}
+        }).
+        then(function (response) {
+            $scope.products = response.data;
+        }, function (error) {
+
         });
     };
 

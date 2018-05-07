@@ -11,10 +11,10 @@ import javax.sql.DataSource;
 public class SpringJdbcConfig {
 
 
-    public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    public static final String JDBC_URL = "jdbc:mysql://localhost:3306/emag";
-    public static final String JDBC_USERNAME = "root";
-    public static final String JDBC_PASS = "7377";
+    private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private final String JDBC_URL = "jdbc:mysql://localhost:3306/emag";
+    private final String JDBC_USERNAME = "root";
+    private final String JDBC_PASS = "7377";
 
     @Bean
     public DataSource dataSource() {

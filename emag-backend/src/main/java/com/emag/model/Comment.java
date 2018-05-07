@@ -2,6 +2,10 @@ package com.emag.model;
 
 import com.emag.exception.CommentException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 public class Comment {
     public static final int MAX_COMMENT_VALUE_LENGTH = 100;
     public static final String INVALID_VALUE_OF_COMMENT = "Invalid value of comment";
@@ -12,7 +16,7 @@ public class Comment {
     private String value;
     private Integer stars;
     private String profileUrl;
-
+    private String creatingDate;
 
     public String getProfileUrl() {
         return profileUrl;
@@ -47,9 +51,17 @@ public class Comment {
         setUserId(userId);
         setValue(value);
         setStars(stars);
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" HH:mm dd-MM-yyyy ");
+        String formatDateTime = now.format(formatter);
+        this.creatingDate = formatDateTime;
     }
 
-    public Comment(Long id, Long productId, Long userId, String namesOfUser, String commentValue, Integer stars, String profileUrl) throws CommentException {
+    public String getCreatingDate() {
+        return creatingDate;
+    }
+
+    public Comment(Long id, Long productId, Long userId, String namesOfUser, String commentValue, Integer stars, String profileUrl,String creatingDate) throws CommentException {
         setId(id);
         setProductId(productId);
         setUserId(userId);
@@ -57,8 +69,14 @@ public class Comment {
         setUserNames(namesOfUser);
         setStars(stars);
         setProfileUrl(profileUrl);
+        setCreatingDate(creatingDate);
     }
 
+    public void setCreatingDate(String creatingDate) throws CommentException {
+        if(creatingDate!=null)
+        this.creatingDate = creatingDate;
+        else throw new CommentException("Bad creation date");
+    }
 
     public Comment(Long id, Long productId, Long userId, String userNames, String value, Integer stars) throws CommentException {
         setId(id);

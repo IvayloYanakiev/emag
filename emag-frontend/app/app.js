@@ -47,6 +47,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/checkoutShoppingCart.html',
             controller: 'checkoutShoppingCartController',
         })
+        .when('/searchedProduct', {
+            templateUrl: 'views/searchedProduct.html',
+            controller: 'searchedProductController'
+        })
         .otherwise('/home');
 
 

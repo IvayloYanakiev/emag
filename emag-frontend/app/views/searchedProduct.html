@@ -1,21 +1,13 @@
-<div class="container" ng-controller="homeController">
-<div>
-    <button class="btn btn-default" ng-click="orderByPriceAscending()"> price ascending order</button>
-    <button class="btn btn-default" ng-click="orderByPriceDescending()"> price descending order</button>
-    <button class="btn btn-default" ng-click="orderByDiscountAscending()"> discount ascending order</button>
-    <button class="btn btn-default" ng-click="orderByDiscountDescending()"> discount descending order</button>
-    <button class="btn btn-default" ng-click="orderByNameAscending()"> name ascending order</button>
-    <button class="btn btn-default" ng-click="orderByNameDescending()"> name descending order</button>
-</div>
+<div  class="container" ng-controller="searchedProductController">
 
-    <div  dir-paginate="product in products | itemsPerPage: 6" class="col-xs-12 col-md-6">
+    <div ng-show="hasProducts" ng-repeat="product in products" class="col-xs-12 col-md-6">
         <div class="prod-info-main prod-wrap clearfix">
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
                         <img src="{{product.pictureURL}}" class="img-responsive rotprod productPictures">
                         <span class="tag2 hot">
-							-{{product.discount}}%
+							  -{{product.discount}}%
 						</span>
                     </div>
                 </div>
@@ -66,7 +58,7 @@
                                         <div class="modal-body">
                                             <form>
                                                 <div class="productPictureContainer product-image">
-                                                        <img src="{{updateProduct.pictureURL}}" class="img-responsive" />
+                                                    <img src="{{updateProduct.pictureURL}}" class="img-responsive" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Name</label>
@@ -127,9 +119,7 @@
             </div>
         </div>
         <!-- end product -->
-
     </div>
-   <div class="dirPaginationHome"> <dir-pagination-controls></dir-pagination-controls></div>
-
+<h3 ng-show="informUser">No products found</h3>
 </div>
 

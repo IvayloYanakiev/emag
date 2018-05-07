@@ -83,22 +83,6 @@ public class ProductController {
         return ResponseEntity.ok(json);
     }
 
-    @GetMapping("/getProductsFromShoppingCart")
-    public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {
-        Gson gson = new Gson();
-        LinkedHashSet<Product> products = new LinkedHashSet<>();
-        if (ids == null || ids.trim().length() == 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(products));
-        }
-        try {
-            products = productService.getProductsFromShoppingCart(ids);
-        } catch (ProductException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(products));
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
-    }
-
-
     @GetMapping("/orderProductsByPrice")
     public ResponseEntity orderProductsByPrice(@RequestParam("orderIn") String orderIn) {
         Gson gson = new Gson();
@@ -134,6 +118,7 @@ public class ProductController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
+
 
     @GetMapping("/orderProductsByName")
     public ResponseEntity orderProductsByName(@RequestParam("orderIn") String orderIn) {
@@ -189,4 +174,20 @@ public class ProductController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
+
+
+    @RequestMapping("/getProductsFilteredByName")
+    public ResponseEntity getProductsFilteredByName(@RequestParam("searchInput") String searchInput) {
+        Gson gson = new Gson();
+        String json = null;
+
+        try {
+            LinkedHashSet<Product> products = productService.getProductsFilteredByName(searchInput);
+            json = gson.toJson(products);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(json);
+    }
+
 }

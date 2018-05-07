@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -26,7 +25,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void addProduct(Product product) throws ProductException {
-        String addProduct = "insert into products(name,picture_url,price,middle_type_id,quantity,description,discount) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description,:discount)";
+        String addProduct = ConstantsSQL.INSERT_INTO_PRODUCTS;
         HashMap<String, Object> params = new HashMap<>();
         params.put("name", product.getName());
         params.put("picture_url", product.getPictureURL());
@@ -69,16 +68,6 @@ public class ProductDaoImpl implements ProductDao {
         } catch (Exception e) {
             throw new ProductException(e.getMessage(), e);
         }
-    }
-
-    @Override
-    public LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException {
-        String productsInCart = ConstantsSQL.GET_PRODUCTS_BY_ID_INTERVAL;
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("ids", ids);
-
-        LinkedHashSet<Product> retrievedProducts = getProducts(productsInCart, params);
-        return retrievedProducts;
     }
 
     private void addProductFromResultToHashSet(ResultSet rs, HashSet<Product> myProducts) throws SQLException {
@@ -124,7 +113,15 @@ public class ProductDaoImpl implements ProductDao {
                                 if (selectedProduct.getCommentsSize() == 0) {
                                     setProductProperties(rs, selectedProduct);
                                 }
-                                selectedProduct.addComment(new Comment(commentId, rs.getLong("user_id"), rs.getLong("product_id"), rs.getString("uname"), rs.getString("value"), rs.getInt("stars")));
+                                selectedProduct.addComment(
+                                        new Comment(
+                                                commentId,
+                                                rs.getLong("user_id"),
+                                                rs.getLong("product_id"),
+                                                rs.getString("uname"), rs.getString("value"),
+                                                rs.getInt("stars"), rs.getString("profile_url"),
+                                                rs.getString("creation_date")
+                                        ));
                             } else {
                                 setProductProperties(rs, selectedProduct);
                             }
@@ -193,6 +190,16 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public LinkedHashSet<Product> getProductsFilteredByName(String searchInput) throws ProductException {
+        searchInput = "%" + searchInput.trim() + "%";
+        String getProducts = ConstantsSQL.GET_PRODUCTS_FILTERED_BY_NAME;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("searchInput", searchInput);
+        LinkedHashSet<Product> products = getProducts(getProducts, params);
+
+        return products;
+    }
+
     public LinkedHashSet<Product> getAllProductsOrderedByDiscount(String orderIn) throws ProductException {
         String getProducts = ConstantsSQL.ORDER_PRODUCTS_BY_DISCOUNT;
         if (orderIn.equals("asc")) {

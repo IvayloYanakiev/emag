@@ -39,29 +39,33 @@
             <div class="panel panel-white post panel-shadow">
                 <div class="post-heading">
                     <div class="pull-left image">
-                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar"
+                        <img src="{{comment.profileUrl}}" class="img-circle avatar productPictureDetails"
                              alt="user profile image">
                     </div>
                     <div class="pull-left meta">
                         <div class="title h5">
                             <a href="#"><b>{{comment.userNames}}</b></a>
                         </div>
-                        <h6 class="text-muted time">1 minute ago</h6>
+                        <h6 class="text-muted time">created on {{comment.creatingDate}}</h6>
+                    </div>
+                    <div class="big-icon" id="{{comment.id}}">
+                        {{iterateStars(comment.stars,comment.id)}}
                     </div>
                 </div>
                 <div class="post-description">
                     <p>{{comment.value}}</p>
                     <div class="stats">
-                        <a href="#" class="btn btn-default stat-item">
-                            <i class="fa fa-thumbs-up icon"></i>2
+                        <a  class="btn btn-default stat-item">
+                            <i class="fa fa-thumbs-up icon"></i>5
                         </a>
-                        <a href="#" class="btn btn-default stat-item">
-                            <i class="fa fa-thumbs-down icon"></i>12
+                        <a  class="btn btn-default stat-item">
+                            <i class="fa fa-thumbs-down icon"></i>1
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 
@@ -98,7 +102,7 @@
                                         <input class="star star-2" ng-value="2" ng-model="comment.stars" id="star-2"
                                                type="radio" name="star"/>
                                         <label class="star star-2" for="star-2"></label>
-                                        <input class="star star-1" id="star-1" type="radio" name="star"/>
+                                        <input class="star star-1" ng-value="1" ng-model="comment.stars" id="star-1" type="radio" name="star"/>
                                         <label class="star star-1" for="star-1"></label>
                                     </form>
                                 </div>
