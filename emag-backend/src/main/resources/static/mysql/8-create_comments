@@ -19,3 +19,12 @@ CREATE TABLE `emag`.`comments` (
 
 ALTER TABLE `emag`.`comments`
 ADD COLUMN `stars` INT(10) NOT NULL AFTER `value`;
+
+ALTER TABLE `emag`.`comments`
+DROP FOREIGN KEY `product_idd`;
+ALTER TABLE `emag`.`comments`
+ADD CONSTRAINT `product_idd`
+  FOREIGN KEY (`product_id`)
+  REFERENCES `emag`.`products` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;

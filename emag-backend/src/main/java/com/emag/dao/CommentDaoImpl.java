@@ -63,8 +63,9 @@ public class CommentDaoImpl implements CommentDao{
                         String commentValue = rs.getString("value");
                         Integer stars = rs.getInt("stars");
                         String namesOfUser = rs.getString("name");
+                        String profileUrl = rs.getString("picture_url");
                         try {
-                            Comment comment = new Comment(id,productId,userId,namesOfUser,commentValue,stars);
+                            Comment comment = new Comment(id,productId,userId,namesOfUser,commentValue,stars,profileUrl);
                             myComments.add(comment);
                         } catch (CommentException e) {
                            throw new SQLException(e.getMessage());

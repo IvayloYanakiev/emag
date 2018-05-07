@@ -11,6 +11,16 @@ public class Comment {
     private String userNames;
     private String value;
     private Integer stars;
+    private String profileUrl;
+
+
+    public String getProfileUrl() {
+        return profileUrl;
+    }
+
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+    }
 
     public Integer getStars() {
         return stars;
@@ -38,6 +48,17 @@ public class Comment {
         setValue(value);
         setStars(stars);
     }
+
+    public Comment(Long id, Long productId, Long userId, String namesOfUser, String commentValue, Integer stars, String profileUrl) throws CommentException {
+        setId(id);
+        setProductId(productId);
+        setUserId(userId);
+        setValue(commentValue);
+        setUserNames(namesOfUser);
+        setStars(stars);
+        setProfileUrl(profileUrl);
+    }
+
 
     public Comment(Long id, Long productId, Long userId, String userNames, String value, Integer stars) throws CommentException {
         setId(id);

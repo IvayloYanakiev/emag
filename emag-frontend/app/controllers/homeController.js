@@ -21,9 +21,9 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
     $rootScope.isAdmin = sessionService.isHeAdmin();
     $scope.orderByPriceAscending = function () {
         $http({
-            url: "http://localhost:7377/product" + "/orderProductsBy",
+            url: "http://localhost:7377/product" + "/orderProductsByPrice",
             method: "GET",
-            params: {"by":"asc"}
+            params: {"orderIn":"asc"}
     }).
         then(function (response) {
             $scope.products = response.data;
@@ -34,9 +34,9 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
 
     $scope.orderByPriceDescending = function () {
         $http({
-            url: "http://localhost:7377/product" + "/orderProductsBy",
+            url: "http://localhost:7377/product" + "/orderProductsByPrice",
             method: "GET",
-            params: {"by":"desc"}
+            params: {"orderIn":"desc"}
         }).
         then(function (response) {
             $scope.products = response.data;
