@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -68,16 +67,6 @@ public class ProductDaoImpl implements ProductDao {
         } catch (Exception e) {
             throw new ProductException(e.getMessage(), e);
         }
-    }
-
-    @Override
-    public LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException {
-        String productsInCart = ConstantsSQL.GET_PRODUCTS_BY_ID_INTERVAL;
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("ids", ids);
-
-        LinkedHashSet<Product> retrievedProducts = getProducts(productsInCart, params);
-        return retrievedProducts;
     }
 
     private void addProductFromResultToHashSet(ResultSet rs, HashSet<Product> myProducts) throws SQLException {
@@ -186,9 +175,9 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderBy) throws ProductException {
+    public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderIn) throws ProductException {
         String getProducts = ConstantsSQL.ORDER_PRODUCTS_BY_PRICE;
-        if (orderBy.equals("asc")) {
+        if (orderIn.equals("asc")) {
             getProducts += " asc";
         } else {
             getProducts += " desc";
@@ -206,6 +195,34 @@ public class ProductDaoImpl implements ProductDao {
         LinkedHashSet<Product> products = getProducts(getProducts, params);
 
         return products;
+    }
+
+    public LinkedHashSet<Product> getAllProductsOrderedByDiscount(String orderIn) throws ProductException {
+        String getProducts = ConstantsSQL.ORDER_PRODUCTS_BY_DISCOUNT;
+        if (orderIn.equals("asc")) {
+            getProducts += " asc";
+        } else {
+            getProducts += " desc";
+        }
+        LinkedHashSet<Product> products = getProducts(getProducts);
+        return products;
+    }
+
+    @Override
+    public LinkedHashSet<Product> getAllProductsOrderedByName(String orderIn) throws ProductException {
+        String getProducts = ConstantsSQL.ORDER_PRODUCTS_BY_NAME;
+        if (orderIn.equals("asc")) {
+            getProducts += " asc";
+        } else {
+            getProducts += " desc";
+        }
+        LinkedHashSet<Product> products = getProducts(getProducts);
+        return products;
+    }
+
+    @Override
+    public LinkedHashSet<Product> getProductsBetweenTwoPrices(Integer from, Integer to) throws ProductException {
+        return null;
     }
 
     private LinkedHashSet<Product> getProducts(String getProducts) throws ProductException {

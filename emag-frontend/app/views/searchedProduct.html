@@ -1,6 +1,6 @@
 <div  class="container" ng-controller="searchedProductController">
 
-    <div ng-show="hasProducts" ng-repeat="product in filteredProducts" class="col-xs-12 col-md-6">
+    <div ng-show="hasProducts" ng-repeat="product in products" class="col-xs-12 col-md-6">
         <div class="prod-info-main prod-wrap clearfix">
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
@@ -120,7 +120,6 @@
         </div>
         <!-- end product -->
     </div>
-
 <h3 ng-show="informUser">No products found</h3>
 </div>
 

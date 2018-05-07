@@ -1,6 +1,6 @@
 var app = angular.module('emag');
 
-app.controller("checkoutShoppingCartController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService) {
+app.controller("checkoutShoppingCartController", function ($rootScope, $q, $scope, $location, $routeParams, $http, sessionService, shoppingCart) {
 
     var allAddresses = function () {
         $http({

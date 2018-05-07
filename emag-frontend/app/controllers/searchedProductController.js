@@ -2,38 +2,6 @@ var app = angular.module('emag');
 
 app.controller("searchedProductController", function ($rootScope, $scope, $location, $routeParams, $http, shoppingCart, sessionService) {
 
-    var input = document.getElementById("searchBox").value;
-    var filteredProducts = function () {
-
-        if (input === "") {
-            $scope.hasProducts = false;
-            $scope.informUser = true;
-        } else {
-            $scope.hasProducts = true;
-            $scope.informUser = false;
-
-
-        $http({
-            url: "http://localhost:7377/product" + "/getProductsFilteredByName",
-            method: "GET",
-            params: {"searchInput": input}
-        }).then(function (response) {
-            document.getElementById("searchBox").value = "";
-            $scope.filteredProducts = response.data;
-            var result = $scope.filteredProducts;
-
-            if (typeof result != "undefined" && result != null && result.length != null && result.length > 0) {
-                $scope.hasProducts = true;
-                $scope.informUser = false;
-            } else {
-                $scope.hasProducts = false;
-                $scope.informUser = true;
-            }
-        });
-        }
-    };
-    filteredProducts();
-
     $scope.addToCart = function (productId) {
         shoppingCart.addEntry(productId);
     };

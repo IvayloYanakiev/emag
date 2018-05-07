@@ -1,7 +1,11 @@
 <div class="container" ng-controller="homeController">
 <div>
-    <button class="btn btn-default" ng-click="orderByPriceAscending()"> ascending order</button>
-    <button class="btn btn-default" ng-click="orderByPriceDescending()"> descending order</button>
+    <button class="btn btn-default" ng-click="orderByPriceAscending()"> price ascending order</button>
+    <button class="btn btn-default" ng-click="orderByPriceDescending()"> price descending order</button>
+    <button class="btn btn-default" ng-click="orderByDiscountAscending()"> discount ascending order</button>
+    <button class="btn btn-default" ng-click="orderByDiscountDescending()"> discount descending order</button>
+    <button class="btn btn-default" ng-click="orderByNameAscending()"> name ascending order</button>
+    <button class="btn btn-default" ng-click="orderByNameDescending()"> name descending order</button>
 </div>
 
     <div ng-repeat="product in products" class="col-xs-12 col-md-6">

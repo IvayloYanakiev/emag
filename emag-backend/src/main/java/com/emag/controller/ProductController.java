@@ -85,35 +85,55 @@ public class ProductController {
         return ResponseEntity.ok(json);
     }
 
-    @GetMapping("/getProductsFromShoppingCart")
-    public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {
-        Gson gson = new Gson();
-        LinkedHashSet<Product> products = new LinkedHashSet<>();
-        if (ids == null || ids.trim().length() == 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(products));
-        }
-        try {
-            products = productService.getProductsFromShoppingCart(ids);
-        } catch (ProductException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(products));
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
-    }
-
-
-
-
-    @GetMapping("/orderProductsBy")
-    public ResponseEntity orderProductsBy(@RequestParam("by") String orderBy) {
+    @GetMapping("/orderProductsByPrice")
+    public ResponseEntity orderProductsByPrice(@RequestParam("orderIn") String orderIn) {
         Gson gson = new Gson();
         LinkedHashSet<Product> products = null;
         try {
-            products = productService.getAllProductsOrderedByPrice(orderBy);
+            products = productService.getAllProductsOrderedByPrice(orderIn);
         } catch (ProductException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
     }
+
+    @GetMapping("/orderProductsByDiscount")
+    public ResponseEntity orderProductsByDiscount(@RequestParam("orderIn") String orderIn) {
+        Gson gson = new Gson();
+        LinkedHashSet<Product> products = null;
+        try {
+            products = productService.getAllProductsOrderedByDiscount(orderIn);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
+    }
+
+    @GetMapping("/getProductsBetweenTwoPrices")
+    public ResponseEntity getProductsBetweenTwoPrices(@RequestParam("from") Integer from,@RequestParam("to") Integer to) {
+        Gson gson = new Gson();
+        LinkedHashSet<Product> products = null;
+        try {
+            products = productService.getProductsBetweenTwoPrices(from,to);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
+    }
+
+
+    @GetMapping("/orderProductsByName")
+    public ResponseEntity orderProductsByName(@RequestParam("orderIn") String orderIn) {
+        Gson gson = new Gson();
+        LinkedHashSet<Product> products = null;
+        try {
+            products = productService.getAllProductsOrderedByName(orderIn);
+        } catch (ProductException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
+    }
+
 
     @GetMapping("/getProductById")
     public ResponseEntity getProductById(@RequestParam("id") Long id) {

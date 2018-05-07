@@ -81,13 +81,13 @@
                     <div style="padding-top: 5%" class="col-lg-4 col-12 order-lg-2 order-3 text-lg-left text-right">
                         <div class="header_search">
                             <div class="header_search_content">
-                                <div  ng-controller="searchedProductController">
+                                <div> <!--searchedProductController-->
                                     <div style="position: absolute">
                                         <input class="form-control" size="70" required="required" type="text"
                                                ng-model="search" id="searchBox" placeholder="Search for product..">
                                     </div>
-                                    <a style="width: 20%; position: absolute; margin-left: 85%" ng-href="#searchedProduct"
-                                       class="btn btn-success btn-block">search</a>
+                                    <button style="width: 20%; position: absolute; margin-left: 85%" ng-click="searchProduct()"
+                                       class="btn btn-success btn-block">search</button>
                                 </div>
                             </div>
                         </div>
@@ -367,6 +367,7 @@
 <script src="controllers/userPersonalDataController.js"></script>
 <script src="controllers/checkoutShoppingCartController.js"></script>
 <script src="controllers/searchedProductController.js"></script>
+<script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
 
 </body>
 
