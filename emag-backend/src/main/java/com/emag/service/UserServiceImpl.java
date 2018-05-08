@@ -1,18 +1,36 @@
 package com.emag.service;
 
+import com.emag.config.Constants;
+import com.emag.config.ConstantsErrorMessages;
+import com.emag.config.SecureTokenGenerator;
 import com.emag.dao.UserDao;
 import com.emag.exception.UserException;
 import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Iterator;
 
 @Service
+@EnableScheduling
 public class UserServiceImpl implements UserService {
+
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @Autowired
+    SecureTokenGenerator secureTokenGenerator;
 
     @Override
     public User findUserById(Long id) throws UserException {
@@ -21,12 +39,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(User data) throws UserException {
-        return userDao.registerUser(data);
+        String token = secureTokenGenerator.nextToken();
+        User user = userDao.registerUser(data, token);
+        sendActivationToken(data.getEmail(), token);
+
+        return user;
+    }
+
+    private void sendActivationToken(String email, String token) throws UserException {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(email);
+        mailMessage.setFrom(Constants.SENDER_EMAIL);
+        mailMessage.setSubject(Constants.ACTIVATE_ACCOUNT);
+        mailMessage.setText(Constants.LINK_FRONTEND_ACTIVATE_ACCOUNT + token);
+        try {
+            javaMailSender.send(mailMessage);
+        } catch (MailException e) {
+            throw new UserException(ConstantsErrorMessages.ERROR_SENDING_ACTIVATION_LINK);
+        }
     }
 
     @Override
     public User findUserByEmail(String email) throws UserException {
-        return userDao.findUserByEmail(email);
+        User user = userDao.findUserByEmail(email);
+        if (user.getIsActivated() == 0) throw new UserException(ConstantsErrorMessages.ACCOUNT_IS_NOT_ACTIVATED);
+        return user;
     }
 
     @Override
@@ -35,9 +72,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void checkDoesGivenUserExists(String email) throws  UserException {
+    public void checkDoesGivenUserExists(String email) throws UserException {
         userDao.checkDoesGivenUserExists(email);
     }
 
+    @Override
+    public void activateAccount(String token) throws UserException {
+        userDao.activateAccount(token);
+    }
+
+    @Scheduled(fixedRate = 600000)
+    private void checkForUnactivatedAccounts() {
+        new Thread(() -> {
+            try {
+                HashSet<User> users = userDao.checkForUnactivatedAccounts();
+                for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); ) {
+                    User user = iterator.next();
+                    sendActivationToken(user.getEmail(), user.getToken());
+                }
+            } catch (UserException e) {
+                //DA SLOJA LOGGER
+            }
+        }).start();
+    }
 
 }

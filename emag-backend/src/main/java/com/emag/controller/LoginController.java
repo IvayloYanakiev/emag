@@ -1,7 +1,6 @@
 package com.emag.controller;
 
 import com.emag.config.Constants;
-import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.UserException;
 import com.emag.model.User;
 import com.emag.service.UserService;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 
 
 @RestController
@@ -32,6 +30,7 @@ public class LoginController {
         try {
             userService.checkDoesGivenUserExists(email, password);
             User user = userService.findUserByEmail(email);
+
             this.session.copyValuesForSession(user);
             json = gson.toJson(user);
         } catch (UserException e) {
