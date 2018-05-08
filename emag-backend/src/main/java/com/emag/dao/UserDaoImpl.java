@@ -1,11 +1,11 @@
 package com.emag.dao;
 
+import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
 import com.emag.exception.UserException;
 import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.HashSet;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -81,6 +82,7 @@ public class UserDaoImpl implements UserDao {
                             user.setName(rs.getString("name"));
                             user.setEmail(rs.getString("email"));
                             user.setType(rs.getInt("isAdmin"));
+                            user.setIsActivated(rs.getInt("isActivated"));
                         } catch (UserException e) {
                             throw new SQLException(e.getMessage());
                         }
@@ -95,13 +97,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User registerUser(User user) throws UserException {
+    public User registerUser(User user, String token) throws UserException {
         String registerUser = ConstantsSQL.ADD_USER;
         HashMap<String, Object> userParams = new HashMap<>();
         userParams.put("name", user.getName());
         userParams.put("email", user.getEmail());
         userParams.put("password", user.getPassword());
-        userParams.put("profileUrl",user.getPictureUrl());
+        userParams.put("profileUrl", user.getPictureUrl());
+        userParams.put("token", token);
         boolean checker = false;
         try {
             checkDoesGivenUserExists(user.getEmail());
@@ -126,6 +129,48 @@ public class UserDaoImpl implements UserDao {
         if (!checkForUser) throw new UserException(ConstantsErrorMessages.NO_SUCH_USER);
     }
 
+    @Override
+    public void activateAccount(String token) throws UserException {
+        String activateAccount = ConstantsSQL.ACTIVATE_REGISTERED_ACCOUNT;
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("token", token);
+        try {
+            jdbcTemplate.update(activateAccount, params);
+        } catch (Exception e) {
+            throw new UserException(ConstantsErrorMessages.PROBLEM_ACTIVATING_ACCOUNT);
+        }
+    }
+
+    @Override
+    public HashSet<User> checkForUnactivatedAccounts() throws UserException {
+        String getUnactivatedUsers = Constants.SELECT_FROM_USERS_WHERE_IS_ACTIVATED_0;
+        HashSet<User> users;
+        try {
+            users = jdbcTemplate.query(getUnactivatedUsers, new ResultSetExtractor<HashSet<User>>() {
+
+                @Override
+                public HashSet<User> extractData(ResultSet rs) throws SQLException {
+                    HashSet<User> myUsers = new HashSet<>();
+
+                    while (rs.next()) {
+                        try {
+                            User user = new User();
+                            user.setEmail(rs.getString("email"));
+                            user.setToken(rs.getString("token"));
+                            myUsers.add(user);
+                        } catch (UserException e) {
+                            throw new SQLException(e.getMessage());
+                        }
+                    }
+                    return myUsers;
+                }
+            });
+        } catch (Exception e) {
+            throw new UserException(e.getMessage(), e);
+        }
+        return users;
+    }
+
     public void checkDoesGivenUserExists(String email, String password) throws UserException {
         String checkForUserRequest = ConstantsSQL.SELECT_USER_BY_EMAIL_AND_PASS;
 
@@ -138,19 +183,19 @@ public class UserDaoImpl implements UserDao {
 
     private Boolean checkForUser(String checkForUserRequest, HashMap<String, Object> userParams) throws UserException {
         Boolean checkForUser;
-        try{
+        try {
             checkForUser = jdbcTemplate.query(checkForUserRequest, userParams, new ResultSetExtractor<Boolean>() {
 
-            @Override
-            public Boolean extractData(ResultSet rs) throws SQLException {
-                if (rs.next()) {
-                    return true;
+                @Override
+                public Boolean extractData(ResultSet rs) throws SQLException {
+                    if (rs.next()) {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });}
-        catch(Exception e){
-            throw new UserException(e.getMessage(),e);
+            });
+        } catch (Exception e) {
+            throw new UserException(e.getMessage(), e);
         }
         return checkForUser;
     }

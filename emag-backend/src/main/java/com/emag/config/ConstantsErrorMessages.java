@@ -48,4 +48,9 @@ public class ConstantsErrorMessages {
     public static final String INVALID_USER_ID = "Invalid user id";
     public static final String INVALID_IMAGE_TYPE = "Invalid image type";
     public static final String INVALID_FILE_TYPE = "Invalid file type";
+    public static final String ERROR_SENDING_ACTIVATION_LINK = "error sending activation link";
+    public static final String PROBLEM_ACTIVATING_ACCOUNT = "problem activating account";
+    public static final String INVALID_ACTIVATION_NUMBER = "Invalid user isActivated number ";
+    public static final String ACCOUNT_IS_NOT_ACTIVATED = "Account is not activated";
+    public static final String INVALID_TOKEN = "Invalid token";
 }

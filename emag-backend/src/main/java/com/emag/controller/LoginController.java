@@ -29,6 +29,7 @@ public class LoginController {
         try {
             userService.checkDoesGivenUserExists(email, password);
             User user = userService.findUserByEmail(email);
+
             this.session.copyValuesForSession(user);
             json = gson.toJson(user);
         } catch (UserException e) {

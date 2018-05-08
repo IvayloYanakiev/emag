@@ -18,7 +18,6 @@ public class RegisterController {
 
     @Autowired
     UserService userService;
-
     @Autowired
     EmagCloud myCloud;
 
@@ -41,7 +40,18 @@ public class RegisterController {
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.CHECK_YOUR_EMAIL_FOR_ACTIVATION_LINK));
+    }
+
+    @PostMapping("/activateAccount")
+    public ResponseEntity register(@RequestParam("token") String token) {
+        Gson gson = new Gson();
+        try {
+            userService.activateAccount(token);
+        } catch (UserException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.ACTIVATION_SUCCESS));
     }
 
 

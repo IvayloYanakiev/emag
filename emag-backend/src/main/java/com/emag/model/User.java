@@ -14,6 +14,8 @@ import java.util.regex.Matcher;
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 @ComponentScan("com.emag")
 public class User {
+
+
     private Long id;
     private String name;
     private String password;
@@ -22,6 +24,8 @@ public class User {
     private String gender;
     private String phone;
     private Integer type;
+    private Integer isActivated;
+    private String token;
 
     public User() {
     }
@@ -88,6 +92,16 @@ public class User {
         }
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) throws UserException {
+        if(token!=null && token.trim().length()>0)
+        this.token = token;
+        else throw new UserException(ConstantsErrorMessages.INVALID_TOKEN);
+    }
+
     public String getEmail() {
         return email;
     }
@@ -110,6 +124,16 @@ public class User {
         } else {
             throw new UserException(ConstantsErrorMessages.INVALID_TYPE);
         }
+    }
+
+    public Integer getIsActivated() {
+        return isActivated;
+    }
+
+    public void setIsActivated(Integer isActivated) throws UserException {
+        if(isActivated!=null && (isActivated==0 || isActivated==1))
+        this.isActivated = isActivated;
+        else throw new UserException(ConstantsErrorMessages.INVALID_ACTIVATION_NUMBER);
     }
 
     public void setPictureUrl(String pictureUrl) throws UserException {

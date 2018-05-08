@@ -25,6 +25,10 @@ app.config(function ($routeProvider) {
             controller: 'userPersonalDataController',
             css: 'css/userPersonalData.css'
         })
+        .when('/activateAccount/:token', {
+            templateUrl: 'views/activateAccount.html',
+            controller: 'activateAccountController'
+        })
         .when('/shoppingCart', {
             templateUrl: 'views/shoppingCart.html',
             controller: 'shoppingCartController',

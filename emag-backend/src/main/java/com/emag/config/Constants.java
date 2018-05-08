@@ -36,4 +36,10 @@ public class Constants {
     public static final int MAX_STARS_VALUE = 5;
     public static final String DATE_AND_TIME_FORMATTER =  " HH:mm dd-MM-yyyy ";
     public static final String FILE_PATH_NAME = "D:\\emagPictures\\";
+    public static final String CHECK_YOUR_EMAIL_FOR_ACTIVATION_LINK = "Check your email for activation link";
+    public static final String ACTIVATE_ACCOUNT = "Activate account";
+    public static final String LINK_FRONTEND_ACTIVATE_ACCOUNT = "To activate your account please click on the link below: \n http://localhost:63342/emag-frontend/app/index.html?_ijt=ov0j7am0hja4huk7t57pv0mj0u#/activateAccount/";
+    public static final String ACTIVATION_SUCCESS = "Activation success";
+    public static final String SELECT_FROM_USERS_WHERE_IS_ACTIVATED_0 = "select * from users where isActivated = 0";
+
 }

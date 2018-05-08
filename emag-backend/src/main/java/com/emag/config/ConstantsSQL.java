@@ -3,7 +3,7 @@ package com.emag.config;
 public class ConstantsSQL {
     public static final String FIND_USER_BY_ID = "select * from users where id=:id";
     public static final String FIND_USER_BY_EMAIL = "select * from users where email=:email";
-    public static final String ADD_USER = "insert into users(name,email,password,profile_url) values(:name,:email,sha1(:password),:profileUrl)";
+    public static final String ADD_USER = "insert into users(name,email,password,profile_url,token) values(:name,:email,sha1(:password),:profileUrl,:token)";
     public static final String SELECT_USER_BY_EMAIL_AND_PASS = "select * from users where email=:email and password = sha1(:password);";
     public static final String GET_ALL_CATEGORIES = "select main.id as id,main.name as main_name,middle.id as middle_id,middle.name as middle_name from main_type as main join middle_type as middle on main.id = middle.main_type_id";
     public static final String INSERT_INTO_ADDRESSES = "insert into addresses(receiver_name,receiver_phone,city,street,floor) values (:receiverName,:receiverPhone,:city,:street,:floor); ";
@@ -29,4 +29,5 @@ public class ConstantsSQL {
     public static final String GET_PRODUCTS_FILTERED_BY_PRICE =  "select * from products where price <= :maxPrice";
     public static final String INSERT_INTO_COMMENTS =  "insert into comments(user_id,product_id,value,stars,creation_date) values(:user_id,:product_id,:commentValue,:stars,:creationDate)";
     public static final String GET_ALL_COMMENTS = "select * from comments c join users u on c.user_id = u.id where product_id=:product_id order by c.id";
+    public static final String ACTIVATE_REGISTERED_ACCOUNT = "update users set isActivated = 1,token = null where token=:token";
 }

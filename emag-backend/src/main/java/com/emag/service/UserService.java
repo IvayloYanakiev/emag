@@ -9,4 +9,6 @@ public interface UserService {
      User findUserByEmail(String email) throws UserException ;
      void checkDoesGivenUserExists(String email,String password) throws  UserException;
      void checkDoesGivenUserExists(String email) throws  UserException;
+
+     void activateAccount(String token) throws UserException;
 }
