@@ -27,4 +27,5 @@ public class ConstantsSQL {
     public static final String INSERT_INTO_PRODUCTS = "insert into products(name,picture_url,price,middle_type_id,quantity,description,discount) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description,:discount)";
     public static final String GET_PRODUCTS_FILTERED_BY_NAME = "select * from products where name LIKE :searchInput";
     public static final String GET_PRODUCTS_FILTERED_BY_PRICE =  "select * from products where price <= :maxPrice";
+    public static final String SELECT_FROM_USERS_WHERE_IS_ACTIVATED_0 = "select * from users where isActivated = 0";
 }

@@ -148,7 +148,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public HashSet<User> checkForUnactivatedAccounts() throws UserException {
-        String getUnactivatedUsers = Constants.SELECT_FROM_USERS_WHERE_IS_ACTIVATED_0;
+        String getUnactivatedUsers = ConstantsSQL.SELECT_FROM_USERS_WHERE_IS_ACTIVATED_0;
         HashSet<User> users;
         try {
             users = jdbcTemplate.query(getUnactivatedUsers, new ResultSetExtractor<HashSet<User>>() {
