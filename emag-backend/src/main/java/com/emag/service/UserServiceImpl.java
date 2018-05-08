@@ -6,8 +6,6 @@ import com.emag.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -38,6 +36,5 @@ public class UserServiceImpl implements UserService {
     public void checkDoesGivenUserExists(String email) throws  UserException {
         userDao.checkDoesGivenUserExists(email);
     }
-
 
 }

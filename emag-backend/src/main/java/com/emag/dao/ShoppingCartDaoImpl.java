@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
@@ -21,7 +22,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException {
+    public Collection<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException {
         String productsInCart = ConstantsSQL.GET_PRODUCTS_BY_ID_INTERVAL;
         HashMap<String, Object> params = new HashMap<>();
         params.put("ids", ids);

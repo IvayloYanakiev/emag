@@ -4,9 +4,6 @@ package com.emag.dao;
 import com.emag.exception.UserException;
 import com.emag.model.User;
 
-import java.sql.SQLException;
-
-
 public interface UserDao {
     User findUserById(Long id) throws UserException;
     User findUserByEmail(String email) throws UserException;

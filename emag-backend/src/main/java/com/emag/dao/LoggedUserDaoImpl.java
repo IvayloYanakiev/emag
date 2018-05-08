@@ -28,7 +28,7 @@ public class LoggedUserDaoImpl implements LoggedUserDao {
         params.put("gender", user.getGender());
         try {
             jdbcTemplate.update(updateUserPersonalInfo, params);
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             throw new UserException(ConstantsErrorMessages.ERROR_UPDATING_USER, e);
         }
     }
@@ -41,7 +41,7 @@ public class LoggedUserDaoImpl implements LoggedUserDao {
         params.put("profile_url", pictureUrl);
         try {
             jdbcTemplate.update(updateUserProfilePicture, params);
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             throw new UserException(ConstantsErrorMessages.ERROR_UPDATING_USER);
         }
     }

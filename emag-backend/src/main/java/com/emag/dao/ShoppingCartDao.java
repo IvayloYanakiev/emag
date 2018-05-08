@@ -4,8 +4,8 @@ import com.emag.exception.ProductException;
 import com.emag.model.Product;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.Collection;
 
 public interface ShoppingCartDao {
-    LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException;
+    Collection<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException;
 }

@@ -1,5 +1,7 @@
 package com.emag.model;
 
+import com.emag.config.Constants;
+import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.CommentException;
 
 import java.time.LocalDateTime;
@@ -7,8 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 
 public class Comment {
-    public static final int MAX_COMMENT_VALUE_LENGTH = 100;
-    public static final String INVALID_VALUE_OF_COMMENT = "Invalid value of comment";
     private Long id;
     private Long productId;
     private Long userId;
@@ -31,9 +31,9 @@ public class Comment {
     }
 
     public void setStars(Integer stars) throws CommentException {
-        if (stars!=null && stars > -1 && stars<6)
+        if (stars != null && stars >= 0 && stars <= Constants.MAX_STARS_VALUE)
             this.stars = stars;
-        else throw new CommentException("Invalid comment stars");
+        else throw new CommentException(ConstantsErrorMessages.INVALID_COMMENT_STARS);
     }
 
     public String getUserNames() {
@@ -41,9 +41,9 @@ public class Comment {
     }
 
     public void setUserNames(String userNames) throws CommentException {
-        if (userNames != null && userNames.trim().length() > 0) {
+        if (userNames != null && userNames.trim().length() > 0 && userNames.length() <= Constants.MAX_USER_NAME_LENGTH) {
             this.userNames = userNames;
-        } else throw new CommentException("Invalid names of user comment");
+        } else throw new CommentException(ConstantsErrorMessages.INVALID_USER_NAMES_OF_COMMENT);
     }
 
     public Comment(Long productId, Long userId, String value, Integer stars) throws CommentException {
@@ -52,7 +52,7 @@ public class Comment {
         setValue(value);
         setStars(stars);
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" HH:mm dd-MM-yyyy ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.DATE_AND_TIME_FORMATTER);
         String formatDateTime = now.format(formatter);
         this.creatingDate = formatDateTime;
     }
@@ -73,9 +73,9 @@ public class Comment {
     }
 
     public void setCreatingDate(String creatingDate) throws CommentException {
-        if(creatingDate!=null)
-        this.creatingDate = creatingDate;
-        else throw new CommentException("Bad creation date");
+        if (creatingDate != null)
+            this.creatingDate = creatingDate;
+        else throw new CommentException(ConstantsErrorMessages.INVALID_CREATION_DATE);
     }
 
     public Comment(Long id, Long productId, Long userId, String userNames, String value, Integer stars) throws CommentException {
@@ -87,15 +87,14 @@ public class Comment {
         setStars(stars);
     }
 
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) throws CommentException {
-        if (id > -1)
+        if (id != null && id > -1)
             this.id = id;
-        else throw new CommentException("Invalid comment id");
+        else throw new CommentException(ConstantsErrorMessages.INVALID_COMMENT_ID);
     }
 
     public Long getProductId() {
@@ -103,9 +102,9 @@ public class Comment {
     }
 
     public void setProductId(Long productId) throws CommentException {
-        if (productId > -1)
+        if (productId != null && productId > -1)
             this.productId = productId;
-        else throw new CommentException("Invalid product id");
+        else throw new CommentException(ConstantsErrorMessages.INVALID_PRODUCT_ID);
     }
 
     public Long getUserId() {
@@ -113,9 +112,9 @@ public class Comment {
     }
 
     public void setUserId(Long userId) throws CommentException {
-        if (userId > -1)
+        if (userId != null && userId > -1)
             this.userId = userId;
-        else throw new CommentException("Invalid user id");
+        else throw new CommentException(ConstantsErrorMessages.INVALID_USER_ID);
     }
 
     public String getValue() {
@@ -123,8 +122,8 @@ public class Comment {
     }
 
     public void setValue(String value) throws CommentException {
-        if (value != null && value.trim().length() > 0 && value.trim().length() <= MAX_COMMENT_VALUE_LENGTH) {
+        if (value != null && value.trim().length() > 0 && value.trim().length() <= Constants.MAX_COMMENT_VALUE_LENGTH) {
             this.value = value;
-        } else throw new CommentException(INVALID_VALUE_OF_COMMENT);
+        } else throw new CommentException(ConstantsErrorMessages.INVALID_VALUE_OF_COMMENT);
     }
 }

@@ -94,7 +94,7 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
     };
     $scope.removeProduct = function (productId) {
         $http({
-            url: "http://localhost:7377/product" + "/removeProductById",
+            url: "http://localhost:7377/admin" + "/removeProductById",
             method: "DELETE",
             params: {"id": productId}
         }).then(function (response) {
@@ -117,7 +117,7 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
         $scope.error = false;
 
         $http({
-            url: "http://localhost:7377/product" + "/updateProduct",
+            url: "http://localhost:7377/admin" + "/updateProduct",
             method: "PUT",
             params: {
                 "id":  $scope.updateProduct.id,

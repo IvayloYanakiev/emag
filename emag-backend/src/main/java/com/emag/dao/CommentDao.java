@@ -8,6 +8,5 @@ import java.util.Collection;
 
 public interface CommentDao {
     void addProductComment(Comment comment) throws CommentException;
-
     Collection<Comment> getAllComments(Long productId) throws CommentException;
 }

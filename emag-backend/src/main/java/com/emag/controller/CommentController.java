@@ -1,6 +1,5 @@
 package com.emag.controller;
 
-import com.emag.config.Constants;
 import com.emag.exception.CommentException;
 import com.emag.model.Comment;
 import com.emag.service.CommentService;

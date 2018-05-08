@@ -1,5 +1,7 @@
 package com.emag.dao;
 
+import com.emag.config.ConstantsErrorMessages;
+import com.emag.config.ConstantsSQL;
 import com.emag.exception.CommentException;
 import com.emag.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +20,12 @@ import java.util.LinkedHashSet;
 
 public class CommentDaoImpl implements CommentDao{
 
-    public static final String ADDING_COMMENT_FAILED = "adding comment failed";
-    public static final String PROBLEM_GETTING_COMMENTS = "problem getting comments";
-    public static final String GET_ALL_COMMENTS = "select * from comments c " +
-            " join users u" +
-            " on c.user_id = u.id" +
-            " where product_id=:product_id" +
-            " order by c.id";
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
     public void addProductComment(Comment comment) throws CommentException {
-        String insertComment = "insert into comments(user_id,product_id,value,stars,creation_date) values(:user_id,:product_id,:commentValue,:stars,:creationDate)";
+        String insertComment = ConstantsSQL.INSERT_INTO_COMMENTS;
         HashMap<String,Object> params = new HashMap<>();
         params.put("user_id",comment.getUserId());
         params.put("product_id",comment.getProductId());
@@ -39,14 +34,14 @@ public class CommentDaoImpl implements CommentDao{
         params.put("creationDate",comment.getCreatingDate());
         try{
             jdbcTemplate.update(insertComment,params);
-        }catch (DataAccessException e){
-            throw new CommentException(ADDING_COMMENT_FAILED,e);
+        }catch (Exception e){
+            throw new CommentException(ConstantsErrorMessages.ADDING_COMMENT_FAILED,e);
         }
     }
 
     @Override
     public Collection<Comment> getAllComments(Long productId) throws CommentException {
-        String getAllComments = GET_ALL_COMMENTS;
+        String getAllComments = ConstantsSQL.GET_ALL_COMMENTS;
         HashMap<String, Object> params = new HashMap<>();
         params.put("product_id", productId);
        Collection<Comment> comments = null;
@@ -72,14 +67,12 @@ public class CommentDaoImpl implements CommentDao{
                         } catch (CommentException e) {
                            throw new SQLException(e.getMessage());
                         }
-
                     }
                     return myComments;
-
                 }
             });
         } catch (Exception e) {
-            throw new CommentException(PROBLEM_GETTING_COMMENTS, e);
+            throw new CommentException(ConstantsErrorMessages.PROBLEM_GETTING_COMMENTS, e);
         }
         return comments;
     }

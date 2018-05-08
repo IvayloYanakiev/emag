@@ -22,7 +22,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findUserById(Long id) throws UserException {
-
         String getUserById = ConstantsSQL.FIND_USER_BY_ID;
 
         HashMap<String, Object> userParams = new HashMap<>();
@@ -110,14 +109,13 @@ public class UserDaoImpl implements UserDao {
         } catch (UserException e) {
             try {
                 jdbcTemplate.update(registerUser, userParams);
-            } catch (DataAccessException ex) {
+            } catch (Exception ex) {
                 throw new UserException(ex.getMessage(), e);
             }
         }
         if (checker) throw new UserException(ConstantsErrorMessages.USER_ALREADY_EXISTS);
         return user;
     }
-    
 
     public void checkDoesGivenUserExists(String email) throws UserException {
         String checkForUserRequest = ConstantsSQL.FIND_USER_BY_EMAIL;
@@ -127,7 +125,6 @@ public class UserDaoImpl implements UserDao {
         Boolean checkForUser = checkForUser(checkForUserRequest, userParams);
         if (!checkForUser) throw new UserException(ConstantsErrorMessages.NO_SUCH_USER);
     }
-
 
     public void checkDoesGivenUserExists(String email, String password) throws UserException {
         String checkForUserRequest = ConstantsSQL.SELECT_USER_BY_EMAIL_AND_PASS;

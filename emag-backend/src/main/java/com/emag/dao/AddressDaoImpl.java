@@ -6,7 +6,6 @@ import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
 import com.emag.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -17,6 +16,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
@@ -56,11 +56,10 @@ public class AddressDaoImpl implements AddressDao {
                 }
             }
         });
-
     }
 
     @Override
-    public LinkedHashSet<Address> getAllAddresses(Long userId) throws AddressException {
+    public Collection<Address> getAllAddresses(Long userId) throws AddressException {
 
         String getAllAddresses = ConstantsSQL.GET_ALL_ADDRESSES;
         HashMap<String, Object> params = new HashMap<>();
@@ -89,7 +88,6 @@ public class AddressDaoImpl implements AddressDao {
                         }
                     }
                     return myAddresses;
-
                 }
             });
         } catch (Exception e) {
@@ -110,7 +108,7 @@ public class AddressDaoImpl implements AddressDao {
         params.put("floor", address.getFloor());
         try {
             jdbcTemplate.update(updateAddress, params);
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             throw new AddressException(ConstantsErrorMessages.ERROR_UPDATING_ADDRESS, e);
         }
     }
@@ -146,7 +144,6 @@ public class AddressDaoImpl implements AddressDao {
         } catch (Exception e) {
             throw new AddressException(e.getMessage(), e);
         }
-
         return addressById;
     }
 
@@ -157,10 +154,9 @@ public class AddressDaoImpl implements AddressDao {
         params.put("addressId", addressId);
         try {
             jdbcTemplate.update(deleteAddress, params);
-        } catch (DataAccessException e) {
+        } catch (Exception e){
             throw new AddressException(ConstantsErrorMessages.ERROR_DELETING_ADDRESS, e);
         }
     }
-
 
 }

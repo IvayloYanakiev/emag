@@ -1,7 +1,6 @@
 package com.emag.controller;
 
 import com.emag.config.Constants;
-import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.UserException;
 import com.emag.model.User;
 import com.emag.service.UserService;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.SQLException;
 
 
 @RestController
@@ -37,13 +34,11 @@ public class LoginController {
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
     @GetMapping("/getUserPageByEmail")
     public ResponseEntity getUserPageByEmail(@RequestParam("email") String email) {
-
         Gson gson = new Gson();
         String json = null;
 
@@ -53,14 +48,11 @@ public class LoginController {
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
-
     @GetMapping("/getUserPageById")
     public ResponseEntity getUserPageById(@RequestParam("id") Long id) {
-
         JSONObject obj = new JSONObject();
         Gson gson = new Gson();
         try {

@@ -6,7 +6,6 @@ import com.emag.exception.UserException;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Matcher;
@@ -26,7 +25,6 @@ public class User {
 
     public User() {
     }
-
 
     public User(String name, String password, String email) throws UserException {
         setName(name);
@@ -107,7 +105,7 @@ public class User {
     }
 
     public void setType(Integer type) throws UserException {
-        if (type != null && (type == 0 || type==1)) {
+        if (type != null && (type == 0 || type == 1)) {
             this.type = type;
         } else {
             throw new UserException(ConstantsErrorMessages.INVALID_TYPE);
@@ -163,6 +161,7 @@ public class User {
         this.setName(user.getName());
         this.setEmail(user.getEmail());
     }
+
     private boolean validateEmail(String emailStr) {
         Matcher matcher = Constants.VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();

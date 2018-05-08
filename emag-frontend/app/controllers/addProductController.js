@@ -10,7 +10,7 @@ app.controller("addProductController", function ($rootScope, $q, $scope, $locati
             var file = $scope.myFile;
             $scope.success = false;
             $scope.error = false;
-            var uploadUrl = "http://localhost:7377/product/addProduct";
+            var uploadUrl = "http://localhost:7377/admin/addProduct";
             productUploadService.uploadFileToUrl(file, uploadUrl, $scope.product).then(function (result) {
                 $location.url("/");
             }, function (err) {

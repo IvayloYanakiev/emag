@@ -37,4 +37,15 @@ public class ConstantsErrorMessages {
     public static final String INVALID_PRODUCT_DISCOUNT = "Invalid product discount";
     public static final String UNSUCCESSFUL_PRODUCT_DELETING = "Deleting product unsuccessful";
     public static final String UNSUCCESSFUL_PRODUCT_UPDATING = "Updating product unsuccessful";
+    public static final String ADDING_COMMENT_FAILED = "Adding comment failed";
+    public static final String PROBLEM_GETTING_COMMENTS = "Problem getting comments";
+    public static final String ERROR_ADDING_PRODUCT = "Error adding product";
+    public static final String INVALID_VALUE_OF_COMMENT = "Invalid value of comment";
+    public static final String INVALID_COMMENT_STARS = "Invalid comment stars";
+    public static final String INVALID_USER_NAMES_OF_COMMENT = "Invalid names of user comment";
+    public static final String INVALID_CREATION_DATE = "Invalid creation date";
+    public static final String INVALID_COMMENT_ID = "Invalid comment id";
+    public static final String INVALID_USER_ID = "Invalid user id";
+    public static final String INVALID_IMAGE_TYPE = "Invalid image type";
+    public static final String INVALID_FILE_TYPE = "Invalid file type";
 }

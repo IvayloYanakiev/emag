@@ -27,4 +27,6 @@ public class ConstantsSQL {
     public static final String INSERT_INTO_PRODUCTS = "insert into products(name,picture_url,price,middle_type_id,quantity,description,discount) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description,:discount)";
     public static final String GET_PRODUCTS_FILTERED_BY_NAME = "select * from products where name LIKE :searchInput";
     public static final String GET_PRODUCTS_FILTERED_BY_PRICE =  "select * from products where price <= :maxPrice";
+    public static final String INSERT_INTO_COMMENTS =  "insert into comments(user_id,product_id,value,stars,creation_date) values(:user_id,:product_id,:commentValue,:stars,:creationDate)";
+    public static final String GET_ALL_COMMENTS = "select * from comments c join users u on c.user_id = u.id where product_id=:product_id order by c.id";
 }
