@@ -6,61 +6,78 @@ import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
 import com.emag.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
+import org.apache.log4j.Logger;
+
 @Repository
 public class AddressDaoImpl implements AddressDao {
+
+
+    private static final Logger logger = Logger.getLogger(AddressDaoImpl.class);
+
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
-    DataSourceTransactionManager transactionManager;
+    private DataSourceTransactionManager transactionManager;
 
     @Override
-    public void addAddress(Long userId, Address address) {
+    public Long addAddress(Long userId, Address address) {
 
         TransactionTemplate tx = new TransactionTemplate(transactionManager);
-        String insertIntoAddresses = ConstantsSQL.INSERT_INTO_ADDRESSES;
         String insertIntoUserAddresses = ConstantsSQL.INSERT_INTO_USER_ADDRESSES;
 
         HashMap<String, Object> addressParam = new HashMap<>();
         addressParam.put("userId", userId);
-        addressParam.put("receiverName", address.getReceiverName());
-        addressParam.put("receiverPhone", address.getReceiverPhone());
-        addressParam.put("city", address.getCity());
-        addressParam.put("street", address.getStreet());
-        addressParam.put("floor", address.getFloor());
+        GeneratedKeyHolder holder = new GeneratedKeyHolder();
+
 
         tx.execute(new TransactionCallbackWithoutResult() {
 
             protected void doInTransactionWithoutResult(TransactionStatus status) {
                 try {
-                    jdbcTemplate.update(insertIntoAddresses, addressParam);
+                    jdbcTemplate.getJdbcOperations().update(new PreparedStatementCreator() {
+                        @Override
+                        public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                            PreparedStatement statement = con.prepareStatement(ConstantsSQL.INSERT_INTO_ADDRESSES, Statement.RETURN_GENERATED_KEYS);
+                            statement.setString(1, address.getReceiverName());
+                            statement.setString(2, address.getReceiverPhone());
+                            statement.setString(3, address.getCity());
+                            statement.setString(4, address.getStreet());
+                            statement.setInt(5, address.getFloor());
+                            return statement;
+                        }
+                    }, holder);
+                    long addressId = holder.getKey().longValue();
+                    addressParam.put("addressId",addressId);
                     jdbcTemplate.update(insertIntoUserAddresses, addressParam);
                 } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
+                    logger.error(ex.getMessage());
                     status.setRollbackOnly();
                 }
             }
         });
-
+        long addressId = holder.getKey().longValue();
+        return addressId;
     }
 
     @Override
-    public LinkedHashSet<Address> getAllAddresses(Long userId) throws AddressException {
+    public Collection<Address> getAllAddresses(Long userId) throws AddressException {
 
         String getAllAddresses = ConstantsSQL.GET_ALL_ADDRESSES;
         HashMap<String, Object> params = new HashMap<>();
@@ -85,14 +102,15 @@ public class AddressDaoImpl implements AddressDao {
                             Address address = new Address(addressId, receiverName, receiverPhone, city, street, floor);
                             myAddresses.add(address);
                         } catch (AddressException e) {
+                            logger.error(e.getMessage());
                             throw new SQLException(e.getMessage());
                         }
                     }
                     return myAddresses;
-
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new AddressException(e.getMessage(), e);
         }
         return addresses;
@@ -110,7 +128,8 @@ public class AddressDaoImpl implements AddressDao {
         params.put("floor", address.getFloor());
         try {
             jdbcTemplate.update(updateAddress, params);
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new AddressException(ConstantsErrorMessages.ERROR_UPDATING_ADDRESS, e);
         }
     }
@@ -144,9 +163,9 @@ public class AddressDaoImpl implements AddressDao {
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new AddressException(e.getMessage(), e);
         }
-
         return addressById;
     }
 
@@ -157,10 +176,10 @@ public class AddressDaoImpl implements AddressDao {
         params.put("addressId", addressId);
         try {
             jdbcTemplate.update(deleteAddress, params);
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new AddressException(ConstantsErrorMessages.ERROR_DELETING_ADDRESS, e);
         }
     }
-
 
 }

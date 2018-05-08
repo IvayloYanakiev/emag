@@ -3,6 +3,7 @@ package com.emag.dao;
 import com.emag.config.ConstantsSQL;
 import com.emag.exception.ProductException;
 import com.emag.model.Product;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
@@ -20,13 +22,16 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    private static final Logger logger = Logger.getLogger(ShoppingCartDaoImpl.class);
+
     @Override
-    public LinkedHashSet<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException {
+    public Collection<Product> getProductsFromShoppingCart(ArrayList<Long> ids) throws ProductException {
         String productsInCart = ConstantsSQL.GET_PRODUCTS_BY_ID_INTERVAL;
         HashMap<String, Object> params = new HashMap<>();
         params.put("ids", ids);
-
-        LinkedHashSet<Product> retrievedProducts =  jdbcTemplate.query(productsInCart, params, new ResultSetExtractor<LinkedHashSet<Product>>() {
+        LinkedHashSet<Product> retrievedProducts=null;
+        try{
+            retrievedProducts =  jdbcTemplate.query(productsInCart, params, new ResultSetExtractor<LinkedHashSet<Product>>() {
             @Override
             public LinkedHashSet<Product> extractData(ResultSet rs) throws SQLException {
                 LinkedHashSet<Product> myProducts = new LinkedHashSet<>();
@@ -45,12 +50,17 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
                         Product product = new Product(id, name, pictureUrl, price, middleTypeId, quantity, description, discount);
                         myProducts.add(product);
                     } catch (ProductException e) {
+                        logger.error(e.getMessage());
                         throw new SQLException(e.getMessage());
                     }
                 }
                 return myProducts;
             }
-        });
+        });}
+        catch (Exception e){
+            logger.error(e.getMessage());
+            throw new ProductException(e.getMessage());
+        }
         return retrievedProducts;
     }
 

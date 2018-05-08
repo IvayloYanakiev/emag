@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/category")
@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class CategoryController {
 
     @Autowired
-    CategoryService categoryService;
+   private  CategoryService categoryService;
 
    @GetMapping("/getAllCategories")
     public ResponseEntity getAllCategories(){
@@ -27,7 +27,7 @@ public class CategoryController {
        Gson gson = new Gson();
        String json = null;
        try {
-           HashMap<Long, Category> categories =  categoryService.getAllCategories();
+           Map<Long, Category> categories = categoryService.getAllCategories();
            json = gson.toJson(categories);
        } catch (CategoryException e) {
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));

@@ -12,16 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @RestController
 @RequestMapping("/login")
 public class LoginController {
 
     @Autowired
-    User session;
+   private  User session;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping("/user")
     public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {
@@ -36,13 +35,11 @@ public class LoginController {
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
     @GetMapping("/getUserPageByEmail")
     public ResponseEntity getUserPageByEmail(@RequestParam("email") String email) {
-
         Gson gson = new Gson();
         String json = null;
 
@@ -52,14 +49,11 @@ public class LoginController {
         } catch (UserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
-
     @GetMapping("/getUserPageById")
     public ResponseEntity getUserPageById(@RequestParam("id") Long id) {
-
         JSONObject obj = new JSONObject();
         Gson gson = new Gson();
         try {

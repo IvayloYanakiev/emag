@@ -1,6 +1,5 @@
 package com.emag.model;
 
-
 import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.CategoryException;
@@ -34,7 +33,6 @@ public class Category {
         } else {
             throw new CategoryException(ConstantsErrorMessages.INVALID_CATEGORY_ID);
         }
-
     }
 
     public String getName() {

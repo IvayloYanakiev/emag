@@ -6,10 +6,7 @@ import com.emag.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
+import java.util.*;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -18,7 +15,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     ShoppingCartDao shoppingCartDao;
 
     @Override
-    public LinkedHashSet<Product> getProductsFromShoppingCart(String ids) throws ProductException {
+    public Collection<Product> getProductsFromShoppingCart(String ids) throws ProductException {
         ids = ids.replace("[", "");
         ids = ids.replace("]", "");
         String[] idsProducts = ids.split(",");
@@ -32,7 +29,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 products.put(productId, (products.get(productId) + 1));
             } else products.put(productId, 1);
         }
-        LinkedHashSet<Product> retrievedProducts = shoppingCartDao.getProductsFromShoppingCart(idsInList);
+        Collection<Product> retrievedProducts = shoppingCartDao.getProductsFromShoppingCart(idsInList);
         Iterator<Product> it = retrievedProducts.iterator();
         while (it.hasNext()) {
             Product product = it.next();
@@ -40,7 +37,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             Integer howMany = products.get(productId);
             product.setQuantity(howMany);
         }
-
         return retrievedProducts;
     }
 }

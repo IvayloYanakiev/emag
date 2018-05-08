@@ -15,17 +15,12 @@ public class ProductServiceImpl implements ProductService {
     ProductDao productDao;
 
     @Override
-    public void addProduct(Product product) throws ProductException {
-        productDao.addProduct(product);
-    }
-
-    @Override
-    public LinkedHashSet<Product> getProductsByInnerCategoryId(Long id) throws ProductException {
+    public Collection<Product> getProductsByInnerCategoryId(Long id) throws ProductException {
         return productDao.getProductsByInnerCategoryId(id);
     }
 
     @Override
-    public LinkedHashSet<Product> getAllProducts() throws ProductException {
+    public Collection<Product> getAllProducts() throws ProductException {
         return productDao.getAllProducts();
     }
 
@@ -35,36 +30,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductById(Long id) throws ProductException {
-         productDao.deleteProductById(id);
-    }
-
-    @Override
-    public void updateProductById(Product product) throws ProductException {
-        productDao.updateProduct(product);
-    }
-
-    @Override
-    public LinkedHashSet<Product> getAllProductsOrderedByPrice(String orderIn) throws ProductException {
+    public Collection<Product> getAllProductsOrderedByPrice(String orderIn) throws ProductException {
         return  productDao.getAllProductsOrderedByPrice(orderIn);
     }
 
     @Override
-    public LinkedHashSet<Product> getProductsFilteredByName(String searchInput) throws ProductException {
+    public Collection<Product> getProductsFilteredByName(String searchInput) throws ProductException {
         return productDao.getProductsFilteredByName(searchInput);
     }
 
-    public LinkedHashSet<Product> getAllProductsOrderedByDiscount(String orderIn) throws ProductException {
+    public Collection<Product> getAllProductsOrderedByDiscount(String orderIn) throws ProductException {
         return  productDao.getAllProductsOrderedByDiscount(orderIn);
     }
 
     @Override
-    public LinkedHashSet<Product> getAllProductsOrderedByName(String orderIn) throws ProductException {
+    public Collection<Product> getAllProductsOrderedByName(String orderIn) throws ProductException {
         return  productDao.getAllProductsOrderedByName(orderIn);
     }
 
     @Override
-    public LinkedHashSet<Product> getProductsFilteredByPrice(Integer maxPrice) throws ProductException {
+    public Collection<Product> getProductsFilteredByPrice(Integer maxPrice) throws ProductException {
         return  productDao.getProductsFilteredByPrice(maxPrice);
     }
 

@@ -24,7 +24,7 @@ app.controller("innerCategoryProducts", function ($scope, $location, $routeParam
         $scope.error = false;
 
         $http({
-            url: "http://localhost:7377/product" + "/updateProduct",
+            url: "http://localhost:7377/admin" + "/updateProduct",
             method: "PUT",
             params: {
                 "id": $scope.updateProduct.id,
@@ -42,57 +42,10 @@ app.controller("innerCategoryProducts", function ($scope, $location, $routeParam
             $scope.value = error.data;
         });
     }
-    $scope.orderByPriceAscending = function () {
-        $http({
-            url: "http://localhost:7377/product" + "/orderProductsBy",
-            method: "GET",
-            params: {"orderIn": "asc"}
-        }).then(function (response) {
-            $scope.products = response.data;
-        }, function (error) {
-
-        });
-    };
-
-    $scope.orderByPriceDescending = function () {
-        $http({
-            url: "http://localhost:7377/product" + "/orderProductsByPrice",
-            method: "GET",
-            params: {"orderIn": "desc"}
-        }).then(function (response) {
-            $scope.products = response.data;
-        }, function (error) {
-
-        });
-    };
-
-    $scope.orderByDiscountAscending = function () {
-        $http({
-            url: "http://localhost:7377/product" + "/orderProductsByDiscount",
-            method: "GET",
-            params: {"orderIn": "asc"}
-        }).then(function (response) {
-            $scope.products = response.data;
-        }, function (error) {
-
-        });
-    };
-
-    $scope.orderByDiscountDescending = function () {
-        $http({
-            url: "http://localhost:7377/product" + "/orderProductsByDiscount",
-            method: "GET",
-            params: {"orderIn": "desc"}
-        }).then(function (response) {
-            $scope.products = response.data;
-        }, function (error) {
-
-        });
-    };
 
     $scope.removeProduct = function (productId) {
         $http({
-            url: "http://localhost:7377/product" + "/removeProductById",
+            url: "http://localhost:7377/admin" + "/removeProductById",
             method: "DELETE",
             params: {"id": productId}
         }).then(function (response) {

@@ -6,7 +6,7 @@ import com.emag.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashSet;
+import java.util.Collection;
 
 @Service
 public class AddressServiceImpl implements AddressService {
@@ -14,14 +14,15 @@ public class AddressServiceImpl implements AddressService {
     @Autowired
     AddressDao addressDao;
 
-
     @Override
-    public void addAddress(Long userId, Address address) throws AddressException {
-        addressDao.addAddress(userId, address);
+    public Address addAddress(Long userId, Address address) throws AddressException {
+        Long addressId = addressDao.addAddress(userId, address);
+        address.setId(addressId);
+        return address;
     }
 
     @Override
-    public LinkedHashSet<Address> getAllAddresses(Long userId) throws AddressException {
+    public Collection<Address> getAllAddresses(Long userId) throws AddressException {
         return addressDao.getAllAddresses(userId);
     }
 

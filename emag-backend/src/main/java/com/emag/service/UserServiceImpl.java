@@ -3,9 +3,11 @@ package com.emag.service;
 import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.SecureTokenGenerator;
+import com.emag.dao.CategoryDaoImpl;
 import com.emag.dao.UserDao;
 import com.emag.exception.UserException;
 import com.emag.model.User;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,8 +15,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -25,6 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+
+    private static final Logger logger = Logger.getLogger(CategoryDaoImpl.class);
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -91,7 +93,7 @@ public class UserServiceImpl implements UserService {
                     sendActivationToken(user.getEmail(), user.getToken());
                 }
             } catch (UserException e) {
-                //DA SLOJA LOGGER
+                logger.error(e.getMessage());
             }
         }).start();
     }

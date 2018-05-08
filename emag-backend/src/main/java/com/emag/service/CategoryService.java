@@ -3,8 +3,8 @@ package com.emag.service;
 import com.emag.exception.CategoryException;
 import com.emag.model.Category;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface CategoryService {
-    HashMap<Long, Category> getAllCategories() throws CategoryException;
+     Map<Long, Category> getAllCategories() throws CategoryException;
 }

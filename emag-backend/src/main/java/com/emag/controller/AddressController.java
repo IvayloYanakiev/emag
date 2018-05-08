@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashSet;
+import java.util.Collection;
 
 @RequestMapping("/address")
 @RestController
@@ -28,19 +28,20 @@ public class AddressController {
             @RequestParam("street") String street,
             @RequestParam("floor") Integer floor) {
         Gson gson = new Gson();
+        Address address=null;
         try {
-            Address address = new Address(receiverName, receiverPhone, city, street, floor);
-            addressService.addAddress(id, address);
+            address = new Address(receiverName, receiverPhone, city, street, floor);
+            address =  addressService.addAddress(id, address);
         } catch (AddressException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(address));
     }
 
     @GetMapping("/getAllAddresses")
     public ResponseEntity getAllAddresses(@RequestParam("userId") Long id) {
         Gson gson = new Gson();
-        LinkedHashSet<Address> addresses = null;
+        Collection<Address> addresses = null;
         try {
             addresses = addressService.getAllAddresses(id);
         } catch (AddressException e) {
@@ -93,6 +94,5 @@ public class AddressController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
     }
-
 
 }

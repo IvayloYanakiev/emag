@@ -2,14 +2,13 @@ package com.emag.service;
 
 import com.emag.exception.AddressException;
 import com.emag.model.Address;
-
-import java.util.LinkedHashSet;
+import java.util.Collection;
 
 public interface AddressService  {
 
-    void addAddress(Long userId, Address address) throws AddressException;
+    Address addAddress(Long userId, Address address) throws AddressException;
 
-    LinkedHashSet<Address> getAllAddresses(Long id) throws AddressException;
+    Collection<Address> getAllAddresses(Long id) throws AddressException;
 
     void updateAddress(Address address) throws AddressException;
 

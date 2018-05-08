@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 
 public class Product {
-
     private Long id;
     private String name;
     private String pictureURL;
@@ -33,6 +32,7 @@ public class Product {
     public Collection<Comment> getComments() {
         return Collections.unmodifiableCollection(comments);
     }
+
     public int getCommentsSize(){
         if(comments!=null){
             return this.comments.size();
@@ -139,13 +139,12 @@ public class Product {
     }
 
     public void setPrice(Double price) throws ProductException {
-        if (price!=null && price > 0) {
+        if (price != null && price > 0) {
             this.price = price;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_PRICE);
         }
     }
-
 
     public Long getInnerCategoryId() {
         return innerCategoryId;
@@ -164,7 +163,7 @@ public class Product {
     }
 
     public void setQuantity(Integer quantity) throws ProductException {
-        if (quantity!=null && quantity >= 0) {
+        if (quantity != null && quantity >= 0) {
             this.quantity = quantity;
         } else {
             throw new ProductException(ConstantsErrorMessages.INVALID_PRODUCT_QUANTITY);

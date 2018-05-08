@@ -6,8 +6,8 @@ public class ConstantsSQL {
     public static final String ADD_USER = "insert into users(name,email,password,profile_url,token) values(:name,:email,sha1(:password),:profileUrl,:token)";
     public static final String SELECT_USER_BY_EMAIL_AND_PASS = "select * from users where email=:email and password = sha1(:password);";
     public static final String GET_ALL_CATEGORIES = "select main.id as id,main.name as main_name,middle.id as middle_id,middle.name as middle_name from main_type as main join middle_type as middle on main.id = middle.main_type_id";
-    public static final String INSERT_INTO_ADDRESSES = "insert into addresses(receiver_name,receiver_phone,city,street,floor) values (:receiverName,:receiverPhone,:city,:street,:floor); ";
-    public static final String INSERT_INTO_USER_ADDRESSES = "insert into users_addresses(address_id,user_id) values ((SELECT LAST_INSERT_ID() from addresses group by last_insert_id()),:userId); ";
+    public static final String INSERT_INTO_USER_ADDRESSES = "insert into users_addresses(address_id,user_id) values (:addressId,:userId); ";
+    public static final String INSERT_INTO_ADDRESSES = "insert into addresses(receiver_name,receiver_phone,city,street,floor) values (?,?,?,?,?); ";
     public static final String GET_ALL_ADDRESSES = "select a.id as address_id,a.receiver_name,a.receiver_phone,a.city,a.street,a.floor from users u join users_addresses ua on u.id=ua.user_id join addresses a on a.id=ua.address_id  where u.id=:userId";
     public static final String UPDATE_ADDRESS = "update addresses set receiver_name=:receiver_name,receiver_phone=:receiver_phone,city=:city,street=:street,floor=:floor where id=:id";
     public static final String GET_ADDRESS_BY_ID = "select * from addresses a where a.id=:addressId";
@@ -27,5 +27,9 @@ public class ConstantsSQL {
     public static final String INSERT_INTO_PRODUCTS = "insert into products(name,picture_url,price,middle_type_id,quantity,description,discount) values (:name,:picture_url,:price,:middle_type_id,:quantity,:description,:discount)";
     public static final String GET_PRODUCTS_FILTERED_BY_NAME = "select * from products where name LIKE :searchInput";
     public static final String GET_PRODUCTS_FILTERED_BY_PRICE =  "select * from products where price <= :maxPrice";
+    public static final String INSERT_INTO_COMMENTS = "insert into comments(user_id,product_id,value,stars,creation_date) values(?,?,?,?,?)";
     public static final String SELECT_FROM_USERS_WHERE_IS_ACTIVATED_0 = "select * from users where isActivated = 0";
+    public static final String GET_ALL_COMMENTS = "select * from comments c join users u on c.user_id = u.id where product_id=:product_id order by c.id";
+    public static final String GET_COMMENT = "select * from comments c join users u on c.user_id = u.id where c.id=:id";
+    public static final String ACTIVATE_REGISTERED_ACCOUNT = "update users set isActivated = 1,token = null where token=:token";
 }

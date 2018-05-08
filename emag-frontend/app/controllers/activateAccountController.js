@@ -14,6 +14,6 @@ app.controller("activateAccountController", function ($http, $scope, $location, 
             $location.url("/login");
         }, function (error) {
         })
-    };  
+    };
     activateAccount();
 });

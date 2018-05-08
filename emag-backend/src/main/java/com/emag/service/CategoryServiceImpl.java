@@ -6,7 +6,7 @@ import com.emag.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -15,7 +15,7 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryDao categoryDao;
 
     @Override
-    public HashMap<Long, Category> getAllCategories() throws CategoryException {
+    public Map<Long, Category> getAllCategories() throws CategoryException {
         return categoryDao.getAllCategories();
     }
 }

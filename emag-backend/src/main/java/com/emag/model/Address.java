@@ -3,8 +3,8 @@ package com.emag.model;
 import com.emag.config.Constants;
 import com.emag.config.ConstantsErrorMessages;
 import com.emag.exception.AddressException;
-public class Address {
 
+public class Address {
     private Long id;
     private String receiverName;
     private String receiverPhone;
@@ -37,7 +37,6 @@ public class Address {
     }
 
     public void setCity(String city) throws AddressException {
-
        if(city!=null && city.trim().length() >= Constants.MIN_CITY_NAME_LENGTH && city.trim().length() <= Constants.MAX_CITY_NAME_LENGTH){
            this.city=city;
        }

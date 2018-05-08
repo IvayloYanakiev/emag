@@ -4,7 +4,6 @@ package com.emag.dao;
 import com.emag.exception.UserException;
 import com.emag.model.User;
 
-import java.sql.SQLException;
 import java.util.HashSet;
 
 

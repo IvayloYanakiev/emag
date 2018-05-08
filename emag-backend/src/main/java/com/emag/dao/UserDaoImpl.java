@@ -5,8 +5,8 @@ import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
 import com.emag.exception.UserException;
 import com.emag.model.User;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,14 +19,13 @@ import java.util.HashSet;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-
-
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
+
     @Override
     public User findUserById(Long id) throws UserException {
-
         String getUserById = ConstantsSQL.FIND_USER_BY_ID;
 
         HashMap<String, Object> userParams = new HashMap<>();
@@ -54,6 +53,7 @@ public class UserDaoImpl implements UserDao {
                             }
                             userById.setType(rs.getInt("isAdmin"));
                         } catch (UserException e) {
+                            logger.error(e.getMessage());
                             throw new SQLException(e.getMessage());
                         }
                     }
@@ -88,6 +88,7 @@ public class UserDaoImpl implements UserDao {
                             user.setType(rs.getInt("isAdmin"));
                             user.setIsActivated(rs.getInt("isActivated"));
                         } catch (UserException e) {
+                            logger.error(e.getMessage());
                             throw new SQLException(e.getMessage());
                         }
                     }
@@ -95,6 +96,7 @@ public class UserDaoImpl implements UserDao {
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new UserException(e.getMessage(), e);
         }
         return user;
@@ -114,16 +116,17 @@ public class UserDaoImpl implements UserDao {
             checkDoesGivenUserExists(user.getEmail());
             checker = true;
         } catch (UserException e) {
+            logger.error(e.getMessage());
             try {
                 jdbcTemplate.update(registerUser, userParams);
-            } catch (DataAccessException ex) {
+            } catch (Exception ex) {
+                logger.error(e.getMessage());
                 throw new UserException(ex.getMessage(), e);
             }
         }
         if (checker) throw new UserException(ConstantsErrorMessages.USER_ALREADY_EXISTS);
         return user;
     }
-
 
     public void checkDoesGivenUserExists(String email) throws UserException {
         String checkForUserRequest = ConstantsSQL.FIND_USER_BY_EMAIL;
@@ -136,12 +139,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void activateAccount(String token) throws UserException {
-        String activateAccount = "update users set isActivated = 1,token = null where token=:token";
+        String activateAccount = ConstantsSQL.ACTIVATE_REGISTERED_ACCOUNT;
         HashMap<String, Object> params = new HashMap<>();
         params.put("token", token);
         try {
             jdbcTemplate.update(activateAccount, params);
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new UserException(ConstantsErrorMessages.PROBLEM_ACTIVATING_ACCOUNT);
         }
     }
@@ -164,6 +168,7 @@ public class UserDaoImpl implements UserDao {
                             user.setToken(rs.getString("token"));
                             myUsers.add(user);
                         } catch (UserException e) {
+                            logger.error(e.getMessage());
                             throw new SQLException(e.getMessage());
                         }
                     }
@@ -171,11 +176,11 @@ public class UserDaoImpl implements UserDao {
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new UserException(e.getMessage(), e);
         }
         return users;
     }
-
 
     public void checkDoesGivenUserExists(String email, String password) throws UserException {
         String checkForUserRequest = ConstantsSQL.SELECT_USER_BY_EMAIL_AND_PASS;
@@ -184,7 +189,10 @@ public class UserDaoImpl implements UserDao {
         userParams.put("email", email);
         userParams.put("password", password);
         Boolean checkForUser = checkForUser(checkForUserRequest, userParams);
-        if (!checkForUser) throw new UserException(ConstantsErrorMessages.WRONG_USERNAME_OR_PASSWORD);
+        if (!checkForUser) {
+            logger.error(ConstantsErrorMessages.WRONG_USERNAME_OR_PASSWORD);
+            throw new UserException(ConstantsErrorMessages.WRONG_USERNAME_OR_PASSWORD);
+        }
     }
 
     private Boolean checkForUser(String checkForUserRequest, HashMap<String, Object> userParams) throws UserException {
@@ -201,6 +209,7 @@ public class UserDaoImpl implements UserDao {
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new UserException(e.getMessage(), e);
         }
         return checkForUser;

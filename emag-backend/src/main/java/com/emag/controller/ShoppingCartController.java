@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
 
 @RestController
@@ -19,12 +20,12 @@ import java.util.LinkedHashSet;
 public class ShoppingCartController {
 
     @Autowired
-    ShoppingCartService shoppingCartService;
+    private ShoppingCartService shoppingCartService;
 
     @GetMapping("/getProductsFromShoppingCart")
     public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {
         Gson gson = new Gson();
-        LinkedHashSet<Product> products = new LinkedHashSet<>();
+        Collection<Product> products = new LinkedHashSet<>();
         if (ids == null || ids.trim().length() == 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(products));
         }

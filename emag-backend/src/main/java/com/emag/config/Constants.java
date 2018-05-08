@@ -30,11 +30,15 @@ public class Constants {
     public static final String EMAIL_SUBJECT_ORDER_INFORMATION = "Order information";
     public static final String EMAIL_TEXT_SUCCESSFUL_SUBSCRIPTION = "Congratulations!\nYou have successfully subscribed to eMAG.bg";
     public static final String EMAIL_TEXT_SUCCESSFUL_ORDER = "Your order was successful!\nOrder details:\n";
-    public static final String CHOSEN_PAYING_METHOD = "\nMethod of paying: ";
+    public static final String CHOSEN_PAYING_METHOD ="\nMethod of paying: ";
+    public static final String NO_PICTURE = "http://res.cloudinary.com/dxnmejm7r/image/upload/v1525705078/zx95yaxdahmoocm9fbt4.jpg";
+    public static final int MAX_COMMENT_VALUE_LENGTH = 100;
+    public static final int MAX_STARS_VALUE = 5;
+    public static final String DATE_AND_TIME_FORMATTER =  " HH:mm dd-MM-yyyy ";
+    public static final String FILE_PATH_NAME = "D:\\emagPictures\\";
     public static final String CHECK_YOUR_EMAIL_FOR_ACTIVATION_LINK = "Check your email for activation link";
     public static final String ACTIVATE_ACCOUNT = "Activate account";
     public static final String LINK_FRONTEND_ACTIVATE_ACCOUNT = "To activate your account please click on the link below: \n http://localhost:63342/emag-frontend/app/index.html?_ijt=ov0j7am0hja4huk7t57pv0mj0u#/activateAccount/";
-    public static final String NO_PICTURE = "http://res.cloudinary.com/dxnmejm7r/image/upload/v1525705078/zx95yaxdahmoocm9fbt4.jpg";
     public static final String ACTIVATION_SUCCESS = "Activation success";
 
 

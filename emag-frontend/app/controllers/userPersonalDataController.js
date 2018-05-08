@@ -159,7 +159,7 @@ app.controller("userPersonalDataController", function ($rootScope, $q, $scope, $
                 }
             }).then(function (response) {
                 $('#myModal3').modal('hide');
-                getAddresses();
+                $scope.addresses.push(response.data);
                 $scope.address = "";
             }, function (error) {
                 $scope.error = true;
