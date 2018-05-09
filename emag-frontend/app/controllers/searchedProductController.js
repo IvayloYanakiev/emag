@@ -8,6 +8,125 @@ app.controller("searchedProductController", function ($rootScope, $scope, $locat
 
     $rootScope.isAdmin = sessionService.isHeAdmin();
 
+    $scope.hasProducts = true;
+    $scope.informUser = false;
+
+    $scope.orderByPriceAscending = function () {
+        function compare(a,b) {
+            if (a.price < b.price)
+                return -1;
+            if (a.price > b.price)
+                return 1;
+            return 0;
+        }
+
+        $scope.products.sort(compare);
+    };
+
+    var search = function () {
+        var input = $routeParams.value;
+        if (input === "") {
+            $scope.hasProducts = false;
+            $scope.informUser = true;
+        } else {
+            $scope.hasProducts = true;
+            $scope.informUser = false;
+
+            $http({
+                url: "http://localhost:7377/product" + "/getProductsFilteredByName",
+                method: "GET",
+                params: {"searchInput": input}
+            }).then(function (response) {
+                document.getElementById("searchBox").value = "";
+                $scope.products = response.data;
+                var result = $scope.products;
+
+                if (typeof result != "undefined" && result != null && result.length != null && result.length > 0) {
+                    $scope.hasProducts = true;
+                    $scope.informUser = false;
+                } else {
+                    $scope.hasProducts = false;
+                    $scope.informUser = true;
+                }
+            });
+        }
+    };
+    search();
+
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    };
+    $scope.filterProducts = function () {
+
+        var newArray = $scope.products.filter(function (el) {
+            return el.price <= slider.value;
+        });
+        $scope.products = newArray;
+    };
+
+    $scope.orderByPriceDescending = function () {
+        function compare(a,b) {
+            if (a.price > b.price)
+                return -1;
+            if (a.price < b.price)
+                return 1;
+            return 0;
+        }
+
+        $scope.products.sort(compare);
+    };
+
+    $scope.orderByDiscountAscending = function () {
+        function compare(a,b) {
+            if (a.discount < b.discount)
+                return -1;
+            if (a.discount > b.discount)
+                return 1;
+            return 0;
+        }
+
+        $scope.products.sort(compare);
+    };
+
+    $scope.orderByDiscountDescending = function () {
+        function compare(a,b) {
+            if (a.discount > b.discount)
+                return -1;
+            if (a.discount < b.discount)
+                return 1;
+            return 0;
+        }
+
+        $scope.products.sort(compare);
+    };
+    $scope.orderByNameAscending = function () {
+        function compare(a,b) {
+            if (a.name.toLowerCase() < b.name.toLowerCase())
+                return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase())
+                return 1;
+            return 0;
+        }
+
+        $scope.products.sort(compare);
+    };
+
+    $scope.orderByNameDescending = function () {
+        function compare(a,b) {
+            if (a.name.toLowerCase() > b.name.toLowerCase())
+                return -1;
+            if (a.name.toLowerCase() < b.name.toLowerCase())
+                return 1;
+            return 0;
+        }
+
+        $scope.products.sort(compare);
+    };
+
     $scope.removeProduct = function (productId) {
         $http({
             url: "http://localhost:7377/admin" + "/removeProductById",

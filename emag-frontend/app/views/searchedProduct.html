@@ -1,5 +1,64 @@
 <div  class="container" ng-controller="searchedProductController">
 
+    <div class="panel panel-default" ng-show="hasProducts" style="margin-bottom: 5%; margin-top: 2%">
+        <div class="panel-heading">
+            <h3 class="panel-title">Filter products</h3>
+        </div>
+        <div class="panel-body">
+            <div class="main_nav_menu ml-auto" class="row">
+                <div class="col-md-5">
+                    <ul class="standard_dropdown main_nav_dropdown">
+                        <li class="hassubs" style="margin-left: 20%; margin-top: 3%">
+                            <a style="color: grey;">Order products by <i class="fa fa-angle-down"></i></a>
+                            <ul style="width: 100%;">
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByPriceAscending()"> Price ascending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByPriceDescending()"> Price descending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByDiscountAscending()"> Discount ascending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByDiscountDescending()"> Discount descending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByNameAscending()"> Name ascending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByNameDescending()"> Name descending
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <p style="font-size: larger">Filter products by price: &nbsp; $<span id="demo"></span></p>
+                    <input style="width: 100%" type="range" min="1" max="10000" value="1" class="slider" id="myRange">
+                </div>
+
+                <div class="col-md-3">
+                    <button style="width: 50%; position: absolute; margin-top: 10%" ng-click="filterProducts()"
+                            class="btn btn-success">filter
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div ng-show="hasProducts" ng-repeat="product in products" class="col-xs-12 col-md-6">
         <div class="prod-info-main prod-wrap clearfix">
             <div class="row">

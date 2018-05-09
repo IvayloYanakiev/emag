@@ -20,7 +20,7 @@ public class ConstantsSQL {
     public static final String GET_ALL_PRODUCTS_BY_INNER_CATEGORY_ID = "select * from products where middle_type_id=:id";
     public static final String DELETE_PRODUCT_BY_ID = "delete from products where id=:productId";
     public static final String UPDATE_PRODUCT_BY_ID = "update products set name=:name,middle_type_id=:categoryId,price=:price,quantity=:quantity,description=:description, discount=:discount where id =:id ";
-    public static final String ORDER_PRODUCTS_BY_PRICE = "select * from products order by price";
+    public static final String ORDER_PRODUCTS_BY_PRICE = "select * from products order by price - discount / 100 * price";
     public static final String ORDER_PRODUCTS_BY_DISCOUNT = "select * from products order by discount";
     public static final String ORDER_PRODUCTS_BY_NAME = "select * from products order by name";
     public static final String GET_PRODUCTS_BY_ID_INTERVAL = "select * from products where id in (:ids)";

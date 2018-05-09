@@ -51,7 +51,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/checkoutShoppingCart.html',
             controller: 'checkoutShoppingCartController',
         })
-        .when('/searchedProduct', {
+        .when('/searchedProduct/:value', {
             templateUrl: 'views/searchedProduct.html',
             controller: 'searchedProductController'
         })
