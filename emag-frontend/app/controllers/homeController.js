@@ -46,6 +46,7 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
 
         });
     };
+
     $scope.orderByDiscountAscending = function () {
         $http({
             url: "http://localhost:7377/product" + "/orderProductsByDiscount",
