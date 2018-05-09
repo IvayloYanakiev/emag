@@ -15,6 +15,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -85,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
     @Scheduled(fixedRate = 600000)
     private void checkForUnactivatedAccounts() {
-        new Thread(() -> {
+        Thread thread = new Thread(() -> {
             try {
                 HashSet<User> users = userDao.checkForUnactivatedAccounts();
                 for (Iterator<User> iterator = users.iterator(); iterator.hasNext(); ) {
@@ -95,7 +96,9 @@ public class UserServiceImpl implements UserService {
             } catch (UserException e) {
                 logger.error(e.getMessage());
             }
-        }).start();
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
 }
