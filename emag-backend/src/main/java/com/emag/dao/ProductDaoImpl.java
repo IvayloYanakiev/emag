@@ -176,15 +176,6 @@ public class ProductDaoImpl implements ProductDao {
         return products;
     }
 
-    @Override
-    public Collection<Product> getProductsFilteredByPrice(Integer maxPrice) throws ProductException {
-        String getProducts = ConstantsSQL.GET_PRODUCTS_FILTERED_BY_PRICE;
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("maxPrice", maxPrice);
-        LinkedHashSet<Product> products = getProducts(getProducts, params);
-        return products;
-    }
-
     private LinkedHashSet<Product> getProducts(String getProducts) throws ProductException {
         try {
             return jdbcTemplate.query(getProducts, new ResultSetExtractor<LinkedHashSet<Product>>() {

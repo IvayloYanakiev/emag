@@ -107,16 +107,4 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(json);
     }
 
-    @GetMapping("/getProductsFilteredByPrice")
-    public ResponseEntity getProductsFilteredByPrice(@RequestParam("maxPrice") Integer maxPrice) {
-        Gson gson = new Gson();
-        Collection<Product> products = null;
-        try {
-            products = productService.getProductsFilteredByPrice(maxPrice);
-        } catch (ProductException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(products));
-    }
-
 }

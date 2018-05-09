@@ -47,14 +47,16 @@ app.controller("checkoutShoppingCartController", function ($rootScope, $q, $scop
                 break;
             }
         }
-
+        var totalSum = $scope.getTotal();
         $http({
             url: "http://localhost:7377/sendEmail" + "/informUserForOrder",
             method: "PUT",
             params: {
                 "email": $scope.user.email,
                 "addressId": addressId,
-                "payingMethod": paying
+                "payingMethod": paying,
+                "totalSum": totalSum,
+                "shoppingCart": shoppingCart.getEntries()
             }
         }).then(function (response) {
             window.alert("Your order was successful");
@@ -63,5 +65,53 @@ app.controller("checkoutShoppingCartController", function ($rootScope, $q, $scop
         }, function (error) {
             window.alert("Your order was not successful");
         });
+        shoppingCart.cleanShoppingCart();
+    }
+
+    var getShoppingCart = function(){
+        var entries = shoppingCart.getEntries();
+        var isNotEmpty = shoppingCart.isNotEmpty();
+        if(isNotEmpty){
+            $http({
+                url: "http://localhost:7377/shoppingCart" + "/getProductsFromShoppingCart",
+                method: "GET",
+                params:{"products":entries}
+            }).then(function (response) {
+                $scope.products = response.data;
+            }, function (error) {
+
+            });
+        } else {
+            $scope.products=[];
+        }
+    };
+    getShoppingCart();
+
+    $scope.getTotal = function () {
+        var total = 0;
+
+        for (var i = 0; i < $scope.products.length; i++) {
+            var product = $scope.products[i];
+
+            if (product.discount === 0) {
+                total += (product.price * product.quantity);
+            } else {
+                total += (product.price - product.discount / 100 * product.price) * product.quantity;
+            }
+        }
+        total = total.toFixed(2);
+        return total;
+    };
+
+    $scope.getSubTotal = function (price, quantity, discount) {
+        var subtotal = 0;
+        if (discount === 0) {
+            subtotal = price * quantity;
+            return subtotal;
+        } else {
+            subtotal = (price - discount / 100 * price) * quantity;
+            subtotal = subtotal.toFixed(2);
+            return subtotal;
+        }
     }
 });

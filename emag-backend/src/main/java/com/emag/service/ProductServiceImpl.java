@@ -48,9 +48,4 @@ public class ProductServiceImpl implements ProductService {
         return  productDao.getAllProductsOrderedByName(orderIn);
     }
 
-    @Override
-    public Collection<Product> getProductsFilteredByPrice(Integer maxPrice) throws ProductException {
-        return  productDao.getProductsFilteredByPrice(maxPrice);
-    }
-
 }

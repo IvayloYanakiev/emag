@@ -13,5 +13,4 @@ public interface ProductDao {
     Collection<Product> getAllProductsOrderedByPrice(String orderIn) throws ProductException;
     Collection<Product> getAllProductsOrderedByDiscount(String orderIn) throws ProductException;
     Collection<Product> getAllProductsOrderedByName(String orderIn) throws ProductException;
-    Collection<Product> getProductsFilteredByPrice(Integer maxPrice) throws ProductException;
 }

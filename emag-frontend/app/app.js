@@ -113,6 +113,10 @@ app.factory('shoppingCart', function () {
         localStorage.setItem("allEntries", JSON.stringify(existingEntries));
     };
 
+    existingEntries.cleanShoppingCart = function(){
+        existingEntries = [];
+    }
+
     existingEntries.removeEntry = function (productId) {
 
         var arr = JSON.parse(localStorage.getItem("allEntries"));

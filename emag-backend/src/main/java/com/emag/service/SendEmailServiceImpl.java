@@ -41,7 +41,7 @@ public class SendEmailServiceImpl implements SendEmailService {
     }
 
     @Override
-    public void informUserForOrder(String email, Long addressId, String payingMethod) throws EmailException {
+    public void informUserForOrder(String email, Long addressId, String payingMethod, Double totalSum, String shoppingCart) throws EmailException {
         try {
             Address address = addressDao.getAddress(addressId);
 
@@ -49,7 +49,7 @@ public class SendEmailServiceImpl implements SendEmailService {
             mailMessage.setTo(email);
             mailMessage.setFrom(Constants.SENDER_EMAIL);
             mailMessage.setSubject(Constants.EMAIL_SUBJECT_ORDER_INFORMATION);
-            mailMessage.setText(Constants.EMAIL_TEXT_SUCCESSFUL_ORDER + address.toString() + Constants.CHOSEN_PAYING_METHOD + payingMethod);
+            mailMessage.setText(Constants.EMAIL_TEXT_SUCCESSFUL_ORDER + address.toString() + Constants.CHOSEN_PAYING_METHOD + payingMethod + Constants.TOTAL_SUM_OF_ORDER + totalSum);
 
             javaMailSender.send(mailMessage);
         } catch (MailException e) {

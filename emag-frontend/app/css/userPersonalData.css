@@ -43,3 +43,7 @@
 .radioBtn:checked + label {
     color: #2196F3;
 }
+
+#totalSumOfOrder {
+    text-align: right;
+}

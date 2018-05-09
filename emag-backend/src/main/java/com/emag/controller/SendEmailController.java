@@ -28,10 +28,11 @@ public class SendEmailController {
 
     @PutMapping("/informUserForOrder")
     public ResponseEntity informUserForOrder(@RequestParam("email") String email, @RequestParam("addressId") Long addressId,
-                                             @RequestParam("payingMethod") String payingMethod) {
+                                             @RequestParam("payingMethod") String payingMethod, @RequestParam("totalSum") Double totalSum,
+                                             @RequestParam("shoppingCart") String shoppingCart) {
         Gson gson = new Gson();
         try {
-            sendingEmailService.informUserForOrder(email, addressId, payingMethod);
+            sendingEmailService.informUserForOrder(email, addressId, payingMethod,totalSum,shoppingCart);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
