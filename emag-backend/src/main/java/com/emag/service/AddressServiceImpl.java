@@ -15,8 +15,10 @@ public class AddressServiceImpl implements AddressService {
     AddressDao addressDao;
 
     @Override
-    public void addAddress(Long userId, Address address) throws AddressException {
-        addressDao.addAddress(userId, address);
+    public Address addAddress(Long userId, Address address) throws AddressException {
+        Long addressId = addressDao.addAddress(userId, address);
+        address.setId(addressId);
+        return address;
     }
 
     @Override

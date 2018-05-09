@@ -184,6 +184,7 @@ public class User {
         this.setId(user.getId());
         this.setName(user.getName());
         this.setEmail(user.getEmail());
+        this.setType(user.getType());
     }
 
     private boolean validateEmail(String emailStr) {

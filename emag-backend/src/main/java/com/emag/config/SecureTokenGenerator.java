@@ -6,9 +6,9 @@ import java.security.SecureRandom;
 
 @Component
 public class SecureTokenGenerator {
-    public static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private  static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    public static final int SECURE_TOKEN_LENGTH = 45;
+    private  static final int SECURE_TOKEN_LENGTH = 45;
 
     private static final SecureRandom random = new SecureRandom();
 

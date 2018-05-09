@@ -19,7 +19,7 @@ import java.util.Map;
 public class CategoryController {
 
     @Autowired
-    CategoryService categoryService;
+   private  CategoryService categoryService;
 
    @GetMapping("/getAllCategories")
     public ResponseEntity getAllCategories(){

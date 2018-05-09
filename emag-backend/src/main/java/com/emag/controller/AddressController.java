@@ -28,13 +28,14 @@ public class AddressController {
             @RequestParam("street") String street,
             @RequestParam("floor") Integer floor) {
         Gson gson = new Gson();
+        Address address=null;
         try {
-            Address address = new Address(receiverName, receiverPhone, city, street, floor);
-            addressService.addAddress(id, address);
+            address = new Address(receiverName, receiverPhone, city, street, floor);
+            address =  addressService.addAddress(id, address);
         } catch (AddressException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(address));
     }
 
     @GetMapping("/getAllAddresses")

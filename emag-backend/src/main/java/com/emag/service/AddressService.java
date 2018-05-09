@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface AddressService  {
 
-    void addAddress(Long userId, Address address) throws AddressException;
+    Address addAddress(Long userId, Address address) throws AddressException;
 
     Collection<Address> getAllAddresses(Long id) throws AddressException;
 

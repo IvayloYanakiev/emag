@@ -14,7 +14,7 @@ public class SpringJdbcConfig {
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private final String JDBC_URL = "jdbc:mysql://localhost:3306/emag";
     private final String JDBC_USERNAME = "root";
-    private final String JDBC_PASS = "1234";
+    private final String JDBC_PASS = "7377";
 
     @Bean
     public DataSource dataSource() {

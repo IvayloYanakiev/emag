@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     @Autowired
-    User session;
+   private  User session;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping("/user")
     public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password) {

@@ -4,6 +4,7 @@ import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.ConstantsSQL;
 import com.emag.exception.ProductException;
 import com.emag.model.Product;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,8 @@ public class AdminDaoImpl implements AdminDao {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
+
+    private static final Logger logger = Logger.getLogger(AddressDaoImpl.class);
 
     @Override
     public void addProduct(Product product) throws ProductException {
@@ -30,6 +33,7 @@ public class AdminDaoImpl implements AdminDao {
         try {
             jdbcTemplate.update(addProduct, params);
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new ProductException(ConstantsErrorMessages.ERROR_ADDING_PRODUCT, e);
         }
     }
@@ -42,6 +46,7 @@ public class AdminDaoImpl implements AdminDao {
         try {
             jdbcTemplate.update(deleteProductById, params);
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new ProductException(ConstantsErrorMessages.UNSUCCESSFUL_PRODUCT_DELETING, e);
         }
     }
@@ -60,6 +65,7 @@ public class AdminDaoImpl implements AdminDao {
         try {
             jdbcTemplate.update(updateProduct, params);
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new ProductException(ConstantsErrorMessages.UNSUCCESSFUL_PRODUCT_UPDATING, e);
         }
     }

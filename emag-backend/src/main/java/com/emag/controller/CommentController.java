@@ -19,16 +19,16 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/addComment")
-    public ResponseEntity orderProductsBy(@RequestParam("productId") Long productId, @RequestParam("userId") Long userId, String value,@RequestParam("stars") Integer stars) {
+    public ResponseEntity orderProductsBy(@RequestParam("productId") Long productId, @RequestParam("userId") Long userId, String value, @RequestParam("stars") Integer stars) {
         Gson gson = new Gson();
-        Collection<Comment> comments = null;
+        Comment comment = null;
         try {
-            Comment comment = new Comment(productId, userId, value,stars);
-            comments = commentService.addProductComment(comment);
+            comment = new Comment(productId, userId, value, stars);
+            comment = commentService.addProductComment(comment);
         } catch (CommentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
         }
-        String json = gson.toJson(comments);
+        String json = gson.toJson(comment);
         return ResponseEntity.status(HttpStatus.OK).body(json);
     }
 

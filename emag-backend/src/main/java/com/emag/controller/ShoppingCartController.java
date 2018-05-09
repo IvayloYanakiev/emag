@@ -20,7 +20,7 @@ import java.util.LinkedHashSet;
 public class ShoppingCartController {
 
     @Autowired
-    ShoppingCartService shoppingCartService;
+    private ShoppingCartService shoppingCartService;
 
     @GetMapping("/getProductsFromShoppingCart")
     public ResponseEntity getProductsFromShoppingCart(@RequestParam("products") String ids) {

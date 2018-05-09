@@ -16,7 +16,7 @@ app.controller("productDetailsController", function ($scope, $location, $routePa
             }
         }).then(function (response) {
 
-            $scope.product.comments = response.data;
+            $scope.product.comments.push(response.data);
             $scope.comment.value = "";
 
         }, function (error) {

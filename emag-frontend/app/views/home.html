@@ -7,27 +7,54 @@
         <div class="panel-body">
             <div class="main_nav_menu ml-auto" class="row">
                 <div class="col-md-5">
-                <ul class="standard_dropdown main_nav_dropdown">
-                    <li class="hassubs" style="margin-left: 20%; margin-top: 3%">
-                        <a style="color: grey;">Order products by <i class="fa fa-angle-down"></i></a>
-                        <ul style="width: 100%;">
-                            <li><button style="background-color: transparent; border: none" ng-click="orderByPriceAscending()"> Price ascending</button></li>
-                            <li><button style="background-color: transparent; border: none" ng-click="orderByPriceDescending()"> Price descending</button></li>
-                            <li><button style="background-color: transparent; border: none" ng-click="orderByDiscountAscending()"> Discount ascending</button></li>
-                            <li><button style="background-color: transparent; border: none" ng-click="orderByDiscountDescending()"> Discount descending</button></li>
-                            <li><button style="background-color: transparent; border: none" ng-click="orderByNameAscending()"> Name ascending</button></li>
-                            <li><button style="background-color: transparent; border: none" ng-click="orderByNameDescending()"> Name descending</button></li>
-                        </ul>
-                    </li>
-                </ul>
+                    <ul class="standard_dropdown main_nav_dropdown">
+                        <li class="hassubs" style="margin-left: 20%; margin-top: 3%">
+                            <a style="color: grey;">Order products by <i class="fa fa-angle-down"></i></a>
+                            <ul style="width: 100%;">
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByPriceAscending()"> Price ascending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByPriceDescending()"> Price descending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByDiscountAscending()"> Discount ascending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByDiscountDescending()"> Discount descending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByNameAscending()"> Name ascending
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="background-color: transparent; border: none"
+                                            ng-click="orderByNameDescending()"> Name descending
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-                    <div class="col-md-4">
-                        <p style="font-size: larger">Filter products by price: &nbsp; $<span id="demo"></span></p>
-                        <input style="width: 100%" type="range" min="1" max="10000" value="1" class="slider" id="myRange">
-                    </div>
+                <div class="col-md-4">
+                    <p style="font-size: larger">Filter products by price: &nbsp; $<span id="demo"></span></p>
+                    <input style="width: 100%" type="range" min="1" max="10000" value="1" class="slider" id="myRange">
+                </div>
 
-                    <div class="col-md-3"><button style="width: 50%; position: absolute; margin-top: 10%" ng-click="filterProducts()" class="btn btn-success">filter
-                    </button></div>
+                <div class="col-md-3">
+                    <button style="width: 50%; position: absolute; margin-top: 10%" ng-click="filterProducts()"
+                            class="btn btn-success">filter
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -42,6 +69,7 @@
                         <span ng-show="product.discount != 0" class="tag2 hot">
 							-{{product.discount}}%
 						</span>
+
                     </div>
                 </div>
                 <div class="col-md-7 col-sm-12 col-xs-12">
@@ -60,8 +88,9 @@
                             <span>${{getNewProductPrice(product.price, product.discount)}}</span>
                         </p>
 
-                        <button ng-show="isAdmin && isAuthenticated" id="editBtn" ng-click="editProduct(product)" type="button"
-                                class="btn btn-default btn-sm btn btn-light"  data-toggle="modal"
+                        <button ng-show="isAdmin && isAuthenticated" id="editBtn" ng-click="editProduct(product)"
+                                type="button"
+                                class="btn btn-default btn-sm btn btn-light" data-toggle="modal"
                                 data-target="#myModal"></i> Edit
                         </button>
                     </div>
@@ -75,7 +104,8 @@
                                         class="btn btn-default btn-sm btn btn-success">
                                     <span class="glyphicon glyphicon-shopping-cart"></span> Add to cart
                                 </button>
-                                <button ng-show="isAdmin && isAuthenticated" ng-click="removeProduct(product.id)" type="button"
+                                <button ng-show="isAdmin && isAuthenticated" ng-click="removeProduct(product.id)"
+                                        type="button"
                                         class="btn btn-default btn-sm btn btn-danger">
                                     <i class="fa fa-close"></i> Remove
                                 </button>
@@ -93,38 +123,48 @@
                                         <div class="modal-body">
                                             <form>
                                                 <div class="productPictureContainer product-image">
-                                                        <img src="{{updateProduct.pictureURL}}" class="img-responsive" />
+                                                    <img src="{{updateProduct.pictureURL}}" class="img-responsive"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Name</label>
-                                                    <input ng-model="updateProduct.name" type="text" class="form-control" placeholder="Enter name">
+                                                    <input ng-model="updateProduct.name" type="text"
+                                                           class="form-control" placeholder="Enter name">
                                                 </div>
                                                 <div class="form-check">
                                                     <label>Category</label>
-                                                    <select class="selectpicker form-control" id="selectContainer" ng-model="updateProduct.innerCategoryId" >
-                                                        <optgroup ng-repeat="category in categories" label={{category.name}}>
-                                                            <option  ng-value="inner.id" ng-repeat="inner in category.innerCategories">{{inner.name}}</option>
+                                                    <select class="selectpicker form-control" id="selectContainer"
+                                                            ng-model="updateProduct.innerCategoryId">
+                                                        <optgroup ng-repeat="category in categories"
+                                                                  label={{category.name}}>
+                                                            <option ng-value="inner.id"
+                                                                    ng-repeat="inner in category.innerCategories">
+                                                                {{inner.name}}
+                                                            </option>
                                                         </optgroup>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Price</label>
-                                                    <input ng-model="updateProduct.price" type="number" class="form-control" placeholder="Enter price">
+                                                    <input ng-model="updateProduct.price" type="number"
+                                                           class="form-control" placeholder="Enter price">
                                                 </div>
 
                                                 <div class="form-check">
                                                     <label>Quantity</label>
-                                                    <input ng-model="updateProduct.quantity" type="number" class="form-control" placeholder="Enter quantity">
+                                                    <input ng-model="updateProduct.quantity" type="number"
+                                                           class="form-control" placeholder="Enter quantity">
                                                 </div>
 
                                                 <div class="form-check">
                                                     <label>Description</label>
-                                                    <input ng-model="updateProduct.description" type="text" class="form-control" placeholder="Enter description">
+                                                    <input ng-model="updateProduct.description" type="text"
+                                                           class="form-control" placeholder="Enter description">
                                                 </div>
 
                                                 <div class="form-check">
                                                     <label>Discount</label>
-                                                    <input ng-model="updateProduct.discount" type="text" class="form-control" placeholder="Enter discount">
+                                                    <input ng-model="updateProduct.discount" type="text"
+                                                           class="form-control" placeholder="Enter discount">
                                                 </div>
 
                                                 <div class="alert alert-danger" role="alert" ng-if="error">
@@ -155,13 +195,14 @@
         </div>
         <!-- end product -->
 
-        <h3 ng-show="informUser">No products found</h3>
-        <br>
-        <a ng-show="informUser" href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Return to home
-            page</a>
     </div>
+
     <div class="dirPaginationHome">
         <dir-pagination-controls></dir-pagination-controls>
     </div>
+    <h3 ng-show="informUser">No products found</h3>
+    <br>
+    <a ng-show="informUser" href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Return to home
+        page</a>
 </div>
 

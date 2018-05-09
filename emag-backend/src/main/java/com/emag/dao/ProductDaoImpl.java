@@ -5,6 +5,7 @@ import com.emag.exception.CommentException;
 import com.emag.exception.ProductException;
 import com.emag.model.Comment;
 import com.emag.model.Product;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -19,6 +20,8 @@ public class ProductDaoImpl implements ProductDao {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
+
+    private  static final Logger logger = Logger.getLogger(ProductDaoImpl.class);
 
     @Override
     public Collection<Product> getProductsByInnerCategoryId(Long id) throws ProductException {
@@ -44,6 +47,7 @@ public class ProductDaoImpl implements ProductDao {
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new ProductException(e.getMessage(), e);
         }
     }
@@ -61,6 +65,7 @@ public class ProductDaoImpl implements ProductDao {
             Product product = new Product(id, name, pictureUrl, price, middleTypeId, quantity, description, discount);
             myProducts.add(product);
         } catch (ProductException e) {
+            logger.error(e.getMessage());
             throw new SQLException(e.getMessage());
         }
     }
@@ -102,6 +107,7 @@ public class ProductDaoImpl implements ProductDao {
                                 setProductProperties(rs, selectedProduct);
                             }
                         } catch (ProductException | CommentException e) {
+                            logger.error(e.getMessage());
                             throw new SQLException(e.getMessage());
                         }
                     }
@@ -109,6 +115,7 @@ public class ProductDaoImpl implements ProductDao {
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new ProductException(e.getMessage(), e);
         }
         return productById;
@@ -193,6 +200,7 @@ public class ProductDaoImpl implements ProductDao {
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new ProductException(e.getMessage(), e);
         }
     }

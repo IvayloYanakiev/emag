@@ -7,5 +7,5 @@ import java.util.Collection;
 
 
 public interface CommentService {
-     Collection<Comment> addProductComment(Comment comment) throws CommentException;
+     Comment addProductComment(Comment comment) throws CommentException;
 }

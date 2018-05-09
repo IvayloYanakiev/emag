@@ -15,7 +15,7 @@ app.controller("addProductController", function ($rootScope, $q, $scope, $locati
                 $location.url("/");
             }, function (err) {
                 $scope.error = true;
-                $scope.value = "Error adding product"
+                $scope.value = err.data;
             })
 
 

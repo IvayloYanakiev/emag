@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class RegisterController {
 
     @Autowired
-    UserService userService;
+   private UserService userService;
     @Autowired
-    EmagCloud myCloud;
+    private EmagCloud myCloud;
 
     @PostMapping("/createUser")
     public ResponseEntity register(@RequestParam("name") String name,

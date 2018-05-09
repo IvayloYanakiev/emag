@@ -1,6 +1,6 @@
 var app = angular.module('emag');
 
-app.controller("homeController", function ($rootScope,$scope, $location, $routeParams, $http, shoppingCart,sessionService) {
+app.controller("homeController", function ($rootScope, $scope, $location, $routeParams, $http, shoppingCart, sessionService) {
 
     $scope.hasProducts = true;
     $scope.informUser = false;
@@ -25,9 +25,8 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
         $http({
             url: "http://localhost:7377/product" + "/orderProductsByPrice",
             method: "GET",
-            params: {"orderIn":"asc"}
-    }).
-        then(function (response) {
+            params: {"orderIn": "asc"}
+        }).then(function (response) {
             $scope.products = response.data;
         }, function (error) {
 
@@ -38,9 +37,8 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
         $http({
             url: "http://localhost:7377/product" + "/orderProductsByPrice",
             method: "GET",
-            params: {"orderIn":"desc"}
-        }).
-        then(function (response) {
+            params: {"orderIn": "desc"}
+        }).then(function (response) {
             $scope.products = response.data;
         }, function (error) {
 
@@ -78,7 +76,7 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
         }).then(function (response) {
             $scope.products = response.data;
         }, function (error) {
-
+            alert(error.data);
         });
     };
 
@@ -90,7 +88,7 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
         }).then(function (response) {
             $scope.products = response.data;
         }, function (error) {
-
+            alert(error.data);
         });
     };
     $scope.removeProduct = function (productId) {
@@ -121,12 +119,12 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
             url: "http://localhost:7377/admin" + "/updateProduct",
             method: "PUT",
             params: {
-                "id":  $scope.updateProduct.id,
-                "name":  $scope.updateProduct.name,
-                "categoryId":  $scope.updateProduct.innerCategoryId,
-                "price":  $scope.updateProduct.price,
-                "quantity":  $scope.updateProduct.quantity,
-                "description":  $scope.updateProduct.description,
+                "id": $scope.updateProduct.id,
+                "name": $scope.updateProduct.name,
+                "categoryId": $scope.updateProduct.innerCategoryId,
+                "price": $scope.updateProduct.price,
+                "quantity": $scope.updateProduct.quantity,
+                "description": $scope.updateProduct.description,
                 "discount": $scope.updateProduct.discount
             }
         }).then(function (response) {
@@ -138,50 +136,26 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
         });
     };
 
-    $scope.orderByPriceDescending = function () {
-        $http({
-            url: "http://localhost:7377/product" + "/orderProductsBy",
-            method: "GET",
-            params: {"by":"desc"}
-        }).
-        then(function (response) {
-            $scope.products = response.data;
-        }, function (error) {
-
-        });
-    };
 
     var slider = document.getElementById("myRange");
     var output = document.getElementById("demo");
     output.innerHTML = slider.value;
 
-    slider.oninput = function() {
+    slider.oninput = function () {
         output.innerHTML = this.value;
     }
 
     $scope.filterProducts = function () {
-        $http({
-            url: "http://localhost:7377/product" + "/getProductsFilteredByPrice",
-            method: "GET",
-            params: {"maxPrice": slider.value}
-        }).
-        then(function (response) {
-            $scope.products = response.data;
-            var result = $scope.products;
 
-            if (typeof result != "undefined" && result != null && result.length != null && result.length > 0) {
-                $scope.hasProducts = true;
-                $scope.informUser = false;
-            } else {
-                $scope.hasProducts = false;
-                $scope.informUser = true;
-            }
-        }, function (error) {
+        var newArray = $scope.products.filter(function (el) {
+            return el.price <= slider.value;
         });
+        $scope.products = newArray;
     }
 
+
     $scope.getNewProductPrice = function (price, discount) {
-        if(discount === 0){
+        if (discount === 0) {
             return price;
         } else {
             var result = price - discount / 100 * price;
@@ -189,4 +163,5 @@ app.controller("homeController", function ($rootScope,$scope, $location, $routeP
             return result;
         }
     }
-});
+})
+;

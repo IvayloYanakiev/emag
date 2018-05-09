@@ -45,6 +45,7 @@ public class ConstantsErrorMessages {
     public static final String INVALID_USER_NAMES_OF_COMMENT = "Invalid names of user comment";
     public static final String INVALID_CREATION_DATE = "Invalid creation date";
     public static final String INVALID_COMMENT_ID = "Invalid comment id";
+    public static final String ACCESS_DENIED = "ACCESS DENIED";
     public static final String INVALID_USER_ID = "Invalid user id";
     public static final String INVALID_IMAGE_TYPE = "Invalid image type";
     public static final String INVALID_FILE_TYPE = "Invalid file type";

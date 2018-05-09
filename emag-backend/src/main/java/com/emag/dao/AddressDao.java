@@ -6,7 +6,7 @@ import com.emag.model.Address;
 import java.util.Collection;
 
 public interface AddressDao {
-    void addAddress(Long userId, Address address) throws AddressException;
+    Long addAddress(Long userId, Address address) throws AddressException;
 
     Collection getAllAddresses(Long userId) throws AddressException;
 

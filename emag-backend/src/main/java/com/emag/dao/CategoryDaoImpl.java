@@ -3,6 +3,7 @@ package com.emag.dao;
 import com.emag.config.ConstantsSQL;
 import com.emag.exception.CategoryException;
 import com.emag.model.Category;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,6 +19,8 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
+
+    private static final Logger logger = Logger.getLogger(CategoryDaoImpl.class);
 
     @Override
     public Map<Long, Category> getAllCategories() throws CategoryException {
@@ -44,6 +47,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
                             myCategories.get(mainID).addCategory(new Category(middleID, middleName));
                         } catch (CategoryException e) {
+                            logger.error(e.getMessage());
                             throw new SQLException(e);
                         }
                     }
@@ -51,6 +55,7 @@ public class CategoryDaoImpl implements CategoryDao {
                 }
             });
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new CategoryException(e.getMessage(), e);
         }
         return categories;

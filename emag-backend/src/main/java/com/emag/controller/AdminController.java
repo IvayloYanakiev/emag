@@ -5,6 +5,7 @@ import com.emag.config.ConstantsErrorMessages;
 import com.emag.config.EmagCloud;
 import com.emag.exception.ProductException;
 import com.emag.model.Product;
+import com.emag.model.User;
 import com.emag.service.AdminService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,15 @@ import java.util.Map;
 @RestController
 public class AdminController {
 
+
     @Autowired
     private EmagCloud myCloud;
 
     @Autowired
     private AdminService adminService;
-    //comments deleting
+
+    @Autowired
+    private User session;
 
     @RequestMapping(value = {"/addProduct"}, method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity addProduct(
@@ -38,35 +42,41 @@ public class AdminController {
             @RequestParam("description") String description,
             @RequestParam("picture") MultipartFile picture,
             @RequestParam("discount") Integer discount) {
-        Gson gson = new Gson();
 
-        String mimetype = picture.getOriginalFilename().split("\\.")[1];
-        String type = mimetype.split("/")[0];
-        if (!type.equals("jpg") && !type.equals("png") && !type.equals("jpeg"))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.INVALID_FILE_TYPE));
-        try {
-            File newFile = UserController.convertFromMultypartToFile(picture);
-            Map uploadResult = myCloud.emagCloud().uploader().upload(newFile, new HashMap<String, Object>());
-            String url = (String) uploadResult.get("url");
-            Product product = new Product(name, category, price, quantity, description, url, discount);
-            adminService.addProduct(product);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(Constants.ERROR));
-        } catch (ProductException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        Gson gson = new Gson();
+        if (session.getType() == 1) {
+
+            String fileName = picture.getOriginalFilename();
+            if (!fileName.endsWith("jpg") && !fileName.endsWith("png") && !fileName.endsWith("jpeg"))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(ConstantsErrorMessages.INVALID_FILE_TYPE));
+            try {
+                File newFile = UserController.convertFromMultypartToFile(picture);
+                Map uploadResult = myCloud.emagCloud().uploader().upload(newFile, new HashMap<String, Object>());
+                String url = (String) uploadResult.get("url");
+                Product product = new Product(name, category, price, quantity, description, url, discount);
+                adminService.addProduct(product);
+            } catch (IOException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(Constants.ERROR));
+            } catch (ProductException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(ConstantsErrorMessages.ACCESS_DENIED));
     }
 
     @DeleteMapping("/removeProductById")
     public ResponseEntity removeProductById(@RequestParam("id") Long id) {
         Gson gson = new Gson();
-        try {
-            adminService.deleteProductById(id);
-        } catch (ProductException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        if (session.getType() == 1) {
+            try {
+                adminService.deleteProductById(id);
+            } catch (ProductException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(ConstantsErrorMessages.ACCESS_DENIED));
     }
 
     @PutMapping("/updateProduct")
@@ -78,12 +88,15 @@ public class AdminController {
                                         @RequestParam("description") String description,
                                         @RequestParam("discount") Integer discount) {
         Gson gson = new Gson();
-        try {
-            Product product = new Product(id, name, category, price, quantity, description, discount);
-            adminService.updateProductById(product);
-        } catch (ProductException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+        if (session.getType() == 1) {
+            try {
+                Product product = new Product(id, name, category, price, quantity, description, discount);
+                adminService.updateProductById(product);
+            } catch (ProductException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(gson.toJson(e.getMessage()));
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(Constants.SUCCESS));
+        return ResponseEntity.status(HttpStatus.OK).body(gson.toJson(ConstantsErrorMessages.ACCESS_DENIED));
     }
 }

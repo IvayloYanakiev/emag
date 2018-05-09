@@ -26,13 +26,13 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    EmagCloud myCloud;
+    private EmagCloud myCloud;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    LoggedUserService loggedUserService;
+    private LoggedUserService loggedUserService;
 
     @GetMapping(value = "/getUserPersonalData")
     public ResponseEntity getUserInfo(@RequestParam("id") Long id) {

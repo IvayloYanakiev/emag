@@ -16,8 +16,9 @@ public class CommentServiceImpl implements CommentService {
     private CommentDao commentDao;
 
     @Override
-    public Collection<Comment> addProductComment(Comment comment) throws CommentException {
-        commentDao.addProductComment(comment);
-        return commentDao.getAllComments(comment.getProductId());
+    public Comment addProductComment(Comment comment) throws CommentException {
+        Long commentId = commentDao.addProductComment(comment);
+        Comment returnedComment = commentDao.getCommentById(commentId);
+        return returnedComment;
     }
 }
